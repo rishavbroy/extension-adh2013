@@ -1,5 +1,5 @@
 # Goal
-Run the following panel event study:
+Our aim is to take data from the replication package of ADH 2013 (saved under `extension-adh2013/adh2013`) and run the following panel event study:
 $$Y_{ct} = \alpha_c + \lambda_t + \sum_k \beta_k (\text{Exposure}_c \times 1[t=k]) + (X_c \times \lambda_t)'\,\Gamma + \varepsilon_{ct}$$
 where, given a commuting zone (CZ) $c$ and year $t$, we have:
 
@@ -21,56 +21,52 @@ We focus on running the event study so we can study separate horizons:
 We begin first with the replication package of ADH 2013 (saved under `replication/adh2013`), and second by building a map from current-day counties (or at least 2024 counties; there have been no substantial changes to counties since 2022, anyways) to 2023 counties to 2022 counties etc., all the way to 1990 counties and then to 1990 CZs. The process is like so:
 
 1. Map 2020 counties to 1990 counties using [Ferrara, Testa, and Zhou (2024)](https://doi.org/10.1080/01615440.2024.2369230).
-	1. **Weighting rules**:
+	1. Use `extension-adh2013/ftz2024` for this. The authors provide a step-by-step walkthrough for how to apply their crosswalk in Stata; see p. 11 of `extension-adh2013/ftz2024/appendix.pdf`. 
+	2. **Weighting rule**: They use six different weightings, whose descriptions (from Sec. 2, p. 69) I've pasted below. Judging from Section 4.1 (pp. 76-77) of `extension-adh2013/ftz2024/paper.pdf`, we should use M5 (or M6) with M2 as fallback. Just M4 is also possible.
 		1. Area-based (model 1, or M1). 
 		2. Population-based (M2), with county area divided into urban and rural areas. **(Fallback)**
 		3. Population-based (M3), with county area divided into urban and rural areas after excluding non-inhabitable areas.
 		4. Population-based (M4), with county area divided into urban and rural areas after excluding non-inhabitable areas, with additional weighting for topographic suitability (i.e., elevation).
-		5. **Population-based (M5), with built-up settlement areas indicated in space (1810–2020 only)**.
+		5. **Population-based (M5), with built-up settlement areas indicated in space (1810–2020 only).**
 		6. Population-based (M6), with built-up property counts indicated in space (1810–2020 only).
 
-2. Aggregate 1990 counties to 1990 CZs using `replication/cz-data`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
+2. Aggregate 1990 counties to 1990 CZs using `extension-adh2013/cz-data`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
 	1. Nothing complicated here. `cz-198090.xls` should match county names and FIPS codes to 1990 CZs. As far as I could tell, the county names and codes are from 1990 and the CZ codes match [Tolbert and Sizer (1996)](https://ageconsearch.umn.edu/record/278812?v=pdf), the paper ADH 2013 used for their CZs.
 
-3. Match with the data from the replication package, `replication/adh2013`
-	1. Everything's smooth sailing now; just join along the 1990 CZ code. Also don't forget that out of 741 CZs, ADH only use "the 722 CZs that cover the entire mainland United States (both metropolitan and rural areas)" (p. 2132).
+3. Match with the data from the replication package, `extension-adh2013/adh2013`
+	1. Everything's smooth sailing now; we just join along the 1990 CZ code. Also don't forget that out of 741 CZs, ADH only use "the 722 CZs that cover the entire mainland United States (both metropolitan and rural areas)" (p. 2132).
 
 4. Check and address errors, e.g.:
-	1. Inconsistencies in FIPS codes
-	2. Missing counties or duplicated mappings
+	1. Missing counties
+	2. Duplicated mappings
 	3. Population weights which don't sum to 1
 
 
 ## Second, use this to match `adh2013` data with variables for the political outcome $Y_{ct}$
 
 - Data sources of $Y_{ct}$
-	- Use `replication/outcomes-data/aa2021-nospatial`, sourced from [Replication Data for: Partisanship & Nationalization in American Elections: Evidence from Presidential, Senatorial, & Gubernatorial Elections in the U.S. Counties, 1872-2020](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DGUMFI), the replication package of [Amlani and Algara (2021)](https://doi.org/10.1016/j.electstud.2021.102387), to construct 1950-2020 political outcomes in presidential, senatorial, and gubernatorial elections. We will use this for pre-trends before 1990, trends during the 1990-2007 shock, and post-shock outcomes. This will be our primary source of outcomes.
+	- Use `extension-adh2013/outcomes-data/aa2021-nospatial`, sourced from [Replication Data for: Partisanship & Nationalization in American Elections: Evidence from Presidential, Senatorial, & Gubernatorial Elections in the U.S. Counties, 1872-2020](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DGUMFI), the replication package of [Amlani and Algara (2021)](https://doi.org/10.1016/j.electstud.2021.102387), to construct 1952-2020 political outcomes in presidential, senatorial, and gubernatorial elections. We will use this for pre-trends before 1990, trends during the 1990-2007 shock, and post-shock outcomes. This will be our primary source of outcomes.
 - For now, define $Y_{ct}$ as the Republican presidential vote margin
 
 
 ## Third, prepare Conley spatial HAC SEs.
 
-- Get county centroids from `replication/ftz2024/crosswalks/County-CD-centroid-lat-lon/lat_lon_coordinates_county_csv/counties_1990_xy.csv`. 
+- Get county centroids from `extension-adh2013/ftz2024/crosswalks/County-CD-centroid-lat-lon/lat_lon_coordinates_county_csv/counties_1990_xy.csv`. 
 - Map counties to 1990 CZs
-- Compute population-weighted CZ centroids using 1990 county populations in `replication/cz-data/cz-198090.xls`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
+- Compute population-weighted CZ centroids using 1990 county populations in `extension-adh2013/cz-data/cz-198090.xls`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
 	- $\text{CZ centroid} = \sum_{i\in c}w_i\cdot(\text{lat}_i,\text{lon}_i),\quad w_i=\frac{\text{pop}_{i,1990}}{\sum_{j\in c}\text{pop}_{j,1990}}$
 - Calculate [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0) spatial HAC SEs. For reference, recall:
-
 Homoskedastic:
 $$SE(\hat{\beta}) = \sqrt{\frac{\hat{\sigma}^2}{\sum (x_i - \bar{x})^2}}$$
-
 Heteroskedastic (HC0):
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum (x_i - \bar{x})^2 \hat{\varepsilon}_i^2}{[\sum (x_i - \bar{x})^2]^2}}$$
-
 Cluster-robust:
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum_g [\sum_{i \in g} (x_i - \bar{x}) \hat{\varepsilon}_i]^2}{[\sum (x_i - \bar{x})^2]^2}}$$
-
-Conley:
+Conley, with kernel $K$ defined in accordance with p. 18 of [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0):
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \bar{x}) \hat{\varepsilon}_i \hat{\varepsilon}_j}{[\sum (x_i - \bar{x})^2]^2}}$$
 
-## Fourth, run the event study
+## Fourth, run the event study.
 - Note that potential controls $X_{ct}$ from 1990 can be found in the ADH 2013 replication package.
-
 
 ### Fifth, fix all of the following errors
 #### Coding and statistical errors
@@ -175,11 +171,10 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 - The $y$-axis does not state the exposure unit.
 - The figure should not be presented before the crosswalk/vote-retention issues are fixed.
 
-
 ## Sixth, implement future plans:
 
 ### Pre-trend
-- Inspect pre-trends of the outcomes variables in `replication/outcomes-data/aa2021-nospatial`
+- Inspect pre-trends of the outcomes variables in `extension-adh2013/outcomes-data/aa2021-nospatial`
 
 ### Robustness checks
 - Different SEs
@@ -205,7 +200,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 	- Any way to check attenuation from crosswalk? 
 	- Check robustness of results to other crosswalks e.g., from https://www.ddorn.net/data.htm
 	- Turn county crosswalk from decadal to annual
-		- It is not possible to build a genuine year-by-year chain from current counties to 2023, 2022, etc. using `replication/ftz2024`Instead, we have had to use a coarse election-year-to-decade rule:
+		- It is not possible to build a genuine year-by-year chain from current counties to 2023, 2022, etc. using `extension-adh2013/ftz2024`Instead, we have had to use a coarse election-year-to-decade rule:
 			- year < 1980 -> 1970
 			- year < 1990 -> 1980
 			- year < 2000 -> 1990
@@ -224,9 +219,9 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 ### More outcomes and mechanisms
 - Run specifications where  $Y_{ct}$, a CZ-level political outcome in year $t$ is either Republican vote share, Democratic vote share, two-party share, Republican margin, and swings across elections.
 - Robustness to different data source for electoral outcomes
-	- Use `replication/outcomes-data/pres_elections-2000-2024`, sourced from [County Presidential Election Returns 2000-2024](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FVOQCHQ), for county-level political outcomes in presidential elections from 2000-2024.
+	- Use `extension-adh2013/outcomes-data/pres_elections-2000-2024`, sourced from [County Presidential Election Returns 2000-2024](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FVOQCHQ), for county-level political outcomes in presidential elections from 2000-2024.
 		- Our "First" step in the Process would then also have to map 2024 counties to 2020 counties using [Lutz (2025)](https://chandlerlutz.github.io/files/bridging_the_geographic_divide_crosswalks_across_space_and_time.pdf).
-			- The only [substantial changes to counties](https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.html) made this period were in Connecticut in 2022. [Lutz (2025)](https://chandlerlutz.github.io/files/bridging_the_geographic_divide_crosswalks_across_space_and_time.pdf) provides a county-level crosswalk of this. Directly replicating the code in the README of `replication/lutz2025/geolinkr-main`, sourced from [https://github.com/ChandlerLutz/geolinkr](https://github.com/ChandlerLutz/geolinkr), is sufficient for this. Note how his code reads in external data via URLs. 
+			- The only [substantial changes to counties](https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.html) made this period were in Connecticut in 2022. [Lutz (2025)](https://chandlerlutz.github.io/files/bridging_the_geographic_divide_crosswalks_across_space_and_time.pdf) provides a county-level crosswalk of this. Directly replicating the code in the README of `extension-adh2013/lutz2025/geolinkr-main`, sourced from [https://github.com/ChandlerLutz/geolinkr](https://github.com/ChandlerLutz/geolinkr), is sufficient for this. Note how his code reads in external data via URLs. 
 			- **Weighting rule**: The README says he uses "the number of housing units in each census tract as weights."
 - Build outcome variable for election turnout
 	- [National Neighborhood Data Archive (NaNDA): Voter Registration, Turnout, and Partisanship by County, United States, 2004-2022 (ICPSR 38506)](https://www.icpsr.umich.edu/web/ICPSR/studies/38506) is very promising
@@ -261,8 +256,8 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 
 ### Pretty stuff for the paper
 - Make maps
-	- 1990 census tract shapefiles in `replication/spatial-data/Census_Tracts_in_1990`, sourced from https://catalog.data.gov/dataset/census-tracts-in-1990. 
-	- 1990 county shapefiles at `replication/spatial-data/counties-1990`, sourced from https://geo.btaa.org/catalog/stanford-pb817xw6983
+	- 1990 census tract shapefiles in `extension-adh2013/spatial-data/Census_Tracts_in_1990`, sourced from https://catalog.data.gov/dataset/census-tracts-in-1990. 
+	- 1990 county shapefiles at `extension-adh2013/spatial-data/counties-1990`, sourced from https://geo.btaa.org/catalog/stanford-pb817xw6983
 
 ### Additional literature review
 - https://en.wikipedia.org/wiki/China_shock
