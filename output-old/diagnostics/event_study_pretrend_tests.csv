@@ -1,4 +1,0 @@
-sample,spec,se_type,pre_years,statistic,p.value,df1,df2,status,error_message
-main_1972_start,minimal_full_panel,cluster_cz,"1972,1976,1980,1984",1.3234572022088305,0.25958599818314637,4,721,ok,NA
-main_1972_start,interacted_core_controls_diagnostic,cluster_cz,"1972,1976,1980,1984",1.8735010401190162,0.1132335494407094,4,721,ok,NA
-main_1972_start,interacted_controls_full_panel,cluster_cz,"1972,1976,1980,1984",0.8474229480814909,0.4953550193998705,4,721,ok,NA

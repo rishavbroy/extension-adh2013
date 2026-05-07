@@ -55,8 +55,7 @@ We begin first with the replication package of ADH 2013 (saved under `replicatio
 - Map counties to 1990 CZs
 - Compute population-weighted CZ centroids using 1990 county populations in `extension-adh2013/cz-data/cz-198090.xls`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
 	- $\text{CZ centroid} = \sum_{i\in c}w_i\cdot(\text{lat}_i,\text{lon}_i),\quad w_i=\frac{\text{pop}_{i,1990}}{\sum_{j\in c}\text{pop}_{j,1990}}$
-- Calculate [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0) spatial HAC SEs. For reference, recall:
-Homoskedastic:
+- Calculate [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0) spatial HAC SEs. For reference, recall homoskedastic:
 $$SE(\hat{\beta}) = \sqrt{\frac{\hat{\sigma}^2}{\sum (x_i - \bar{x})^2}}$$
 Heteroskedastic (HC0):
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum (x_i - \bar{x})^2 \hat{\varepsilon}_i^2}{[\sum (x_i - \bar{x})^2]^2}}$$
@@ -76,7 +75,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 	- `retained_vote_share` is computed after the many-to-many crosswalk join, so the denominator double- or multi-counts source-county votes when a county has multiple crosswalk rows?
 	- Repair matching algorithm
 - Conley VCOV (variance-covariance matrix) was not positive definite, had to be repaired (i.e., numerically regularized, I suppose?)
-	- `vcov_fix = TRUE` is also too casual here. The fixest documentation says non-positive-definite repair may signal a problem with the asymptotic approximation, and the code does not save eigenvalues, repair flags, the minimum eigenvalue, or severity of the correction. ([Lrberge](https://lrberge.github.io/fixest/reference/vcov_conley.html))
+	- `vcov_fix = TRUE` is also too casual here. The fixest documentation says non-positive-definite repair may signal a problem with the asymptotic approximation, and the code does not save eigenvalues, repair flags, the minimum eigenvalue, or severity of the correction. (https://lrberge.github.io/fixest/reference/vcov_conley.html)
 	- Inspect role of interacted controls in near-singularity
 - SEs are spatial-only Conley, not spatial-temporal HAC
 	- It does not clearly implement a temporal HAC kernel; residuals in year 1 may clearly affect residuals in year 2. 
@@ -162,6 +161,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 - The CSV table contains LaTeX `\makecell` strings, so it is not a clean machine-readable output.
 - `render_table_pdf()` hardcodes `tab_event_study_rep_margin_two_specs.tex` instead of using the passed input filename.
 - The table does not report the units of ADH exposure.
+
 #### Figure issues:
 - The line connects across the omitted 1988 reference year, but 1988 is not plotted as a zero coefficient. That can visually mislead.
 	- Plot two separate trends, a pre- and a post-trend.
