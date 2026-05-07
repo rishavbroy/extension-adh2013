@@ -1,0 +1,240 @@
+------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Clas
+> ses/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/chi
+> na_shock-ECON6951/Public-Release-Data/do/../log/czone_analysis_preperi
+> od.log
+  log type:  text
+ opened on:   9 Mar 2026, 09:30:02
+
+. 
+. use ../dta/workfile_china_preperiod.dta, clear
+
+. 
+. 
+. ***********************************************
+. * Results by period, 1970-2007
+. ***********************************************
+. 
+. eststo clear
+
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw=d_tradeotch_pw_la
+> g) [aw=timepwt48] if yr==1990, cluster(statefip)
+(sum of wgt is   1.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>    722
+                                                  Wald chi2(1)    =     
+>  24.00
+                                                  Prob > chi2     =     
+> 0.0000
+                                                  Root MSE        =     
+> 1.7336
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~w |  -.8875124     .18116    -4.90   0.000    -1.242579   -.5
+> 324454
+       _cons |   -1.05649   .1932492    -5.47   0.000    -1.435252   -.6
+> 777288
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw
+Exogenous:  d_tradeotch_pw_lag
+(est1 stored)
+
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw=d_tradeotch_pw_la
+> g) [aw=timepwt48] if yr==2000, cluster(statefip)
+(sum of wgt is   1.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>    722
+                                                  Wald chi2(1)    =     
+> 125.00
+                                                  Prob > chi2     =     
+> 0.0000
+                                                  R-squared       =     
+> 0.1391
+                                                  Root MSE        =     
+> 1.6659
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~w |  -.7183816   .0642545   -11.18   0.000    -.8443181   -.5
+> 924451
+       _cons |  -.8460127   .2555812    -3.31   0.001    -1.346943   -.3
+> 450828
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw
+Exogenous:  d_tradeotch_pw_lag
+(est2 stored)
+
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw=d_tradeotch_pw_la
+> g) t2000 [aw=timepwt48] if yr>=1990, cluster(statefip)
+(sum of wgt is   2.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>  1,444
+                                                  Wald chi2(2)    =     
+> 153.90
+                                                  Prob > chi2     =     
+> 0.0000
+                                                  R-squared       =     
+> 0.0664
+                                                  Root MSE        =     
+>  1.686
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~w |  -.7460301   .0680391   -10.96   0.000    -.8793842   -.6
+> 126759
+       t2000 |   .4444448   .3237889     1.37   0.170    -.1901698    1.
+> 079059
+       _cons |  -1.217819   .1385799    -8.79   0.000     -1.48943    -.
+> 946207
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw
+Exogenous:  t2000 d_tradeotch_pw_lag
+(est3 stored)
+
+. 
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw_future=d_tradeotc
+> h_pw_lag_future) [aw=timepwt48] if yr==1970, cluster(statefip)
+(sum of wgt is   1.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>    722
+                                                  Wald chi2(1)    =     
+>   8.34
+                                                  Prob > chi2     =     
+> 0.0039
+                                                  R-squared       =     
+> 0.0435
+                                                  Root MSE        =     
+>  2.166
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~e |   .4311331   .1492742     2.89   0.004     .1385611    .7
+> 237051
+       _cons |  -.9544705   .3158107    -3.02   0.003    -1.573448   -.3
+> 354929
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw_future
+Exogenous:  d_tradeotch_pw_lag_future
+(est4 stored)
+
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw_future=d_tradeotc
+> h_pw_lag_future) [aw=timepwt48] if yr==1980, cluster(statefip)
+(sum of wgt is   1.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>    722
+                                                  Wald chi2(1)    =     
+>   1.07
+                                                  Prob > chi2     =     
+> 0.3019
+                                                  Root MSE        =     
+> 2.0811
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~e |  -.1295626   .1255041    -1.03   0.302     -.375546    .1
+> 164209
+       _cons |  -1.831749   .3306781    -5.54   0.000    -2.479867   -1.
+> 183632
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw_future
+Exogenous:  d_tradeotch_pw_lag_future
+(est5 stored)
+
+. eststo: ivregress 2sls d_sh_empl_mfg (d_tradeusch_pw_future=d_tradeotc
+> h_pw_lag_future) t1980 [aw=timepwt48] if yr>=1970 & yr<1990, cluster(s
+> tatefip)
+(sum of wgt is   2.0000e+00)
+
+Instrumental-variables 2SLS regression            Number of obs   =     
+>  1,444
+                                                  Wald chi2(2)    =     
+>  62.60
+                                                  Prob > chi2     =     
+> 0.0000
+                                                  R-squared       =     
+> 0.1814
+                                                  Root MSE        =     
+> 2.1307
+
+                              (Std. err. adjusted for 48 clusters in sta
+> tefip)
+------------------------------------------------------------------------
+> ------
+             |               Robust
+d_sh_empl_~g | Coefficient  std. err.      z    P>|z|     [95% conf. int
+> erval]
+-------------+----------------------------------------------------------
+> ------
+d_tradeusc~e |    .148424   .0946698     1.57   0.117    -.0371255    .3
+> 339735
+       t1980 |  -1.944921   .2470447    -7.87   0.000     -2.42912   -1.
+> 460723
+       _cons |  -.4145781   .2992556    -1.39   0.166    -1.001108    .1
+> 719521
+------------------------------------------------------------------------
+> ------
+Endogenous: d_tradeusch_pw_future
+Exogenous:  t1980 d_tradeotch_pw_lag_future
+(est6 stored)
+
+. esttab using ../log/tab_ipw_mfg_byperiod.scsv, b(%9.3f) se(%9.3f) nost
+> ar r2 drop(t*) replace
+(output written to ../log/tab_ipw_mfg_byperiod.scsv)
+
+. 
+. log close
+      name:  <unnamed>
+       log:  /Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Clas
+> ses/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/chi
+> na_shock-ECON6951/Public-Release-Data/do/../log/czone_analysis_preperi
+> od.log
+  log type:  text
+ closed on:   9 Mar 2026, 09:30:02
+------------------------------------------------------------------------

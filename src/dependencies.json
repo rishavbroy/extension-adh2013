@@ -1,0 +1,20 @@
+{
+  "description": "Dependency manifest for src pipeline. Install before running; the runner does not install packages.",
+  "packages": [
+    "here",
+    "dplyr",
+    "fixest",
+    "ggplot2",
+    "haven",
+    "jsonlite",
+    "kableExtra",
+    "knitr",
+    "purrr",
+    "readr",
+    "readxl",
+    "rlang",
+    "stringr",
+    "tibble",
+    "tidyr"
+  ]
+}

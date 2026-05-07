@@ -1,0 +1,7 @@
+sample,spec,n_obs,n_cz,n_years,n_rhs_terms,residualized_rank,residualized_rank_deficiency,condition_number,min_singular_value,max_singular_value,fixest_dropped_variables,fixest_dropped_count
+main_1972_start,minimal_full_panel,9386,722,13,12,12,0,3.605551275463991,0.7038056058818297,2.537607199965938,,0
+main_1972_start,interacted_core_controls_diagnostic,9386,722,13,48,48,0,22.572673566155025,0.537337745344529,12.129149520435792,,0
+main_1972_start,interacted_controls_full_panel,9386,722,13,84,84,0,218.38575332342106,0.056073525444048644,12.245659095598581,,0
+diagnostic_1952_start,minimal_full_panel,12996,722,18,17,17,0,4.242640687119288,0.5981197530279069,2.537607199965938,,0
+diagnostic_1952_start,interacted_core_controls_diagnostic,12996,722,18,68,68,0,26.561192997181045,0.45664927481695056,12.12914952043579,,0
+diagnostic_1952_start,interacted_controls_full_panel,12996,722,18,119,119,0,256.97381946618134,0.047653333405857576,12.245659095598592,,0

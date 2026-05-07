@@ -1,0 +1,119 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# geolinkr
+
+geolinkr is an R package that creates crosswalks for empirical comparisons across geographies and over time using shapefiles. 
+
+You can create a crosswalk by providing three shapefiles to the `create_cw()` function:
+
+- `from_sf`: A shapefile with the **source** geographies as an [sf object](https://github.com/r-spatial/sf?tab=readme-ov-file#simple-features-for-r) 
+- `to_sf`: A shapefile with the **target** geographies as an sf object.
+- `wts_sf`: A shapefile usually with census blocks or tracts delineations and a weighting variable, such as population or household counts, to allocate geographies from `from_sf` to `to_sf`. 
+
+See [Examples](#Examples)
+	
+
+## Installation
+
+``` r
+# install.packages("remotes")
+remotes::install_github("ChandlerLutz/geolinkr")
+```
+
+## Examples
+
+In 2022, Connecticut [updated its county definitions](https://www.federalregister.gov/documents/2022/06/06/2022-12063/change-to-county-equivalents-in-the-state-of-connecticut), creating a break in various economic datasets. We can use the `geolinkr::create_cw()` function to create a crosswalk from the Connecticut 2020 to the 2023 county definitions, using household counts at the tract level as weights.
+
+- Note: It's typically best to use the smallest available delineations, such as Census blocks, for the weights, but we'll use tracts to keep the example tractable.
+
+First, download the 2020 CT county delineations (the source) and the 2023 CT county delineations (the target):
+
+```{r dwnld, warning=FALSE, message=FALSE, results='hide'}
+library(geolinkr)
+library(sf)
+library(tigris)
+
+# 2020 CT counties -- source shapefile 
+ct_cnty20 <- tigris::counties(state = "CT", year = 2020) |>
+  sf::st_transform(crs = 5070) |>
+  _[, c("GEOID", "geometry")]
+names(ct_cnty20) <- c("geoid", "geometry")
+
+# 2023 CT counties -- target shapefile
+ct_cnty23 <- tigris::counties(state = "CT", year = 2023) |>
+  sf::st_transform(crs = 5070) |>
+  _[, c("GEOID", "geometry")]
+names(ct_cnty23) <- c("geoid", "geometry")
+```
+
+- The source and target `sf` objects must have 2 columns: `geoid` and `geometry`.
+
+From 2020 to 2023, Connecticut's county count increased from 8 to 9 and the definitions changed:
+
+```{r ct_cnty_chg}
+par(mfrow = c(1, 2))
+plot(ct_cnty20$geometry, main = "2020 CT counties")
+plot(ct_cnty23$geometry, main = "2023 CT counties")
+```
+
+We'll use the number of housing units in each census tract as weights. I have prepared other tract, block group, and block shapefiles dating back to 2000 that you can use for weights [here](https://github.com/ChandlerLutz/census-blocks-tracks-shp).
+
+```{r wts}
+# 2020 CT census tracts -- wts shapefile (with hh2020 as the weight variable)
+ct_tracts20 <- readRDS(url("https://github.com/ChandlerLutz/ct-shps/blob/main/ct_tracts20_sf.rds?raw=1")) |>
+  sf::st_transform(crs = 5070) |>
+  _[, c("GEOID", "hh2020", "geometry")]
+names(ct_tracts20) <- c("geoid", "hh2020", "geometry")
+
+print(ct_tracts20)
+```
+
+- The wts sf object must have three columns: `geoid`, `geometry` and the weighting variable (`hh2020` in this case). 
+
+Finally, we'll create the crosswalk using the `create_cw()` function. The output is the crosswalk from 2020 CT counties to 2023 CT counties.
+
+```{r create_cw}
+cw_ct_cnty20_cnty23 <- create_cw(
+  from_sf = ct_cnty20,
+  to_sf = ct_cnty23,
+  wts_sf = ct_tracts20,
+  wt_var_name = "hh2020",
+  check_that_wts_cover_from_and_to = FALSE
+)
+
+print(cw_ct_cnty20_cnty23)
+```
+
+The `create_cw()` returns a [data.table](https://github.com/Rdatatable/data.table) with the crosswalk and has the following columns
+
+- `from_geoid`: the source `geoid` (from the source shapefile).
+- `to_goeid`: the target `geoid` (from the target shapefile).
+- `hh2020`: The number of households (the weight) associated with the intersection of  `from_geoid` and `to_geoid` polygons.
+- `afact`: The allocation factor from `from_geoid` to `to_geoid` that represents the share of `from_geoid` allocated to `to_geoid`. Note that the sum of `afact` for each `from_geoid` is 1, meaning that 100% of each `from_geoid` is allocated to a `to_geoid`. 
+
+## Notes on `create_cw()` inputs:
+
+- When set to `TRUE`, the function parameter `check_that_wts_cover_from_and_to`, checks that the `wts_sf` covers `from_sf` and `to_sf`. The `wts_check_buffer_frac` parameter in `create_cw()`, with a default value of `0.001` adds a 1 percent land area buffer to `wts_sf` when checking if `wts_sf` covers `from_sf` and `to_sf`. 
+  - If `create_cw()` returns an error indicating that `wts_sf` does not cover `from_sf` or `to_sf`, you can increase the parameter in `wts_check_buffer_frac` in `create_cw()` from its default value of `0.001`, set `check_that_wts_cover_from_and_to` to `FALSE` so `creat_cw()` does not perform this check, or see [this solution](https://github.com/r-spatial/sf/issues/906).
+- For area-based weighting, use a constant (e.g., `1`) as the weighting variable for all polygons  in `wts_sf`.
+
+## Notes on `create_cw()` output:
+
+- When `to_geoid` is `NA` (missing), `from_geoid` is not allocated to any `to_geoid`. 
+- When the weight variable is `NA`, `to_geoid` covers `from_geoid` and `afact` equals 1. In these cases, it's best to get the weight variable from the original source shapefile. 
+
+
+
