@@ -831,12 +831,14 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
       n_failed = invalid_positive_final_weight_count,
       details = paste0("Tolerance: ", config$weight_sum_tolerance)
     ),
-    validation_check(
+    reported_check(
       "crosswalk_all_source_weight_sums_equal_one_or_reported",
-      invalid_final_weight_count == 0,
-      fatal = FALSE,
-      n_failed = invalid_final_weight_count,
-      details = "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance."
+      n_reported = invalid_final_weight_count,
+      details = paste0(
+        "Global non-ADH or unsupported source-county rows are reported rather than treated as validation failures. ",
+        "Estimation is gated by positive final weights, retained vote share, and panel balance. Tolerance: ",
+        config$weight_sum_tolerance
+      )
     ),
     validation_check(
       "crosswalk_undefined_selected_weights_handled",

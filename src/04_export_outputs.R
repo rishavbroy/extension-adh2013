@@ -12,7 +12,8 @@ export_event_study_outputs <- function(config = CONFIG) {
   if (nrow(checks) > 0 && has_fatal_failures(checks) && !isTRUE(config$allow_failed_diagnostics)) {
     stop("Refusing to export figures/tables because fatal validation checks are present.", call. = FALSE)
   }
-  has_validation_warnings <- nrow(checks) > 0 && has_any_failures(checks)
+  has_validation_failures <- nrow(checks) > 0 && has_any_failures(checks)
+  has_reported_nonfatal_conditions <- nrow(checks) > 0 && has_reported_conditions(checks)
 
   res_all <- read_model_object(config$all_specs_rds)
   spec_order <- c("minimal_full_panel", "interacted_core_controls_diagnostic", "interacted_controls_full_panel")
@@ -96,8 +97,13 @@ export_event_study_outputs <- function(config = CONFIG) {
   }
 
   notes_text <- paste0(
-    if (uses_repaired_main_vcov || has_validation_warnings) {
-      "PROVISIONAL: at least one validation check failed or a numerical repair/warning was recorded; treat these as diagnostic output until reviewed. "
+    if (uses_repaired_main_vcov || has_validation_failures) {
+      "PROVISIONAL: at least one fatal/non-handled validation check failed or a main numerical repair/warning was recorded; treat these as diagnostic output until reviewed. "
+    } else {
+      ""
+    },
+    if (has_reported_nonfatal_conditions) {
+      "Handled nonfatal crosswalk-support conditions are reported in the diagnostics and do not block the ADH-mainland estimating sample. "
     } else {
       ""
     },
@@ -117,7 +123,7 @@ export_event_study_outputs <- function(config = CONFIG) {
     longtable = TRUE,
     escape = TRUE,
     caption = paste0(
-      if (uses_repaired_main_vcov || has_validation_warnings) "Provisional " else "",
+      if (uses_repaired_main_vcov || has_validation_failures) "Provisional " else "",
       "event-study estimates: ADH China exposure and Republican presidential vote margin"
     ),
     align = c("l", rep("c", ncol(table_for_tex) - 1))
@@ -217,6 +223,8 @@ export_event_study_outputs <- function(config = CONFIG) {
   ggplot2::ggsave(filename = config$figure_pdf, plot = event_plot, width = 8.5, height = 7.5, bg = "white")
   ggplot2::ggsave(filename = config$figure_png, plot = event_plot, width = 8.5, height = 7.5, dpi = 320, bg = "white")
 
+  output_inventory <- write_output_manifest(config)
+
   write_pipeline_manifest(
     config = config,
     checks = checks,
@@ -230,9 +238,13 @@ export_event_study_outputs <- function(config = CONFIG) {
         table_tex = list(path = config$table_tex, md5 = file_checksum(config$table_tex)),
         table_pdf = list(path = config$table_pdf, md5 = file_checksum(config$table_pdf)),
         figure_pdf = list(path = config$figure_pdf, md5 = file_checksum(config$figure_pdf)),
-        figure_png = list(path = config$figure_png, md5 = file_checksum(config$figure_png))
+        figure_png = list(path = config$figure_png, md5 = file_checksum(config$figure_png)),
+        output_manifest_csv = list(path = config$output_manifest_csv, md5 = file_checksum(config$output_manifest_csv)),
+        output_manifest_json = list(path = config$output_manifest_json, md5 = file_checksum(config$output_manifest_json))
       ),
-      validation_warnings = has_validation_warnings
+      output_manifest_n_files = nrow(output_inventory),
+      validation_failures = has_validation_failures,
+      reported_nonfatal_conditions = has_reported_nonfatal_conditions
     )
   )
 

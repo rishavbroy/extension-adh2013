@@ -521,12 +521,21 @@ estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
         dplyr::select(sample, spec, se_type, vcov_dim, vcov_rank, vcov_rank_deficiency),
       by = c("sample", "spec", "se_type")
     ) %>%
+    dplyr::left_join(
+      vcov_diagnostics %>%
+        dplyr::select(sample, spec, se_type, vcov_status = status, repair_required, vcov_repaired, min_eigenvalue),
+      by = c("sample", "spec", "se_type")
+    ) %>%
     dplyr::mutate(
       diagnostic_note = dplyr::case_when(
         grepl("driscoll", se_type) & near_zero_se_count > 0 & dplyr::coalesce(vcov_rank_deficiency, 0L) > 0 ~
           "Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.",
         grepl("driscoll", se_type) & near_zero_se_count > 0 ~
           "Suspicious near-zero Driscoll-Kraay SEs; do not report without further diagnosis.",
+        grepl("conley", se_type) & (dplyr::coalesce(repair_required, FALSE) | dplyr::coalesce(vcov_repaired, FALSE)) ~
+          "Conley VCOV is non-positive-definite before repair or requires numerical repair; diagnostic only unless separately justified.",
+        dplyr::coalesce(vcov_repaired, FALSE) ~
+          "VCOV required numerical repair; diagnostic only unless separately justified.",
         dplyr::coalesce(vcov_rank_deficiency, 0L) > 0 ~
           "VCOV is rank deficient; use as diagnostic only unless justified.",
         grepl("cluster_cz_year", se_type) ~

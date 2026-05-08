@@ -105,3 +105,18 @@ Set `RUN_CROSSWALK_SENSITIVITY=true` to run four appendix specifications in one 
 The runner writes `output/diagnostics/crosswalk_sensitivity_run_status.csv` and archives per-spec diagnostics under `output/diagnostics/by_crosswalk/<slug>/`. The M4 specification intentionally uses M2 fallback so that all four sensitivity series use the same balanced ADH mainland CZ panel. The all-spec coefficient CSVs now include all Conley cutoffs/specifications that can be computed, even when the VCOV is flagged as repair-required; use the `vcov_repair_required` and `vcov_repaired` columns to avoid treating those rows as publication-ready inference.
 
 Diagnostic support-map PNGs are saved with full, simplified, and small-raster versions.
+
+## Latest validation/output manifest conventions
+
+The pipeline now distinguishes true validation failures from handled/reported diagnostic conditions. In `pipeline_validation_checks.csv`, rows with `status == "reported"` are nonfatal conditions that have been explicitly documented (for example, global/nonmainland source-county support rows outside the ADH-mainland estimating sample). Rows with `status == "fail"` are the rows that trigger failure logic when fatal.
+
+The table/figure export no longer labels outputs as provisional solely because handled `reported` conditions exist. It still uses provisional labeling if an unhandled validation failure or main-VCOV numerical repair is recorded.
+
+Every run writes an output inventory:
+
+- `output/diagnostics/output_manifest.csv`
+- `output/diagnostics/output_manifest.json`
+
+These files list generated outputs, file sizes, MD5 checksums, inferred crosswalk slugs, and broad output categories. They are intended as the final reproducibility inventory for the generated `output/` tree.
+
+Conley rows in `event_study_se_warning_diagnostics.csv` now carry explicit diagnostic notes when the unrepaired Conley VCOV is non-positive-definite or requires numerical repair. Such Conley estimates remain diagnostic-only unless separately justified.

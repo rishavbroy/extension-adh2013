@@ -435,6 +435,8 @@ export_diagnostic_maps_and_comparisons <- function(config = CONFIG) {
   } else {
     tibble::tibble()
   }
+  output_inventory <- write_output_manifest(config)
+
   write_pipeline_manifest(
     config = config,
     checks = checks,
@@ -453,8 +455,11 @@ export_diagnostic_maps_and_comparisons <- function(config = CONFIG) {
         crosswalk_support_county_map_small_png = list(path = config$crosswalk_support_county_map_small_png, md5 = file_checksum(config$crosswalk_support_county_map_small_png)),
         crosswalk_support_cz_map_png = list(path = config$crosswalk_support_cz_map_png, md5 = file_checksum(config$crosswalk_support_cz_map_png)),
         crosswalk_support_cz_map_simplified_png = list(path = config$crosswalk_support_cz_map_simplified_png, md5 = file_checksum(config$crosswalk_support_cz_map_simplified_png)),
-        crosswalk_support_cz_map_small_png = list(path = config$crosswalk_support_cz_map_small_png, md5 = file_checksum(config$crosswalk_support_cz_map_small_png))
-      )
+        crosswalk_support_cz_map_small_png = list(path = config$crosswalk_support_cz_map_small_png, md5 = file_checksum(config$crosswalk_support_cz_map_small_png)),
+        output_manifest_csv = list(path = config$output_manifest_csv, md5 = file_checksum(config$output_manifest_csv)),
+        output_manifest_json = list(path = config$output_manifest_json, md5 = file_checksum(config$output_manifest_json))
+      ),
+      output_manifest_n_files = nrow(output_inventory)
     )
   )
   invisible(NULL)
@@ -516,6 +521,7 @@ run_crosswalk_sensitivity_pipeline <- function(config = CONFIG) {
   }
   status_tbl <- dplyr::bind_rows(status_rows)
   write_crosswalk_sensitivity_status(status_rows, comparison_config)
+  output_inventory <- write_output_manifest(comparison_config)
   write_pipeline_manifest(
     config = comparison_config,
     checks = checks,
@@ -531,7 +537,10 @@ run_crosswalk_sensitivity_pipeline <- function(config = CONFIG) {
       comparison_csv = list(path = comparison_config$crosswalk_comparison_csv, md5 = file_checksum(comparison_config$crosswalk_comparison_csv)),
       comparison_png = list(path = comparison_config$crosswalk_comparison_png, md5 = file_checksum(comparison_config$crosswalk_comparison_png)),
       comparison_delta_csv = list(path = comparison_config$crosswalk_comparison_delta_csv, md5 = file_checksum(comparison_config$crosswalk_comparison_delta_csv)),
-      comparison_delta_png = list(path = comparison_config$crosswalk_comparison_delta_png, md5 = file_checksum(comparison_config$crosswalk_comparison_delta_png))
+      comparison_delta_png = list(path = comparison_config$crosswalk_comparison_delta_png, md5 = file_checksum(comparison_config$crosswalk_comparison_delta_png)),
+      output_manifest_csv = list(path = comparison_config$output_manifest_csv, md5 = file_checksum(comparison_config$output_manifest_csv)),
+      output_manifest_json = list(path = comparison_config$output_manifest_json, md5 = file_checksum(comparison_config$output_manifest_json)),
+      output_manifest_n_files = nrow(output_inventory)
     )
   )
   invisible(status_tbl)

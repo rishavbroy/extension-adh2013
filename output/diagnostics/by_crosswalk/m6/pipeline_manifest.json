@@ -1,6 +1,6 @@
 {
   "stage": "export_event_study_outputs",
-  "generated_at": "2026-05-08 10:44:52 CDT",
+  "generated_at": "2026-05-08 11:33:42 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
@@ -29,23 +29,26 @@
     "save_single_rds": false,
     "rds_chunk_size_mib": 45,
     "county1990_shapefile_path": "spatial-data/counties-1990",
-    "nhgis_extract_dir": "spatial-data/nhgis_1990_county"
+    "nhgis_extract_dir": "spatial-data/nhgis_1990_county",
+    "output_manifest_csv": "output/diagnostics/output_manifest.csv",
+    "output_manifest_json": "output/diagnostics/output_manifest.json"
   },
   "sources": {
     "all_specs": {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6.rds",
       "chunk_manifest": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6_rds_chunks/manifest.json",
       "chunk_dir": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6_rds_chunks",
-      "manifest_md5": "04801c17f5118f680c5c902fcd8f4152",
+      "manifest_md5": "11bbeb54caa2000a682d97de8550e713",
       "storage": "chunked_rds"
     }
   },
   "checks": {
     "check": ["adh_one_row_per_czone", "cz_lookup_unique_1990_counties", "aa_all_county_fips_valid", "aa_vote_identity_error_within_tolerance", "crosswalk_positive_final_weight_sums_equal_one", "crosswalk_all_source_weight_sums_equal_one_or_reported", "crosswalk_undefined_selected_weights_handled", "aa_no_duplicate_county_years_after_exact_distinct", "aa_two_party_votes_match_party_votes", "aa_votes_nonnegative", "bridged_vote_retention_above_threshold", "main_panel_balanced", "event_study_residualized_design_full_rank", "event_study_main_vcov_available_without_repair", "event_study_conley_repair_diagnostics_recorded"],
-    "status": ["pass", "pass", "pass", "pass", "pass", "fail", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass"],
+    "status": ["pass", "pass", "pass", "pass", "pass", "reported", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass"],
     "fatal": [true, true, true, true, true, false, true, true, true, true, true, true, true, true, false],
-    "n_failed": [0, 0, 0, 0, 0, 162, 1204, 0, 0, 0, 0, 0, 0, 0, 31],
-    "details": ["Requires one ADH baseline/exposure row per commuting zone.", "Requires each 1990 county FIPS to appear once and map to one CZ.", "Requires all county FIPS to be five numeric digits before filtering.", "Max absolute vote identity error: 0", "Tolerance: 1e-06", "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance.", "Policy: fallback_m2", "Exact duplicate rows removed: 0", "Requires republican + democratic votes to equal two-party votes.", "Requires nonnegative Republican, Democratic, two-party, and total votes.", "Minimum retained share in main years: 0.996122", "Observed complete rows: 9386; expected rows: 9386; missing share: 0", "Requires no residualized RHS rank deficiency in 1952-start or 1972-start specifications.", "Main SE type: cluster_cz", "Conley VCOVs requiring repair across all samples/specs/cutoffs: 31"]
+    "n_failed": [0, 0, 0, 0, 0, 0, 1204, 0, 0, 0, 0, 0, 0, 0, 31],
+    "details": ["Requires one ADH baseline/exposure row per commuting zone.", "Requires each 1990 county FIPS to appear once and map to one CZ.", "Requires all county FIPS to be five numeric digits before filtering.", "Max absolute vote identity error: 0", "Tolerance: 1e-06", "Global non-ADH or unsupported source-county rows are reported rather than treated as validation failures. Estimation is gated by positive final weights, retained vote share, and panel balance. Tolerance: 1e-06", "Policy: fallback_m2", "Exact duplicate rows removed: 0", "Requires republican + democratic votes to equal two-party votes.", "Requires nonnegative Republican, Democratic, two-party, and total votes.", "Minimum retained share in main years: 0.996122", "Observed complete rows: 9386; expected rows: 9386; missing share: 0", "Requires no residualized RHS rank deficiency in 1952-start or 1972-start specifications.", "Main SE type: cluster_cz", "Conley VCOVs requiring repair across all samples/specs/cutoffs: 31"],
+    "n_reported": ["NA", "NA", "NA", "NA", "NA", 162, "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA"]
   },
   "fatal_failure": false,
   "extra": {
@@ -56,21 +59,31 @@
       },
       "table_tex": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m6.tex",
-        "md5": "41591b5d1ab7378602d13cca9f71342d"
+        "md5": "a9e7f7be50b3637a4b917878e2a3efd8"
       },
       "table_pdf": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m6.pdf",
-        "md5": "1b47eb437dd632372a5216456e28792b"
+        "md5": "d92f427cd5525676f58a0721c3725467"
       },
       "figure_pdf": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m6.pdf",
-        "md5": "457cac253c821d2d223914521455f140"
+        "md5": "b3262dc52150858b31d2484210f1e0cf"
       },
       "figure_png": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m6.png",
         "md5": "3950da2bbef1b92b70e5ca8e877ced7d"
+      },
+      "output_manifest_csv": {
+        "path": "output/diagnostics/output_manifest.csv",
+        "md5": "3501737703b80e3eb8a4ce5ca5159126"
+      },
+      "output_manifest_json": {
+        "path": "output/diagnostics/output_manifest.json",
+        "md5": "56b22d591e8fe19105f0f06ba9e5c910"
       }
     },
-    "validation_warnings": true
+    "output_manifest_n_files": 114,
+    "validation_failures": false,
+    "reported_nonfatal_conditions": true
   }
 }

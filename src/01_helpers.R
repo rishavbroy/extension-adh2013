@@ -118,6 +118,8 @@ finalize_config <- function(config) {
 
   config$dependency_manifest_json <- file.path(config$diagnostic_dir, "dependency_manifest.json")
   config$pipeline_manifest_json <- file.path(config$diagnostic_dir, "pipeline_manifest.json")
+  config$output_manifest_csv <- file.path(config$diagnostic_dir, "output_manifest.csv")
+  config$output_manifest_json <- file.path(config$diagnostic_dir, "output_manifest.json")
   config$validation_checks_csv <- file.path(config$diagnostic_dir, "pipeline_validation_checks.csv")
   config$crosswalk_diagnostics_csv <- file.path(
     config$diagnostic_dir, paste0("ftz_", slug, "_crosswalk_source_diagnostics.csv")
@@ -463,12 +465,30 @@ validation_check <- function(name, passed, fatal = TRUE, n_failed = NA_integer_,
   )
 }
 
+reported_check <- function(name, n_reported = 0L, details = "") {
+  tibble::tibble(
+    check = name,
+    status = if (is.na(n_reported) || n_reported == 0L) "pass" else "reported",
+    fatal = FALSE,
+    n_failed = 0L,
+    n_reported = as.integer(dplyr::coalesce(as.integer(n_reported), 0L)),
+    details = as.character(details)
+  )
+}
+
 has_fatal_failures <- function(checks) {
-  any(checks$fatal & checks$status == "fail")
+  if (nrow(checks) == 0 || !("status" %in% names(checks))) return(FALSE)
+  any(checks$fatal %in% TRUE & checks$status == "fail", na.rm = TRUE)
 }
 
 has_any_failures <- function(checks) {
-  any(checks$status == "fail")
+  if (nrow(checks) == 0 || !("status" %in% names(checks))) return(FALSE)
+  any(checks$status == "fail", na.rm = TRUE)
+}
+
+has_reported_conditions <- function(checks) {
+  if (nrow(checks) == 0 || !("status" %in% names(checks))) return(FALSE)
+  any(checks$status == "reported", na.rm = TRUE)
 }
 
 write_dependency_manifest <- function(config) {
@@ -631,6 +651,66 @@ model_object_reference <- function(path, config = CONFIG) {
   list(path = path, md5 = NA_character_, storage = "missing")
 }
 
+
+output_file_category <- function(path, config = CONFIG) {
+  rel <- portable_path(path, config)
+  dplyr::case_when(
+    startsWith(rel, "output/diagnostics/") ~ "diagnostics",
+    startsWith(rel, "output/intermediate/") ~ "intermediate",
+    startsWith(rel, "output/tables/") ~ "tables",
+    startsWith(rel, "output/figures/") ~ "figures",
+    TRUE ~ "other"
+  )
+}
+
+infer_crosswalk_slug_from_path <- function(path) {
+  base <- basename(path)
+  hit <- stringr::str_match(base, "_(m2|m4|m5|m6)(\\.|_|$)")[, 2]
+  ifelse(is.na(hit), NA_character_, hit)
+}
+
+write_output_manifest <- function(config = CONFIG) {
+  config <- finalize_config(config)
+  if (!dir.exists(config$output_dir)) {
+    empty <- tibble::tibble(
+      path = character(), category = character(), extension = character(), bytes = numeric(),
+      md5 = character(), crosswalk_slug = character(), modified_time = character()
+    )
+    readr::write_csv(empty, config$output_manifest_csv)
+    jsonlite::write_json(list(generated_at = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), files = empty),
+                         config$output_manifest_json, pretty = TRUE, auto_unbox = TRUE)
+    return(invisible(empty))
+  }
+  files <- list.files(config$output_dir, recursive = TRUE, full.names = TRUE, all.files = FALSE, no.. = TRUE)
+  files <- files[file.exists(files) & !dir.exists(files)]
+  # Avoid self-recursive checksum churn by writing the manifest after listing but
+  # excluding the previous copy of itself from checksum-based reproducibility checks.
+  info <- file.info(files)
+  out <- tibble::tibble(
+    path = vapply(files, portable_path, character(1), config = config),
+    category = vapply(files, output_file_category, character(1), config = config),
+    extension = tolower(tools::file_ext(files)),
+    bytes = as.numeric(info$size),
+    md5 = vapply(files, file_checksum, character(1)),
+    crosswalk_slug = vapply(files, infer_crosswalk_slug_from_path, character(1)),
+    modified_time = format(info$mtime, "%Y-%m-%d %H:%M:%S %Z")
+  ) %>%
+    dplyr::arrange(category, path)
+  readr::write_csv(out, config$output_manifest_csv)
+  jsonlite::write_json(
+    list(
+      generated_at = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"),
+      n_files = nrow(out),
+      total_bytes = sum(out$bytes, na.rm = TRUE),
+      files = out
+    ),
+    config$output_manifest_json,
+    pretty = TRUE,
+    auto_unbox = TRUE
+  )
+  invisible(out)
+}
+
 write_pipeline_manifest <- function(config, checks, stage, sources = list(), extra = list()) {
   sources <- sanitize_manifest_paths(sources, config)
   extra <- sanitize_manifest_paths(extra, config)
@@ -647,7 +727,7 @@ write_pipeline_manifest <- function(config, checks, stage, sources = list(), ext
       "conley_cutoffs_km", "main_se_type", "nw_lag", "dk_lag", "interacted_controls",
       "standardize_interacted_controls", "export_crosswalk_maps", "run_crosswalk_sensitivity",
       "save_single_rds", "rds_chunk_size_mib", "county1990_shapefile_path",
-      "nhgis_extract_dir"
+      "nhgis_extract_dir", "output_manifest_csv", "output_manifest_json"
     )],
     sources = sources,
     checks = checks,
@@ -656,6 +736,11 @@ write_pipeline_manifest <- function(config, checks, stage, sources = list(), ext
   )
   manifest <- sanitize_manifest_paths(manifest, config)
   jsonlite::write_json(manifest, config$pipeline_manifest_json, pretty = TRUE, auto_unbox = TRUE, null = "null")
+  # Keep the standalone output inventory current after each manifest write.
+  tryCatch(write_output_manifest(config), error = function(e) warning(
+    "Could not update output manifest after writing pipeline manifest: ",
+    conditionMessage(e), call. = FALSE
+  ))
   invisible(manifest)
 }
 

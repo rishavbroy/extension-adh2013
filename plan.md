@@ -32,7 +32,8 @@ We begin first with the replication package of ADH 2013 (saved under `replicatio
 		4. Population-based (M4), with county area divided into urban and rural areas after excluding non-inhabitable areas, with additional weighting for topographic suitability (i.e., elevation).
 		5. **Population-based (M5), with built-up settlement areas indicated in space (1810–2020 only).**
 		6. Population-based (M6), with built-up property counts indicated in space (1810–2020 only).
-   3. Normalize final weights within source county only after the fallback rule is applied. Report source counties requiring fallback and compare results to M6+fallback, pure M2, and M4+fallback.
+   3. Use FTZ-provided weights as-is after fallback. Validate that final source-county sums equal one, and otherwise do not renormalize unless explicitly requested.
+   4. Report source counties requiring fallback and compare results to M6+fallback, pure M2, and M4+fallback.
 
 2. Aggregate 1990 counties to 1990 CZs using `extension-adh2013/cz-data`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
 	1. Nothing complicated here. `cz-198090.xls` should match county names and FIPS codes to 1990 CZs. As far as I could tell, the county names and codes are from 1990 and the CZ codes match [Tolbert and Sizer (1996)](https://ageconsearch.umn.edu/record/278812?v=pdf), the paper ADH 2013 used for their CZs.
@@ -68,7 +69,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_g [\sum_{i \in g} (x_i - \bar{x}) \hat{\var
 Conley, with kernel $K$ defined in accordance with p. 18 of [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0):
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \bar{x}) \hat{\varepsilon}_i \hat{\varepsilon}_j}{[\sum (x_i - \bar{x})^2]^2}}$$
 
-- The preferred SE is still CZ-clustered, however. Conley SEs are retained as diagnostics and are not used as main inference because many Conley VCOVs are non-positive-definite or require repair. Driscoll-Kraay and two-way CZ$\times$year clustering are also diagnostic since the short election-year panel produces unstable or near-zero SEs. A genuine spatial-temporal HAC estimator remains future work.
+- The preferred SE is still CZ-clustered, however. Conley SEs are retained as diagnostics and are not used as main inference because many Conley VCOVs are non-positive-definite or require repair. Driscoll-Kraay and two-way CZ$\times$year clustering are also diagnostic since the short election-year panel produces unstable or near-zero SEs.
 
 ## Fourth, run the event study.
 - Note that potential controls $X_{ct}$ from 1990 can be found in the ADH 2013 replication package.
@@ -220,6 +221,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 			- Single static 1990-2007 exposure with election-year dummies could work better if we instead used time-varying exposure by subperiod, namely 1991-1999 and 2000-2007
 	- Relevant data from https://www.ddorn.net/data.htm to reconstruct a better exposure
 		- All files from [C] Industry Codes and [D] Industry Trade Exposure
+- A genuine spatio-temporal HAC estimator
 
 
 ### More outcomes and mechanisms
@@ -260,10 +262,11 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 	- Did a political change occur for majority-white + trade-exposed CZs vs. majority-white + not trade-exposed CZs? Or did it only occur for majority-white CZs vs. majority-minority CZs?
 	- Does media consumption (e.g., Fox News viewership) predict political change?
 
-### Pretty stuff for the paper
+### Cosmetic adjustments
 - Make maps
 	- 1990 census tract shapefiles in `extension-adh2013/spatial-data/Census_Tracts_in_1990`, sourced from https://catalog.data.gov/dataset/census-tracts-in-1990. 
 	- 1990 county shapefiles at `extension-adh2013/spatial-data/counties-1990`, sourced from https://geo.btaa.org/catalog/stanford-pb817xw6983
+- Organize outputs
 
 ### Additional literature review
 - https://en.wikipedia.org/wiki/China_shock

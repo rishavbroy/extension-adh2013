@@ -1,2 +1,2 @@
 crosswalk_slug,crosswalk_specification,crosswalk_weight,crosswalk_missing_weight_policy,status,error_message,diagnostics_dir,archived_at
-m6,M6 + fallback M2,m6_weight,fallback_m2,completed,NA,output/diagnostics/by_crosswalk/m6,2026-05-08 10:44:52 CDT
+m6,M6 + fallback M2,m6_weight,fallback_m2,completed,NA,output/diagnostics/by_crosswalk/m6,2026-05-08 11:33:43 CDT
