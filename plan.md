@@ -187,22 +187,20 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 - Different SEs
 	- Different Conley SEs
 		- Test out lower Conley cutoffs. Test for bandwidth sensitivity
-		- Perhaps use the `SpatialInference` R package for the bandwidth selection method described in [Lehner (2026)](https://arxiv.org/html/2603.03997v1).
-- Incorporate serial dependence across election years.
-	- May need to use [Kelejian and Prucha (2006)](https://doi.org/10.1016/j.jeconom.2006.09.005)
-- Run specifications with/without instrument and run weak instrument tests (medium-priority)
+		- Perhaps use the `SpatialInference` R package for the bandwidth selection method described in [Lehner (2026)](https://doi.org/10.48550/arXiv.2603.03997) ([HTML version](https://arxiv.org/html/2603.03997v1)).
+- Run specifications with/without instrument and run weak instrument tests
 	- $\text{Exposure}_c$, the ADH measure of exposure, is an endogenous regressor!! 
 		- ADH’s Bartik instrument for their exposure measure is Chinese import growth in other high-income countries. Will likely be far weaker for our longer-run political outcomes than their shorter-run labor outcomes.
 	- How to test?
 		- One instrument --> first-stage $F$-stat is natural, test if industry shares predict exposure
-		- But it's a Bartik instrument! [Goldsmith-Pinkham, Sorkin, and Swift (2020)](https://doi.org/10.1257/aer.20181047), a single industry share likely correlated with the error term may drive this. Might have to do some Rotemberg weight funkiness. [Borusyak, Hull, and Jaravel (2025)](https://doi.org/10.1257/jep.20231370) could be a helpful guide here too.
-- Test for Bartik instrument flaws (low)
-	- Presence of flaws can be tested by replicating Sec. A.5 of the [Online Appendix](https://www-aeaweb-org.ezproxy.library.wisc.edu/content/file?id=12670) for [Goldsmith-Pinkham, Sorkin, and Swift (2020)](https://doi.org/10.1257/aer.20181047).
-	- Additional sensitivity can be tested using [Apfel (2024)](https://doi.org/10.1093/jrsssa/qnad148)
+		- But it's a Bartik instrument! [Goldsmith-Pinkham, Sorkin, and Swift (2020)](https://doi.org/10.1257/aer.20181047) (`gpss2020-paper.pdf` and `gpss2020-appendix.pdf`), a single industry share likely correlated with the error term may drive this. Might have to do some Rotemberg weight funkiness. [Borusyak, Hull, and Jaravel (2025)](https://doi.org/10.1257/jep.20231370) (`bhj2025-paper.pdf` and `bhj2025-appendix.pdf`) seems like it could be a very helpful guide here, too.
+- Test for Bartik instrument flaws
+	- Presence of flaws can be tested by replicating Sec. A.5 of the [Online Appendix](https://www-aeaweb-org.ezproxy.library.wisc.edu/content/file?id=12670) (`gpss2020-appendix.pdf`) for [Goldsmith-Pinkham, Sorkin, and Swift (2020)](https://doi.org/10.1257/aer.20181047).
+	- Additional sensitivity can be tested using [Apfel (2024)](https://doi.org/10.1093/jrsssa/qnad148) (`a2024.pdf`)
 - Test for sensitivity to commuting zone definition
 	- Commuting zone definitions are sensitive, making empirical results sensitive
-	- Replicate [Foote, Kutzbach, and Vilhuber (2021)](https://doi.org/10.1080/00036846.2020.1841083) using https://github.com/larsvilhuber/MobZ i.e., https://larsvilhuber.github.io/MobZ/ or https://zenodo.org/records/4072428
-- Test for crosswalk flaws
+	- Replicate [Foote, Kutzbach, and Vilhuber (2021)](https://doi.org/10.1080/00036846.2020.1841083) (`fkv2021-paper.html` and `fkv2021-paper.pdf`) using their replication package https://github.com/larsvilhuber/MobZ which is also found at https://larsvilhuber.github.io/MobZ/ and https://zenodo.org/records/4072428 (`fkv2021-replication.zip`)
+- Test for crosswalk flaws (we've basically already completed this)
 	- Compare the sensitivity of results to use of different weights (e.g., M5 vs. M6) in step 1 of crosswalk.
 	- Any way to check attenuation from crosswalk? 
 	- Check robustness of results to other crosswalks e.g., from https://www.ddorn.net/data.htm
@@ -221,12 +219,13 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 			- Single static 1990-2007 exposure with election-year dummies could work better if we instead used time-varying exposure by subperiod, namely 1991-1999 and 2000-2007
 	- Relevant data from https://www.ddorn.net/data.htm to reconstruct a better exposure
 		- All files from [C] Industry Codes and [D] Industry Trade Exposure
-- A genuine spatio-temporal HAC estimator
+- A genuine spatio-temporal HAC estimator. Incorporate serial dependence across election years.
+	- May need to use [Kelejian and Prucha (2006)](https://doi.org/10.1016/j.jeconom.2006.09.005)
 
 
 ### More outcomes and mechanisms
 - Run specifications where  $Y_{ct}$, a CZ-level political outcome in year $t$ is either Republican vote share, Democratic vote share, two-party share, Republican margin, and swings across elections.
-- Robustness to different data source for electoral outcomes
+- Robustness to different data source for electoral outcomes (doesn't seem worthwhile)
 	- Use `extension-adh2013/outcomes-data/pres_elections-2000-2024`, sourced from [County Presidential Election Returns 2000-2024](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FVOQCHQ), for county-level political outcomes in presidential elections from 2000-2024.
 		- Our "First" step in the Process would then also have to map 2024 counties to 2020 counties using [Lutz (2025)](https://chandlerlutz.github.io/files/bridging_the_geographic_divide_crosswalks_across_space_and_time.pdf).
 			- The only [substantial changes to counties](https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.html) made this period were in Connecticut in 2022. [Lutz (2025)](https://chandlerlutz.github.io/files/bridging_the_geographic_divide_crosswalks_across_space_and_time.pdf) provides a county-level crosswalk of this. Directly replicating the code in the README of `extension-adh2013/lutz2025/geolinkr-main`, sourced from [https://github.com/ChandlerLutz/geolinkr](https://github.com/ChandlerLutz/geolinkr), is sufficient for this. Note how his code reads in external data via URLs. 
@@ -235,12 +234,12 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 	- [National Neighborhood Data Archive (NaNDA): Voter Registration, Turnout, and Partisanship by County, United States, 2004-2022 (ICPSR 38506)](https://www.icpsr.umich.edu/web/ICPSR/studies/38506) is very promising
 		- Relevant county-level variables: Registered voters, ballots cast, voting population (specifically CVAP), voter registration, voter turnout, registered voter turnout 
 - Build outcomes that provide a better picture of the full political effect
-	- Motivation: [Autor et al. (2020)](https://doi.org/10.1257/aer.20170011) find the China shock’s main political effects to be a rightward shift in media consumption and electoral outcomes + a loss of moderates. 
+	- Motivation: [Autor et al. (2020)](https://doi.org/10.1257/aer.20170011) (`adhm2020-paper.pdf`, `adhm2020-appendix.pdf`, and `adhm2020-replication.zip`) find the China shock’s main political effects to be a rightward shift in media consumption and electoral outcomes + a loss of moderates. 
 	- Partisanship
 		- [National Neighborhood Data Archive (NaNDA): Voter Registration, Turnout, and Partisanship by County, United States, 2004-2022 (ICPSR 38506)](https://www.icpsr.umich.edu/web/ICPSR/studies/38506) is very promising
 			- Relevant county-level variables: Democratic and Republican partisanship indices
 	- Polarization
-		- [American National Election Studies (ANES)](https://electionstudies.org/data-center/) data measures polarization and other political attitudes; read the questions it asks [here](https://electionstudies.org/data-tools/anes-continuity-guide/#iii-c-economic-issues). Sample sizes per CZ are probably tiny, however. Don't prioritize it. 
+		- [American National Election Studies (ANES)](https://electionstudies.org/data-center/) data measures polarization and other political attitudes; read the questions it asks [here](https://electionstudies.org/data-tools/anes-continuity-guide/#iii-c-economic-issues). Sample sizes per CZ are probably tiny, however. Don't prioritize this data source. 
 	- Data on media consumption?
 	- Relevant political outcomes from https://www.ddorn.net/data.htm:
 		- [[H1]](https://www.ddorn.net/data/cfavg_2002_2016.zip) Liberal, moderate and conservative legislators in U.S. Congress, 2002-2016.
@@ -269,5 +268,6 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 - Organize outputs
 
 ### Additional literature review
-- https://en.wikipedia.org/wiki/China_shock
-- [Partisan Popularity & Protectionism: The Political Economy Impact of the China Shock on Local Labor Markets](https://dataspace.princeton.edu/handle/88435/dsp012z10wt48b)
+- https://en.wikipedia.org/wiki/China_shock has many interesting sources
+  - [Ferrara (2023)](https://doi.org/10.1080/09692290.2021.1980898) (`f2023-paper.pdf` and `f2023-appendix.pdf`) seems particularly interesting and relevant
+- [Partisan Popularity & Protectionism: The Political Economy Impact of the China Shock on Local Labor Markets](http://arks.princeton.edu/ark:/88435/dsp012z10wt48b) seems to have a conclusion in line with our results so far. The full thesis, unfortunately, cannot be accessedl; just the abstract at the provided link.
