@@ -1,4 +1,4 @@
-# replication/src/00_config.R
+# extension-adh2013/src/00_config.R
 
 if (!requireNamespace("here", quietly = TRUE)) {
   stop("Package 'here' is required. Install it before sourcing the pipeline config.")
@@ -34,7 +34,7 @@ CONFIG <- list(
   weight_var = "adh_weight",
 
   crosswalk_weight = "m5_weight",
-  crosswalk_missing_weight_policy = "fallback_m2", # Use "fail" unless exploratory
+  crosswalk_missing_weight_policy = "fallback_m2",
   renormalize_crosswalk_weights = FALSE,
   weight_sum_tolerance = 1e-6,
   min_retained_vote_share = 0.98,
@@ -54,7 +54,14 @@ CONFIG <- list(
   dk_lag = 1L,
   main_se_type = "cluster_cz",
 
-  export_bandwidth_diagnostic = TRUE
+  standardize_interacted_controls = TRUE,
+  export_bandwidth_diagnostic = TRUE,
+  export_crosswalk_maps = TRUE,
+  run_crosswalk_sensitivity = FALSE,
+  save_single_rds = FALSE,
+  rds_chunk_size_mib = 45,
+  county1990_shapefile_path = Sys.getenv("COUNTY1990_SHAPEFILE", unset = file.path(REPLICATION_DIR, "spatial-data", "counties-1990")),
+  nhgis_extract_dir = Sys.getenv("NHGIS_1990_COUNTY_EXTRACT_DIR", unset = file.path(REPLICATION_DIR, "spatial-data", "nhgis_1990_county"))
 )
 
 CONFIG$baseline_controls <- c(

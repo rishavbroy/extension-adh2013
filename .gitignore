@@ -1,1 +1,19 @@
 .DS_Store
+__MACOSX/
+.Rhistory
+.RData
+.Ruserdata
+*.log
+*.aux
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.lof
+*.lot
+output/intermediate/*.rds
+
+# Oversized model objects; use chunked outputs instead
+output/intermediate/*.rds
+output/intermediate/*_all_specs_*.rds

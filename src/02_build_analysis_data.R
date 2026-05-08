@@ -1,28 +1,24 @@
-# replication/src/02_build_analysis_data.R
+# extension-adh2013/src/02_build_analysis_data.R
 
-preflight_ftz_builtup_support <- function(zip_path, source_decades, tolerance = 1e-6) {
+preflight_ftz_builtup_support <- function(zip_path, source_decades, tolerance = 1e-6,
+                                           weight_types = c("m2_weight", "m4_weight", "m5_weight", "m6_weight")) {
+  # 1990 is identity-mapped to itself in this project, so M2/M4/M5/M6 support
+  # is not meaningful for that decade. Omitting it avoids the misleading
+  # n_source_counties = 1 synthetic row seen in earlier diagnostics.
+  source_decades <- setdiff(as.integer(source_decades), 1990L)
+
   purrr::map_dfr(source_decades, function(source_decade) {
-    if (source_decade == 1990L) {
-      return(tibble::tibble(
-        source_decade = 1990L,
-        county_fips_source = NA_character_,
-        weight_type = c("m5_weight", "m6_weight"),
-        weight_sum = 1,
-        zero_or_undefined_support = FALSE
-      ))
-    }
-
     file_name <- paste0("Crosswalk_", source_decade, "_1990.csv")
     source_col <- paste0("gisjoin_", source_decade)
     raw <- readr::read_csv(
       unz(zip_path, file_name),
-      col_select = dplyr::all_of(c(source_col, "m5_weight", "m6_weight")),
+      col_select = dplyr::all_of(c(source_col, weight_types)),
       show_col_types = FALSE
     ) %>%
       dplyr::mutate(
         gisjoin_source = as.character(.data[[source_col]])
       ) %>%
-      dplyr::select(gisjoin_source, m5_weight, m6_weight)
+      dplyr::select(gisjoin_source, dplyr::all_of(weight_types))
     if (source_decade == 2020L) {
       raw <- raw %>%
         dplyr::mutate(gisjoin_source = fips_to_gisjoin(stringr::str_pad(gisjoin_source, 5, pad = "0")))
@@ -30,27 +26,147 @@ preflight_ftz_builtup_support <- function(zip_path, source_decades, tolerance = 
 
     raw %>%
       tidyr::pivot_longer(
-        cols = c("m5_weight", "m6_weight"),
+        cols = dplyr::all_of(weight_types),
         names_to = "weight_type",
         values_to = "weight"
       ) %>%
       dplyr::group_by(gisjoin_source, weight_type) %>%
       dplyr::summarise(
-        weight_sum = if (all(is.na(weight))) NA_real_ else sum(weight, na.rm = TRUE),
+        weight_sum = sum_preserve_all_na(weight),
+        n_parts = dplyr::n(),
+        n_missing_parts = sum(is.na(weight)),
         .groups = "drop"
       ) %>%
       dplyr::transmute(
         source_decade = as.integer(source_decade),
+        gisjoin_source,
         county_fips_source = gisjoin_to_fips(gisjoin_source),
         weight_type,
         weight_sum,
+        n_parts,
+        n_missing_parts,
+        available = !is.na(weight_sum) & weight_sum > tolerance,
         zero_or_undefined_support = is.na(weight_sum) | weight_sum <= tolerance
       )
   })
 }
 
+read_ftz_raw_target_rows <- function(source_decade, zip_path, weight_types = c("m2_weight", "m4_weight", "m5_weight", "m6_weight")) {
+  if (source_decade == 1990L) return(tibble::tibble())
+  file_name <- paste0("Crosswalk_", source_decade, "_1990.csv")
+  source_col <- paste0("gisjoin_", source_decade)
+  raw <- readr::read_csv(
+    unz(zip_path, file_name),
+    col_select = dplyr::all_of(c(source_col, "gisjoin_1990", weight_types)),
+    show_col_types = FALSE
+  ) %>%
+    dplyr::mutate(
+      source_decade = as.integer(source_decade),
+      gisjoin_source = as.character(.data[[source_col]]),
+      gisjoin_source = dplyr::if_else(
+        source_decade == 2020L,
+        fips_to_gisjoin(stringr::str_pad(gisjoin_source, 5, pad = "0")),
+        gisjoin_source
+      ),
+      county_fips_source = gisjoin_to_fips(gisjoin_source),
+      county_fips_1990 = gisjoin_to_fips(gisjoin_1990)
+    )
+  raw %>%
+    dplyr::select(source_decade, gisjoin_source, county_fips_source, gisjoin_1990, county_fips_1990, dplyr::all_of(weight_types))
+}
+
+build_target_weight_support_diagnostics <- function(zip_path, source_decades, county_pres, cz_lookup,
+                                                    selected_crosswalks, tolerance = 1e-6,
+                                                    adh_czones = NULL) {
+  weight_types <- c("m2_weight", "m4_weight", "m5_weight", "m6_weight")
+  source_support <- preflight_ftz_builtup_support(zip_path, source_decades, tolerance, weight_types)
+
+  raw_targets <- purrr::map_dfr(setdiff(as.integer(source_decades), 1990L), read_ftz_raw_target_rows,
+                                zip_path = zip_path, weight_types = weight_types)
+  support_long <- source_support %>%
+    dplyr::select(source_decade, gisjoin_source, county_fips_source, weight_type, weight_sum, available)
+
+  # Attach election-year vote mass so the map can indicate which 1990 counties/CZs
+  # actually receive votes from source counties whose M2/M4/M5/M6 support is unavailable.
+  source_votes <- county_pres %>%
+    dplyr::select(year, source_decade, gisjoin_source, county_fips, state_fips, state, county_name, twoparty_votes)
+
+  # Use the selected/fallback crosswalk weights as the vote-mass allocator for the
+  # demonstration map. A target is flagged only if the selected/fallback crosswalk
+  # sends positive vote mass to that 1990 target from a source county where the
+  # diagnostic weight type is unavailable. This avoids over-flagging ordinary
+  # zero-weight target rows in the raw many-to-many FTZ crosswalk.
+  selected_targets <- selected_crosswalks %>%
+    dplyr::filter(!is.na(crosswalk_weight), crosswalk_weight > tolerance) %>%
+    dplyr::select(source_decade, gisjoin_source, county_fips_1990,
+                  selected_crosswalk_weight = crosswalk_weight) %>%
+    dplyr::distinct()
+
+  target_long <- raw_targets %>%
+    tidyr::pivot_longer(
+      cols = dplyr::all_of(weight_types),
+      names_to = "weight_type",
+      values_to = "raw_weight_for_type"
+    ) %>%
+    dplyr::left_join(support_long, by = c("source_decade", "gisjoin_source", "county_fips_source", "weight_type")) %>%
+    dplyr::left_join(source_votes, by = c("source_decade", "gisjoin_source"), relationship = "many-to-many") %>%
+    dplyr::left_join(selected_targets, by = c("source_decade", "gisjoin_source", "county_fips_1990"), relationship = "many-to-many") %>%
+    dplyr::mutate(
+      unavailable = !dplyr::coalesce(available, FALSE),
+      selected_crosswalk_weight = dplyr::coalesce(selected_crosswalk_weight, 0),
+      received_vote_mass_proxy = twoparty_votes * selected_crosswalk_weight,
+      receives_positive_vote_mass = !is.na(received_vote_mass_proxy) & received_vote_mass_proxy > 0,
+      affected_received_vote_mass_proxy = dplyr::if_else(
+        unavailable & receives_positive_vote_mass,
+        received_vote_mass_proxy,
+        0
+      )
+    )
+
+  county_diag <- target_long %>%
+    dplyr::filter(!is.na(county_fips_1990), !is.na(year)) %>%
+    dplyr::group_by(county_fips_1990, weight_type) %>%
+    dplyr::summarise(
+      receives_unavailable_source = any(affected_received_vote_mass_proxy > 0, na.rm = TRUE),
+      n_unavailable_source_counties = dplyr::n_distinct(county_fips_source[affected_received_vote_mass_proxy > 0]),
+      unavailable_source_vote_mass_proxy = sum(affected_received_vote_mass_proxy, na.rm = TRUE),
+      total_received_vote_mass_proxy = sum(received_vote_mass_proxy, na.rm = TRUE),
+      share_received_from_unavailable_sources = dplyr::if_else(
+        total_received_vote_mass_proxy > 0,
+        unavailable_source_vote_mass_proxy / total_received_vote_mass_proxy,
+        NA_real_
+      ),
+      .groups = "drop"
+    ) %>%
+    dplyr::left_join(cz_lookup %>% dplyr::select(county_fips_1990, czone), by = "county_fips_1990")
+
+  if (!is.null(adh_czones)) {
+    adh_czones <- unique(as.integer(adh_czones))
+    county_diag <- county_diag %>% dplyr::filter(czone %in% adh_czones)
+  }
+
+  cz_diag <- county_diag %>%
+    dplyr::filter(!is.na(czone)) %>%
+    dplyr::group_by(czone, weight_type) %>%
+    dplyr::summarise(
+      receives_unavailable_source = any(receives_unavailable_source %in% TRUE, na.rm = TRUE),
+      n_1990_counties_receiving_unavailable_source = sum(receives_unavailable_source %in% TRUE, na.rm = TRUE),
+      n_unavailable_source_counties = sum(n_unavailable_source_counties, na.rm = TRUE),
+      unavailable_source_vote_mass_proxy = sum(unavailable_source_vote_mass_proxy, na.rm = TRUE),
+      total_received_vote_mass_proxy = sum(total_received_vote_mass_proxy, na.rm = TRUE),
+      share_received_from_unavailable_sources = dplyr::if_else(
+        total_received_vote_mass_proxy > 0,
+        unavailable_source_vote_mass_proxy / total_received_vote_mass_proxy,
+        NA_real_
+      ),
+      .groups = "drop"
+    )
+
+  list(source_support = source_support, county_diag = county_diag, cz_diag = cz_diag)
+}
+
 build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
-  load_required_packages()
+  load_required_packages(config)
   config <- finalize_config(config)
 
   adh_stack_path <- file.path(config$replication_dir, "adh2013", "dta", "workfile_china.dta")
@@ -97,6 +213,19 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
   adh_duplicate_czones <- adh_sample %>%
     dplyr::count(czone, name = "rows_per_czone") %>%
     dplyr::filter(rows_per_czone > 1)
+
+  std_controls <- standardize_baseline_controls(adh_sample, config$baseline_controls)
+  adh_sample <- std_controls$data
+  readr::write_csv(std_controls$summary, config$baseline_control_summary_csv)
+
+  control_corr <- stats::cor(
+    adh_sample[, config$baseline_controls, drop = FALSE],
+    use = "pairwise.complete.obs"
+  )
+  control_corr_long <- as.data.frame(as.table(control_corr), stringsAsFactors = FALSE) %>%
+    tibble::as_tibble() %>%
+    dplyr::rename(control_1 = Var1, control_2 = Var2, correlation = Freq)
+  readr::write_csv(control_corr_long, config$baseline_control_correlation_csv)
 
   message("Reading 1990 county-to-CZ lookup and county centroids...")
   cz_lookup <- readxl::read_xls(cz_path) %>%
@@ -156,9 +285,11 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
     config$crosswalk_preflight_counties_csv
   )
 
-  if (any(preflight_support$zero_or_undefined_support)) {
+  builtup_preflight <- preflight_support %>%
+    dplyr::filter(weight_type %in% c("m5_weight", "m6_weight"))
+  if (any(builtup_preflight$zero_or_undefined_support)) {
     summary_msg <- preflight_summary %>%
-      dplyr::filter(n_zero_or_undefined_support > 0) %>%
+      dplyr::filter(weight_type %in% c("m5_weight", "m6_weight"), n_zero_or_undefined_support > 0) %>%
       dplyr::mutate(piece = paste0(weight_type, " ", source_decade, ": ", n_zero_or_undefined_support)) %>%
       dplyr::pull(piece) %>%
       paste(collapse = "; ")
@@ -274,46 +405,119 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
     dplyr::pull(abs_vote_identity_error) %>%
     max(na.rm = TRUE)
 
+  bridge_exceptions <- read_county_bridge_exceptions(config)
+  if (nrow(bridge_exceptions) > 0) {
+    readr::write_csv(bridge_exceptions, file.path(config$diagnostic_dir, "county_bridge_exceptions_applied.csv"))
+  }
+
   county_pres <- county_pres_validation %>%
     dplyr::filter(usable_for_bridge) %>%
+    dplyr::mutate(source_decade_default = year_to_source_decade(year)) %>%
+    dplyr::left_join(
+      bridge_exceptions %>%
+        dplyr::select(year, county_fips, override_source_decade, override_county_fips_source, exception_issue_class = issue_class, exception_reason = reason),
+      by = c("year", "county_fips")
+    ) %>%
     dplyr::mutate(
-      source_decade = year_to_source_decade(year),
-      gisjoin_source = fips_to_gisjoin(county_fips)
+      source_decade = dplyr::coalesce(override_source_decade, source_decade_default),
+      county_fips_for_crosswalk = dplyr::coalesce(override_county_fips_source, county_fips),
+      gisjoin_source = fips_to_gisjoin(county_fips_for_crosswalk),
+      source_scope = dplyr::if_else(is_adh_mainland_source(state_fips), "adh_mainland_eligible", "excluded_nonmainland"),
+      bridge_exception_applied = !is.na(override_county_fips_source) | !is.na(override_source_decade)
     ) %>%
     dplyr::select(
-      year, county_fips, state_fips, state, county_name, rep_votes, dem_votes,
-      twoparty_votes, total_votes, source_decade, gisjoin_source
+      year, county_fips, county_fips_for_crosswalk, state_fips, state, county_name, rep_votes, dem_votes,
+      twoparty_votes, total_votes, source_decade, source_decade_default, gisjoin_source, source_scope,
+      bridge_exception_applied, exception_issue_class, exception_reason
     )
+
+  target_support <- build_target_weight_support_diagnostics(
+    zip_path = ftz_zip,
+    source_decades = config$source_decades,
+    county_pres = county_pres,
+    cz_lookup = cz_lookup,
+    selected_crosswalks = crosswalks,
+    tolerance = config$weight_sum_tolerance,
+    adh_czones = adh_sample$czone
+  )
+  readr::write_csv(target_support$source_support, config$all_weight_support_csv)
+  readr::write_csv(target_support$county_diag, config$target_weight_support_county_csv)
+  readr::write_csv(target_support$cz_diag, config$target_weight_support_cz_csv)
+
+  source_vote_denominators <- county_pres %>%
+    dplyr::group_by(year) %>%
+    dplyr::summarise(source_two_party_votes_prejoin = sum(twoparty_votes, na.rm = TRUE), .groups = "drop")
+
+  positive_target_summary <- crosswalks %>%
+    dplyr::filter(!is.na(crosswalk_weight), crosswalk_weight > config$weight_sum_tolerance) %>%
+    dplyr::left_join(cz_lookup %>% dplyr::select(county_fips_1990, czone), by = "county_fips_1990") %>%
+    dplyr::group_by(source_decade, gisjoin_source) %>%
+    dplyr::summarise(
+      positive_target_1990_counties = paste(sort(unique(county_fips_1990)), collapse = ";"),
+      positive_target_czones = paste(sort(unique(stats::na.omit(czone))), collapse = ";"),
+      positive_target_count = dplyr::n_distinct(county_fips_1990),
+      positive_target_cz_count = dplyr::n_distinct(czone, na.rm = TRUE),
+      .groups = "drop"
+    )
+
+  # Source-level issue report. Do not filter on row-level crosswalk_weight <= 0:
+  # valid source counties naturally have many zero-weight target rows in the raw
+  # many-to-many FTZ crosswalk. A source is an issue only if its selected raw
+  # weight is undefined/invalid, its final weight sum is invalid, or it has no
+  # positive final target weight after the chosen fallback policy.
+  crosswalk_source_issue_rows <- crosswalk_source_diagnostics %>%
+    dplyr::mutate(
+      no_positive_final_target = positive_targets == 0,
+      final_weight_invalid = is.na(crosswalk_weight_sum) |
+        abs(crosswalk_weight_sum - 1) > config$weight_sum_tolerance
+    ) %>%
+    dplyr::filter(raw_weight_undefined | raw_weight_requires_policy | final_weight_invalid | no_positive_final_target) %>%
+    dplyr::left_join(positive_target_summary, by = c("source_decade", "gisjoin_source"))
 
   crosswalk_issue_vote_report <- county_pres %>%
     dplyr::left_join(
-      crosswalks %>%
-        dplyr::select(
-          source_decade, gisjoin_source, county_fips_1990, raw_weight,
-          weight_sum_raw, crosswalk_weight, crosswalk_weight_sum,
-          raw_weight_undefined, raw_weight_sum_valid, raw_weight_requires_policy,
-          fallback_used, fallback_policy, weight_source
-        ) %>%
-        dplyr::left_join(cz_lookup %>% dplyr::select(county_fips_1990, czone), by = "county_fips_1990"),
-      by = c("source_decade", "gisjoin_source"),
-      relationship = "many-to-many"
+      crosswalk_source_issue_rows,
+      by = c("source_decade", "gisjoin_source")
     ) %>%
     dplyr::filter(
       raw_weight_undefined %in% TRUE |
         raw_weight_requires_policy %in% TRUE |
-        is.na(crosswalk_weight) |
-        crosswalk_weight <= 0
+        final_weight_invalid %in% TRUE |
+        no_positive_final_target %in% TRUE
     ) %>%
-    dplyr::group_by(year) %>%
-    dplyr::mutate(vote_share_of_year = twoparty_votes / sum(twoparty_votes, na.rm = TRUE)) %>%
-    dplyr::ungroup() %>%
+    dplyr::left_join(source_vote_denominators, by = "year") %>%
+    dplyr::mutate(
+      vote_share_of_year = twoparty_votes / source_two_party_votes_prejoin,
+      source_issue_class = dplyr::case_when(
+        no_positive_final_target %in% TRUE & fallback_used %in% TRUE ~ paste0(
+          "selected_", weight_slug(config$crosswalk_weight), "_unavailable_", fallback_policy, "_used_but_no_positive_target"
+        ),
+        no_positive_final_target %in% TRUE & raw_weight_requires_policy %in% TRUE ~ paste0(
+          "selected_", weight_slug(config$crosswalk_weight), "_unavailable_no_fallback"
+        ),
+        no_positive_final_target %in% TRUE ~ classify_unmatched_county(state_fips, county_fips, county_name, year),
+        raw_weight_requires_policy %in% TRUE & fallback_used %in% TRUE ~ paste0(
+          "selected_", weight_slug(config$crosswalk_weight), "_unavailable_", fallback_policy, "_used"
+        ),
+        raw_weight_requires_policy %in% TRUE & !(fallback_used %in% TRUE) ~ paste0(
+          "selected_", weight_slug(config$crosswalk_weight), "_unavailable_no_fallback"
+        ),
+        final_weight_invalid %in% TRUE ~ "final_weight_invalid",
+        TRUE ~ "reported_crosswalk_issue"
+      )
+    ) %>%
     dplyr::select(
-      year, source_decade, state_fips, state, county_fips, county_name,
-      twoparty_votes, vote_share_of_year, county_fips_1990, czone,
-      raw_weight, weight_sum_raw, crosswalk_weight, crosswalk_weight_sum,
+      year, source_decade, source_decade_default, source_scope, source_issue_class,
+      state_fips, state, county_fips, county_fips_for_crosswalk, county_name,
+      bridge_exception_applied, exception_issue_class, exception_reason,
+      twoparty_votes, source_two_party_votes_prejoin, vote_share_of_year,
+      weight_sum_raw, selected_weight_sum_raw, crosswalk_weight_sum,
       raw_weight_undefined, raw_weight_sum_valid, raw_weight_requires_policy,
-      fallback_used, fallback_policy, weight_source
-    )
+      fallback_used, fallback_policy, no_positive_final_target, final_weight_invalid,
+      n_targets, positive_targets, positive_target_1990_counties, positive_target_czones,
+      positive_target_count, positive_target_cz_count
+    ) %>%
+    dplyr::arrange(year, source_issue_class, state_fips, county_fips)
   readr::write_csv(crosswalk_issue_vote_report, config$crosswalk_issue_vote_report_csv)
 
   national_pre <- county_pres %>%
@@ -354,7 +558,7 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
     )
 
   unmatched_source_counties <- county_bridged %>%
-    dplyr::group_by(year, source_decade, county_fips, state_fips, state, county_name) %>%
+    dplyr::group_by(year, source_decade, source_decade_default, county_fips, county_fips_for_crosswalk, state_fips, state, county_name, source_scope, bridge_exception_applied, exception_issue_class, exception_reason) %>%
     dplyr::summarise(
       twoparty_votes = dplyr::first(twoparty_votes),
       has_positive_crosswalk_weight = any(!is.na(crosswalk_weight) & crosswalk_weight > 0),
@@ -362,11 +566,24 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
       fallback_used = any(fallback_used %in% TRUE, na.rm = TRUE),
       .groups = "drop"
     ) %>%
-    dplyr::group_by(year) %>%
-    dplyr::mutate(vote_share_of_year = twoparty_votes / sum(twoparty_votes, na.rm = TRUE)) %>%
-    dplyr::ungroup() %>%
+    dplyr::left_join(source_vote_denominators, by = "year") %>%
+    dplyr::mutate(
+      vote_share_of_year = twoparty_votes / source_two_party_votes_prejoin,
+      source_issue_class = classify_unmatched_county(state_fips, county_fips, county_name, year)
+    ) %>%
     dplyr::filter(!has_positive_crosswalk_weight)
   readr::write_csv(unmatched_source_counties, config$unmatched_source_counties_csv)
+  readr::write_csv(
+    unmatched_source_counties %>%
+      dplyr::count(year, source_scope, source_issue_class, name = "unmatched_source_counties") %>%
+      dplyr::left_join(
+        unmatched_source_counties %>%
+          dplyr::group_by(year, source_scope, source_issue_class) %>%
+          dplyr::summarise(unmatched_two_party_votes = sum(twoparty_votes, na.rm = TRUE), .groups = "drop"),
+        by = c("year", "source_scope", "source_issue_class")
+      ),
+    config$county_bridge_classification_csv
+  )
 
   original_by_year <- county_pres %>%
     dplyr::group_by(year) %>%
@@ -397,14 +614,51 @@ build_analysis_data <- function(config = CONFIG, stop_on_fatal = TRUE) {
       .groups = "drop"
     )
 
+  original_by_scope <- county_pres %>%
+    dplyr::group_by(year, source_scope) %>%
+    dplyr::summarise(
+      source_counties = dplyr::n_distinct(county_fips),
+      source_two_party_votes_prejoin = sum(twoparty_votes, na.rm = TRUE),
+      .groups = "drop"
+    )
+  bridged_by_scope <- county_bridged %>%
+    dplyr::filter(!is.na(crosswalk_weight), crosswalk_weight > 0) %>%
+    dplyr::group_by(year, source_scope) %>%
+    dplyr::summarise(
+      matched_source_counties = dplyr::n_distinct(county_fips),
+      bridged_two_party_votes = sum(twoparty_votes * crosswalk_weight, na.rm = TRUE),
+      fallback_source_counties = dplyr::n_distinct(county_fips[fallback_used %in% TRUE]),
+      .groups = "drop"
+    )
+  retention_by_scope <- original_by_scope %>%
+    dplyr::left_join(bridged_by_scope, by = c("year", "source_scope")) %>%
+    dplyr::mutate(
+      matched_source_counties = dplyr::coalesce(matched_source_counties, 0L),
+      bridged_two_party_votes = dplyr::coalesce(bridged_two_party_votes, 0),
+      fallback_source_counties = dplyr::coalesce(fallback_source_counties, 0L),
+      unmatched_source_counties = source_counties - matched_source_counties,
+      retained_vote_share = bridged_two_party_votes / source_two_party_votes_prejoin
+    )
+  readr::write_csv(retention_by_scope, config$mainland_retention_csv)
+
+  mainland_retention_wide <- retention_by_scope %>%
+    dplyr::select(year, source_scope, source_two_party_votes_prejoin, bridged_two_party_votes, retained_vote_share) %>%
+    tidyr::pivot_wider(
+      names_from = source_scope,
+      values_from = c(source_two_party_votes_prejoin, bridged_two_party_votes, retained_vote_share),
+      names_sep = "_"
+    )
+
   bridge_diagnostics <- original_by_year %>%
     dplyr::left_join(naive_postjoin_denominator, by = "year") %>%
     dplyr::left_join(bridged_by_year, by = "year") %>%
+    dplyr::left_join(mainland_retention_wide, by = "year") %>%
     dplyr::mutate(
       matched_source_counties = dplyr::coalesce(matched_source_counties, 0L),
       unmatched_source_counties = source_counties - matched_source_counties,
       retained_vote_share_correct = bridged_two_party_votes / source_two_party_votes_prejoin,
-      retained_vote_share = retained_vote_share_correct
+      retained_vote_share = retained_vote_share_correct,
+      retained_vote_share_adh_mainland_eligible = retained_vote_share_adh_mainland_eligible
     )
   readr::write_csv(bridge_diagnostics, config$bridge_diagnostics_csv)
 

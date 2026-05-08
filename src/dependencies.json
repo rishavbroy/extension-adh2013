@@ -1,6 +1,6 @@
 {
-  "description": "Dependency manifest for src pipeline. Install before running; the runner does not install packages.",
-  "packages": [
+  "description": "Dependency manifest for the extension-adh2013 source pipeline. Install core packages before running; the runner does not install packages. The sf package is needed for routine diagnostic map rendering; ipumsr is optional for retrieving NHGIS shapefiles. Large model outputs are saved as compressed chunks by default to avoid GitHub's 100 MiB file limit.",
+  "core_packages": [
     "here",
     "dplyr",
     "fixest",
@@ -15,6 +15,10 @@
     "rlang",
     "stringr",
     "tibble",
-    "tidyr"
+    "tidyr",
+    "sf"
+  ],
+  "optional_packages": [
+    "ipumsr"
   ]
 }

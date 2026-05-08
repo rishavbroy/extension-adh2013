@@ -1,14 +1,27 @@
-# replication/src/01_helpers.R
+# extension-adh2013/src/01_helpers.R
 
-required_packages <- function() {
-  c(
+required_packages <- function(config = NULL) {
+  pkgs <- c(
     "dplyr", "fixest", "ggplot2", "haven", "jsonlite", "kableExtra", "knitr",
     "purrr", "readr", "readxl", "rlang", "stringr", "tibble", "tidyr"
   )
+  if (!is.null(config) && isTRUE(config$export_crosswalk_maps)) pkgs <- c(pkgs, "sf")
+  unique(pkgs)
 }
 
-load_required_packages <- function() {
-  pkgs <- required_packages()
+optional_packages <- function() {
+  c("ipumsr")
+}
+
+configured_shapefile_defaults <- function(config) {
+  c(
+    file.path(config$replication_dir, "spatial-data", "counties-1990"),
+    file.path(config$replication_dir, "spatial-data", "nhgis_1990_county")
+  )
+}
+
+load_required_packages <- function(config = NULL) {
+  pkgs <- required_packages(config)
   missing <- pkgs[!vapply(pkgs, requireNamespace, FUN.VALUE = logical(1), quietly = TRUE)]
   if (length(missing) > 0) {
     stop(
@@ -32,7 +45,7 @@ weight_slug <- function(weight_col) {
 }
 
 finalize_config <- function(config) {
-  allowed_weights <- c("m5_weight", "m6_weight")
+  allowed_weights <- c("m2_weight", "m4_weight", "m5_weight", "m6_weight")
   if (!config$crosswalk_weight %in% allowed_weights) {
     stop("CONFIG$crosswalk_weight must be one of: ", paste(allowed_weights, collapse = ", "))
   }
@@ -61,6 +74,18 @@ finalize_config <- function(config) {
   config$source_decades <- sort(unique(year_to_source_decade(config$diagnostic_event_years)))
   if (is.null(config$main_se_type) || !nzchar(config$main_se_type)) {
     config$main_se_type <- paste0("conley_", config$conley_cutoff_km, "km")
+  }
+
+  # Treat common placeholder strings as unset. This avoids silently skipping maps
+  # when COUNTY1990_SHAPEFILE was previously set to something like
+  # "path/to/nhgis_1990_county.shp".
+  if (is.null(config$county1990_shapefile_path) ||
+      !nzchar(config$county1990_shapefile_path) ||
+      grepl("^path/to", config$county1990_shapefile_path, ignore.case = TRUE)) {
+    config$county1990_shapefile_path <- file.path(config$replication_dir, "spatial-data", "counties-1990")
+  }
+  if (is.null(config$nhgis_extract_dir) || !nzchar(config$nhgis_extract_dir)) {
+    config$nhgis_extract_dir <- file.path(config$replication_dir, "spatial-data", "nhgis_1990_county")
   }
 
   config$analysis_panel_rds <- file.path(
@@ -112,6 +137,78 @@ finalize_config <- function(config) {
   config$crosswalk_preflight_counties_csv <- file.path(
     config$diagnostic_dir, "ftz_m5_m6_zero_support_preflight_counties.csv"
   )
+  config$all_weight_support_csv <- file.path(
+    config$diagnostic_dir, "ftz_all_weight_support_by_source_county.csv"
+  )
+  config$target_weight_support_county_csv <- file.path(
+    config$diagnostic_dir, "ftz_weight_support_by_1990_county.csv"
+  )
+  config$target_weight_support_cz_csv <- file.path(
+    config$diagnostic_dir, "ftz_weight_support_by_cz.csv"
+  )
+  config$county_bridge_classification_csv <- file.path(
+    config$diagnostic_dir, paste0("unmatched_source_county_classification_", slug, ".csv")
+  )
+  config$mainland_retention_csv <- file.path(
+    config$diagnostic_dir, paste0("county_bridge_retention_by_scope_", slug, ".csv")
+  )
+  config$baseline_control_summary_csv <- file.path(
+    config$diagnostic_dir, "baseline_control_summary.csv"
+  )
+  config$baseline_control_correlation_csv <- file.path(
+    config$diagnostic_dir, "baseline_control_correlation_matrix.csv"
+  )
+  config$interacted_control_variance_csv <- file.path(
+    config$diagnostic_dir, "interacted_control_variance_diagnostics.csv"
+  )
+  config$conley_neighbor_counts_csv <- file.path(
+    config$diagnostic_dir, "conley_neighbor_count_by_cutoff.csv"
+  )
+  config$vcov_rank_csv <- file.path(
+    config$diagnostic_dir, "event_study_vcov_rank_by_se_type.csv"
+  )
+  config$se_warning_diagnostics_csv <- file.path(
+    config$diagnostic_dir, "event_study_se_warning_diagnostics.csv"
+  )
+  config$crosswalk_comparison_csv <- file.path(
+    config$diagnostic_dir, "crosswalk_specification_comparison_coefficients.csv"
+  )
+  config$crosswalk_comparison_png <- file.path(
+    config$figure_dir, "fig_crosswalk_specification_comparison.png"
+  )
+  config$crosswalk_comparison_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_specification_comparison.pdf"
+  )
+  config$crosswalk_support_county_map_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties.png"
+  )
+  config$crosswalk_support_county_map_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties.pdf"
+  )
+  config$crosswalk_support_cz_map_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_czs.png"
+  )
+  config$crosswalk_support_cz_map_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_czs.pdf"
+  )
+  config$crosswalk_support_county_map_simplified_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties_simplified.png"
+  )
+  config$crosswalk_support_county_map_small_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties_small.png"
+  )
+  config$crosswalk_support_county_map_simplified_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties_simplified.pdf"
+  )
+  config$crosswalk_support_cz_map_simplified_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_czs_simplified.png"
+  )
+  config$crosswalk_support_cz_map_small_png <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_czs_small.png"
+  )
+  config$crosswalk_support_cz_map_simplified_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_unavailable_weights_1990_czs_simplified.pdf"
+  )
   config$outcome_duplicate_report_csv <- file.path(
     config$diagnostic_dir, "aa2021_presidential_duplicate_county_years.csv"
   )
@@ -144,14 +241,14 @@ finalize_config <- function(config) {
   config$pretrend_tests_csv <- file.path(config$diagnostic_dir, "event_study_pretrend_tests.csv")
   config$pretrend_coefficients_csv <- file.path(config$diagnostic_dir, "event_study_pretrend_coefficients.csv")
 
-  config$table_tex <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_two_specs_", slug, ".tex"))
-  config$table_csv <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_two_specs_", slug, ".csv"))
-  config$table_pdf <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_two_specs_", slug, ".pdf"))
+  config$table_tex <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_main_specs_", slug, ".tex"))
+  config$table_csv <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_main_specs_", slug, ".csv"))
+  config$table_pdf <- file.path(config$table_dir, paste0("tab_event_study_rep_margin_main_specs_", slug, ".pdf"))
   config$table_standalone_tex <- file.path(
-    config$table_dir, paste0("tab_event_study_rep_margin_two_specs_", slug, "_standalone.tex")
+    config$table_dir, paste0("tab_event_study_rep_margin_main_specs_", slug, "_standalone.tex")
   )
-  config$figure_pdf <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_two_specs_", slug, ".pdf"))
-  config$figure_png <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_two_specs_", slug, ".png"))
+  config$figure_pdf <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_main_specs_", slug, ".pdf"))
+  config$figure_png <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_main_specs_", slug, ".png"))
   config
 }
 
@@ -366,9 +463,16 @@ has_any_failures <- function(checks) {
 }
 
 write_dependency_manifest <- function(config) {
-  pkgs <- required_packages()
+  core <- required_packages(config)
+  optional <- optional_packages()
+  pkgs <- unique(c(core, optional))
   dep <- tibble::tibble(
     package = pkgs,
+    dependency_type = dplyr::case_when(
+      package %in% core ~ "core",
+      package %in% optional ~ "optional",
+      TRUE ~ "other"
+    ),
     installed = vapply(pkgs, requireNamespace, FUN.VALUE = logical(1), quietly = TRUE),
     version = vapply(pkgs, function(pkg) {
       if (!requireNamespace(pkg, quietly = TRUE)) return(NA_character_)
@@ -393,7 +497,134 @@ file_checksum <- function(path) {
   unname(tools::md5sum(path))
 }
 
+portable_path <- function(path, config = CONFIG) {
+  if (is.null(path) || length(path) == 0 || is.na(path)) return(path)
+  path_chr <- as.character(path)
+  root <- normalizePath(config$replication_dir, winslash = "/", mustWork = FALSE)
+  norm <- normalizePath(path_chr, winslash = "/", mustWork = FALSE)
+  prefix <- paste0(root, "/")
+  dplyr::case_when(
+    norm == root ~ ".",
+    startsWith(norm, prefix) ~ substring(norm, nchar(prefix) + 1L),
+    TRUE ~ path_chr
+  )
+}
+
+sanitize_manifest_paths <- function(x, config = CONFIG) {
+  if (is.list(x)) {
+    nms <- names(x)
+    out <- lapply(x, sanitize_manifest_paths, config = config)
+    names(out) <- nms
+    return(out)
+  }
+  if (is.character(x) && length(x) == 1 && (grepl("/", x) || grepl("\\\\", x))) {
+    return(portable_path(x, config))
+  }
+  x
+}
+
+chunk_dir_for_rds <- function(path) {
+  file.path(dirname(path), paste0(tools::file_path_sans_ext(basename(path)), "_rds_chunks"))
+}
+
+write_chunked_rds <- function(object, path, config = CONFIG) {
+  raw <- serialize(object, connection = NULL, xdr = TRUE)
+  compressed <- memCompress(raw, type = "xz")
+  chunk_size <- as.integer((config$rds_chunk_size_mib %||% 45) * 1024^2)
+  if (!is.finite(chunk_size) || chunk_size <= 0) chunk_size <- 45L * 1024L^2L
+
+  chunk_dir <- chunk_dir_for_rds(path)
+  if (dir.exists(chunk_dir)) unlink(chunk_dir, recursive = TRUE, force = TRUE)
+  dir.create(chunk_dir, recursive = TRUE, showWarnings = FALSE)
+
+  n <- length(compressed)
+  n_chunks <- max(1L, ceiling(n / chunk_size))
+  chunk_files <- character(n_chunks)
+  for (i in seq_len(n_chunks)) {
+    start <- (i - 1L) * chunk_size + 1L
+    end <- min(i * chunk_size, n)
+    chunk_files[[i]] <- file.path(chunk_dir, sprintf("part-%03d.rdsbin", i))
+    writeBin(compressed[start:end], chunk_files[[i]], useBytes = TRUE)
+  }
+
+  manifest <- list(
+    format = "serialized-r-object-xdr-memCompress-xz-chunked",
+    original_path = portable_path(path, config),
+    created_at = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"),
+    chunk_size_mib = config$rds_chunk_size_mib %||% 45,
+    n_chunks = n_chunks,
+    uncompressed_bytes = length(raw),
+    compressed_bytes = length(compressed),
+    chunks = lapply(chunk_files, function(cf) list(
+      path = portable_path(cf, config),
+      bytes = file.info(cf)$size,
+      md5 = file_checksum(cf)
+    ))
+  )
+  jsonlite::write_json(manifest, file.path(chunk_dir, "manifest.json"), pretty = TRUE, auto_unbox = TRUE)
+  if (file.exists(path)) unlink(path)
+  invisible(list(path = path, chunk_dir = chunk_dir, manifest = manifest))
+}
+
+read_chunked_rds <- function(path) {
+  chunk_dir <- chunk_dir_for_rds(path)
+  manifest_path <- file.path(chunk_dir, "manifest.json")
+  if (!file.exists(manifest_path)) stop("Chunked RDS manifest not found: ", manifest_path, call. = FALSE)
+  manifest <- jsonlite::read_json(manifest_path, simplifyVector = TRUE)
+  chunk_paths <- file.path(chunk_dir, basename(manifest$chunks$path))
+  if (!all(file.exists(chunk_paths))) {
+    # Fall back to paths relative to the project root when the manifest was moved.
+    root <- dirname(dirname(dirname(path)))
+    chunk_paths <- file.path(root, manifest$chunks$path)
+  }
+  if (!all(file.exists(chunk_paths))) {
+    missing <- chunk_paths[!file.exists(chunk_paths)]
+    stop("Missing chunked RDS files: ", paste(missing, collapse = ", "), call. = FALSE)
+  }
+  compressed <- unlist(Map(function(pth, nbytes) {
+    readBin(pth, what = "raw", n = nbytes)
+  }, chunk_paths, file.info(chunk_paths)$size), use.names = FALSE)
+  unserialize(memDecompress(compressed, type = "xz"))
+}
+
+write_model_object <- function(object, path, config = CONFIG) {
+  if (isTRUE(config$save_single_rds)) {
+    saveRDS(object, path, compress = "xz")
+    chunk_dir <- chunk_dir_for_rds(path)
+    if (dir.exists(chunk_dir)) unlink(chunk_dir, recursive = TRUE, force = TRUE)
+    invisible(list(path = path, mode = "single_rds"))
+  } else {
+    out <- write_chunked_rds(object, path, config)
+    invisible(c(out, list(mode = "chunked_rds")))
+  }
+}
+
+read_model_object <- function(path) {
+  if (file.exists(path)) return(readRDS(path))
+  read_chunked_rds(path)
+}
+
+model_object_reference <- function(path, config = CONFIG) {
+  if (file.exists(path)) {
+    return(list(path = path, md5 = file_checksum(path), storage = "single_rds"))
+  }
+  chunk_dir <- chunk_dir_for_rds(path)
+  manifest_path <- file.path(chunk_dir, "manifest.json")
+  if (file.exists(manifest_path)) {
+    return(list(
+      path = path,
+      chunk_manifest = manifest_path,
+      chunk_dir = chunk_dir,
+      manifest_md5 = file_checksum(manifest_path),
+      storage = "chunked_rds"
+    ))
+  }
+  list(path = path, md5 = NA_character_, storage = "missing")
+}
+
 write_pipeline_manifest <- function(config, checks, stage, sources = list(), extra = list()) {
+  sources <- sanitize_manifest_paths(sources, config)
+  extra <- sanitize_manifest_paths(extra, config)
   manifest <- list(
     stage = stage,
     generated_at = format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"),
@@ -404,15 +635,184 @@ write_pipeline_manifest <- function(config, checks, stage, sources = list(), ext
       "require_balanced_panel", "require_no_duplicate_county_years",
       "require_no_vcov_repair_for_main", "allow_vcov_repair", "allow_failed_diagnostics",
       "max_abs_vote_identity_error", "max_missing_cz_year_share",
-      "conley_cutoffs_km", "main_se_type", "nw_lag", "dk_lag", "interacted_controls"
+      "conley_cutoffs_km", "main_se_type", "nw_lag", "dk_lag", "interacted_controls",
+      "standardize_interacted_controls", "export_crosswalk_maps", "run_crosswalk_sensitivity",
+      "save_single_rds", "rds_chunk_size_mib", "county1990_shapefile_path",
+      "nhgis_extract_dir"
     )],
     sources = sources,
     checks = checks,
     fatal_failure = has_fatal_failures(checks),
     extra = extra
   )
+  manifest <- sanitize_manifest_paths(manifest, config)
   jsonlite::write_json(manifest, config$pipeline_manifest_json, pretty = TRUE, auto_unbox = TRUE, null = "null")
   invisible(manifest)
+}
+
+
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+standardized_control_name <- function(ctrl) paste0("z_", ctrl)
+
+standardize_baseline_controls <- function(data, controls) {
+  out <- data
+  summary <- purrr::map_dfr(controls, function(ctrl) {
+    vals <- out[[ctrl]]
+    mu <- mean(vals, na.rm = TRUE)
+    sig <- stats::sd(vals, na.rm = TRUE)
+    zname <- standardized_control_name(ctrl)
+    out[[zname]] <<- if (is.finite(sig) && sig > 0) (vals - mu) / sig else NA_real_
+    tibble::tibble(
+      control = ctrl,
+      standardized_control = zname,
+      n_nonmissing = sum(!is.na(vals)),
+      mean = mu,
+      sd = sig,
+      min = suppressWarnings(min(vals, na.rm = TRUE)),
+      max = suppressWarnings(max(vals, na.rm = TRUE))
+    )
+  })
+  list(data = out, summary = summary)
+}
+
+
+read_county_bridge_exceptions <- function(config) {
+  empty <- tibble::tibble(
+    year = integer(), county_fips = character(), county_name_pattern = character(),
+    override_source_decade = integer(), override_county_fips_source = character(),
+    issue_class = character(), reason = character(), apply = logical()
+  )
+  path <- file.path(config$src_dir, "county_bridge_exceptions.csv")
+  if (!file.exists(path)) return(empty)
+  out <- readr::read_csv(path, show_col_types = FALSE) %>%
+    dplyr::mutate(
+      year = as.integer(year),
+      county_fips = stringr::str_pad(as.character(county_fips), 5, pad = "0"),
+      override_county_fips_source = stringr::str_pad(as.character(override_county_fips_source), 5, pad = "0"),
+      override_source_decade = as.integer(override_source_decade),
+      apply = as.logical(apply)
+    ) %>%
+    dplyr::filter(apply %in% TRUE)
+  dplyr::bind_rows(empty, out)
+}
+
+classify_unmatched_county <- function(state_fips, county_fips, county_name, year) {
+  state_fips <- stringr::str_pad(as.character(state_fips), 2, pad = "0")
+  county_fips <- stringr::str_pad(as.character(county_fips), 5, pad = "0")
+  nm <- tolower(as.character(county_name))
+  dplyr::case_when(
+    state_fips %in% c("02", "15", "72") ~ "excluded_nonmainland",
+    county_fips %in% c("04012", "35006", "08014", "46113", "46102", "51683", "51685", "51735") ~ "county_boundary_change_needs_bridge",
+    state_fips == "51" & stringr::str_detect(nm, "south boston|clifton forge|bedford|manassas|poquoson") ~ "county_boundary_change_needs_bridge",
+    year < 1972L ~ "pre_1972_diagnostic_only",
+    TRUE ~ "unexpected_unmatched"
+  )
+}
+
+is_adh_mainland_source <- function(state_fips) {
+  !stringr::str_pad(as.character(state_fips), 2, pad = "0") %in% c("02", "15", "72")
+}
+
+find_first_shapefile <- function(path) {
+  if (is.null(path) || !nzchar(path)) return(NA_character_)
+  if (file.exists(path) && grepl("\\.shp$", path, ignore.case = TRUE)) return(path)
+  if (dir.exists(path)) {
+    shps <- list.files(path, pattern = "\\.shp$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)
+    if (length(shps) > 0) return(shps[[1]])
+  }
+  NA_character_
+}
+
+infer_county_fips_from_sf <- function(sf_obj) {
+  nm <- names(sf_obj)
+  if ("county_fips_1990" %in% nm) return(stringr::str_pad(as.character(sf_obj$county_fips_1990), 5, pad = "0"))
+  if ("FIPS" %in% nm) return(stringr::str_pad(as.character(sf_obj$FIPS), 5, pad = "0"))
+  if ("GEOID" %in% nm) return(stringr::str_pad(as.character(sf_obj$GEOID), 5, pad = "0"))
+  if ("GISJOIN" %in% nm) return(gisjoin_to_fips(sf_obj$GISJOIN))
+  if (all(c("STATEFP", "COUNTYFP") %in% nm)) return(paste0(stringr::str_pad(sf_obj$STATEFP, 2, pad = "0"), stringr::str_pad(sf_obj$COUNTYFP, 3, pad = "0")))
+  if (all(c("STATEA", "COUNTYA") %in% nm)) return(paste0(stringr::str_pad(sf_obj$STATEA, 2, pad = "0"), stringr::str_pad(sf_obj$COUNTYA, 3, pad = "0")))
+  if (all(c("STATE_FIPS", "FIPS") %in% nm)) return(stringr::str_pad(as.character(sf_obj$FIPS), 5, pad = "0"))
+  stop("Could not infer county FIPS from shapefile. Expected county_fips_1990, FIPS, GEOID, GISJOIN, STATEFP+COUNTYFP, STATEA+COUNTYA, or STATE_FIPS+FIPS.")
+}
+
+safe_read_county1990_shapefile <- function(config) {
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    warning("Package 'sf' is not installed; skipping crosswalk support maps.", call. = FALSE)
+    return(NULL)
+  }
+
+  candidate_paths <- unique(c(
+    config$county1990_shapefile_path,
+    config$nhgis_extract_dir,
+    configured_shapefile_defaults(config)
+  ))
+  candidate_paths <- candidate_paths[!is.na(candidate_paths) & nzchar(candidate_paths)]
+  candidate_paths <- candidate_paths[!grepl("^path/to", candidate_paths, ignore.case = TRUE)]
+
+  shp <- NA_character_
+  for (candidate in candidate_paths) {
+    shp <- find_first_shapefile(candidate)
+    if (!is.na(shp)) break
+  }
+
+  if (is.na(shp)) {
+    warning(
+      "No 1990 county shapefile found. Put co1990p020.shp (and companion files) under ",
+      file.path(config$replication_dir, "spatial-data", "counties-1990"),
+      ", or set COUNTY1990_SHAPEFILE to a 1990 county .shp file or folder. ",
+      "Skipping map rendering but writing non-spatial diagnostics.",
+      call. = FALSE
+    )
+    return(NULL)
+  }
+
+  sf_obj <- sf::st_read(shp, quiet = TRUE)
+  sf_obj$county_fips_1990 <- infer_county_fips_from_sf(sf_obj)
+  sf_obj <- sf_obj %>%
+    dplyr::filter(!is.na(county_fips_1990))
+
+  # Many historical county shapefiles store multipart counties/islands as multiple
+  # rows with the same FIPS. Dissolve before any diagnostic joins so maps do not
+  # trigger unexpected many-to-many warnings or over-represent multipart counties.
+  sf_obj <- sf_obj %>%
+    dplyr::group_by(county_fips_1990) %>%
+    dplyr::summarise(geometry = sf::st_union(geometry), .groups = "drop")
+
+  attr(sf_obj, "source_shapefile") <- shp
+  sf_obj
+}
+
+haversine_km <- function(lon1, lat1, lon2, lat2) {
+  rad <- pi / 180
+  dlon <- (lon2 - lon1) * rad
+  dlat <- (lat2 - lat1) * rad
+  a <- sin(dlat / 2)^2 + cos(lat1 * rad) * cos(lat2 * rad) * sin(dlon / 2)^2
+  6371.0088 * 2 * atan2(sqrt(a), sqrt(pmax(0, 1 - a)))
+}
+
+summarise_conley_neighbors <- function(panel, cutoffs_km) {
+  coords <- panel %>%
+    dplyr::distinct(czone, lon, lat) %>%
+    dplyr::filter(is.finite(lon), is.finite(lat))
+  if (nrow(coords) == 0) return(tibble::tibble())
+  dist_mat <- outer(seq_len(nrow(coords)), seq_len(nrow(coords)), Vectorize(function(i, j) {
+    haversine_km(coords$lon[[i]], coords$lat[[i]], coords$lon[[j]], coords$lat[[j]])
+  }))
+  purrr::map_dfr(cutoffs_km, function(cutoff) {
+    counts <- rowSums(dist_mat <= cutoff, na.rm = TRUE) - 1L
+    tibble::tibble(
+      cutoff_km = cutoff,
+      n_cz = nrow(coords),
+      min_neighbors = min(counts),
+      p25_neighbors = as.numeric(stats::quantile(counts, 0.25)),
+      median_neighbors = stats::median(counts),
+      mean_neighbors = mean(counts),
+      p75_neighbors = as.numeric(stats::quantile(counts, 0.75)),
+      max_neighbors = max(counts),
+      cz_with_zero_neighbors = sum(counts == 0)
+    )
+  })
 }
 
 render_table_pdf <- function(fragment_tex, standalone_tex, output_pdf) {

@@ -1,13 +1,13 @@
 {
-  "stage": "export_event_study_outputs",
-  "generated_at": "2026-05-07 00:02:18 CDT",
+  "stage": "build_analysis_data",
+  "generated_at": "2026-05-08 03:42:20 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
     "last_election_year": 2020,
     "reference_year": 1988,
-    "crosswalk_weight": "m5_weight",
-    "crosswalk_missing_weight_policy": "fallback_m2",
+    "crosswalk_weight": "m4_weight",
+    "crosswalk_missing_weight_policy": "fallback_m4",
     "renormalize_crosswalk_weights": false,
     "weight_sum_tolerance": 1e-06,
     "min_retained_vote_share": 0.98,
@@ -22,145 +22,50 @@
     "main_se_type": "cluster_cz",
     "nw_lag": 1,
     "dk_lag": 1,
-    "interacted_controls": ["l_shind_manuf_cbp", "l_sh_popedu_c", "l_sh_popfborn", "l_sh_empl_f", "l_sh_routine33", "l_task_outsource"]
+    "interacted_controls": ["l_shind_manuf_cbp", "l_sh_popedu_c", "l_sh_popfborn", "l_sh_empl_f", "l_sh_routine33", "l_task_outsource"],
+    "standardize_interacted_controls": true,
+    "export_crosswalk_maps": false,
+    "run_crosswalk_sensitivity": true,
+    "save_single_rds": false,
+    "rds_chunk_size_mib": 45,
+    "county1990_shapefile_path": "spatial-data/counties-1990",
+    "nhgis_extract_dir": "spatial-data/nhgis_1990_county"
   },
   "sources": {
-    "all_specs": {
-      "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m5.rds",
-      "md5": "b0ed0b897eea69e07c9d968645d55e9e"
+    "adh_stack": {
+      "path": "adh2013/dta/workfile_china.dta",
+      "md5": "e7c70a3bf91d6ad6074cc371091d9472"
+    },
+    "adh_long": {
+      "path": "adh2013/dta/workfile_china_long.dta",
+      "md5": "ee859cd98610a79c0a3a0c3e0969b0f6"
+    },
+    "cz_lookup": {
+      "path": "cz-data/cz-198090.xls",
+      "md5": "292ea35e951a31b252039fc730baf952"
+    },
+    "ftz_zip": {
+      "path": "ftz2024/crosswalks/CountyToCounty/1990/1990_csv.zip",
+      "md5": "02f49f17a671df6c22f63f09b9599c2f"
+    },
+    "aa_presidential": {
+      "path": "outcomes-data/aa2021-nospatial/County_Level_US_Elections_Data/dataverse_shareable_presidential_county_returns_1868_2020.Rdata",
+      "md5": "40ebfa297238e26d1d72f8b68db52ed5"
     }
   },
-  "checks": [
-    {
-      "check": "adh_one_row_per_czone",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires one ADH baseline/exposure row per commuting zone."
-    },
-    {
-      "check": "cz_lookup_unique_1990_counties",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires each 1990 county FIPS to appear once and map to one CZ."
-    },
-    {
-      "check": "aa_all_county_fips_valid",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires all county FIPS to be five numeric digits before filtering."
-    },
-    {
-      "check": "aa_vote_identity_error_within_tolerance",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Max absolute vote identity error: 0"
-    },
-    {
-      "check": "crosswalk_positive_final_weight_sums_equal_one",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Tolerance: 1e-06"
-    },
-    {
-      "check": "crosswalk_all_source_weight_sums_equal_one_or_reported",
-      "status": "fail",
-      "fatal": false,
-      "n_failed": 162,
-      "details": "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance."
-    },
-    {
-      "check": "crosswalk_undefined_selected_weights_handled",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 1204,
-      "details": "Policy: fallback_m2"
-    },
-    {
-      "check": "aa_no_duplicate_county_years_after_exact_distinct",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Exact duplicate rows removed: 0"
-    },
-    {
-      "check": "aa_two_party_votes_match_party_votes",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires republican + democratic votes to equal two-party votes."
-    },
-    {
-      "check": "aa_votes_nonnegative",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires nonnegative Republican, Democratic, two-party, and total votes."
-    },
-    {
-      "check": "bridged_vote_retention_above_threshold",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Minimum retained share in main years: 0.996007"
-    },
-    {
-      "check": "main_panel_balanced",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Observed complete rows: 9386; expected rows: 9386; missing share: 0"
-    },
-    {
-      "check": "event_study_residualized_design_full_rank",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Requires no residualized RHS rank deficiency in 1952-start or 1972-start specifications."
-    },
-    {
-      "check": "event_study_main_vcov_available_without_repair",
-      "status": "pass",
-      "fatal": true,
-      "n_failed": 0,
-      "details": "Main SE type: cluster_cz"
-    },
-    {
-      "check": "event_study_conley_repair_diagnostics_recorded",
-      "status": "pass",
-      "fatal": false,
-      "n_failed": 23,
-      "details": "Conley VCOVs requiring repair across all samples/specs/cutoffs: 23"
-    }
-  ],
-  "fatal_failure": false,
+  "checks": {
+    "check": ["adh_one_row_per_czone", "cz_lookup_unique_1990_counties", "aa_all_county_fips_valid", "aa_vote_identity_error_within_tolerance", "crosswalk_positive_final_weight_sums_equal_one", "crosswalk_all_source_weight_sums_equal_one_or_reported", "crosswalk_undefined_selected_weights_handled", "aa_no_duplicate_county_years_after_exact_distinct", "aa_two_party_votes_match_party_votes", "aa_votes_nonnegative", "bridged_vote_retention_above_threshold", "main_panel_balanced"],
+    "status": ["pass", "pass", "pass", "pass", "pass", "fail", "pass", "pass", "pass", "pass", "pass", "fail"],
+    "fatal": [true, true, true, true, true, false, true, true, true, true, true, true],
+    "n_failed": [0, 0, 0, 0, 0, 211, 211, 0, 0, 0, 0, 11],
+    "details": ["Requires one ADH baseline/exposure row per commuting zone.", "Requires each 1990 county FIPS to appear once and map to one CZ.", "Requires all county FIPS to be five numeric digits before filtering.", "Max absolute vote identity error: 0", "Tolerance: 1e-06", "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance.", "Policy: fallback_m4", "Exact duplicate rows removed: 0", "Requires republican + democratic votes to equal two-party votes.", "Requires nonnegative Republican, Democratic, two-party, and total votes.", "Minimum retained share in main years: 0.995953", "Observed complete rows: 9375; expected rows: 9386; missing share: 0.00117196"]
+  },
+  "fatal_failure": true,
   "extra": {
-    "outputs": {
-      "table_csv": {
-        "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/tables/tab_event_study_rep_margin_two_specs_m5.csv",
-        "md5": "4257c2b29fb74e26fe726fe874df5ed3"
-      },
-      "table_tex": {
-        "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/tables/tab_event_study_rep_margin_two_specs_m5.tex",
-        "md5": "2464532d6fd27a629b3571783db1bcfb"
-      },
-      "table_pdf": {
-        "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/tables/tab_event_study_rep_margin_two_specs_m5.pdf",
-        "md5": "444afebaad5db124e80623210b9e1c45"
-      },
-      "figure_pdf": {
-        "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/figures/fig_event_study_rep_margin_two_specs_m5.pdf",
-        "md5": "42a7df8c5433e912339b44be0caadeb5"
-      },
-      "figure_png": {
-        "path": "/Users/Patron/Library/CloudStorage/OneDrive-UW-Madison/Classes/2026.1 Spring/ECON 695 001 Empirical Methods in Microeconomics/china_shock-ECON6951/replication/output/figures/fig_event_study_rep_margin_two_specs_m5.png",
-        "md5": "960568fcfd2fda55c89772bfe76f5c4a"
-      }
-    },
-    "validation_warnings": true
+    "main_expected_rows": 9386,
+    "main_observed_rows": 9375,
+    "main_missing_rows": 11,
+    "main_missing_share": 0.0012,
+    "min_main_retained_vote_share": 0.996
   }
 }

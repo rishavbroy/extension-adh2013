@@ -1,0 +1,16 @@
+{
+  "format": "serialized-r-object-xdr-memCompress-xz-chunked",
+  "original_path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6.rds",
+  "created_at": "2026-05-08 03:40:37 CDT",
+  "chunk_size_mib": 45,
+  "n_chunks": 1,
+  "uncompressed_bytes": 205288809,
+  "compressed_bytes": 11677820,
+  "chunks": [
+    {
+      "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6_rds_chunks/part-001.rdsbin",
+      "bytes": 11677820,
+      "md5": "85bfbd7f7e7af9901d5f1e84c2703aa5"
+    }
+  ]
+}

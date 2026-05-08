@@ -1,0 +1,12 @@
+year,county_fips,county_name_pattern,override_source_decade,override_county_fips_source,issue_class,reason,apply
+1984,04012,La Paz,1990,04012,county_boundary_change_needs_bridge,"La Paz County, AZ was created after 1980 but exists in 1990 target geography; use 1990 identity mapping for 1984/1988 presidential returns.",TRUE
+1988,04012,La Paz,1990,04012,county_boundary_change_needs_bridge,"La Paz County, AZ was created after 1980 but exists in 1990 target geography; use 1990 identity mapping for 1984/1988 presidential returns.",TRUE
+1984,35006,Cibola,1990,35006,county_boundary_change_needs_bridge,"Cibola County, NM was created after 1980 but exists in 1990 target geography; use 1990 identity mapping for 1984/1988 presidential returns.",TRUE
+1988,35006,Cibola,1990,35006,county_boundary_change_needs_bridge,"Cibola County, NM was created after 1980 but exists in 1990 target geography; use 1990 identity mapping for 1984/1988 presidential returns.",TRUE
+2016,46102,Oglala Lakota,2010,46113,county_boundary_change_needs_bridge,"Oglala Lakota County, SD is the renamed Shannon County; map 2016 returns to the 2010/1990 Shannon FIPS where needed.",TRUE
+2020,46102,Oglala Lakota,2010,46113,county_boundary_change_needs_bridge,"Oglala Lakota County, SD is the renamed Shannon County; map 2020 returns to the 2010/1990 Shannon FIPS where needed.",FALSE
+2004,08014,Broomfield,2010,08014,county_boundary_change_needs_bridge,"Broomfield County, CO was created after the 2000 Census; use the 2010 source crosswalk for 2004 returns so its vote mass is allocated to 1990 counties.",TRUE
+2008,08014,Broomfield,2010,08014,county_boundary_change_needs_bridge,"Broomfield County, CO was created after the 2000 Census; use the 2010 source crosswalk for 2008 returns so its vote mass is allocated to 1990 counties.",TRUE
+1976,51683,Manassas,1980,51683,county_boundary_change_needs_bridge,"Manassas city appears in 1976 returns but not the 1970 source crosswalk used by the decade rule; use the 1980 source crosswalk.",TRUE
+1976,51685,Manassas Park,1980,51685,county_boundary_change_needs_bridge,"Manassas Park city appears in 1976 returns but not the 1970 source crosswalk used by the decade rule; use the 1980 source crosswalk.",TRUE
+1976,51735,Poquoson,1980,51735,county_boundary_change_needs_bridge,"Poquoson city appears in 1976 returns but not the 1970 source crosswalk used by the decade rule; use the 1980 source crosswalk.",TRUE

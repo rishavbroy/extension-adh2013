@@ -1,7 +1,7 @@
-# replication/src/04_export_outputs.R
+# extension-adh2013/src/04_export_outputs.R
 
 export_event_study_outputs <- function(config = CONFIG) {
-  load_required_packages()
+  load_required_packages(config)
   config <- finalize_config(config)
 
   checks <- if (file.exists(config$validation_checks_csv)) {
@@ -14,11 +14,12 @@ export_event_study_outputs <- function(config = CONFIG) {
   }
   has_validation_warnings <- nrow(checks) > 0 && has_any_failures(checks)
 
-  res_all <- readRDS(config$all_specs_rds)
-  spec_order <- c("minimal_full_panel", "interacted_controls_full_panel")
+  res_all <- read_model_object(config$all_specs_rds)
+  spec_order <- c("minimal_full_panel", "interacted_core_controls_diagnostic", "interacted_controls_full_panel")
   pretty_spec_names <- c(
     minimal_full_panel = "Minimal",
-    interacted_controls_full_panel = "Interacted controls"
+    interacted_core_controls_diagnostic = "Core controls",
+    interacted_controls_full_panel = "Full controls"
   )
 
   ok_keys <- names(res_all)[vapply(res_all, function(x) {
@@ -62,7 +63,7 @@ export_event_study_outputs <- function(config = CONFIG) {
   stat_names <- c(
     "Observations", "Commuting zones", "Election years", "Reference election year",
     "CZ fixed effects", "Election-year fixed effects", "Controls", "Sample",
-    "ADH weights", "Main SE type"
+    "ADH weights", "Controls standardized", "Main SE type"
   )
   get_stat_value <- function(ms, nm) {
     if (is.null(ms) || is.null(ms[[nm]]) || length(ms[[nm]]) == 0) return("")
@@ -78,13 +79,19 @@ export_event_study_outputs <- function(config = CONFIG) {
   }
 
   table_for_tex <- dplyr::bind_rows(table_body, stat_rows)
+  fallback_label <- dplyr::case_when(
+    config$crosswalk_missing_weight_policy == "fallback_m2" ~ "M2 fallback",
+    config$crosswalk_missing_weight_policy == "fallback_m4" ~ "M4 fallback",
+    config$crosswalk_missing_weight_policy == "identity_if_same_fips" ~ "same-FIPS identity fallback",
+    TRUE ~ config$crosswalk_missing_weight_policy
+  )
   crosswalk_note <- if (identical(config$crosswalk_missing_weight_policy, "fail")) {
     paste0(toupper(config$crosswalk_weight_slug), " weights with no fallback")
   } else {
     paste0(
       toupper(config$crosswalk_weight_slug),
-      " weights where valid and policy ", config$crosswalk_missing_weight_policy,
-      " for source counties whose selected built-up-support weights are undefined or invalid"
+      " weights where valid, with ", fallback_label,
+      " for source counties whose selected weights are undefined or invalid"
     )
   }
 
@@ -110,8 +117,8 @@ export_event_study_outputs <- function(config = CONFIG) {
     longtable = TRUE,
     escape = TRUE,
     caption = paste0(
-      if (uses_repaired_main_vcov || has_validation_warnings) "Provisional validation-warning " else "",
-      "Event-study estimates: ADH China exposure and Republican presidential vote margin"
+      if (uses_repaired_main_vcov || has_validation_warnings) "Provisional " else "",
+      "event-study estimates: ADH China exposure and Republican presidential vote margin"
     ),
     align = c("l", rep("c", ncol(table_for_tex) - 1))
   ) %>%
@@ -127,7 +134,7 @@ export_event_study_outputs <- function(config = CONFIG) {
 
   plot_tbl <- coef_tbl_all %>%
     dplyr::mutate(
-      spec_label = factor(spec_label, levels = c("Minimal", "Interacted controls")),
+      spec_label = factor(spec_label, levels = c("Minimal", "Core controls", "Full controls")),
       line_group = ifelse(year < config$reference_year, "pre", "post")
     )
   ref_rows <- plot_tbl %>%
@@ -195,11 +202,7 @@ export_event_study_outputs <- function(config = CONFIG) {
     ) +
     ggplot2::labs(
       title = "China exposure and Republican presidential vote margin, 1972-2020",
-      subtitle = paste0(
-        if (uses_repaired_main_vcov || has_validation_warnings) "Provisional validation-warning output; " else "",
-        "Event-study coefficients with 95% ", config$main_se_type,
-        " confidence intervals; ", config$reference_year, " is normalized to zero"
-      ),
+      subtitle = paste0("Event-study coefficients with 95% ", config$main_se_type, " CIs; ", config$reference_year, " normalized to zero."),
       x = "Presidential election year",
       y = paste0("Coefficient on ADH China exposure (per ", config$exposure_units, ")")
     ) +
@@ -211,15 +214,15 @@ export_event_study_outputs <- function(config = CONFIG) {
       legend.position = "bottom"
     )
 
-  ggplot2::ggsave(filename = config$figure_pdf, plot = event_plot, width = 8.5, height = 7.5)
-  ggplot2::ggsave(filename = config$figure_png, plot = event_plot, width = 8.5, height = 7.5, dpi = 320)
+  ggplot2::ggsave(filename = config$figure_pdf, plot = event_plot, width = 8.5, height = 7.5, bg = "white")
+  ggplot2::ggsave(filename = config$figure_png, plot = event_plot, width = 8.5, height = 7.5, dpi = 320, bg = "white")
 
   write_pipeline_manifest(
     config = config,
     checks = checks,
     stage = "export_event_study_outputs",
     sources = list(
-      all_specs = list(path = config$all_specs_rds, md5 = file_checksum(config$all_specs_rds))
+      all_specs = model_object_reference(config$all_specs_rds, config)
     ),
     extra = list(
       outputs = list(

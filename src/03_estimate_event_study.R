@@ -1,4 +1,4 @@
-# replication/src/03_estimate_event_study.R
+# extension-adh2013/src/03_estimate_event_study.R
 
 add_event_study_terms <- function(data, controls, config) {
   years <- sort(unique(data$year))
@@ -9,6 +9,47 @@ add_event_study_terms <- function(data, controls, config) {
   }
   ctrl_build <- make_interacted_control_vars(data, controls, years, config$reference_year)
   list(data = ctrl_build$data, event_vars = event_vars, control_vars = ctrl_build$vars)
+}
+
+model_control_names <- function(controls, standardize = FALSE) {
+  if (isTRUE(standardize)) standardized_control_name(controls) else controls
+}
+
+interacted_control_variance_diagnostics <- function(prepared_data, control_vars, sample_name, spec_name) {
+  if (length(control_vars) == 0) return(tibble::tibble())
+  purrr::map_dfr(control_vars, function(v) {
+    vals <- prepared_data[[v]]
+    tibble::tibble(
+      sample = sample_name,
+      spec = spec_name,
+      interacted_control = v,
+      n_nonmissing = sum(!is.na(vals)),
+      variance = stats::var(vals, na.rm = TRUE),
+      min = suppressWarnings(min(vals, na.rm = TRUE)),
+      max = suppressWarnings(max(vals, na.rm = TRUE)),
+      share_zero = mean(vals == 0, na.rm = TRUE)
+    )
+  })
+}
+
+vcov_rank_summary <- function(vcov_mat, sample_name, spec_name, se_type) {
+  if (is.null(vcov_mat) || any(!is.finite(vcov_mat))) {
+    return(tibble::tibble(
+      sample = sample_name, spec = spec_name, se_type = se_type,
+      vcov_dim = NA_integer_, vcov_rank = NA_integer_, vcov_rank_deficiency = NA_integer_,
+      min_diag = NA_real_, max_diag = NA_real_, median_diag = NA_real_
+    ))
+  }
+  q <- qr(vcov_mat, tol = 1e-10)
+  d <- diag(vcov_mat)
+  tibble::tibble(
+    sample = sample_name, spec = spec_name, se_type = se_type,
+    vcov_dim = nrow(vcov_mat), vcov_rank = q$rank,
+    vcov_rank_deficiency = nrow(vcov_mat) - q$rank,
+    min_diag = suppressWarnings(min(d, na.rm = TRUE)),
+    max_diag = suppressWarnings(max(d, na.rm = TRUE)),
+    median_diag = suppressWarnings(stats::median(d, na.rm = TRUE))
+  )
 }
 
 residualized_design_diagnostics <- function(data, rhs_terms, config, sample_name, spec_name) {
@@ -243,25 +284,32 @@ compute_vcov_outputs <- function(model, spec_name, sample_name, config) {
   )
 }
 
-controls_manifest_for_spec <- function(sample_name, spec_name, controls, config, model) {
+controls_manifest_for_spec <- function(sample_name, spec_name, controls, model_controls, standardize_controls, config, model) {
   dropped <- model$collin.var %||% character(0)
   tibble::tibble(control = config$baseline_controls) %>%
     dplyr::mutate(
       sample = sample_name,
       spec = spec_name,
       requested = control %in% controls,
+      standardize_controls = isTRUE(standardize_controls),
+      model_control = dplyr::if_else(requested, model_control_names(control, standardize_controls), NA_character_),
       status = dplyr::case_when(
         !requested ~ "omitted_from_spec",
-        vapply(control, function(ctrl) any(startsWith(dropped, paste0("ctrl_", ctrl, "_"))), logical(1)) ~
+        vapply(model_control, function(ctrl) !is.na(ctrl) && any(startsWith(dropped, paste0("ctrl_", ctrl, "_"))), logical(1)) ~
           "dropped_by_fixest",
         TRUE ~ "included"
       )
     ) %>%
-    dplyr::select(sample, spec, control, requested, status)
+    dplyr::select(sample, spec, control, requested, standardize_controls, model_control, status)
 }
 
-estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_label, config) {
-  prepared <- add_event_study_terms(data, controls, config)
+estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_label, config, standardize_controls = FALSE) {
+  model_controls <- model_control_names(controls, standardize_controls)
+  missing_model_controls <- setdiff(model_controls, names(data))
+  if (length(missing_model_controls) > 0) {
+    stop("Missing model control variables: ", paste(missing_model_controls, collapse = ", "))
+  }
+  prepared <- add_event_study_terms(data, model_controls, config)
   rhs_terms <- c(prepared$event_vars, prepared$control_vars)
   formula_chr <- paste0(config$outcome_var, " ~ ", paste(rhs_terms, collapse = " + "), " | czone + year")
   design_diag <- residualized_design_diagnostics(prepared$data, rhs_terms, config, sample_name, spec_name)
@@ -272,6 +320,7 @@ estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_l
       fml = stats::as.formula(formula_chr),
       data = prepared$data,
       weights = stats::as.formula(paste0("~", config$weight_var)),
+      panel.id = stats::as.formula("~czone + election_index"),
       warn = TRUE,
       notes = FALSE
     )
@@ -295,6 +344,7 @@ estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_l
       "CZ fixed effects" = "Yes",
       "Election-year fixed effects" = "Yes",
       "Controls" = controls_label,
+      "Controls standardized" = if (isTRUE(standardize_controls)) "Yes" else "No",
       "Sample" = sample_name,
       "ADH weights" = "timepwt48",
       "Main SE type" = config$main_se_type
@@ -305,7 +355,8 @@ estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_l
       formula_chr = formula_chr, model = model, vcov = vcovs$vcov,
       coefficients = vcovs$coefficients, vcov_diagnostics = vcovs$diagnostics,
       vcov_eigenvalues = vcovs$eigenvalues, model_diagnostics = design_diag,
-      controls_manifest = controls_manifest_for_spec(sample_name, spec_name, controls, config, model),
+      interacted_control_variance = interacted_control_variance_diagnostics(prepared$data, prepared$control_vars, sample_name, spec_name),
+      controls_manifest = controls_manifest_for_spec(sample_name, spec_name, controls, model_controls, standardize_controls, config, model),
       model_stats = model_stats, n_obs = nrow(prepared$data),
       n_cz = dplyr::n_distinct(prepared$data$czone), min_year = min(prepared$data$year),
       max_year = max(prepared$data$year)
@@ -316,7 +367,7 @@ estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_l
       error_message = conditionMessage(e), formula_chr = formula_chr,
       model = NULL, vcov = list(), coefficients = tibble::tibble(),
       vcov_diagnostics = tibble::tibble(), vcov_eigenvalues = tibble::tibble(),
-      model_diagnostics = design_diag, controls_manifest = tibble::tibble(),
+      model_diagnostics = design_diag, interacted_control_variance = tibble::tibble(), controls_manifest = tibble::tibble(),
       model_stats = list(
         "Observations" = format(nrow(prepared$data), big.mark = ","),
         "Commuting zones" = format(dplyr::n_distinct(prepared$data$czone), big.mark = ","),
@@ -325,6 +376,7 @@ estimate_one_spec <- function(data, sample_name, spec_name, controls, controls_l
         "CZ fixed effects" = "Yes",
         "Election-year fixed effects" = "Yes",
         "Controls" = controls_label,
+        "Controls standardized" = if (isTRUE(standardize_controls)) "Yes" else "No",
         "Sample" = sample_name,
         "ADH weights" = "timepwt48",
         "Main SE type" = "Failed"
@@ -366,7 +418,7 @@ run_pretrend_tests <- function(results, config) {
 }
 
 estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
-  load_required_packages()
+  load_required_packages(config)
   config <- finalize_config(config)
 
   existing_checks <- if (file.exists(config$validation_checks_csv)) {
@@ -384,15 +436,23 @@ estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
   spec_definitions <- list(
     minimal_full_panel = list(
       controls = character(0),
+      standardize_controls = FALSE,
       label = "None"
     ),
     interacted_core_controls_diagnostic = list(
       controls = config$core_interacted_controls,
-      label = "1990 manufacturing share, college share, and foreign-born share interacted with election-year indicators"
+      standardize_controls = isTRUE(config$standardize_interacted_controls),
+      label = "Three 1990 ADH controls interacted with election-year indicators"
     ),
     interacted_controls_full_panel = list(
       controls = config$interacted_controls,
-      label = "Configured 1990 ADH baseline controls interacted with election-year indicators"
+      standardize_controls = isTRUE(config$standardize_interacted_controls),
+      label = "All configured 1990 ADH baseline controls interacted with election-year indicators"
+    ),
+    interacted_controls_full_panel_raw_controls_diagnostic = list(
+      controls = config$interacted_controls,
+      standardize_controls = FALSE,
+      label = "All configured 1990 ADH baseline controls interacted with election-year indicators (raw-control diagnostic)"
     )
   )
 
@@ -412,7 +472,8 @@ estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
         spec_name = spec_name,
         controls = def$controls,
         controls_label = def$label,
-        config = config
+        config = config,
+        standardize_controls = isTRUE(def$standardize_controls)
       )
     }
   }
@@ -432,8 +493,42 @@ estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
       )
   })
   controls_manifest <- purrr::map_dfr(all_results, ~ .x$controls_manifest)
+  interacted_control_variance <- purrr::map_dfr(all_results, ~ .x$interacted_control_variance %||% tibble::tibble())
   vcov_diagnostics <- purrr::map_dfr(all_results, ~ .x$vcov_diagnostics)
   vcov_eigenvalues <- purrr::map_dfr(all_results, ~ .x$vcov_eigenvalues)
+  vcov_rank_diagnostics <- purrr::imap_dfr(all_results, function(res, nm) {
+    if (is.null(res$vcov) || length(res$vcov) == 0) return(tibble::tibble())
+    purrr::imap_dfr(res$vcov, ~ vcov_rank_summary(.x, res$sample, res$spec, .y))
+  })
+  se_warning_diagnostics <- coef_tbl_all %>%
+    dplyr::group_by(sample, spec, se_type) %>%
+    dplyr::summarise(
+      n_event_coefficients = dplyr::n(),
+      min_std_error = min(std.error, na.rm = TRUE),
+      median_std_error = stats::median(std.error, na.rm = TRUE),
+      max_std_error = max(std.error, na.rm = TRUE),
+      near_zero_se_count = sum(abs(std.error) < 1e-10, na.rm = TRUE),
+      nonfinite_se_count = sum(!is.finite(std.error)),
+      .groups = "drop"
+    ) %>%
+    dplyr::left_join(
+      vcov_rank_diagnostics %>%
+        dplyr::select(sample, spec, se_type, vcov_dim, vcov_rank, vcov_rank_deficiency),
+      by = c("sample", "spec", "se_type")
+    ) %>%
+    dplyr::mutate(
+      diagnostic_note = dplyr::case_when(
+        grepl("driscoll", se_type) & near_zero_se_count > 0 & dplyr::coalesce(vcov_rank_deficiency, 0L) > 0 ~
+          "Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.",
+        grepl("driscoll", se_type) & near_zero_se_count > 0 ~
+          "Suspicious near-zero Driscoll-Kraay SEs; do not report without further diagnosis.",
+        dplyr::coalesce(vcov_rank_deficiency, 0L) > 0 ~
+          "VCOV is rank deficient; use as diagnostic only unless justified.",
+        grepl("cluster_cz_year", se_type) ~
+          "Two-way clustering includes very few year clusters; use as diagnostic only.",
+        TRUE ~ NA_character_
+      )
+    )
   pretrend_tests <- run_pretrend_tests(all_results, config)
   pretrend_coefficients <- coef_tbl_all %>%
     dplyr::filter(sample == "main_1972_start", se_type == config$main_se_type, year < config$reference_year)
@@ -492,29 +587,37 @@ estimate_event_study <- function(config = CONFIG, stop_on_fatal = TRUE) {
   combined_checks <- dplyr::bind_rows(build_checks, estimation_checks)
   readr::write_csv(combined_checks, config$validation_checks_csv)
 
-  saveRDS(all_results, config$all_specs_rds)
+  write_model_object(all_results, config$all_specs_rds, config)
   readr::write_csv(status_tbl, config$spec_status_csv)
   readr::write_csv(coef_tbl_all, config$all_specs_csv)
   readr::write_csv(model_diagnostics, config$model_diagnostics_csv)
   readr::write_csv(controls_manifest, config$controls_manifest_csv)
+  readr::write_csv(interacted_control_variance, config$interacted_control_variance_csv)
   readr::write_csv(vcov_diagnostics, config$vcov_diagnostics_csv)
   readr::write_csv(vcov_eigenvalues, config$vcov_eigenvalues_csv)
+  readr::write_csv(vcov_rank_diagnostics, config$vcov_rank_csv)
+  readr::write_csv(se_warning_diagnostics, config$se_warning_diagnostics_csv)
+  readr::write_csv(summarise_conley_neighbors(main_panel, config$conley_cutoffs_km), config$conley_neighbor_counts_csv)
   readr::write_csv(pretrend_tests, config$pretrend_tests_csv)
   readr::write_csv(pretrend_coefficients, config$pretrend_coefficients_csv)
 
-  main_key <- "main_1972_start__minimal_full_panel"
-  if (all_results[[main_key]]$status == "ok") {
-    main_out <- list(
-      model = all_results[[main_key]]$model,
-      vcov = all_results[[main_key]]$vcov[[config$main_se_type]],
-      coefficients = all_results[[main_key]]$coefficients %>%
-        dplyr::filter(se_type == config$main_se_type),
-      model_stats = all_results[[main_key]]$model_stats,
-      formula_chr = all_results[[main_key]]$formula_chr
-    )
-    saveRDS(main_out, config$event_study_rds)
-    readr::write_csv(main_out$coefficients, config$event_study_csv)
-  }
+  main_display_specs <- c("minimal_full_panel", "interacted_core_controls_diagnostic", "interacted_controls_full_panel")
+  main_coefficients <- coef_tbl_all %>%
+    dplyr::filter(
+      sample == "main_1972_start",
+      se_type == config$main_se_type,
+      spec %in% main_display_specs
+    ) %>%
+    dplyr::arrange(factor(spec, levels = main_display_specs), year)
+  main_models <- all_results[grepl("^main_1972_start__", names(all_results))]
+  main_out <- list(
+    coefficients = main_coefficients,
+    main_se_type = config$main_se_type,
+    display_specs = main_display_specs,
+    models = main_models
+  )
+  write_model_object(main_out, config$event_study_rds, config)
+  readr::write_csv(main_coefficients, config$event_study_csv)
 
   failed_main_vcov <- vcov_diagnostics %>%
     dplyr::filter(
