@@ -257,7 +257,12 @@ compute_vcov_outputs <- function(model, spec_name, sample_name, config) {
       repair_required = eig$repair_required, vcov_repaired = repaired
     )
 
-    if (status %in% c("ok", "repaired")) {
+    # Write coefficient rows for every successfully computed VCOV, including
+    # unrepaired VCOVs flagged as repair_required. This keeps the all-spec CSV
+    # complete for diagnostics (especially all Conley cutoffs/specifications),
+    # while the vcov_repair_required/vcov_repaired flags make clear which rows
+    # should not be treated as publication-ready inference.
+    if (status %in% c("ok", "repaired", "repair_required")) {
       coef_tbl <- tryCatch(
         extract_event_coefficients(
           model = model, vcov_mat = use_vcov, spec_name = spec_name,
@@ -267,7 +272,7 @@ compute_vcov_outputs <- function(model, spec_name, sample_name, config) {
         error = function(e) e
       )
       if (inherits(coef_tbl, "error")) {
-        diagnostics[[se_type]]$status <- "failed"
+        diagnostics[[se_type]]$status <- "coeftable_failed"
         diagnostics[[se_type]]$error_message <- conditionMessage(coef_tbl)
       } else {
         coefficients[[se_type]] <- coef_tbl

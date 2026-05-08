@@ -1,6 +1,6 @@
 {
   "stage": "crosswalk_sensitivity_complete",
-  "generated_at": "2026-05-08 04:30:47 CDT",
+  "generated_at": "2026-05-08 10:47:50 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
@@ -42,7 +42,7 @@
     },
     "sensitivity_status": {
       "path": "output/diagnostics/crosswalk_sensitivity_run_status.csv",
-      "md5": "aac8c3a5ba18011fd74a90b0f8c05630"
+      "md5": "01b39261ea0dcdf01df6af84ec718838"
     }
   },
   "checks": {
@@ -59,11 +59,19 @@
     "failed_specifications": [],
     "comparison_csv": {
       "path": "output/diagnostics/crosswalk_specification_comparison_coefficients.csv",
-      "md5": "7cfc6f1ce1e8543d8eb354b3ddfe1ab5"
+      "md5": "2e3bcca64608b6faf955df278dd5b7e1"
     },
     "comparison_png": {
       "path": "output/figures/fig_crosswalk_specification_comparison.png",
-      "md5": "040b9a3a7b17188f787b4cdd51bfd822"
+      "md5": "cb31bb7322a8f35184718f8bf423d9ee"
+    },
+    "comparison_delta_csv": {
+      "path": "output/diagnostics/crosswalk_specification_comparison_deltas_vs_pure_m2.csv",
+      "md5": "ee10c187a6cc016d7ea0c9697158dbdc"
+    },
+    "comparison_delta_png": {
+      "path": "output/figures/fig_crosswalk_specification_comparison_deltas_vs_pure_m2.png",
+      "md5": "f48c58dd9228ca199eabad423191ec87"
     }
   }
 }

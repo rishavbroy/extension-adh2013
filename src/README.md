@@ -26,7 +26,7 @@ Set `CROSSWALK_MISSING_WEIGHT_POLICY="fail"` when you want a strict diagnostic r
 
 ## Four-specification crosswalk sensitivity run
 
-To run M5 + fallback M2, M6 + fallback M2, pure M2, and pure M4 in one pass and create the appendix comparison plot:
+To run M5 + fallback M2, M6 + fallback M2, pure M2, and M4 + fallback M2 in one pass and create the appendix comparison plots:
 
 ```r
 Sys.setenv(RUN_CROSSWALK_SENSITIVITY = "true")
@@ -40,14 +40,20 @@ The sensitivity plan is:
 | M5 + fallback M2 | `m5_weight` | `fallback_m2` |
 | M6 + fallback M2 | `m6_weight` | `fallback_m2` |
 | Pure M2 | `m2_weight` | `fallback_m2` |
-| Pure M4 | `m4_weight` | `fallback_m4` |
+| M4 + fallback M2 | `m4_weight` | `fallback_m2` |
 
-For the pure M2/M4 runs, the fallback policy is the same as the selected weight. It is used only to keep non-analysis/unavailable cases from triggering the strict selected-weight failure; it does not substitute M2 into the M4 specification.
+The M4 sensitivity specification uses M2 fallback so all four appendix series use the same balanced ADH-mainland CZ panel. The pure M2 run has `m2_weight` selected; its fallback policy only affects non-analysis/unavailable cases and does not change the selected M2 weights.
 
-The comparison plot is written to:
+The comparison outputs are written to:
 
+- `output/diagnostics/crosswalk_specification_comparison_coefficients.csv`
+- `output/diagnostics/crosswalk_specification_comparison_deltas_vs_pure_m2.csv`
 - `output/figures/fig_crosswalk_specification_comparison.png`
 - `output/figures/fig_crosswalk_specification_comparison.pdf`
+- `output/figures/fig_crosswalk_specification_comparison_deltas_vs_pure_m2.png`
+- `output/figures/fig_crosswalk_specification_comparison_deltas_vs_pure_m2.pdf`
+
+The level plot uses colors, line widths, transparencies, and line types to make nearly overlapping lines visible. The delta plot shows differences relative to Pure M2, which is often more informative when crosswalk estimates almost perfectly overlap.
 
 ## Demonstration maps
 
@@ -96,6 +102,6 @@ Set `RUN_CROSSWALK_SENSITIVITY=true` to run four appendix specifications in one 
 - Pure M2
 - M4 + fallback M2
 
-The runner writes `output/diagnostics/crosswalk_sensitivity_run_status.csv` and archives per-spec diagnostics under `output/diagnostics/by_crosswalk/<slug>/`. The M4 specification intentionally uses M2 fallback so that all four sensitivity series use the same balanced ADH mainland CZ panel.
+The runner writes `output/diagnostics/crosswalk_sensitivity_run_status.csv` and archives per-spec diagnostics under `output/diagnostics/by_crosswalk/<slug>/`. The M4 specification intentionally uses M2 fallback so that all four sensitivity series use the same balanced ADH mainland CZ panel. The all-spec coefficient CSVs now include all Conley cutoffs/specifications that can be computed, even when the VCOV is flagged as repair-required; use the `vcov_repair_required` and `vcov_repaired` columns to avoid treating those rows as publication-ready inference.
 
 Diagnostic support-map PNGs are saved with full, simplified, and small-raster versions.

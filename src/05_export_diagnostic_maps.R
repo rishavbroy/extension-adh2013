@@ -34,6 +34,9 @@ export_crosswalk_specification_comparison <- function(config = CONFIG) {
     return(invisible(NULL))
   }
 
+  crosswalk_levels <- c("M5 + fallback M2", "M6 + fallback M2", "Pure M2", "M4 + fallback M2")
+  display_specs <- c("minimal_full_panel", "interacted_core_controls_diagnostic", "interacted_controls_full_panel")
+
   coef_long <- purrr::map_dfr(coef_files, function(path) {
     slug <- sub("^event_study_coefficients_all_specs_aa2021_rep_margin_", "", basename(path))
     slug <- sub("\\.csv$", "", slug)
@@ -46,7 +49,7 @@ export_crosswalk_specification_comparison <- function(config = CONFIG) {
     dplyr::filter(
       sample == "main_1972_start",
       se_type == config$main_se_type,
-      spec %in% c("minimal_full_panel", "interacted_core_controls_diagnostic", "interacted_controls_full_panel")
+      spec %in% display_specs
     ) %>%
     dplyr::mutate(
       spec_label = dplyr::recode(
@@ -56,10 +59,7 @@ export_crosswalk_specification_comparison <- function(config = CONFIG) {
         interacted_controls_full_panel = "Full controls"
       ),
       spec_label = factor(spec_label, levels = c("Minimal", "Core controls", "Full controls")),
-      crosswalk_specification = factor(
-        crosswalk_specification,
-        levels = c("M5 + fallback M2", "M6 + fallback M2", "Pure M2", "M4 + fallback M2")
-      )
+      crosswalk_specification = factor(crosswalk_specification, levels = crosswalk_levels)
     ) %>%
     dplyr::filter(!is.na(crosswalk_specification))
 
@@ -67,6 +67,20 @@ export_crosswalk_specification_comparison <- function(config = CONFIG) {
     warning("Crosswalk comparison inputs exist but no matching main-spec coefficients were found.", call. = FALSE)
     return(invisible(NULL))
   }
+
+  # Draw thicker baseline/early layers first and thinner layers last. When the
+  # four crosswalk estimates are nearly identical, this makes the overlap show
+  # up as concentric colored strokes rather than one hidden line.
+  draw_order_tbl <- tibble::tibble(
+    crosswalk_specification = factor(crosswalk_levels, levels = crosswalk_levels),
+    draw_order = c(4L, 3L, 1L, 2L),
+    line_width = c(0.75, 0.95, 1.45, 1.20),
+    point_size = c(1.25, 1.45, 2.05, 1.75),
+    alpha_value = c(0.95, 0.90, 0.70, 0.82)
+  )
+
+  coef_long <- coef_long %>%
+    dplyr::left_join(draw_order_tbl, by = "crosswalk_specification")
 
   readr::write_csv(coef_long, config$crosswalk_comparison_csv)
 
@@ -77,31 +91,145 @@ export_crosswalk_specification_comparison <- function(config = CONFIG) {
     paste0("Event-study coefficients: ", as.character(unique(coef_long$crosswalk_specification)))
   }
   plot_subtitle <- if (n_specs > 1) {
-    paste0("Main 1972-2020 event-study coefficients; SE type = ", config$main_se_type)
+    paste0("Main 1972-2020 event-study coefficients; colored/width-varied lines reveal nearly overlapping estimates. SE type = ", config$main_se_type)
   } else {
     paste0("Only one crosswalk specification was found; rerun sensitivity mode to add M6, M2, and M4. SE type = ", config$main_se_type)
   }
 
+  # Colors are intentionally specified here because the plot is meant for a
+  # final appendix figure where four nearly identical series must be visually
+  # distinguishable.
+  comparison_colors <- c(
+    "M5 + fallback M2" = "#1b9e77",
+    "M6 + fallback M2" = "#d95f02",
+    "Pure M2" = "#7570b3",
+    "M4 + fallback M2" = "#e7298a"
+  )
+  comparison_linetypes <- c(
+    "M5 + fallback M2" = "solid",
+    "M6 + fallback M2" = "22",
+    "Pure M2" = "longdash",
+    "M4 + fallback M2" = "dotdash"
+  )
+  comparison_linewidths <- c(
+    "M5 + fallback M2" = 0.75,
+    "M6 + fallback M2" = 0.95,
+    "Pure M2" = 1.45,
+    "M4 + fallback M2" = 1.20
+  )
+  comparison_alphas <- c(
+    "M5 + fallback M2" = 0.95,
+    "M6 + fallback M2" = 0.90,
+    "Pure M2" = 0.70,
+    "M4 + fallback M2" = 0.82
+  )
+  comparison_shapes <- c(
+    "M5 + fallback M2" = 16,
+    "M6 + fallback M2" = 17,
+    "Pure M2" = 15,
+    "M4 + fallback M2" = 18
+  )
+
+  coef_plot_data <- coef_long %>%
+    dplyr::arrange(spec_label, draw_order, year)
+
   comp_plot <- ggplot2::ggplot(
-    coef_long,
-    ggplot2::aes(x = year, y = estimate, linetype = crosswalk_specification, group = crosswalk_specification)
+    coef_plot_data,
+    ggplot2::aes(
+      x = year, y = estimate,
+      color = crosswalk_specification,
+      linetype = crosswalk_specification,
+      linewidth = crosswalk_specification,
+      alpha = crosswalk_specification,
+      group = crosswalk_specification
+    )
   ) +
-    ggplot2::geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.3) +
-    ggplot2::geom_line(linewidth = 0.45) +
-    ggplot2::geom_point(size = 1.3) +
+    ggplot2::geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.3, color = "grey45") +
+    ggplot2::geom_line(lineend = "round") +
+    ggplot2::geom_point(ggplot2::aes(shape = crosswalk_specification, size = crosswalk_specification), stroke = 0.2) +
+    ggplot2::scale_color_manual(values = comparison_colors, drop = FALSE) +
+    ggplot2::scale_linetype_manual(values = comparison_linetypes, drop = FALSE) +
+    ggplot2::scale_linewidth_manual(values = comparison_linewidths, drop = FALSE, guide = "none") +
+    ggplot2::scale_alpha_manual(values = comparison_alphas, drop = FALSE, guide = "none") +
+    ggplot2::scale_shape_manual(values = comparison_shapes, drop = FALSE) +
+    ggplot2::scale_size_manual(values = c(
+      "M5 + fallback M2" = 1.25,
+      "M6 + fallback M2" = 1.45,
+      "Pure M2" = 2.05,
+      "M4 + fallback M2" = 1.75
+    ), drop = FALSE, guide = "none") +
     ggplot2::facet_wrap(~ spec_label, ncol = 1) +
     ggplot2::labs(
       title = plot_title,
       subtitle = plot_subtitle,
       x = "Presidential election year",
       y = paste0("Coefficient on ADH China exposure (per ", config$exposure_units, ")"),
-      linetype = "Crosswalk"
+      color = "Crosswalk",
+      linetype = "Crosswalk",
+      shape = "Crosswalk"
     ) +
     ggplot2::theme_bw(base_size = 11) +
     ggplot2::theme(legend.position = "bottom", panel.grid.minor = ggplot2::element_blank())
 
   ggplot2::ggsave(config$crosswalk_comparison_pdf, comp_plot, width = 8.5, height = 7.5, bg = "white")
   ggplot2::ggsave(config$crosswalk_comparison_png, comp_plot, width = 8.5, height = 7.5, dpi = 320, bg = "white")
+
+  # Appendix companion: differences relative to Pure M2. This makes the actual
+  # magnitude of crosswalk sensitivity visible when the level plot overlaps.
+  pure_m2 <- coef_long %>%
+    dplyr::filter(crosswalk_specification == "Pure M2") %>%
+    dplyr::select(spec_label, year, pure_m2_estimate = estimate)
+
+  delta_long <- coef_long %>%
+    dplyr::left_join(pure_m2, by = c("spec_label", "year")) %>%
+    dplyr::mutate(delta_vs_pure_m2 = estimate - pure_m2_estimate) %>%
+    dplyr::arrange(spec_label, draw_order, year)
+
+  readr::write_csv(delta_long, config$crosswalk_comparison_delta_csv)
+
+  if (n_specs > 1 && any(is.finite(delta_long$delta_vs_pure_m2))) {
+    delta_plot <- ggplot2::ggplot(
+      delta_long,
+      ggplot2::aes(
+        x = year, y = delta_vs_pure_m2,
+        color = crosswalk_specification,
+        linetype = crosswalk_specification,
+        linewidth = crosswalk_specification,
+        alpha = crosswalk_specification,
+        group = crosswalk_specification
+      )
+    ) +
+      ggplot2::geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.3, color = "grey45") +
+      ggplot2::geom_line(lineend = "round") +
+      ggplot2::geom_point(ggplot2::aes(shape = crosswalk_specification, size = crosswalk_specification), stroke = 0.2) +
+      ggplot2::scale_color_manual(values = comparison_colors, drop = FALSE) +
+      ggplot2::scale_linetype_manual(values = comparison_linetypes, drop = FALSE) +
+      ggplot2::scale_linewidth_manual(values = comparison_linewidths, drop = FALSE, guide = "none") +
+      ggplot2::scale_alpha_manual(values = comparison_alphas, drop = FALSE, guide = "none") +
+      ggplot2::scale_shape_manual(values = comparison_shapes, drop = FALSE) +
+      ggplot2::scale_size_manual(values = c(
+        "M5 + fallback M2" = 1.25,
+        "M6 + fallback M2" = 1.45,
+        "Pure M2" = 2.05,
+        "M4 + fallback M2" = 1.75
+      ), drop = FALSE, guide = "none") +
+      ggplot2::facet_wrap(~ spec_label, ncol = 1, scales = "free_y") +
+      ggplot2::labs(
+        title = "Crosswalk-specification sensitivity relative to Pure M2",
+        subtitle = paste0("Main 1972-2020 event-study coefficients; SE type = ", config$main_se_type),
+        x = "Presidential election year",
+        y = paste0("Coefficient difference vs. Pure M2 (per ", config$exposure_units, ")"),
+        color = "Crosswalk",
+        linetype = "Crosswalk",
+        shape = "Crosswalk"
+      ) +
+      ggplot2::theme_bw(base_size = 11) +
+      ggplot2::theme(legend.position = "bottom", panel.grid.minor = ggplot2::element_blank())
+
+    ggplot2::ggsave(config$crosswalk_comparison_delta_pdf, delta_plot, width = 8.5, height = 7.5, bg = "white")
+    ggplot2::ggsave(config$crosswalk_comparison_delta_png, delta_plot, width = 8.5, height = 7.5, dpi = 320, bg = "white")
+  }
+
   invisible(comp_plot)
 }
 
@@ -318,6 +446,8 @@ export_diagnostic_maps_and_comparisons <- function(config = CONFIG) {
     extra = list(
       outputs = list(
         crosswalk_comparison_png = list(path = config$crosswalk_comparison_png, md5 = file_checksum(config$crosswalk_comparison_png)),
+        crosswalk_comparison_delta_png = list(path = config$crosswalk_comparison_delta_png, md5 = file_checksum(config$crosswalk_comparison_delta_png)),
+        crosswalk_comparison_delta_csv = list(path = config$crosswalk_comparison_delta_csv, md5 = file_checksum(config$crosswalk_comparison_delta_csv)),
         crosswalk_support_county_map_png = list(path = config$crosswalk_support_county_map_png, md5 = file_checksum(config$crosswalk_support_county_map_png)),
         crosswalk_support_county_map_simplified_png = list(path = config$crosswalk_support_county_map_simplified_png, md5 = file_checksum(config$crosswalk_support_county_map_simplified_png)),
         crosswalk_support_county_map_small_png = list(path = config$crosswalk_support_county_map_small_png, md5 = file_checksum(config$crosswalk_support_county_map_small_png)),
@@ -399,7 +529,9 @@ run_crosswalk_sensitivity_pipeline <- function(config = CONFIG) {
       completed_specifications = status_tbl %>% dplyr::filter(status == "completed") %>% dplyr::pull(crosswalk_specification),
       failed_specifications = status_tbl %>% dplyr::filter(status != "completed") %>% dplyr::pull(crosswalk_specification),
       comparison_csv = list(path = comparison_config$crosswalk_comparison_csv, md5 = file_checksum(comparison_config$crosswalk_comparison_csv)),
-      comparison_png = list(path = comparison_config$crosswalk_comparison_png, md5 = file_checksum(comparison_config$crosswalk_comparison_png))
+      comparison_png = list(path = comparison_config$crosswalk_comparison_png, md5 = file_checksum(comparison_config$crosswalk_comparison_png)),
+      comparison_delta_csv = list(path = comparison_config$crosswalk_comparison_delta_csv, md5 = file_checksum(comparison_config$crosswalk_comparison_delta_csv)),
+      comparison_delta_png = list(path = comparison_config$crosswalk_comparison_delta_png, md5 = file_checksum(comparison_config$crosswalk_comparison_delta_png))
     )
   )
   invisible(status_tbl)

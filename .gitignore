@@ -13,7 +13,3 @@ __MACOSX/
 *.lof
 *.lot
 output/intermediate/*.rds
-
-# Oversized model objects; use chunked outputs instead
-output/intermediate/*.rds
-output/intermediate/*_all_specs_*.rds

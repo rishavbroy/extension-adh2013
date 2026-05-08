@@ -1,6 +1,6 @@
 {
   "stage": "export_event_study_outputs",
-  "generated_at": "2026-05-08 04:30:47 CDT",
+  "generated_at": "2026-05-08 10:47:49 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
@@ -36,7 +36,7 @@
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4.rds",
       "chunk_manifest": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks/manifest.json",
       "chunk_dir": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks",
-      "manifest_md5": "1a3fbf8de9b236924589024b4f2a9d25",
+      "manifest_md5": "1507a08f60ba243d481518c6c407ad48",
       "storage": "chunked_rds"
     }
   },
@@ -60,11 +60,11 @@
       },
       "table_pdf": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.pdf",
-        "md5": "233231d0979f92de449570cd6c7c7eed"
+        "md5": "86540db39a4cf087168636344c734858"
       },
       "figure_pdf": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.pdf",
-        "md5": "ad796cc0ac7e9d0e16c55ff1bc3a416d"
+        "md5": "50dd4ee23fd15b5d8c9cc0862e0dda14"
       },
       "figure_png": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.png",

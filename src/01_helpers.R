@@ -179,6 +179,15 @@ finalize_config <- function(config) {
   config$crosswalk_comparison_pdf <- file.path(
     config$figure_dir, "fig_crosswalk_specification_comparison.pdf"
   )
+  config$crosswalk_comparison_delta_csv <- file.path(
+    config$diagnostic_dir, "crosswalk_specification_comparison_deltas_vs_pure_m2.csv"
+  )
+  config$crosswalk_comparison_delta_png <- file.path(
+    config$figure_dir, "fig_crosswalk_specification_comparison_deltas_vs_pure_m2.png"
+  )
+  config$crosswalk_comparison_delta_pdf <- file.path(
+    config$figure_dir, "fig_crosswalk_specification_comparison_deltas_vs_pure_m2.pdf"
+  )
   config$crosswalk_support_county_map_png <- file.path(
     config$figure_dir, "fig_crosswalk_unavailable_weights_1990_counties.png"
   )

@@ -1,42 +1,81 @@
 sample,spec,se_type,n_event_coefficients,min_std_error,median_std_error,max_std_error,near_zero_se_count,nonfinite_se_count,vcov_dim,vcov_rank,vcov_rank_deficiency,diagnostic_note
 diagnostic_1952_start,interacted_controls_full_panel,cluster_cz,17,0.0011450234308976008,0.002855759718821617,0.005505006359555713,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel,cluster_cz_year,17,3.3839739879539443e-4,0.0012845675822754285,0.002066193611668625,0,8,119,119,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 diagnostic_1952_start,interacted_controls_full_panel,cluster_state,17,0.001261842570539022,0.0031569736785642863,0.007113012623749615,0,0,119,47,72,VCOV is rank deficient; use as diagnostic only unless justified.
+diagnostic_1952_start,interacted_controls_full_panel,conley_1000km,17,0.0010731476060478425,0.0039130587671153995,0.007143893390035892,0,1,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel,conley_250km,17,0.0013421987053707396,0.003554182557555342,0.008008356488977564,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel,conley_500km,17,0.001243119483424855,0.003734965902573602,0.009201188688438472,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel,conley_750km,17,0.0011858851742429424,0.004070978942368952,0.0058521014773704385,0,1,119,119,0,NA
 diagnostic_1952_start,interacted_controls_full_panel,driscoll_kraay_lag1,17,5.538891787461818e-15,5.551965200936566e-15,5.660106486233805e-15,17,0,119,36,83,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 diagnostic_1952_start,interacted_controls_full_panel,heteroskedastic,17,0.0021335085632261494,0.0029209765603307072,0.005377112243214196,0,0,119,119,0,NA
 diagnostic_1952_start,interacted_controls_full_panel,newey_west_lag1,17,0.0017731141807656734,0.0030055444438707012,0.005532789973785843,0,0,119,119,0,NA
 diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,17,0.0011450234308966827,0.0028557597188211582,0.005505006359555337,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,17,3.3839739879977575e-4,0.001284567582275194,0.002066193611667648,0,8,119,119,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,17,0.0012618425705371661,0.0031569736785636124,0.007113012623748127,0,0,119,50,69,VCOV is rank deficient; use as diagnostic only unless justified.
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,17,0.0010731476060433923,0.003913058767115872,0.00714389339003307,0,1,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,17,0.0013421987053685862,0.0035541825575562515,0.008008356488975951,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,17,0.001243119483423571,0.0037349659025744937,0.009201188688436116,0,0,119,119,0,NA
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,17,0.0011858851742415273,0.004070978942366063,0.0058521014773674504,0,1,119,119,0,NA
 diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,17,2.8651556199370523e-15,2.8858894606933024e-15,3.0197439497459025e-15,17,0,119,62,57,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,17,0.0021335085632256993,0.002920976560330252,0.005377112243213775,0,0,119,119,0,NA
 diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,17,0.001773114180764883,0.00300554444387009,0.005532789973785086,0,0,119,119,0,NA
 diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz,17,0.0011360706417469634,0.0026991082996650467,0.005437898183125301,0,0,68,68,0,NA
+diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz_year,17,7.964188742002746e-4,0.002113142767470745,0.0025128358573116563,0,10,68,68,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_state,17,0.001282958583689815,0.0031409045772335157,0.006515104601957142,0,0,68,47,21,VCOV is rank deficient; use as diagnostic only unless justified.
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_1000km,17,9.922507741863325e-4,0.0033103307604901914,0.00696224564769458,0,0,68,68,0,NA
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_250km,17,0.0012789695267287698,0.0035721989156548067,0.007819080406298713,0,0,68,68,0,NA
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_500km,17,5.878002278365571e-4,0.0036432566297509494,0.008216647929732918,0,0,68,68,0,NA
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_750km,17,0.0011283493424990101,0.0038813203015944254,0.005866710120123175,0,1,68,68,0,NA
 diagnostic_1952_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,17,1.328152427095491e-15,1.3554827010792716e-15,1.4615729068767126e-15,17,0,68,20,48,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 diagnostic_1952_start,interacted_core_controls_diagnostic,heteroskedastic,17,0.002364863076145447,0.0029061961436136355,0.005177445403489385,0,0,68,68,0,NA
 diagnostic_1952_start,interacted_core_controls_diagnostic,newey_west_lag1,17,0.0019191801613790025,0.002990336105691575,0.005327342395427728,0,0,68,68,0,NA
 diagnostic_1952_start,minimal_full_panel,cluster_cz,17,0.001244665550047638,0.003849124060925368,0.0068714895449039195,0,0,17,17,0,NA
+diagnostic_1952_start,minimal_full_panel,cluster_cz_year,17,3.392306407880004e-4,9.339072136010213e-4,0.002261698685002341,0,7,17,17,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 diagnostic_1952_start,minimal_full_panel,cluster_state,17,0.0016511881588391936,0.0049191812959138255,0.008769589911866835,0,0,17,17,0,NA
+diagnostic_1952_start,minimal_full_panel,conley_1000km,17,0.0014002924874921318,0.005819608485266606,0.012514299053171482,0,0,17,17,0,NA
+diagnostic_1952_start,minimal_full_panel,conley_250km,17,0.0018947322113310539,0.005103888155159105,0.00871765501247235,0,0,17,17,0,NA
+diagnostic_1952_start,minimal_full_panel,conley_500km,17,0.0019132465792929061,0.005315404252869491,0.01072584972287819,0,0,17,17,0,NA
+diagnostic_1952_start,minimal_full_panel,conley_750km,17,0.0021886155409387557,0.00547067428342239,0.01141588831552107,0,0,17,17,0,NA
 diagnostic_1952_start,minimal_full_panel,driscoll_kraay_lag1,17,5.721566967715593e-16,5.729683393638118e-16,5.907703121052772e-16,17,0,17,17,0,Suspicious near-zero Driscoll-Kraay SEs; do not report without further diagnosis.
 diagnostic_1952_start,minimal_full_panel,heteroskedastic,17,0.002040134453234329,0.003994814369485839,0.006696730188285047,0,0,17,17,0,NA
 diagnostic_1952_start,minimal_full_panel,newey_west_lag1,17,0.001752310019180145,0.004110471920782249,0.006890613393769059,0,0,17,17,0,NA
 main_1972_start,interacted_controls_full_panel,cluster_cz,12,0.0011448866390139554,0.0027070403020751227,0.0032706338249540168,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel,cluster_cz_year,12,0.0010836869404686502,0.0016456687817554595,0.002025336973308984,0,5,84,84,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 main_1972_start,interacted_controls_full_panel,cluster_state,12,0.0012616918226868103,0.003086103420902502,0.0038108330067689075,0,0,84,47,37,VCOV is rank deficient; use as diagnostic only unless justified.
+main_1972_start,interacted_controls_full_panel,conley_1000km,12,0.0010854972370252594,0.003958089694375217,0.004708618053035799,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel,conley_250km,12,0.0013576445383756924,0.003372032286892983,0.004103506585408163,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel,conley_500km,12,0.0012574251267511835,0.003595270203030231,0.003965390838790395,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel,conley_750km,12,0.0011995321732233039,0.003892694998875684,0.004875297875938962,0,0,84,84,0,NA
 main_1972_start,interacted_controls_full_panel,driscoll_kraay_lag1,12,3.4333843277468296e-15,3.4396005860842637e-15,3.5098479536809835e-15,12,0,84,26,58,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 main_1972_start,interacted_controls_full_panel,heteroskedastic,12,0.0021177869610639233,0.002444352774665407,0.0033734761506979314,0,0,84,84,0,NA
 main_1972_start,interacted_controls_full_panel,newey_west_lag1,12,0.001788241102221903,0.002544027497577244,0.0035110382505943,0,0,84,84,0,NA
 main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,12,0.0011448866390137004,0.002707040302074108,0.003270633824953145,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,12,0.0010836869404679005,0.0016456687817546552,0.002025336973308288,0,5,84,84,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,12,0.0012616918226867435,0.003086103420901927,0.003810833006768041,0,0,84,49,35,VCOV is rank deficient; use as diagnostic only unless justified.
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,12,0.0010854972370268952,0.003958089694372651,0.004708618053033265,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,12,0.0013576445383760526,0.0033720322868923455,0.0041035065854068305,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,12,0.0012574251267508144,0.003595270203028792,0.003965390838788875,0,0,84,84,0,NA
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,12,0.0011995321732243998,0.0038926949988735754,0.004875297875936992,0,0,84,84,0,NA
 main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,12,7.350959010228389e-16,7.458853788634971e-16,7.966338729653374e-16,12,0,84,30,54,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,12,0.002117786961063216,0.002444352774664783,0.003373476150697413,0,0,84,84,0,NA
 main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,12,0.0017882411022213283,0.0025440274975765745,0.003511038250593693,0,0,84,84,0,NA
 main_1972_start,interacted_core_controls_diagnostic,cluster_cz,12,0.0011359861446788892,0.002602568836649247,0.002928147438280466,0,0,48,48,0,NA
+main_1972_start,interacted_core_controls_diagnostic,cluster_cz_year,12,0.0011483595398266383,0.0014095912703815951,0.0017763920958226256,0,5,48,48,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 main_1972_start,interacted_core_controls_diagnostic,cluster_state,12,0.0012828631615968806,0.003044523452607565,0.0037392834920982393,0,0,48,47,1,VCOV is rank deficient; use as diagnostic only unless justified.
+main_1972_start,interacted_core_controls_diagnostic,conley_1000km,12,0.001003669455861607,0.0034269006772056354,0.0055653800311308834,0,0,48,48,0,NA
+main_1972_start,interacted_core_controls_diagnostic,conley_250km,12,0.0012936877272833075,0.0033931690531219653,0.004062410862783917,0,0,48,48,0,NA
+main_1972_start,interacted_core_controls_diagnostic,conley_500km,12,5.94564549789632e-4,0.0036779878193481798,0.004386197275186159,0,0,48,48,0,NA
+main_1972_start,interacted_core_controls_diagnostic,conley_750km,12,0.0011413342272632418,0.003745356576873425,0.005706304188167466,0,0,48,48,0,NA
 main_1972_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,12,1.247441394530351e-15,1.2540005039664845e-15,1.3745558835862368e-15,12,0,48,13,35,Suspicious near-zero Driscoll-Kraay SEs and rank-deficient VCOV; do not report without further diagnosis.
 main_1972_start,interacted_core_controls_diagnostic,heteroskedastic,12,0.0021056066846844128,0.0023789058601099153,0.0032685787980433196,0,0,48,48,0,NA
 main_1972_start,interacted_core_controls_diagnostic,newey_west_lag1,12,0.0017770182366841235,0.002475911818045868,0.0034018634406641217,0,0,48,48,0,NA
 main_1972_start,minimal_full_panel,cluster_cz,12,0.0012446286636839214,0.003633024766035338,0.006871285904445899,0,0,12,12,0,NA
+main_1972_start,minimal_full_panel,cluster_cz_year,12,0.0017578411911134569,0.003091001760761708,0.004252734372322476,0,6,12,12,0,Two-way clustering includes very few year clusters; use as diagnostic only.
 main_1972_start,minimal_full_panel,cluster_state,12,0.0016511392249490984,0.004453092558542831,0.008769330020136665,0,0,12,12,0,NA
+main_1972_start,minimal_full_panel,conley_1000km,12,0.0016319515280916086,0.006273620001464813,0.012658311838010878,0,0,12,12,0,NA
 main_1972_start,minimal_full_panel,conley_250km,12,0.0019165365218336869,0.004685675543416052,0.008817976554276762,0,0,12,12,0,NA
+main_1972_start,minimal_full_panel,conley_500km,12,0.0019352639505254242,0.005529347983357228,0.010849281285588805,0,0,12,12,0,NA
+main_1972_start,minimal_full_panel,conley_750km,12,0.002213801819263723,0.0060720202314558085,0.011547260744831684,0,0,12,12,0,NA
 main_1972_start,minimal_full_panel,driscoll_kraay_lag1,12,2.1768702552041688e-16,2.2931415522786332e-16,2.6686681760682865e-16,12,0,12,12,0,Suspicious near-zero Driscoll-Kraay SEs; do not report without further diagnosis.
 main_1972_start,minimal_full_panel,heteroskedastic,12,0.002553861973364672,0.003223510437727604,0.005742506031864591,0,0,12,12,0,NA
 main_1972_start,minimal_full_panel,newey_west_lag1,12,0.0021072129983136807,0.0033036661337400358,0.005976671371449965,0,0,12,12,0,NA
