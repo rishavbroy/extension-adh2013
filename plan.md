@@ -7,8 +7,11 @@ where, given a commuting zone (CZ) $c$ and year $t$, we have:
 - $\alpha_c$, CZ fixed effects
 - $\lambda_t$, election-year fixed effects
 - $\text{Exposure}_c$, the ADH measure of 1990-2007 exposure
-- $X_c$, a column vector of CZ-level baseline controls
-	- 1990 manufacturing share, college share, and foreign-born share
+- $X_c$, a column vector of CZ-level baseline controls. Report results for each of the following:
+	- Minimal: No controls
+	- Core controls: 1990 manufacturing share, college share, and foreign-born share
+	- Full controls: Six ADH 1990 controls, standardized before interacting them with election-year indicators
+	- Raw full-control (for diagnostics)
 
 We focus on running the event study so we can study separate horizons:
 
@@ -22,13 +25,14 @@ We begin first with the replication package of ADH 2013 (saved under `replicatio
 
 1. Map 2020 counties to 1990 counties using [Ferrara, Testa, and Zhou (2024)](https://doi.org/10.1080/01615440.2024.2369230).
 	1. Use `extension-adh2013/ftz2024` for this. The authors provide a step-by-step walkthrough for how to apply their crosswalk in Stata; see p. 11 of `extension-adh2013/ftz2024/appendix.pdf`. 
-	2. **Weighting rule**: They use six different weightings, whose descriptions (from Sec. 2, p. 69) I've pasted below. Judging from Section 4.1 (pp. 76-77) of `extension-adh2013/ftz2024/paper.pdf`, we should use M5 (or M6) with M2 as fallback. Just M4 is also possible.
+	2. **Weighting rule**: They use six different weightings, whose descriptions (from Sec. 2, p. 69) I've pasted below. Judging from Section 4.1 (pp. 76-77) of `extension-adh2013/ftz2024/paper.pdf`, we should use M5 with M2 fallback for source counties where M5 is undefined/zero.
 		1. Area-based (model 1, or M1). 
 		2. Population-based (M2), with county area divided into urban and rural areas. **(Fallback)**
 		3. Population-based (M3), with county area divided into urban and rural areas after excluding non-inhabitable areas.
 		4. Population-based (M4), with county area divided into urban and rural areas after excluding non-inhabitable areas, with additional weighting for topographic suitability (i.e., elevation).
 		5. **Population-based (M5), with built-up settlement areas indicated in space (1810–2020 only).**
 		6. Population-based (M6), with built-up property counts indicated in space (1810–2020 only).
+   3. Normalize final weights within source county only after the fallback rule is applied. Report source counties requiring fallback and compare results to M6+fallback, pure M2, and M4+fallback.
 
 2. Aggregate 1990 counties to 1990 CZs using `extension-adh2013/cz-data`, sourced from [https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas](https://www.ers.usda.gov/data-products/commuting-zones-and-labor-market-areas)
 	1. Nothing complicated here. `cz-198090.xls` should match county names and FIPS codes to 1990 CZs. As far as I could tell, the county names and codes are from 1990 and the CZ codes match [Tolbert and Sizer (1996)](https://ageconsearch.umn.edu/record/278812?v=pdf), the paper ADH 2013 used for their CZs.
@@ -64,11 +68,13 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_g [\sum_{i \in g} (x_i - \bar{x}) \hat{\var
 Conley, with kernel $K$ defined in accordance with p. 18 of [Conley (1999)](https://doi.org/10.1016/S0304-4076(98)00084-0):
 $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \bar{x}) \hat{\varepsilon}_i \hat{\varepsilon}_j}{[\sum (x_i - \bar{x})^2]^2}}$$
 
+- The preferred SE is still CZ-clustered, however. Conley SEs are retained as diagnostics and are not used as main inference because many Conley VCOVs are non-positive-definite or require repair. Driscoll-Kraay and two-way CZ$\times$year clustering are also diagnostic since the short election-year panel produces unstable or near-zero SEs. A genuine spatial-temporal HAC estimator remains future work.
+
 ## Fourth, run the event study.
 - Note that potential controls $X_{ct}$ from 1990 can be found in the ADH 2013 replication package.
 
-### Fifth, fix all of the following errors
-#### Coding and statistical errors
+## Fifth, fix all of the following errors
+### Coding and statistical errors
 - If I recall correctly, extending out to 1952 induces near-singularity. That is why the starting point had to be pushed back to 1972
 	- Diagnostics for rank, condition number, dropped variables, and collinearity (which I also mandate below) should be ran on both 1952-start and 1972-start panels.
 - Why such absurdly low vote-retention rates? 0.60 in 1972-1988 and 2000-2008, and about 0.157 in 2012-2020
@@ -130,7 +136,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 		- count(year, county_fips) == 1
 		- twoparty_votes == rep_votes + dem_votes
 		- nonnegative votes
-		- complete FIPS coverage
+		- complete coverage of the ADH mainland CZ panel after county-bridge exceptions and documented nonmainland exclusions
 		- state/year vote totals
 		- national vote totals before bridging
 	- If the duplicates are exact duplicates, explicitly `distinct()` them. If they represent something substantive, aggregate correctly only after understanding the source structure.
@@ -153,7 +159,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 		- require_no_vcov_repair_for_main = TRUE
 
 
-#### Table issues:
+### Table issues:
 - The LaTeX table is manually assembled with strings. This is brittle.
 	- The table does not need to be shaded. Use the standard methods (namely `threeparttable`, `kableExtra`, `booktabs`, and perhaps `longtable`) to construct a non-shaded table.
 - `latex_escape()` is defined but not actually used for table content.
@@ -162,7 +168,7 @@ $$SE(\hat{\beta}) = \sqrt{\frac{\sum_i \sum_j K(d_{ij}) (x_i - \bar{x})(x_j - \b
 - `render_table_pdf()` hardcodes `tab_event_study_rep_margin_two_specs.tex` instead of using the passed input filename.
 - The table does not report the units of ADH exposure.
 
-#### Figure issues:
+### Figure issues:
 - The line connects across the omitted 1988 reference year, but 1988 is not plotted as a zero coefficient. That can visually mislead.
 	- Plot two separate trends, a pre- and a post-trend.
 - Facet order is odd: “Interacted controls” appears above “Minimal.”
