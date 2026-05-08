@@ -1,13 +1,13 @@
 {
-  "stage": "build_analysis_data",
-  "generated_at": "2026-05-08 03:42:20 CDT",
+  "stage": "export_diagnostic_maps_and_comparisons",
+  "generated_at": "2026-05-08 04:17:04 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
     "last_election_year": 2020,
     "reference_year": 1988,
-    "crosswalk_weight": "m4_weight",
-    "crosswalk_missing_weight_policy": "fallback_m4",
+    "crosswalk_weight": "m5_weight",
+    "crosswalk_missing_weight_policy": "fallback_m2",
     "renormalize_crosswalk_weights": false,
     "weight_sum_tolerance": 1e-06,
     "min_retained_vote_share": 0.98,
@@ -24,48 +24,61 @@
     "dk_lag": 1,
     "interacted_controls": ["l_shind_manuf_cbp", "l_sh_popedu_c", "l_sh_popfborn", "l_sh_empl_f", "l_sh_routine33", "l_task_outsource"],
     "standardize_interacted_controls": true,
-    "export_crosswalk_maps": false,
-    "run_crosswalk_sensitivity": true,
+    "export_crosswalk_maps": true,
+    "run_crosswalk_sensitivity": false,
     "save_single_rds": false,
     "rds_chunk_size_mib": 45,
     "county1990_shapefile_path": "spatial-data/counties-1990",
     "nhgis_extract_dir": "spatial-data/nhgis_1990_county"
   },
   "sources": {
-    "adh_stack": {
-      "path": "adh2013/dta/workfile_china.dta",
-      "md5": "e7c70a3bf91d6ad6074cc371091d9472"
+    "county_support": {
+      "path": "output/diagnostics/ftz_weight_support_by_1990_county.csv",
+      "md5": "87fcfe508713e7589be875dc04c5b642"
     },
-    "adh_long": {
-      "path": "adh2013/dta/workfile_china_long.dta",
-      "md5": "ee859cd98610a79c0a3a0c3e0969b0f6"
-    },
-    "cz_lookup": {
-      "path": "cz-data/cz-198090.xls",
-      "md5": "292ea35e951a31b252039fc730baf952"
-    },
-    "ftz_zip": {
-      "path": "ftz2024/crosswalks/CountyToCounty/1990/1990_csv.zip",
-      "md5": "02f49f17a671df6c22f63f09b9599c2f"
-    },
-    "aa_presidential": {
-      "path": "outcomes-data/aa2021-nospatial/County_Level_US_Elections_Data/dataverse_shareable_presidential_county_returns_1868_2020.Rdata",
-      "md5": "40ebfa297238e26d1d72f8b68db52ed5"
+    "cz_support": {
+      "path": "output/diagnostics/ftz_weight_support_by_cz.csv",
+      "md5": "4b6bb8b5e4e61b0ade554491126d15c4"
     }
   },
   "checks": {
-    "check": ["adh_one_row_per_czone", "cz_lookup_unique_1990_counties", "aa_all_county_fips_valid", "aa_vote_identity_error_within_tolerance", "crosswalk_positive_final_weight_sums_equal_one", "crosswalk_all_source_weight_sums_equal_one_or_reported", "crosswalk_undefined_selected_weights_handled", "aa_no_duplicate_county_years_after_exact_distinct", "aa_two_party_votes_match_party_votes", "aa_votes_nonnegative", "bridged_vote_retention_above_threshold", "main_panel_balanced"],
-    "status": ["pass", "pass", "pass", "pass", "pass", "fail", "pass", "pass", "pass", "pass", "pass", "fail"],
-    "fatal": [true, true, true, true, true, false, true, true, true, true, true, true],
-    "n_failed": [0, 0, 0, 0, 0, 211, 211, 0, 0, 0, 0, 11],
-    "details": ["Requires one ADH baseline/exposure row per commuting zone.", "Requires each 1990 county FIPS to appear once and map to one CZ.", "Requires all county FIPS to be five numeric digits before filtering.", "Max absolute vote identity error: 0", "Tolerance: 1e-06", "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance.", "Policy: fallback_m4", "Exact duplicate rows removed: 0", "Requires republican + democratic votes to equal two-party votes.", "Requires nonnegative Republican, Democratic, two-party, and total votes.", "Minimum retained share in main years: 0.995953", "Observed complete rows: 9375; expected rows: 9386; missing share: 0.00117196"]
+    "check": ["adh_one_row_per_czone", "cz_lookup_unique_1990_counties", "aa_all_county_fips_valid", "aa_vote_identity_error_within_tolerance", "crosswalk_positive_final_weight_sums_equal_one", "crosswalk_all_source_weight_sums_equal_one_or_reported", "crosswalk_undefined_selected_weights_handled", "aa_no_duplicate_county_years_after_exact_distinct", "aa_two_party_votes_match_party_votes", "aa_votes_nonnegative", "bridged_vote_retention_above_threshold", "main_panel_balanced", "event_study_residualized_design_full_rank", "event_study_main_vcov_available_without_repair", "event_study_conley_repair_diagnostics_recorded"],
+    "status": ["pass", "pass", "pass", "pass", "pass", "fail", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass"],
+    "fatal": [true, true, true, true, true, false, true, true, true, true, true, true, true, true, false],
+    "n_failed": [0, 0, 0, 0, 0, 162, 1204, 0, 0, 0, 0, 0, 0, 0, 31],
+    "details": ["Requires one ADH baseline/exposure row per commuting zone.", "Requires each 1990 county FIPS to appear once and map to one CZ.", "Requires all county FIPS to be five numeric digits before filtering.", "Max absolute vote identity error: 0", "Tolerance: 1e-06", "Nonfatal global report; estimation is gated by positive final weights, retained vote share, and panel balance.", "Policy: fallback_m2", "Exact duplicate rows removed: 0", "Requires republican + democratic votes to equal two-party votes.", "Requires nonnegative Republican, Democratic, two-party, and total votes.", "Minimum retained share in main years: 0.996122", "Observed complete rows: 9386; expected rows: 9386; missing share: 0", "Requires no residualized RHS rank deficiency in 1952-start or 1972-start specifications.", "Main SE type: cluster_cz", "Conley VCOVs requiring repair across all samples/specs/cutoffs: 31"]
   },
-  "fatal_failure": true,
+  "fatal_failure": false,
   "extra": {
-    "main_expected_rows": 9386,
-    "main_observed_rows": 9375,
-    "main_missing_rows": 11,
-    "main_missing_share": 0.0012,
-    "min_main_retained_vote_share": 0.996
+    "outputs": {
+      "crosswalk_comparison_png": {
+        "path": "output/figures/fig_crosswalk_specification_comparison.png",
+        "md5": "3c1b4c34ba4044324920658d4df25036"
+      },
+      "crosswalk_support_county_map_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties.png",
+        "md5": "be60dea368a21703b007439cf36f158d"
+      },
+      "crosswalk_support_county_map_simplified_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties_simplified.png",
+        "md5": "cddadcdbfbec99fce908f17426b74f12"
+      },
+      "crosswalk_support_county_map_small_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties_small.png",
+        "md5": "46f0ba886e1a6bc713502fedf64a8b44"
+      },
+      "crosswalk_support_cz_map_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs.png",
+        "md5": "cf0de654ab01c36eee7f9d7bca5c4c6c"
+      },
+      "crosswalk_support_cz_map_simplified_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs_simplified.png",
+        "md5": "ad29af7dfafa835ea9d844e793620d30"
+      },
+      "crosswalk_support_cz_map_small_png": {
+        "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs_small.png",
+        "md5": "e19e0a1c64097e81dfafa61f3fc72a1a"
+      }
+    }
   }
 }
