@@ -1,0 +1,54 @@
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{ThreePartTable}
+\begin{TableNotes}
+\item \textit{Note: } 
+\item PROVISIONAL: at least one validation check failed or a numerical repair/warning was recorded; treat these as diagnostic output until reviewed. Each coefficient is the interaction between ADH's 1990-2007 import-exposure measure and the indicated presidential-election year, with 1988 omitted as the reference year. Exposure is measured in thousand dollars per worker. The dependent variable is the commuting-zone Republican presidential vote margin, defined as Republican minus Democratic votes divided by two-party votes. County presidential returns are from Amlani and Algara (2021), bridged to 1990 counties with the Ferrara, Testa, and Zhou (2024) M4 weights where valid, with M2 fallback for source counties whose selected weights are undefined or invalid, then aggregated to 1990 commuting zones. Standard errors use cluster\_cz. Significance stars: *** p<0.01, ** p<0.05, * p<0.10.
+\end{TableNotes}
+\begin{longtable}[t]{lccc}
+\caption{Provisional event-study estimates: ADH China exposure and Republican presidential vote margin}\\
+\toprule
+Election year & Minimal & Core controls & Full controls\\
+\midrule
+\endfirsthead
+\caption[]{Provisional event-study estimates: ADH China exposure and Republican presidential vote margin \textit{(continued)}}\\
+\toprule
+Election year & Minimal & Core controls & Full controls\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\insertTableNotes
+\endlastfoot
+1972 & 0.000 (0.002) & 0.002 (0.003) & 0.002 (0.002)\\
+1976 & -0.007* (0.004) & -0.005* (0.003) & -0.004 (0.003)\\
+1980 & -0.007* (0.004) & -0.000 (0.003) & -0.001 (0.002)\\
+1984 & -0.001 (0.001) & 0.000 (0.001) & -0.000 (0.001)\\
+1988 & -- & -- & --\\
+\addlinespace
+1992 & -0.003*** (0.001) & -0.003** (0.001) & -0.004*** (0.001)\\
+1996 & -0.002 (0.002) & -0.004 (0.003) & -0.007*** (0.002)\\
+2000 & -0.001 (0.003) & -0.003 (0.003) & -0.007** (0.003)\\
+2004 & -0.000 (0.003) & -0.003 (0.002) & -0.006** (0.003)\\
+2008 & 0.002 (0.004) & 0.001 (0.003) & -0.002 (0.003)\\
+\addlinespace
+2012 & 0.003 (0.005) & 0.001 (0.003) & -0.002 (0.003)\\
+2016 & 0.008 (0.007) & 0.001 (0.002) & -0.001 (0.003)\\
+2020 & 0.009 (0.006) & 0.000 (0.003) & -0.002 (0.003)\\
+Observations & 9,386 & 9,386 & 9,386\\
+Commuting zones & 722 & 722 & 722\\
+\addlinespace
+Election years & 1972--2020 & 1972--2020 & 1972--2020\\
+Reference election year & 1988 & 1988 & 1988\\
+CZ fixed effects & Yes & Yes & Yes\\
+Election-year fixed effects & Yes & Yes & Yes\\
+Controls & None & Three 1990 ADH controls interacted with election-year indicators & All configured 1990 ADH baseline controls interacted with election-year indicators\\
+\addlinespace
+Sample & main\_1972\_start & main\_1972\_start & main\_1972\_start\\
+ADH weights & timepwt48 & timepwt48 & timepwt48\\
+Controls standardized & No & Yes & Yes\\
+Main SE type & cluster\_cz & cluster\_cz & cluster\_cz\\*
+\end{longtable}
+\end{ThreePartTable}
+\endgroup{}
