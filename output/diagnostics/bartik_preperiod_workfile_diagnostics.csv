@@ -1,0 +1,3 @@
+outcome,regressor,estimate,std.error,statistic,p.value,n_obs,note
+d_sh_empl_mfg,exposure_1990_2007,0.020304090799115534,0.020105713699509885,1.0098667026980737,0.31264390413450016,2888,ADH preperiod-workfile diagnostic: future exposure/instrument predicting preperiod/local-labor-market changes.
+d_sh_empl_mfg,instrument_1990_2007,-0.11332386536501665,0.02400440890660836,-4.720960462134889,2.459409711822983e-6,2888,ADH preperiod-workfile diagnostic: future exposure/instrument predicting preperiod/local-labor-market changes.

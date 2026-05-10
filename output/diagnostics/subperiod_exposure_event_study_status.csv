@@ -1,8 +1,4 @@
-spec,status,error_message
-minimal,ok,NA
-core_controls,error,"in fixest::feols(fml, data = dat, weights = ~adh_wei...: 
-Argument `data` must be either: i) a matrix, or ii) a data.frame.
-PROBLEM: it is not a matrix nor a data.frame (instead it is a list)."
-full_controls,error,"in fixest::feols(fml, data = dat, weights = ~adh_wei...: 
-Argument `data` must be either: i) a matrix, or ii) a data.frame.
-PROBLEM: it is not a matrix nor a data.frame (instead it is a list)."
+spec,status,error_message,n_coefficients
+minimal,ok,NA,24
+core_controls,ok,NA,24
+full_controls,ok,NA,24
