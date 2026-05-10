@@ -12,6 +12,7 @@ source(here::here("src", "02_build_analysis_data.R"))
 source(here::here("src", "03_estimate_event_study.R"))
 source(here::here("src", "04_export_outputs.R"))
 source(here::here("src", "05_export_diagnostic_maps.R"))
+source(here::here("src", "06_sixth_extensions.R"))
 
 read_bool_env <- function(name, default) {
   value <- Sys.getenv(name, unset = "")
@@ -36,6 +37,11 @@ run_single_pipeline <- function(config) {
   message("Exporting diagnostic maps and crosswalk comparisons when inputs are available...")
   export_diagnostic_maps_and_comparisons(config)
 
+  if (isTRUE(config$run_sixth_extensions)) {
+    message("Running Sixth-section extensions...")
+    run_sixth_extensions(config)
+  }
+
   invisible(config)
 }
 
@@ -44,6 +50,12 @@ if (nzchar(policy_override)) CONFIG$crosswalk_missing_weight_policy <- policy_ov
 
 weight_override <- Sys.getenv("CROSSWALK_WEIGHT", unset = "")
 if (nzchar(weight_override)) CONFIG$crosswalk_weight <- weight_override
+
+ext_weight_override <- Sys.getenv("EXTENSION_CROSSWALK_WEIGHT", unset = "")
+if (nzchar(ext_weight_override)) CONFIG$extension_crosswalk_weight <- ext_weight_override
+
+ext_policy_override <- Sys.getenv("EXTENSION_CROSSWALK_MISSING_WEIGHT_POLICY", unset = "")
+if (nzchar(ext_policy_override)) CONFIG$extension_crosswalk_missing_weight_policy <- ext_policy_override
 
 CONFIG$renormalize_crosswalk_weights <- read_bool_env(
   "RENORMALIZE_CROSSWALK_WEIGHTS", CONFIG$renormalize_crosswalk_weights
@@ -66,6 +78,9 @@ CONFIG$export_crosswalk_maps <- read_bool_env(
 )
 CONFIG$run_crosswalk_sensitivity <- read_bool_env(
   "RUN_CROSSWALK_SENSITIVITY", CONFIG$run_crosswalk_sensitivity
+)
+CONFIG$run_sixth_extensions <- read_bool_env(
+  "RUN_SIXTH_EXTENSIONS", CONFIG$run_sixth_extensions
 )
 CONFIG$save_single_rds <- read_bool_env(
   "SAVE_SINGLE_RDS", CONFIG$save_single_rds

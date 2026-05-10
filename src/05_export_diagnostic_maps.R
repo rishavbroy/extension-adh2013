@@ -514,6 +514,11 @@ run_crosswalk_sensitivity_pipeline <- function(config = CONFIG) {
   comparison_config <- finalize_config(base_config)
   export_crosswalk_specification_comparison(comparison_config)
 
+  if (isTRUE(comparison_config$run_sixth_extensions)) {
+    # Sixth-section extensions are estimated only once for the preferred M5 + fallback-M2 design.
+    run_sixth_extensions(comparison_config)
+  }
+
   checks <- if (file.exists(comparison_config$validation_checks_csv)) {
     readr::read_csv(comparison_config$validation_checks_csv, show_col_types = FALSE)
   } else {

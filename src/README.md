@@ -120,3 +120,33 @@ Every run writes an output inventory:
 These files list generated outputs, file sizes, MD5 checksums, inferred crosswalk slugs, and broad output categories. They are intended as the final reproducibility inventory for the generated `output/` tree.
 
 Conley rows in `event_study_se_warning_diagnostics.csv` now carry explicit diagnostic notes when the unrepaired Conley VCOV is non-positive-definite or requires numerical repair. Such Conley estimates remain diagnostic-only unless separately justified.
+
+## Sixth-section extensions
+
+The runner now defaults to `run_sixth_extensions = TRUE`. These extensions are run once for the primary design, even when `RUN_CROSSWALK_SENSITIVITY=true`, so mechanism and identification outputs are not multiplied by crosswalk specification unless explicitly requested in future work. The primary extension design defaults to M5 + fallback M2 and can be overridden with:
+
+```r
+Sys.setenv(EXTENSION_CROSSWALK_WEIGHT = "m5_weight")
+Sys.setenv(EXTENSION_CROSSWALK_MISSING_WEIGHT_POLICY = "fallback_m2")
+```
+
+The extension modules write:
+
+- `output/diagnostics/bartik_first_stage_diagnostics.csv`
+- `output/diagnostics/bartik_balance_correlations.csv`
+- `output/diagnostics/bartik_pretrend_placebos.csv`
+- `output/diagnostics/bartik_rotemberg_data_availability.csv`
+- `output/diagnostics/bartik_identification_memo.md`
+- `output/diagnostics/alternative_political_outcome_event_studies.csv`
+- `output/figures/fig_alternative_political_outcomes.*`
+- `output/intermediate/nanda_2004_2022_cz_panel.csv`
+- `output/diagnostics/nanda_outcome_event_studies.csv`
+- `output/figures/fig_nanda_outcome_event_studies.*`
+- `output/diagnostics/adhm2020_public_data_summary.csv`
+- `output/diagnostics/adhm2020_mechanism_regressions.csv`
+- `output/diagnostics/adhm2020_outcome_dictionary.csv`
+- `output/intermediate/adh_subperiod_exposure_by_cz.csv`
+- `output/diagnostics/subperiod_exposure_event_study_coefficients.csv`
+- `output/figures/fig_subperiod_exposure_event_study.*`
+
+Exact GPSS Rotemberg weights are not computed unless a CZ-by-industry baseline share matrix is added or reconstructed. The current Bartik module therefore reports first-stage, balance, and pretrend diagnostics and writes a data-availability note explaining what is missing for exact Rotemberg weights.

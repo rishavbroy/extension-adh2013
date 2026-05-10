@@ -260,6 +260,39 @@ finalize_config <- function(config) {
   )
   config$figure_pdf <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_main_specs_", slug, ".pdf"))
   config$figure_png <- file.path(config$figure_dir, paste0("fig_event_study_rep_margin_main_specs_", slug, ".png"))
+
+  # Sixth-section extension outputs. These are intentionally keyed to the
+  # primary crosswalk slug when relevant, but are otherwise single-project
+  # diagnostics that should not be re-estimated separately for every
+  # crosswalk-sensitivity specification.
+  config$bartik_first_stage_csv <- file.path(config$diagnostic_dir, "bartik_first_stage_diagnostics.csv")
+  config$bartik_balance_csv <- file.path(config$diagnostic_dir, "bartik_balance_correlations.csv")
+  config$bartik_pretrend_csv <- file.path(config$diagnostic_dir, "bartik_pretrend_placebos.csv")
+  config$bartik_data_availability_csv <- file.path(config$diagnostic_dir, "bartik_rotemberg_data_availability.csv")
+  config$bartik_identification_memo_md <- file.path(config$diagnostic_dir, "bartik_identification_memo.md")
+
+  config$alternative_outcomes_coefficients_csv <- file.path(config$diagnostic_dir, "alternative_political_outcome_event_studies.csv")
+  config$alternative_outcomes_summary_csv <- file.path(config$diagnostic_dir, "alternative_political_outcome_summary.csv")
+  config$alternative_outcomes_plot_png <- file.path(config$figure_dir, "fig_alternative_political_outcomes.png")
+  config$alternative_outcomes_plot_pdf <- file.path(config$figure_dir, "fig_alternative_political_outcomes.pdf")
+
+  config$nanda_cz_panel_csv <- file.path(config$intermediate_dir, "nanda_2004_2022_cz_panel.csv")
+  config$nanda_outcomes_coefficients_csv <- file.path(config$diagnostic_dir, "nanda_outcome_event_studies.csv")
+  config$nanda_outcomes_summary_csv <- file.path(config$diagnostic_dir, "nanda_outcome_summary.csv")
+  config$nanda_outcomes_plot_png <- file.path(config$figure_dir, "fig_nanda_outcome_event_studies.png")
+  config$nanda_outcomes_plot_pdf <- file.path(config$figure_dir, "fig_nanda_outcome_event_studies.pdf")
+
+  config$adhm2020_summary_csv <- file.path(config$diagnostic_dir, "adhm2020_public_data_summary.csv")
+  config$adhm2020_regressions_csv <- file.path(config$diagnostic_dir, "adhm2020_mechanism_regressions.csv")
+  config$adhm2020_outcome_dictionary_csv <- file.path(config$diagnostic_dir, "adhm2020_outcome_dictionary.csv")
+
+  config$subperiod_exposure_csv <- file.path(config$intermediate_dir, "adh_subperiod_exposure_by_cz.csv")
+  config$subperiod_exposure_summary_csv <- file.path(config$diagnostic_dir, "adh_subperiod_exposure_summary.csv")
+  config$subperiod_event_study_coefficients_csv <- file.path(config$diagnostic_dir, "subperiod_exposure_event_study_coefficients.csv")
+  config$subperiod_event_study_status_csv <- file.path(config$diagnostic_dir, "subperiod_exposure_event_study_status.csv")
+  config$subperiod_event_study_plot_png <- file.path(config$figure_dir, "fig_subperiod_exposure_event_study.png")
+  config$subperiod_event_study_plot_pdf <- file.path(config$figure_dir, "fig_subperiod_exposure_event_study.pdf")
+
   config
 }
 
