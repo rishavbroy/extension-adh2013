@@ -150,3 +150,15 @@ The extension modules write:
 - `output/figures/fig_subperiod_exposure_event_study.*`
 
 Exact GPSS Rotemberg weights are not computed unless a CZ-by-industry baseline share matrix is added or reconstructed. The current Bartik module therefore reports first-stage, balance, and pretrend diagnostics and writes a data-availability note explaining what is missing for exact Rotemberg weights.
+
+## Sixth-section extension diagnostics
+
+`06_sixth_extensions.R` now writes status/validation files for each extension module. Key additions include:
+
+- `bartik_first_stage_diagnostics.csv`, `fig_bartik_first_stage.*`, `bartik_preperiod_workfile_diagnostics.csv`, and `bartik_industry_shift_summary.csv` for shift-share identification diagnostics.
+- `alternative_political_outcome_status.csv` plus `fig_alternative_political_outcome_decomposition.*` for vote-share/vote-volume/swing decomposition.
+- `nanda_county_year_validation.csv`, `nanda_cz_year_validation.csv`, `nanda_outlier_rates.csv`, and `nanda_outcome_event_study_status.csv`; NaNDA rate outcomes with impossible values outside `[0, 1.5]` are set to missing before estimation.
+- `adhm2020_mechanism_regression_status.csv`, `adhm2020_heterogeneity_data_availability.csv`, and `fig_adhm2020_mechanism_regressions.*` for ADHM public political-supply diagnostics across minimal, core, and full-control specifications.
+- `subperiod_exposure_first_stage.csv` and `subperiod_exposure_equality_tests.csv` for 1990-2000 versus 2000-2007 exposure diagnostics.
+
+These extensions are intentionally estimated once under the preferred M5 + fallback-M2 design, even when `RUN_CROSSWALK_SENSITIVITY=true`, unless the preferred panel has not yet been generated.
