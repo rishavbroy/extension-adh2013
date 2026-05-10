@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-08 11:36:38 CDT",
-  "n_files": 234,
-  "total_bytes": 170640483,
+  "generated_at": "2026-05-10 13:26:29 CDT",
+  "n_files": 226,
+  "total_bytes": 170491259,
   "files": [
     {
       "path": "output/diagnostics/aa2021_presidential_county_year_validation.csv",
@@ -9,7 +9,7 @@
       "extension": "csv",
       "bytes": 4098794,
       "md5": "f5990c54c089c06748d04e0e91eec83e",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:29 CDT"
     },
     {
       "path": "output/diagnostics/aa2021_presidential_duplicate_county_years.csv",
@@ -17,91 +17,91 @@
       "extension": "csv",
       "bytes": 128,
       "md5": "4b4ba2b738ab76380a4bd38c7e476845",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:29 CDT"
     },
     {
       "path": "output/diagnostics/aa2021_presidential_national_vote_totals.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2755,
-      "md5": "3e9cdabbd853e8b0a0fcd8267e6c6df2",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "bytes": 2750,
+      "md5": "f77f4d22ff6376f65886b21b34f8835f",
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/aa2021_presidential_state_vote_totals.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 109789,
-      "md5": "ced197982eb9a90e7fe7ba5e5a4a18ec",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "bytes": 109672,
+      "md5": "b96c0880692419d5f003eb2c852927e5",
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/baseline_control_correlation_matrix.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1714,
-      "md5": "55123d925320de0defce9c556aeaf958",
-      "modified_time": "2026-05-08 11:35:04 CDT"
+      "bytes": 1718,
+      "md5": "70ec220db665e5d2da956305f7595029",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/baseline_control_summary.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 722,
-      "md5": "482da3f65b0e1d8592e5e43e40177b09",
-      "modified_time": "2026-05-08 11:35:04 CDT"
+      "bytes": 724,
+      "md5": "7046bb976c8889a75dab4a63466c313c",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/county_bridge_diagnostics_by_year_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4169,
-      "md5": "35a048fb24d8f0a845ac9703a1f00bf9",
+      "bytes": 4159,
+      "md5": "541f83e88d4c2675a84ad203a5a67317",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/county_bridge_retention_by_scope_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2435,
-      "md5": "7a80f9ff641b9c17cb5ed25334d74362",
+      "bytes": 2433,
+      "md5": "3742f02dd38568721f030e5d3832305a",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_coefficients_aa2021_rep_margin_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 7564,
-      "md5": "662a6ede0ae660a81addaf802026b2c0",
+      "bytes": 7568,
+      "md5": "fea5f50ddce474d8f95ed8cf6e505bd8",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_coefficients_all_specs_aa2021_rep_margin_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 250346,
-      "md5": "9994930136220c79ff45d69610772e52",
+      "bytes": 250328,
+      "md5": "777df4c60e7f153647635078a49bb3cb",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_model_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1275,
-      "md5": "96a6515822869ac7a1be51ec80ae8dbf",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "bytes": 1270,
+      "md5": "3dba62dfbf25e96e40b4f531b5ebc863",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_se_warning_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 21327,
-      "md5": "729e086595284d04dc9f2362ac0df33e",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "bytes": 21328,
+      "md5": "8824d437d41ffc991edf95815d23cb80",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_spec_status.csv",
@@ -109,15 +109,15 @@
       "extension": "csv",
       "bytes": 14376,
       "md5": "344ad722d24495c89ebc9161e1791d1e",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/event_study_vcov_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 14600,
-      "md5": "549ea04844fe75178fb4e6547987bef3",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "bytes": 14592,
+      "md5": "c492dceebeed933c81c10a8828fac2fb",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/ftz_m2_crosswalk_issue_vote_report.csv",
@@ -126,25 +126,25 @@
       "bytes": 15588,
       "md5": "426a1c6cd5c4fd2686c71e5bdfd25cb9",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/ftz_m2_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4551093,
-      "md5": "1a7bf5734b02e9c9ed3e70ce95d040b9",
+      "bytes": 4545865,
+      "md5": "74aa4df71923d47206028dda0009f404",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/ftz_m2_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1367474,
-      "md5": "a89d81b66bf051b094f9359c8cc632b0",
+      "bytes": 1366349,
+      "md5": "9d64169699ceeb68259422d8e3c15185",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/ftz_m2_undefined_or_zero_support_counties.csv",
@@ -153,7 +153,7 @@
       "bytes": 12270,
       "md5": "929f134225a157e49ccf50dc2c0d8427",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/missing_cz_year_outcomes_m2.csv",
@@ -162,7 +162,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/panel_coverage_by_year_m2.csv",
@@ -171,15 +171,15 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/pipeline_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 5218,
-      "md5": "cb63d4c9b952d9db6d0d6f5fbf8aaf11",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "bytes": 5277,
+      "md5": "858d1b8677be11c5e2f4808cd859dc1c",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/pipeline_validation_checks.csv",
@@ -187,24 +187,24 @@
       "extension": "csv",
       "bytes": 1796,
       "md5": "a4e328300158e3002ae3139c4490a8fc",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/run_status.csv",
       "category": "diagnostics",
       "extension": "csv",
       "bytes": 242,
-      "md5": "10da02f6f292bef06ed1d247fb7f83dc",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "md5": "a401a4902c06b5e299ef09d7114cca15",
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/tab_event_study_rep_margin_main_specs_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 8007,
-      "md5": "c7e39ac1a07777ae453696fb7ba4e67f",
+      "bytes": 8011,
+      "md5": "bd0faa4af0ac7900abf7cad6353956f8",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/unmatched_source_counties_m2.csv",
@@ -213,7 +213,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m2/unmatched_source_county_classification_m2.csv",
@@ -222,59 +222,59 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:18 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/county_bridge_diagnostics_by_year_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4189,
-      "md5": "ff6b6c18db25a5a5b6a378a47ee65a4e",
+      "bytes": 4175,
+      "md5": "b15701b33f2df695fc35cbda448790e4",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/county_bridge_retention_by_scope_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2452,
-      "md5": "0c7f65328f7ed165da4858a3659c4bf7",
+      "bytes": 2449,
+      "md5": "e18d0458c0d147789d73ddf63e03d3a6",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_coefficients_aa2021_rep_margin_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 7571,
-      "md5": "0e54be1d5ae8ab359a4b615ac9aea544",
+      "bytes": 7565,
+      "md5": "efa35bd054e836d5f106d8eb05c675a2",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_coefficients_all_specs_aa2021_rep_margin_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 250378,
-      "md5": "6e7aef005b4761aa439840581b0d181a",
+      "bytes": 250336,
+      "md5": "1ec2e22ab2fda1dbda5a2dff232f7e63",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_model_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1275,
-      "md5": "96a6515822869ac7a1be51ec80ae8dbf",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 1270,
+      "md5": "3dba62dfbf25e96e40b4f531b5ebc863",
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_se_warning_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 21390,
-      "md5": "95c87c5a5d54786b38b2c995f2fcd69b",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 21398,
+      "md5": "c49b9ffd16c6e35ae54c889a162ff026",
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_spec_status.csv",
@@ -282,51 +282,51 @@
       "extension": "csv",
       "bytes": 14376,
       "md5": "344ad722d24495c89ebc9161e1791d1e",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/event_study_vcov_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 14595,
-      "md5": "5299e546b0a2f20546ce076ae43c0381",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 14615,
+      "md5": "4e0a22bda35a8ac04cab8fbded14e30c",
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/ftz_m4_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 52052,
-      "md5": "44c013052cbb19e7fd90fae729400240",
+      "bytes": 52002,
+      "md5": "29f0ed1eda3a0473dbccd62124e1a4e3",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/ftz_m4_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4504007,
-      "md5": "10302cbe6484a4ecd8dcbb94cb5d6177",
+      "bytes": 4500625,
+      "md5": "5864ee3799b180f3d92cc17ba27a708f",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/ftz_m4_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1360003,
-      "md5": "28b1de7608ee3680564ec7729900181b",
+      "bytes": 1359277,
+      "md5": "50a58b3c093cb32d13f52708b9103a28",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/ftz_m4_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 15853,
-      "md5": "8b714f18cac5517309fd9adac3147930",
+      "bytes": 15823,
+      "md5": "bf3d0e5e51410f8838af8cdbfd446330",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/missing_cz_year_outcomes_m4.csv",
@@ -335,7 +335,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/panel_coverage_by_year_m4.csv",
@@ -344,15 +344,15 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/pipeline_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 5218,
-      "md5": "410f310391f6fbc438d8ade6995dd40c",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 5277,
+      "md5": "f07f6c8ab6f2337f7c245f23c0086fc1",
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/pipeline_validation_checks.csv",
@@ -360,24 +360,24 @@
       "extension": "csv",
       "bytes": 1796,
       "md5": "2b7f9fd2b989ee73f2eb87242fdc2528",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/run_status.csv",
       "category": "diagnostics",
       "extension": "csv",
       "bytes": 251,
-      "md5": "bd911dc4ae82a8233a6a2b633f80abe3",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "md5": "11b1ea739a7eae81803bcb87b576b9db",
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/tab_event_study_rep_margin_main_specs_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 8014,
-      "md5": "97dfa9d66f2237fbbcfd2ade2f4cc664",
+      "bytes": 8008,
+      "md5": "12178037fac4a6377aa7724c482a112c",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/unmatched_source_counties_m4.csv",
@@ -386,7 +386,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m4/unmatched_source_county_classification_m4.csv",
@@ -395,59 +395,59 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:26 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/county_bridge_diagnostics_by_year_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4198,
-      "md5": "353bfff8d7470efc1229f5f633aef7f7",
+      "bytes": 4195,
+      "md5": "580dd4d1e9168fd042db697edc06c730",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/county_bridge_retention_by_scope_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2468,
-      "md5": "1ad4d70408bd294b72d8810f1de9f8b1",
+      "bytes": 2465,
+      "md5": "39161bd94a0baf3539539703e4948537",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_coefficients_aa2021_rep_margin_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 7556,
-      "md5": "0b370a33ccae1c0fc55667af865060a7",
+      "bytes": 7555,
+      "md5": "724c05fbc4d17e00fd4fed3ce77314bf",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_coefficients_all_specs_aa2021_rep_margin_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 250219,
-      "md5": "22cd9621c9893257637d1583aea933c6",
+      "bytes": 250259,
+      "md5": "8739e7fdb40e954b15ab9012406b9568",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_model_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1275,
-      "md5": "96a6515822869ac7a1be51ec80ae8dbf",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "bytes": 1270,
+      "md5": "3dba62dfbf25e96e40b4f531b5ebc863",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_se_warning_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 21384,
-      "md5": "f4278d638b7feb531cfa560284f3411f",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "bytes": 21315,
+      "md5": "76851005eb3594d38b792748c60802cc",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_spec_status.csv",
@@ -455,51 +455,51 @@
       "extension": "csv",
       "bytes": 14376,
       "md5": "344ad722d24495c89ebc9161e1791d1e",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/event_study_vcov_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 14601,
-      "md5": "0c3c7341d8da7d5ebbc6c877b4a94fee",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "bytes": 14600,
+      "md5": "395c4b49cdff964ddf77566432e32900",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/ftz_m5_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 830424,
-      "md5": "4de16137bac5c3c5c14dbb8648a24d93",
+      "bytes": 830284,
+      "md5": "e86309a5a113ced24e478cf66d970a15",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/ftz_m5_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4532484,
-      "md5": "878d430ce18c45bac0a3e2b1ba032f6d",
+      "bytes": 4525448,
+      "md5": "fe5864ca0a3f71444f49483fde5d2226",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/ftz_m5_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1367301,
-      "md5": "3144e99323a4ff1820da13b7cb243fb2",
+      "bytes": 1365699,
+      "md5": "76b2a64f6717d66dc08a1a0dce04f622",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/ftz_m5_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 90941,
-      "md5": "1d8c635c00e293c5ceab569d9c2a11e1",
+      "bytes": 90833,
+      "md5": "f61f28caa420fffb2f1dc6dcb83077cd",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/missing_cz_year_outcomes_m5.csv",
@@ -508,7 +508,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/panel_coverage_by_year_m5.csv",
@@ -517,15 +517,15 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/pipeline_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 5217,
-      "md5": "b9dae6f4b586c0c00d0d2761bfb4acce",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "bytes": 5276,
+      "md5": "67956f928c8b339b5a9b41d65817bc30",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/pipeline_validation_checks.csv",
@@ -533,24 +533,24 @@
       "extension": "csv",
       "bytes": 1797,
       "md5": "dd7f5d4097e14f0b8b878d0ed6ac2c6b",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/run_status.csv",
       "category": "diagnostics",
       "extension": "csv",
       "bytes": 251,
-      "md5": "943e45278ac29126341e160492959379",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "md5": "e1ba3d38d87e4180c31e5d8e81a61aa3",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/tab_event_study_rep_margin_main_specs_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 7999,
-      "md5": "44539972f1fb2118a28bb58b32e8c650",
+      "bytes": 7998,
+      "md5": "f3ba099139850e9e1b49fbb30fbe22c3",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/unmatched_source_counties_m5.csv",
@@ -559,7 +559,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m5/unmatched_source_county_classification_m5.csv",
@@ -568,59 +568,59 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/county_bridge_diagnostics_by_year_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4199,
-      "md5": "68dac545f0410d68022b734082b682b7",
+      "bytes": 4190,
+      "md5": "a821d99a27a89861decbe1237a49eb2d",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/county_bridge_retention_by_scope_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2470,
-      "md5": "9845b1f1913d7cea62a71dfdf50f806a",
+      "bytes": 2466,
+      "md5": "7e7836ecd6de36a9030679e439b8facc",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_coefficients_aa2021_rep_margin_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 7575,
-      "md5": "99b2bc3f0ff250af9ada6d0ee0232aa9",
+      "bytes": 7567,
+      "md5": "a079756e833670dfdf852667f21c9023",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_coefficients_all_specs_aa2021_rep_margin_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 250360,
-      "md5": "af5b77c30712ef2dee7a0713021f9e57",
+      "bytes": 250417,
+      "md5": "6125e63ead08b818c9f673f4fc1405eb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_model_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1275,
-      "md5": "96a6515822869ac7a1be51ec80ae8dbf",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "bytes": 1270,
+      "md5": "3dba62dfbf25e96e40b4f531b5ebc863",
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_se_warning_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 21387,
-      "md5": "19b6280c657686b9cb42a31db6be6305",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "bytes": 21327,
+      "md5": "bcd693dee9acb37ba6be8fc540fe164c",
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_spec_status.csv",
@@ -628,51 +628,51 @@
       "extension": "csv",
       "bytes": 14376,
       "md5": "344ad722d24495c89ebc9161e1791d1e",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/event_study_vcov_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 14596,
-      "md5": "80d4f3d90add4c0216da3b97159fd0c2",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "bytes": 14606,
+      "md5": "15ff84fa86c37439bd86812788e4be00",
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/ftz_m6_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 830424,
-      "md5": "79245b70c3345fdae820e0cb8ca9fc1f",
+      "bytes": 830284,
+      "md5": "54490e60eb3ea1c973c439f802f3d0cb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/ftz_m6_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4546578,
-      "md5": "a0a34a072b38e028d759efe1f8272974",
+      "bytes": 4542954,
+      "md5": "2716136466303525ca5fdc846d99bada",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/ftz_m6_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1370400,
-      "md5": "afa758651a8733e3d0c012f511e4c3dc",
+      "bytes": 1369521,
+      "md5": "a4a25e2d0e615730243399c5b704a9bb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/ftz_m6_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 90941,
-      "md5": "1d8c635c00e293c5ceab569d9c2a11e1",
+      "bytes": 90833,
+      "md5": "f61f28caa420fffb2f1dc6dcb83077cd",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/missing_cz_year_outcomes_m6.csv",
@@ -681,7 +681,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/panel_coverage_by_year_m6.csv",
@@ -690,15 +690,15 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/pipeline_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 5219,
-      "md5": "2e4b3bdf7e501c8d77a0d61e0b76bc5f",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "bytes": 5278,
+      "md5": "3a1c3671f1f0f6323341f22ae3c1f9aa",
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/pipeline_validation_checks.csv",
@@ -706,24 +706,24 @@
       "extension": "csv",
       "bytes": 1797,
       "md5": "dd7f5d4097e14f0b8b878d0ed6ac2c6b",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/run_status.csv",
       "category": "diagnostics",
       "extension": "csv",
       "bytes": 251,
-      "md5": "85229045c1e84c181230bf92d0afafec",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "md5": "203c38c0caecd4f8f97daf55123205a9",
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/tab_event_study_rep_margin_main_specs_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 8018,
-      "md5": "5a9074eafe3ae5b1a9f2ef1fc05eac8f",
+      "bytes": 8010,
+      "md5": "1fae1085aec466a0329e0fdb132f4e86",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/unmatched_source_counties_m6.csv",
@@ -732,7 +732,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/by_crosswalk/m6/unmatched_source_county_classification_m6.csv",
@@ -741,51 +741,51 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:43 CDT"
+      "modified_time": "2026-05-10 13:21:52 CDT"
     },
     {
       "path": "output/diagnostics/conley_neighbor_count_by_cutoff.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 313,
-      "md5": "96b5131c1ad659a94598a1cc2947b4e8",
-      "modified_time": "2026-05-08 11:36:19 CDT"
+      "bytes": 311,
+      "md5": "a7ff790d4c3166c772c60ba0852b73cd",
+      "modified_time": "2026-05-10 13:26:04 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_diagnostics_by_year_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4169,
-      "md5": "35a048fb24d8f0a845ac9703a1f00bf9",
+      "bytes": 4159,
+      "md5": "541f83e88d4c2675a84ad203a5a67317",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:05 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_diagnostics_by_year_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4189,
-      "md5": "ff6b6c18db25a5a5b6a378a47ee65a4e",
+      "bytes": 4175,
+      "md5": "b15701b33f2df695fc35cbda448790e4",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_diagnostics_by_year_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4198,
-      "md5": "353bfff8d7470efc1229f5f633aef7f7",
+      "bytes": 4195,
+      "md5": "580dd4d1e9168fd042db697edc06c730",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:46 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_diagnostics_by_year_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4199,
-      "md5": "68dac545f0410d68022b734082b682b7",
+      "bytes": 4190,
+      "md5": "a821d99a27a89861decbe1237a49eb2d",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:57 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_exceptions_applied.csv",
@@ -793,76 +793,76 @@
       "extension": "csv",
       "bytes": 2223,
       "md5": "49e6f58ab649627e8dfd0486df3e9b55",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:29 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_retention_by_scope_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2435,
-      "md5": "7a80f9ff641b9c17cb5ed25334d74362",
+      "bytes": 2433,
+      "md5": "3742f02dd38568721f030e5d3832305a",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:05 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_retention_by_scope_m4.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2452,
-      "md5": "0c7f65328f7ed165da4858a3659c4bf7",
+      "bytes": 2449,
+      "md5": "e18d0458c0d147789d73ddf63e03d3a6",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_retention_by_scope_m5.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2468,
-      "md5": "1ad4d70408bd294b72d8810f1de9f8b1",
+      "bytes": 2465,
+      "md5": "39161bd94a0baf3539539703e4948537",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:46 CDT"
     },
     {
       "path": "output/diagnostics/county_bridge_retention_by_scope_m6.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 2470,
-      "md5": "9845b1f1913d7cea62a71dfdf50f806a",
+      "bytes": 2466,
+      "md5": "7e7836ecd6de36a9030679e439b8facc",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:57 CDT"
     },
     {
       "path": "output/diagnostics/crosswalk_sensitivity_run_status.csv",
       "category": "diagnostics",
       "extension": "csv",
       "bytes": 535,
-      "md5": "581667ee36def44a573cb45d2b23a493",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "md5": "8ac90b9e61d1ad7c8a063d4f992e28dd",
+      "modified_time": "2026-05-10 13:26:28 CDT"
     },
     {
       "path": "output/diagnostics/crosswalk_specification_comparison_coefficients.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 35850,
-      "md5": "2e3bcca64608b6faf955df278dd5b7e1",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 35845,
+      "md5": "93b01a08d69ce647cf76eafd9d42fd08",
+      "modified_time": "2026-05-10 13:26:27 CDT"
     },
     {
       "path": "output/diagnostics/crosswalk_specification_comparison_deltas_vs_pure_m2.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 41310,
-      "md5": "ee10c187a6cc016d7ea0c9697158dbdc",
+      "bytes": 41322,
+      "md5": "78241338d84fea5a58aa60ec3f5ca15b",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "modified_time": "2026-05-10 13:26:27 CDT"
     },
     {
       "path": "output/diagnostics/dependency_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 2059,
-      "md5": "6d2084ddd7a7d5a3ee7eabfacc64f203",
-      "modified_time": "2026-05-08 11:30:06 CDT"
+      "bytes": 2192,
+      "md5": "b7f2e57a4a70abf0a348963ec33e2e95",
+      "modified_time": "2026-05-10 13:13:55 CDT"
     },
     {
       "path": "output/diagnostics/event_study_controls_manifest.csv",
@@ -870,39 +870,39 @@
       "extension": "csv",
       "bytes": 5018,
       "md5": "aa94a424e75d4f7ab2495b8612246aa7",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/event_study_model_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1275,
-      "md5": "96a6515822869ac7a1be51ec80ae8dbf",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 1270,
+      "md5": "3dba62dfbf25e96e40b4f531b5ebc863",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/event_study_pretrend_coefficients.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 3537,
-      "md5": "2c4665ff31e32e3a87ffac91221c0f64",
-      "modified_time": "2026-05-08 11:36:19 CDT"
+      "bytes": 3540,
+      "md5": "a61b21164c0b256c0ebe9cd137707bf4",
+      "modified_time": "2026-05-10 13:26:04 CDT"
     },
     {
       "path": "output/diagnostics/event_study_pretrend_tests.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 616,
-      "md5": "339c66df44a75c99150ddd31a3854bc9",
-      "modified_time": "2026-05-08 11:36:19 CDT"
+      "bytes": 615,
+      "md5": "ca6341db0f2a95bb533b1555fc9ed7c0",
+      "modified_time": "2026-05-10 13:26:04 CDT"
     },
     {
       "path": "output/diagnostics/event_study_se_warning_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 21390,
-      "md5": "95c87c5a5d54786b38b2c995f2fcd69b",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 21398,
+      "md5": "c49b9ffd16c6e35ae54c889a162ff026",
+      "modified_time": "2026-05-10 13:26:00 CDT"
     },
     {
       "path": "output/diagnostics/event_study_spec_status.csv",
@@ -910,39 +910,39 @@
       "extension": "csv",
       "bytes": 14376,
       "md5": "344ad722d24495c89ebc9161e1791d1e",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/event_study_vcov_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 14595,
-      "md5": "5299e546b0a2f20546ce076ae43c0381",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 14615,
+      "md5": "4e0a22bda35a8ac04cab8fbded14e30c",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/event_study_vcov_eigenvalues.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 546219,
-      "md5": "8edaf6e174bff41f7920a7a1fd936335",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 546340,
+      "md5": "f713b4ba628b95b34708ac7a0a92d847",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/event_study_vcov_rank_by_se_type.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 11451,
-      "md5": "df368aebadefee4f3302eb93f28f9381",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 11453,
+      "md5": "52993b50db6e733fbbc0333d931bb252",
+      "modified_time": "2026-05-10 13:26:00 CDT"
     },
     {
       "path": "output/diagnostics/ftz_all_weight_support_by_source_county.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 3105734,
-      "md5": "d4a63380498c228a65192d678dfcb728",
-      "modified_time": "2026-05-08 11:35:09 CDT"
+      "bytes": 3104372,
+      "md5": "9cda06bd7a6d9bb406a64af1f3778834",
+      "modified_time": "2026-05-10 13:24:32 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m2_crosswalk_issue_vote_report.csv",
@@ -951,25 +951,25 @@
       "bytes": 15588,
       "md5": "426a1c6cd5c4fd2686c71e5bdfd25cb9",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:51 CDT"
+      "modified_time": "2026-05-10 13:22:03 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m2_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4551093,
-      "md5": "1a7bf5734b02e9c9ed3e70ce95d040b9",
+      "bytes": 4545865,
+      "md5": "74aa4df71923d47206028dda0009f404",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:48 CDT"
+      "modified_time": "2026-05-10 13:21:58 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m2_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1367474,
-      "md5": "a89d81b66bf051b094f9359c8cc632b0",
+      "bytes": 1366349,
+      "md5": "9d64169699ceeb68259422d8e3c15185",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:48 CDT"
+      "modified_time": "2026-05-10 13:21:58 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m2_undefined_or_zero_support_counties.csv",
@@ -978,70 +978,70 @@
       "bytes": 12270,
       "md5": "929f134225a157e49ccf50dc2c0d8427",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:48 CDT"
+      "modified_time": "2026-05-10 13:21:58 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m4_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 52052,
-      "md5": "44c013052cbb19e7fd90fae729400240",
+      "bytes": 52002,
+      "md5": "29f0ed1eda3a0473dbccd62124e1a4e3",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:09 CDT"
+      "modified_time": "2026-05-10 13:24:33 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m4_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4504007,
-      "md5": "10302cbe6484a4ecd8dcbb94cb5d6177",
+      "bytes": 4500625,
+      "md5": "5864ee3799b180f3d92cc17ba27a708f",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:28 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m4_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1360003,
-      "md5": "28b1de7608ee3680564ec7729900181b",
+      "bytes": 1359277,
+      "md5": "50a58b3c093cb32d13f52708b9103a28",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:28 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m4_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 15853,
-      "md5": "8b714f18cac5517309fd9adac3147930",
+      "bytes": 15823,
+      "md5": "bf3d0e5e51410f8838af8cdbfd446330",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:07 CDT"
+      "modified_time": "2026-05-10 13:24:28 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 830424,
-      "md5": "4de16137bac5c3c5c14dbb8648a24d93",
+      "bytes": 830284,
+      "md5": "e86309a5a113ced24e478cf66d970a15",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:13 CDT"
+      "modified_time": "2026-05-10 13:14:42 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4532484,
-      "md5": "878d430ce18c45bac0a3e2b1ba032f6d",
+      "bytes": 4525448,
+      "md5": "fe5864ca0a3f71444f49483fde5d2226",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:10 CDT"
+      "modified_time": "2026-05-10 13:14:24 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1367301,
-      "md5": "3144e99323a4ff1820da13b7cb243fb2",
+      "bytes": 1365699,
+      "md5": "76b2a64f6717d66dc08a1a0dce04f622",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:10 CDT"
+      "modified_time": "2026-05-10 13:14:23 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_m6_zero_support_preflight_counties.csv",
@@ -1050,7 +1050,7 @@
       "bytes": 134003,
       "md5": "e53ab708e6b77e754735cf337c8b38f0",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:35:04 CDT"
+      "modified_time": "2026-05-10 13:24:22 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_m6_zero_support_preflight_summary.csv",
@@ -1059,76 +1059,76 @@
       "bytes": 542,
       "md5": "27663e597f2918a925bb339417a863c5",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:35:04 CDT"
+      "modified_time": "2026-05-10 13:24:21 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m5_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 90941,
-      "md5": "1d8c635c00e293c5ceab569d9c2a11e1",
+      "bytes": 90833,
+      "md5": "f61f28caa420fffb2f1dc6dcb83077cd",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:10 CDT"
+      "modified_time": "2026-05-10 13:14:23 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m6_crosswalk_issue_vote_report.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 830424,
-      "md5": "79245b70c3345fdae820e0cb8ca9fc1f",
+      "bytes": 830284,
+      "md5": "54490e60eb3ea1c973c439f802f3d0cb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:26 CDT"
+      "modified_time": "2026-05-10 13:19:55 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m6_crosswalk_row_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 4546578,
-      "md5": "a0a34a072b38e028d759efe1f8272974",
+      "bytes": 4542954,
+      "md5": "2716136466303525ca5fdc846d99bada",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:23 CDT"
+      "modified_time": "2026-05-10 13:19:50 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m6_crosswalk_source_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 1370400,
-      "md5": "afa758651a8733e3d0c012f511e4c3dc",
+      "bytes": 1369521,
+      "md5": "a4a25e2d0e615730243399c5b704a9bb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:23 CDT"
+      "modified_time": "2026-05-10 13:19:49 CDT"
     },
     {
       "path": "output/diagnostics/ftz_m6_undefined_or_zero_support_counties.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 90941,
-      "md5": "1d8c635c00e293c5ceab569d9c2a11e1",
+      "bytes": 90833,
+      "md5": "f61f28caa420fffb2f1dc6dcb83077cd",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:23 CDT"
+      "modified_time": "2026-05-10 13:19:50 CDT"
     },
     {
       "path": "output/diagnostics/ftz_weight_support_by_1990_county.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 613066,
-      "md5": "454eb57c903f380b84e6bc7df94ce1f8",
-      "modified_time": "2026-05-08 11:35:09 CDT"
+      "bytes": 609231,
+      "md5": "b78ceacdd206915f0bbe6d6b9a484b10",
+      "modified_time": "2026-05-10 13:24:32 CDT"
     },
     {
       "path": "output/diagnostics/ftz_weight_support_by_cz.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 144109,
-      "md5": "0d40190891faf838e79871703f078fcb",
-      "modified_time": "2026-05-08 11:35:09 CDT"
+      "bytes": 143932,
+      "md5": "a9613d29a8a5bc77d2a02bbab9967321",
+      "modified_time": "2026-05-10 13:24:32 CDT"
     },
     {
       "path": "output/diagnostics/interacted_control_variance_diagnostics.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 71273,
-      "md5": "3b8f148e00c728219a2e7a21ab37be43",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 71160,
+      "md5": "17b60e8bf8f6e0cfb7a8761b470c336a",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/diagnostics/missing_cz_year_outcomes_m2.csv",
@@ -1137,7 +1137,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/diagnostics/missing_cz_year_outcomes_m4.csv",
@@ -1146,7 +1146,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/diagnostics/missing_cz_year_outcomes_m5.csv",
@@ -1155,7 +1155,7 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:49 CDT"
     },
     {
       "path": "output/diagnostics/missing_cz_year_outcomes_m6.csv",
@@ -1164,23 +1164,23 @@
       "bytes": 18,
       "md5": "890e8fe4d422f63801ba97d89415e294",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/diagnostics/output_manifest.csv",
       "category": "diagnostics",
       "extension": "csv",
-      "bytes": 34833,
-      "md5": "a7145a38ec5b0dbcfaee3738fb201a50",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "bytes": 33701,
+      "md5": "abf619f80ec88399d08fd16349e3f080",
+      "modified_time": "2026-05-10 13:26:29 CDT"
     },
     {
       "path": "output/diagnostics/output_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 69069,
-      "md5": "3315309308a0fdcb0aaaeca99e4c21b7",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "bytes": 68637,
+      "md5": "cb784d657f733ffd5405ae4d57a66d84",
+      "modified_time": "2026-05-10 13:26:29 CDT"
     },
     {
       "path": "output/diagnostics/panel_coverage_by_year_m2.csv",
@@ -1189,7 +1189,7 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/diagnostics/panel_coverage_by_year_m4.csv",
@@ -1198,7 +1198,7 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/diagnostics/panel_coverage_by_year_m5.csv",
@@ -1207,7 +1207,7 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:49 CDT"
     },
     {
       "path": "output/diagnostics/panel_coverage_by_year_m6.csv",
@@ -1216,15 +1216,15 @@
       "bytes": 1211,
       "md5": "a9d04855d438f1f315b49fa3161b703f",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/diagnostics/pipeline_manifest.json",
       "category": "diagnostics",
       "extension": "json",
-      "bytes": 5292,
-      "md5": "552df9e1d0391702d987230693cc5e44",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "bytes": 5381,
+      "md5": "54640f907a7bbdd1d93d10149cc8b6c1",
+      "modified_time": "2026-05-10 13:26:29 CDT"
     },
     {
       "path": "output/diagnostics/pipeline_validation_checks.csv",
@@ -1232,7 +1232,7 @@
       "extension": "csv",
       "bytes": 1796,
       "md5": "2b7f9fd2b989ee73f2eb87242fdc2528",
-      "modified_time": "2026-05-08 11:35:25 CDT"
+      "modified_time": "2026-05-10 13:25:03 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_counties_m2.csv",
@@ -1241,7 +1241,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:51 CDT"
+      "modified_time": "2026-05-10 13:22:05 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_counties_m4.csv",
@@ -1250,7 +1250,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_counties_m5.csv",
@@ -1259,7 +1259,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:45 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_counties_m6.csv",
@@ -1268,7 +1268,7 @@
       "bytes": 11783,
       "md5": "9f7aeca036cbe40b72cf8762ff4a476a",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:57 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_county_classification_m2.csv",
@@ -1277,7 +1277,7 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:05 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_county_classification_m4.csv",
@@ -1286,7 +1286,7 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:10 CDT"
+      "modified_time": "2026-05-10 13:24:35 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_county_classification_m5.csv",
@@ -1295,7 +1295,7 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:46 CDT"
     },
     {
       "path": "output/diagnostics/unmatched_source_county_classification_m6.csv",
@@ -1304,725 +1304,653 @@
       "bytes": 1171,
       "md5": "bb7f5847b0aa408bbfb3173861db4fb3",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:57 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_specification_comparison.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 11153,
-      "md5": "c4ac60b4024031133ebb4423fd3ac59e",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 10990,
+      "md5": "64935ab7bdb906e21422cab950906504",
+      "modified_time": "2026-05-10 13:26:27 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_specification_comparison.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 352598,
-      "md5": "cb31bb7322a8f35184718f8bf423d9ee",
-      "modified_time": "2026-05-08 11:36:36 CDT"
+      "bytes": 351884,
+      "md5": "9bab363c42ce6ca3f47a4119d11ffc70",
+      "modified_time": "2026-05-10 13:26:27 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_specification_comparison_deltas_vs_pure_m2.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 11154,
-      "md5": "27d79fd1990c0e65983e0fcef981989a",
+      "bytes": 10991,
+      "md5": "0273b267e31be8ed1d71efdbc5e5663a",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "modified_time": "2026-05-10 13:26:28 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_specification_comparison_deltas_vs_pure_m2.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 354097,
-      "md5": "f48c58dd9228ca199eabad423191ec87",
+      "bytes": 356760,
+      "md5": "03250100e39c47971229b93fb6c7e889",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:36:37 CDT"
+      "modified_time": "2026-05-10 13:26:28 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 7464608,
-      "md5": "5a4647d37066c39b3b9f1960cfdd8b34",
-      "modified_time": "2026-05-08 11:31:53 CDT"
+      "bytes": 7464445,
+      "md5": "991e07936d1b2f8cb8435798cc9c86d6",
+      "modified_time": "2026-05-10 13:19:05 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 793485,
-      "md5": "be60dea368a21703b007439cf36f158d",
-      "modified_time": "2026-05-08 11:31:56 CDT"
+      "bytes": 792489,
+      "md5": "fa637ffeb4fa5d738e2409603df359fb",
+      "modified_time": "2026-05-10 13:19:11 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties_simplified.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 7419388,
-      "md5": "4d31a54742b4aebf5c5bf20242cd62d4",
-      "modified_time": "2026-05-08 11:32:00 CDT"
+      "bytes": 7419225,
+      "md5": "214c29960ad841ce8630a20bdb75d31c",
+      "modified_time": "2026-05-10 13:19:15 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties_simplified.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 492566,
-      "md5": "cddadcdbfbec99fce908f17426b74f12",
-      "modified_time": "2026-05-08 11:32:01 CDT"
+      "bytes": 493100,
+      "md5": "c9f90b9ec91b8052265c91a7e19a4950",
+      "modified_time": "2026-05-10 13:19:17 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_counties_small.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 345638,
-      "md5": "46f0ba886e1a6bc713502fedf64a8b44",
-      "modified_time": "2026-05-08 11:32:02 CDT"
+      "bytes": 345392,
+      "md5": "20a34e079f0d380db2e4aa57d88ed1b2",
+      "modified_time": "2026-05-10 13:19:19 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 4600613,
-      "md5": "0f5a0169157bca64126edf2e3b1056d7",
-      "modified_time": "2026-05-08 11:32:12 CDT"
+      "bytes": 4600450,
+      "md5": "2ccabbcd33cce3c917516d9264b43111",
+      "modified_time": "2026-05-10 13:19:35 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 814389,
-      "md5": "cf0de654ab01c36eee7f9d7bca5c4c6c",
-      "modified_time": "2026-05-08 11:32:14 CDT"
+      "bytes": 813706,
+      "md5": "efd547bcd923adc121aca0c57bf63d53",
+      "modified_time": "2026-05-10 13:19:37 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs_simplified.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 4557799,
-      "md5": "7522a5e49e3898c01d03a7756ea36b97",
-      "modified_time": "2026-05-08 11:32:16 CDT"
+      "bytes": 4557636,
+      "md5": "5840001981319b087bf31ea5c4f86938",
+      "modified_time": "2026-05-10 13:19:40 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs_simplified.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 495854,
-      "md5": "ad29af7dfafa835ea9d844e793620d30",
-      "modified_time": "2026-05-08 11:32:17 CDT"
+      "bytes": 494788,
+      "md5": "8b9b0747596d9ce41a2a922abd9a7c39",
+      "modified_time": "2026-05-10 13:19:41 CDT"
     },
     {
       "path": "output/figures/fig_crosswalk_unavailable_weights_1990_czs_small.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 332555,
-      "md5": "e19e0a1c64097e81dfafa61f3fc72a1a",
-      "modified_time": "2026-05-08 11:32:18 CDT"
+      "bytes": 331733,
+      "md5": "05a181a04f017545e16cea6dc998f946",
+      "modified_time": "2026-05-10 13:19:43 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m2.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 9345,
-      "md5": "45eb38aebfc29294978f7f64bf6fd768",
+      "bytes": 9182,
+      "md5": "8ae668ad8b4df03e61ae4fd6f8dd7253",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:14 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m2.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 241887,
-      "md5": "9692482eecf65c4b64e4f3a78e496f99",
+      "bytes": 243265,
+      "md5": "cbf628855da1e7dc6796f041f01d19b8",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:03 CDT"
+      "modified_time": "2026-05-10 13:24:15 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 9352,
-      "md5": "a8f2ded08d042b0353ed1037081f2f91",
+      "bytes": 9189,
+      "md5": "c1e05d8ebd18b662c9f73da4bf42b88a",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:35 CDT"
+      "modified_time": "2026-05-10 13:26:25 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 242338,
-      "md5": "b9f20cd067fc012ac6764a767bb8d847",
+      "bytes": 243374,
+      "md5": "fe664182b55e69ce95dcc2c8481ac7a2",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:35 CDT"
+      "modified_time": "2026-05-10 13:26:25 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m5.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 9359,
-      "md5": "5dc1980baeeb7f38ebe00e13fe17bf64",
+      "bytes": 9196,
+      "md5": "ad9076ab83dacfa60c9caadd9aa74bda",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:28 CDT"
+      "modified_time": "2026-05-10 13:18:27 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m5.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 242106,
-      "md5": "6afd2cdb30ac2b46a5ecbd0a76fac3d2",
+      "bytes": 243325,
+      "md5": "134b49fad200d0dd606cee0736bb871f",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:28 CDT"
+      "modified_time": "2026-05-10 13:18:28 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m6.pdf",
       "category": "figures",
       "extension": "pdf",
-      "bytes": 9360,
-      "md5": "b3262dc52150858b31d2484210f1e0cf",
+      "bytes": 9197,
+      "md5": "4de044d9b66e146fdee25e4ee2fe6784",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:42 CDT"
+      "modified_time": "2026-05-10 13:21:50 CDT"
     },
     {
       "path": "output/figures/fig_event_study_rep_margin_main_specs_m6.png",
       "category": "figures",
       "extension": "png",
-      "bytes": 241826,
-      "md5": "3950da2bbef1b92b70e5ca8e877ced7d",
+      "bytes": 243613,
+      "md5": "271613b85b65a06ef0c15640c91569df",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:42 CDT"
+      "modified_time": "2026-05-10 13:21:51 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_1952start_m2.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 409044,
-      "md5": "ba5652bf19bf0dd32c7d5288381cf161",
+      "bytes": 409025,
+      "md5": "5f0e5e3b4d89745832a4fac021fac249",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_1952start_m4.rds",
       "category": "intermediate",
       "extension": "rds",
       "bytes": 407427,
-      "md5": "6fd34d38df996ed92194b1a74d8c6d43",
+      "md5": "fff621b3a05711c8ec838c5d1841e8c0",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_1952start_m5.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 400998,
-      "md5": "f5b12d7ae2fd6a7c69e8475b9866dfdc",
+      "bytes": 400994,
+      "md5": "d147628b42208d272d88c8747846dd1c",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:50 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_1952start_m6.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 401254,
-      "md5": "17c3b35740ce26fe4a8dde3ba4ad0fc8",
+      "bytes": 401251,
+      "md5": "a8fa0cb9cc76fcc062946907316e4a6d",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_m2.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 327346,
-      "md5": "b0ddf19f54b98c4d1d64442e5f551a37",
+      "bytes": 327332,
+      "md5": "09f1a31aa7834714db62cde7e8dbb018",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_m4.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 325651,
-      "md5": "7cbed6b481d2345034ced0808497f97e",
+      "bytes": 325636,
+      "md5": "08686b738cbb17b5e4fada3fc7c4da8b",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_m5.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 320399,
-      "md5": "bd9c556f4a954d2d62f81920bd318a0d",
+      "bytes": 320383,
+      "md5": "3ed338ef47ae7fd252bf764236f387d9",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:50 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_aa2021_rep_margin_m6.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 320467,
-      "md5": "3da91139cd71bb1431350579a6ea9a81",
+      "bytes": 320464,
+      "md5": "3668994ec9f88983ef7c77cdeab1d278",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_1952start_m2.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 409044,
-      "md5": "ba5652bf19bf0dd32c7d5288381cf161",
+      "bytes": 409025,
+      "md5": "5f0e5e3b4d89745832a4fac021fac249",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_1952start_m4.rds",
       "category": "intermediate",
       "extension": "rds",
       "bytes": 407427,
-      "md5": "6fd34d38df996ed92194b1a74d8c6d43",
+      "md5": "fff621b3a05711c8ec838c5d1841e8c0",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_1952start_m5.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 400998,
-      "md5": "f5b12d7ae2fd6a7c69e8475b9866dfdc",
+      "bytes": 400994,
+      "md5": "d147628b42208d272d88c8747846dd1c",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:16 CDT"
+      "modified_time": "2026-05-10 13:14:50 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_1952start_m6.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 401254,
-      "md5": "17c3b35740ce26fe4a8dde3ba4ad0fc8",
+      "bytes": 401251,
+      "md5": "a8fa0cb9cc76fcc062946907316e4a6d",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:28 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_m2.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 327346,
-      "md5": "b0ddf19f54b98c4d1d64442e5f551a37",
+      "bytes": 327332,
+      "md5": "09f1a31aa7834714db62cde7e8dbb018",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:33:52 CDT"
+      "modified_time": "2026-05-10 13:22:06 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_m4.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 325651,
-      "md5": "7cbed6b481d2345034ced0808497f97e",
+      "bytes": 325636,
+      "md5": "08686b738cbb17b5e4fada3fc7c4da8b",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:35:11 CDT"
+      "modified_time": "2026-05-10 13:24:36 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_m5.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 320399,
-      "md5": "bd9c556f4a954d2d62f81920bd318a0d",
+      "bytes": 320383,
+      "md5": "3ed338ef47ae7fd252bf764236f387d9",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:30:15 CDT"
+      "modified_time": "2026-05-10 13:14:50 CDT"
     },
     {
       "path": "output/intermediate/analysis_panel_full_aa2021_rep_margin_m6.rds",
       "category": "intermediate",
       "extension": "rds",
-      "bytes": 320467,
-      "md5": "3da91139cd71bb1431350579a6ea9a81",
+      "bytes": 320464,
+      "md5": "3668994ec9f88983ef7c77cdeab1d278",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:32:27 CDT"
+      "modified_time": "2026-05-10 13:19:58 CDT"
     },
     {
       "path": "output/intermediate/cz_centroids_1990_population_weighted.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 36496,
-      "md5": "a016003a38896317b217a61079bb0b1a",
-      "modified_time": "2026-05-08 11:35:04 CDT"
+      "bytes": 36495,
+      "md5": "720278e7490ebbd1367b11d6418cf154",
+      "modified_time": "2026-05-10 13:24:19 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_aa2021_rep_margin_m2.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 7564,
-      "md5": "662a6ede0ae660a81addaf802026b2c0",
+      "bytes": 7568,
+      "md5": "fea5f50ddce474d8f95ed8cf6e505bd8",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:00 CDT"
+      "modified_time": "2026-05-10 13:24:09 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_aa2021_rep_margin_m4.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 7571,
-      "md5": "0e54be1d5ae8ab359a4b615ac9aea544",
+      "bytes": 7565,
+      "md5": "efa35bd054e836d5f106d8eb05c675a2",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:32 CDT"
+      "modified_time": "2026-05-10 13:26:22 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_aa2021_rep_margin_m5.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 7556,
-      "md5": "0b370a33ccae1c0fc55667af865060a7",
+      "bytes": 7555,
+      "md5": "724c05fbc4d17e00fd4fed3ce77314bf",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:25 CDT"
+      "modified_time": "2026-05-10 13:18:24 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_aa2021_rep_margin_m6.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 7575,
-      "md5": "99b2bc3f0ff250af9ada6d0ee0232aa9",
+      "bytes": 7567,
+      "md5": "a079756e833670dfdf852667f21c9023",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:39 CDT"
+      "modified_time": "2026-05-10 13:21:47 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_all_specs_aa2021_rep_margin_m2.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 250346,
-      "md5": "9994930136220c79ff45d69610772e52",
+      "bytes": 250328,
+      "md5": "777df4c60e7f153647635078a49bb3cb",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:34:44 CDT"
+      "modified_time": "2026-05-10 13:23:31 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_all_specs_aa2021_rep_margin_m4.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 250378,
-      "md5": "6e7aef005b4761aa439840581b0d181a",
+      "bytes": 250336,
+      "md5": "1ec2e22ab2fda1dbda5a2dff232f7e63",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_all_specs_aa2021_rep_margin_m5.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 250219,
-      "md5": "22cd9621c9893257637d1583aea933c6",
+      "bytes": 250259,
+      "md5": "8739e7fdb40e954b15ab9012406b9568",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:09 CDT"
+      "modified_time": "2026-05-10 13:17:55 CDT"
     },
     {
       "path": "output/intermediate/event_study_coefficients_all_specs_aa2021_rep_margin_m6.csv",
       "category": "intermediate",
       "extension": "csv",
-      "bytes": 250360,
-      "md5": "af5b77c30712ef2dee7a0713021f9e57",
+      "bytes": 250417,
+      "md5": "6125e63ead08b818c9f673f4fc1405eb",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:22 CDT"
+      "modified_time": "2026-05-10 13:21:24 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m2_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 509,
-      "md5": "a6eeedf53b3a49769b70337f2986ba4b",
-      "modified_time": "2026-05-08 11:35:00 CDT"
+      "bytes": 525,
+      "md5": "388a73a98202814e6bb22da05ec0b75a",
+      "modified_time": "2026-05-10 13:24:09 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m2_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 5179304,
-      "md5": "8768f4355dfbf9fe0915239bb23b4c17",
-      "modified_time": "2026-05-08 11:35:00 CDT"
+      "bytes": 5184800,
+      "md5": "043d3ef483e2d153dd310274fe75dc21",
+      "modified_time": "2026-05-10 13:24:09 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m4_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 509,
-      "md5": "fafbf30c43bc0d3df3ff6f6e1b44d2cf",
-      "modified_time": "2026-05-08 11:36:32 CDT"
+      "bytes": 525,
+      "md5": "7d502b1556b05fdc6afa83c7f1f736c5",
+      "modified_time": "2026-05-10 13:26:22 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m4_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 5177432,
-      "md5": "1ca92576b406f0b3341fb98628d6619e",
-      "modified_time": "2026-05-08 11:36:32 CDT"
+      "bytes": 5217040,
+      "md5": "1db00b81af8b61a00311923a28cb84eb",
+      "modified_time": "2026-05-10 13:26:22 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m5_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 509,
-      "md5": "0edac1a23f8c8f1edc46928ebd3868e3",
-      "modified_time": "2026-05-08 11:31:25 CDT"
+      "bytes": 525,
+      "md5": "f5b34c2436b0138d724394e0f2a8eefb",
+      "modified_time": "2026-05-10 13:18:24 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m5_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 5188720,
-      "md5": "c0180cbfa480e8f8ff24bc471275c949",
-      "modified_time": "2026-05-08 11:31:25 CDT"
+      "bytes": 5210748,
+      "md5": "3eda5eeb659a9a51a8d523d7f2afef08",
+      "modified_time": "2026-05-10 13:18:24 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m6_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 509,
-      "md5": "d005e5bdd18e6421cded77a72338e713",
-      "modified_time": "2026-05-08 11:33:39 CDT"
+      "bytes": 525,
+      "md5": "a063c4db23e0b2a3db6ddf10e0940552",
+      "modified_time": "2026-05-10 13:21:47 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_aa2021_rep_margin_m6_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 5178524,
-      "md5": "816b7146ee3b35d7e826a3329b846180",
-      "modified_time": "2026-05-08 11:33:39 CDT"
+      "bytes": 5193024,
+      "md5": "a1cb3e63affff5bf0c2e74e0a557fb83",
+      "modified_time": "2026-05-10 13:21:47 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m2_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 532,
-      "md5": "b0cb2c3927d96d89f4a4fae5072d1632",
-      "modified_time": "2026-05-08 11:34:44 CDT"
+      "bytes": 548,
+      "md5": "9b11eb7fc95d14add1c443e18f7a8c85",
+      "modified_time": "2026-05-10 13:23:30 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m2_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 12991060,
-      "md5": "8ad6d5e790d89ef0b92028073f22d34e",
-      "modified_time": "2026-05-08 11:34:44 CDT"
+      "bytes": 13029304,
+      "md5": "933ecafdefcfcf6e30fd0ec24502afaa",
+      "modified_time": "2026-05-10 13:23:30 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 532,
-      "md5": "d61bd1cb330ad8fd2a3bcb51edebce69",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 548,
+      "md5": "ff700b06812eddcfba00540af055aa9b",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 13004452,
-      "md5": "ff9d0ca550a9c09bab5ebc4591b45f34",
-      "modified_time": "2026-05-08 11:36:15 CDT"
+      "bytes": 13048180,
+      "md5": "90e8efba9c738c4d03542adc83b7bad5",
+      "modified_time": "2026-05-10 13:25:59 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m5_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 532,
-      "md5": "227429d40b4dd82a39a822cfbb2e8090",
-      "modified_time": "2026-05-08 11:31:09 CDT"
+      "bytes": 548,
+      "md5": "5eca3bb45306cf317dfbf8ad4ef69f77",
+      "modified_time": "2026-05-10 13:17:55 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m5_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 12981616,
-      "md5": "cc8bdd5839a30cc05e7a9144f25f937d",
-      "modified_time": "2026-05-08 11:31:09 CDT"
+      "bytes": 13027892,
+      "md5": "963929db9e3636980b67634f2b84bf50",
+      "modified_time": "2026-05-10 13:17:55 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6_rds_chunks/manifest.json",
       "category": "intermediate",
       "extension": "json",
-      "bytes": 532,
-      "md5": "11bbeb54caa2000a682d97de8550e713",
-      "modified_time": "2026-05-08 11:33:22 CDT"
+      "bytes": 548,
+      "md5": "d09f1eba629392d27fad6ffb25288836",
+      "modified_time": "2026-05-10 13:21:24 CDT"
     },
     {
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m6_rds_chunks/part-001.rdsbin",
       "category": "intermediate",
       "extension": "rdsbin",
-      "bytes": 12919808,
-      "md5": "4a475e165ae76a7bf8739714922e6510",
-      "modified_time": "2026-05-08 11:33:22 CDT"
+      "bytes": 13002388,
+      "md5": "9b1dd1a1eb3b0b1993f57c4c3d7ef699",
+      "modified_time": "2026-05-10 13:21:24 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m2.csv",
       "category": "tables",
       "extension": "csv",
-      "bytes": 8007,
-      "md5": "c7e39ac1a07777ae453696fb7ba4e67f",
+      "bytes": 8011,
+      "md5": "bd0faa4af0ac7900abf7cad6353956f8",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:02 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m2.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48661,
-      "md5": "841f7c047388f90265e2992812b66233",
-      "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:02 CDT"
+      "modified_time": "2026-05-10 13:24:13 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m2.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 2950,
-      "md5": "da50dfc0224cb135f67a8476d030f229",
+      "bytes": 3004,
+      "md5": "9ee7bfd1382d0af6971f9ef8c9760ae6",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:02 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m2_standalone.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48661,
-      "md5": "841f7c047388f90265e2992812b66233",
-      "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:02 CDT"
+      "modified_time": "2026-05-10 13:24:14 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m2_standalone.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 436,
-      "md5": "3cd08ba2c93a4c10947dfd107b6e1b45",
+      "bytes": 449,
+      "md5": "cf387830ca582311400409ac9978ecb6",
       "crosswalk_slug": "m2",
-      "modified_time": "2026-05-08 11:35:02 CDT"
+      "modified_time": "2026-05-10 13:24:14 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.csv",
       "category": "tables",
       "extension": "csv",
-      "bytes": 8014,
-      "md5": "97dfa9d66f2237fbbcfd2ade2f4cc664",
+      "bytes": 8008,
+      "md5": "12178037fac4a6377aa7724c482a112c",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:34 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "c1388f9394e428f5d3b0d4ad0f2b4314",
-      "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:35 CDT"
+      "modified_time": "2026-05-10 13:26:24 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 2950,
-      "md5": "fec92340581e3c772a1c31fa490237b1",
+      "bytes": 3004,
+      "md5": "b4fe014bcaf7183b7582374818596533",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:34 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m4_standalone.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "c1388f9394e428f5d3b0d4ad0f2b4314",
-      "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:35 CDT"
+      "modified_time": "2026-05-10 13:26:24 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m4_standalone.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 436,
-      "md5": "d788d2ac20f08f37cbe6515ca043ae37",
+      "bytes": 449,
+      "md5": "b5808e89708835d74a5c16d78783d61f",
       "crosswalk_slug": "m4",
-      "modified_time": "2026-05-08 11:36:34 CDT"
+      "modified_time": "2026-05-10 13:26:24 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m5.csv",
       "category": "tables",
       "extension": "csv",
-      "bytes": 7999,
-      "md5": "44539972f1fb2118a28bb58b32e8c650",
+      "bytes": 7998,
+      "md5": "f3ba099139850e9e1b49fbb30fbe22c3",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:27 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m5.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "43f7005bb4602a6bc9b35349683e12c7",
-      "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:28 CDT"
+      "modified_time": "2026-05-10 13:18:26 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m5.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 2950,
-      "md5": "62eaf6f1571b22aa6358e9b801302235",
+      "bytes": 3004,
+      "md5": "c7d8e02164fb1c128396490f93b71a03",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:27 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m5_standalone.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "43f7005bb4602a6bc9b35349683e12c7",
-      "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:28 CDT"
+      "modified_time": "2026-05-10 13:18:26 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m5_standalone.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 436,
-      "md5": "278ce831c499ed66a46c4351fc6ac816",
+      "bytes": 449,
+      "md5": "11bf779bc8e4a44b71343fc9cfb3acbb",
       "crosswalk_slug": "m5",
-      "modified_time": "2026-05-08 11:31:27 CDT"
+      "modified_time": "2026-05-10 13:18:26 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m6.csv",
       "category": "tables",
       "extension": "csv",
-      "bytes": 8018,
-      "md5": "5a9074eafe3ae5b1a9f2ef1fc05eac8f",
+      "bytes": 8010,
+      "md5": "1fae1085aec466a0329e0fdb132f4e86",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:41 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m6.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "d92f427cd5525676f58a0721c3725467",
-      "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:42 CDT"
+      "modified_time": "2026-05-10 13:21:50 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m6.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 2950,
-      "md5": "a9e7f7be50b3637a4b917878e2a3efd8",
+      "bytes": 3004,
+      "md5": "ca0ba6d6608d6a59a602af4e5cfb04e2",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:41 CDT"
-    },
-    {
-      "path": "output/tables/tab_event_study_rep_margin_main_specs_m6_standalone.pdf",
-      "category": "tables",
-      "extension": "pdf",
-      "bytes": 48662,
-      "md5": "d92f427cd5525676f58a0721c3725467",
-      "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:42 CDT"
+      "modified_time": "2026-05-10 13:21:50 CDT"
     },
     {
       "path": "output/tables/tab_event_study_rep_margin_main_specs_m6_standalone.tex",
       "category": "tables",
       "extension": "tex",
-      "bytes": 436,
-      "md5": "7b135a6e8a45ebc8c6d1f2447477568d",
+      "bytes": 449,
+      "md5": "91eba4a13b13e0fcfb257c5be3502d27",
       "crosswalk_slug": "m6",
-      "modified_time": "2026-05-08 11:33:41 CDT"
+      "modified_time": "2026-05-10 13:21:50 CDT"
     }
   ]
 }

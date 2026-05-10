@@ -1,6 +1,6 @@
 {
   "stage": "export_event_study_outputs",
-  "generated_at": "2026-05-08 11:36:36 CDT",
+  "generated_at": "2026-05-10 13:26:26 CDT",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
@@ -38,7 +38,7 @@
       "path": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4.rds",
       "chunk_manifest": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks/manifest.json",
       "chunk_dir": "output/intermediate/event_study_results_all_specs_aa2021_rep_margin_m4_rds_chunks",
-      "manifest_md5": "d61bd1cb330ad8fd2a3bcb51edebce69",
+      "manifest_md5": "ff700b06812eddcfba00540af055aa9b",
       "storage": "chunked_rds"
     }
   },
@@ -55,34 +55,34 @@
     "outputs": {
       "table_csv": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.csv",
-        "md5": "97dfa9d66f2237fbbcfd2ade2f4cc664"
+        "md5": "12178037fac4a6377aa7724c482a112c"
       },
       "table_tex": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.tex",
-        "md5": "fec92340581e3c772a1c31fa490237b1"
+        "md5": "b4fe014bcaf7183b7582374818596533"
       },
       "table_pdf": {
         "path": "output/tables/tab_event_study_rep_margin_main_specs_m4.pdf",
-        "md5": "c1388f9394e428f5d3b0d4ad0f2b4314"
+        "md5": null
       },
       "figure_pdf": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.pdf",
-        "md5": "a8f2ded08d042b0353ed1037081f2f91"
+        "md5": "c1e05d8ebd18b662c9f73da4bf42b88a"
       },
       "figure_png": {
         "path": "output/figures/fig_event_study_rep_margin_main_specs_m4.png",
-        "md5": "b9f20cd067fc012ac6764a767bb8d847"
+        "md5": "fe664182b55e69ce95dcc2c8481ac7a2"
       },
       "output_manifest_csv": {
         "path": "output/diagnostics/output_manifest.csv",
-        "md5": "c39cf00b8d2e8cb15179e535954e888a"
+        "md5": "2720d3e2da0b2d891389a0b6e7d98669"
       },
       "output_manifest_json": {
         "path": "output/diagnostics/output_manifest.json",
-        "md5": "d4df356a5cfe29174bdb7aeed331e91d"
+        "md5": "ce2652b518be349fa4ac372246c9fc8f"
       }
     },
-    "output_manifest_n_files": 208,
+    "output_manifest_n_files": 200,
     "validation_failures": false,
     "reported_nonfatal_conditions": true
   }
