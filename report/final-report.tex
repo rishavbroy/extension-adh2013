@@ -185,9 +185,6 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{xcolor}
-\usepackage{caption}
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -234,7 +231,7 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Trade Shocks and Political Change in Local Labor Markets},
-  pdfauthor={Yana; Rachel; Yuxiao; Rishav Roy},
+  pdfauthor={Yana Samanta; Rachel Williams; Yuxiao Li; Rishav Roy},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -244,7 +241,8 @@
 
 
 \title{Trade Shocks and Political Change in Local Labor Markets}
-\author{Yana \and Rachel \and Yuxiao \and Rishav Roy}
+\author{Yana Samanta \and Rachel Williams \and Yuxiao Li \and Rishav
+Roy}
 \date{}
 \begin{document}
 \maketitle
@@ -252,19 +250,16 @@
 
 \section{Summary}\label{summary}
 
-Authors: Yana, Rachel, Yuxiao, and Rishav Roy.
-
-Autor, Dorn, and Hanson (2013, hereafter ADH), ``The China Syndrome:
-Local Labor Market Effects of Import Competition in the United States,''
-examine how rising Chinese import competition affected U.S. local labor
-markets between 1990 and 2007 (\citeproc{ref-autorDornHanson2013}{Autor
-et al. 2013}). Their primary research question is whether greater
-exposure to Chinese imports contributed to declines in manufacturing
-employment, wages, and labor force participation across U.S. regions.
-Using commuting zones (CZs) as local labor market units, ADH use a
-shift-share research design that relates changes in local outcomes to
-differences in baseline industry composition and subsequent
-industry-level import growth.
+Autor et al. (\citeproc{ref-autorDornHanson2013}{2013}) (hereafter ADH),
+``The China Syndrome: Local Labor Market Effects of Import Competition
+in the United States,'' examine how rising Chinese import competition
+affected U.S. local labor markets between 1990 and 2007. Their primary
+research question is whether greater exposure to Chinese imports
+contributed to declines in manufacturing employment, wages, and labor
+force participation across U.S. regions. Using commuting zones (CZs) as
+local labor market units, ADH use a shift-share research design that
+relates changes in local outcomes to differences in baseline industry
+composition and subsequent industry-level import growth.
 
 Our project extends this framework to political outcomes. We ask whether
 CZs more exposed to the China shock experienced different changes in
@@ -345,55 +340,49 @@ cautious interpretation.
 
 Our analysis combines four primary datasets to construct
 commuting-zone-level political and trade exposure measures. We use the
-ADH (2013) replication package for baseline commuting-zone trade
-exposure measures and pre-determined labor market controls, including
-industry composition and demographic structure
-(\citeproc{ref-autorDornHanson2013}{Autor et al. 2013}).
+Autor et al. (\citeproc{ref-autorDornHanson2013}{2013}) replication
+package for baseline commuting-zone trade exposure measures and
+pre-determined labor market controls, including industry composition and
+demographic structure.
 
 To align modern political data with historical labor markets, we use
-Ferrara, Testa, and Zhou (2024), \emph{Crosswalks for U.S. Counties and
-Congressional Districts, 1790--2020}, which maps contemporary counties
-to historical boundaries and provides county centroid coordinates
-(\citeproc{ref-ferraraTestaZhou2024}{Ferrara et al. 2024}). Our
-preferred crosswalk uses M5 weights where available and M2 weights as
-fallback for source counties where M5 weights are undefined or zero.
+Ferrara et al. (\citeproc{ref-ferraraTestaZhou2024}{2024}),
+\emph{Crosswalks for U.S. Counties and Congressional Districts,
+1790--2020}, which maps contemporary counties to historical boundaries
+and provides county centroid coordinates. Our preferred crosswalk uses
+M5 weights where available and M2 weights as fallback for source
+counties where M5 weights are undefined or zero.
 
 We aggregate counties into 1990 commuting zones using the U.S.
 Department of Agriculture Economic Research Service Commuting Zones and
-Labor Market Areas dataset, consistent with the Tolbert and Sizer (1996)
-classification (\citeproc{ref-tolbertSizer1996}{Tolbert and Sizer 1996};
-\citeproc{ref-usdaERSCommutingZones}{U.S. Department of Agriculture
-Economic Research Service 2026}).
+Labor Market Areas dataset, consistent with the Tolbert and Sizer
+(\citeproc{ref-tolbertSizer1996}{1996}) classification and the USDA ERS
+commuting-zone data (\citeproc{ref-usdaERSCommutingZones}{U.S.
+Department of Agriculture Economic Research Service 2026}).
 
-Political outcomes are drawn from Amlani and Algara (2021),
-\emph{Partisanship \& Nationalization in American Elections,
-1872--2020}, which provides county-level presidential election returns
-used to construct Republican vote margins
-(\citeproc{ref-amlaniAlgara2021}{Amlani and Algara 2021}).
+Political outcomes are drawn from Amlani and Algara
+(\citeproc{ref-amlaniAlgara2021}{2021}), \emph{Partisanship \&
+Nationalization in American Elections, 1872--2020}, which provides
+county-level presidential election returns used to construct Republican
+vote margins.
 
 We follow the sample design of Autor, Dorn, and Hanson (2013). The unit
 of analysis is the 1990 commuting zone (CZ) of Tolbert and Sizer (1996),
 covering 722 CZs over 1990--2000 and 2000--2007 stacked in first
-differences (1,444 observations). Table Figure~\ref{fig-yuxiao-summary}
-reports population-weighted means from ADH's replication package. Two
-findings stand out. Chinese imports per worker (10-year equivalent) more
-than doubled, from \$1.14k in 1990--2000 to \$2.63k in 2000--2007,
-tracking China's WTO accession in 2001. Manufacturing employment as a
-share of population declined from 12.69\% in 1990 to 8.51\% in 2007,
-while SSDI receipt increased over the same period.
+differences (1,444 observations). Table 1 reports population-weighted
+means from ADH's replication package. Two findings stand out. Chinese
+imports per worker (10-year equivalent) more than doubled, from \$1.14k
+in 1990--2000 to \$2.63k in 2000--2007, tracking China's WTO accession
+in 2001. Manufacturing employment as a share of population declined from
+12.69\% in 1990 to 8.51\% in 2007, while SSDI receipt increased over the
+same period.
 
-\begin{figure}[H]
-
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{assets/yuxiao_table1.png}
-
-}
-
-\caption{\label{fig-yuxiao-summary}Descriptive statistics for selected
-CZ-level variables, reproduced from ADH 2013 Appendix Table 2.}
-
-\end{figure}%
+\begin{table}[H]
+\centering
+\caption{Descriptive statistics for selected CZ-level variables.}
+\label{tbl-yuxiao-summary}
+\includegraphics[width=0.95\linewidth]{assets/yuxiao_table1.png}
+\end{table}
 
 \section{Analysis and Findings}\label{analysis-and-findings}
 
@@ -402,9 +391,9 @@ Plausibility}\label{identification-strategy-and-its-plausibility}
 
 OLS estimation of the labor-market effect of Chinese import exposure
 faces an endogeneity problem. Observed U.S. imports reflect both Chinese
-supply-side and U.S. demand shocks, biasing OLS toward zero. ADH (2013)
-report an OLS estimate of −0.171 versus an IV estimate of −0.596
-(\citeproc{ref-autorDornHanson2013}{Autor et al. 2013}).
+supply-side and U.S. demand shocks, biasing OLS toward zero. Autor et
+al. (\citeproc{ref-autorDornHanson2013}{2013}) report an OLS estimate of
+−0.171 versus an IV estimate of −0.596.
 
 They address this with a Bartik-style instrument, replacing
 \(\Delta IPW_{uit}\) with \(\Delta IPW_{oit}\), built from same-period
@@ -430,8 +419,8 @@ The second-stage equation is estimated as stacked first differences:
 
 where \(X_{it}\) contains start-of-period manufacturing share,
 demographic controls, the routine and offshorability indices of Autor
-and Dorn (2013), and Census division dummies
-(\citeproc{ref-autorDorn2013}{Autor and Dorn 2013}).
+and Dorn (\citeproc{ref-autorDorn2013}{2013}), and Census division
+dummies.
 
 Three pieces of evidence support the strategy. First, the first stage is
 strong: the instrument predicts the endogenous regressor with
@@ -450,36 +439,31 @@ in the U.S., supporting the supply-driven interpretation.
 Results}\label{reproduction-of-published-results}
 
 We verify that the official replication package functions correctly. Our
-target is Table 3 of ADH (2013), the 2SLS regression of CZ-level change
-in manufacturing employment share on \(\Delta IPW_{uit}\), instrumented
-by the eight-country measure. We focus on column (6) with full controls.
+target is Table 3 of Autor et al.
+(\citeproc{ref-autorDornHanson2013}{2013}), the 2SLS regression of
+CZ-level change in manufacturing employment share on
+\(\Delta IPW_{uit}\), instrumented by the eight-country measure. We
+focus on column (6) with full controls.
 
 Running the official Stata code on the published workfile, we obtain
 coefficients matching the published values exactly to three decimal
 places across all six columns. In column (6), the coefficient on
-\(\Delta IPW\) is −0.596 (SE 0.099); the first-stage coefficient is
-0.631 (\(t=6.90\)); \(N=1{,}444\) with \(R^2=0.343\). Table
-Figure~\ref{fig-yuxiao-replication} reports the full comparison.
+\(\Delta IPW\) is -0.596 (SE 0.099); the first-stage coefficient is
+0.631 (\(t=6.90\)); \(N=1{,}444\) with \(R^2=0.343\). Table 2 reports
+the full comparison.
 
-\begin{figure}[H]
+\begin{table}[H]
+\centering
+\caption{Replication of ADH (2013) Table 3: effect of Chinese import exposure on CZ manufacturing employment share.}
+\label{tbl-yuxiao-replication}
+\includegraphics[width=0.98\linewidth]{assets/yuxiao_table2.png}
+\end{table}
 
-\centering{
-
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{assets/yuxiao_table2.png}
-
-}
-
-\caption{\label{fig-yuxiao-replication}Replication of ADH (2013) Table 3
---- effect of Chinese import exposure on CZ manufacturing employment
-share.}
-
-\end{figure}%
-
-Economically, −0.596 implies that a \$1,000 per-worker increase in
+Economically, -0.596 implies that a \$1,000 per-worker increase in
 decadal Chinese exposure lowers a CZ's manufacturing share by 0.6
 percentage points. ADH attribute 44\% of the 1990--2007 manufacturing
 decline to this channel. Because we use the original data and code, this
-is a computational reproduction---the exact match confirms our codebase
+is a computational reproduction: the exact match confirms our codebase
 functions correctly. The next section applies the same strategy to
 CZ-level presidential political outcomes.
 
@@ -521,7 +505,7 @@ political trends
 These assumptions are not innocuous. In our diagnostics, the ADH
 instrument strongly predicts exposure, but exposure is also highly
 correlated with baseline manufacturing intensity and routine-task
-concentration. Table Table~\ref{tbl-bartik-firststage} summarizes the
+concentration. Table~\ref{tbl-bartik-firststage} summarizes the
 first-stage strength in our political-outcome sample.
 
 {
@@ -547,7 +531,7 @@ Full controls & 0.794 & 0.101 & 62.0 & 722 \\
 
 }
 
-Figure Figure~\ref{fig-main-event-study} presents the main event-study
+Figure~\ref{fig-main-event-study} presents the main event-study
 estimates. The preferred inference is CZ-clustered. Conley,
 Driscoll-Kraay, Newey-West, state-clustered, and two-way clustered
 alternatives are computed as diagnostics, but several spatial and
@@ -580,11 +564,11 @@ positioning, media narratives, or changing turnout and party coalitions.
 
 To understand what is behind the margin effect, we decompose the outcome
 into Republican votes per 1990 population, Democratic votes per 1990
-population, and two-party vote volume. Figure
-Figure~\ref{fig-alt-decomp} shows that the margin pattern should not be
-interpreted mechanically as a simple increase in Republican votes. The
-broader decomposition helps distinguish vote-choice changes from changes
-in participation and party-specific mobilization.
+population, and two-party vote volume. Figure~\ref{fig-alt-decomp} shows
+that the margin pattern should not be interpreted mechanically as a
+simple increase in Republican votes. The broader decomposition helps
+distinguish vote-choice changes from changes in participation and
+party-specific mobilization.
 
 \begin{figure}[H]
 
@@ -606,12 +590,12 @@ coefficient for 2016 does not mean that a new trade shock occurs in
 2016. It means that CZs with greater cumulative exposure by 2007 evolved
 differently by 2016. To make this interpretation more transparent, we
 split exposure into 1990--2000 and 2000--2007 components and include
-both components jointly. Figure Figure~\ref{fig-subperiod-exposure}
-shows that the estimated relationship varies depending on which
-subperiod of import growth is emphasized. Pre-1988 coefficients in this
-exercise are placebo relationships with future exposure, while post-2008
-coefficients describe how early- and late-shock exposure predict later
-political differences.
+both components jointly. Figure~\ref{fig-subperiod-exposure} shows that
+the estimated relationship varies depending on which subperiod of import
+growth is emphasized. Pre-1988 coefficients in this exercise are placebo
+relationships with future exposure, while post-2008 coefficients
+describe how early- and late-shock exposure predict later political
+differences.
 
 \begin{figure}[H]
 
@@ -721,75 +705,53 @@ This appendix documents the county-to-CZ bridge used to construct
 political outcomes. County election returns are bridged to 1990 counties
 using FTZ crosswalk weights and then aggregated to 1990 CZs. The
 preferred design uses M5 where valid and M2 fallback where M5 is
-undefined or zero.
+undefined or zero. The full row-level diagnostics are saved in
+\texttt{output/diagnostics/}; the tables below report compact summaries
+intended for print.
 
 {
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1833}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0300}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0200}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0300}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0367}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.7000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.7237}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1184}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0789}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0789}}@{}}
 
-\caption{\label{tbl-validation-checks}Pipeline validation checks.}
+\caption{\label{tbl-validation-checks}Pipeline validation checks,
+compact summary.}
 
 \tabularnewline
 
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-check
+Check
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-status
+Status
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-fatal
+Fatal
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-n\_failed
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-n\_reported
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-details
+Count
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-adh\_one\_row\_per\_czone & pass & TRUE & 0 & NA & Requires one ADH
-baseline/exposure row per commuting zone. \\
-cz\_lookup\_unique\_1990\_counties & pass & TRUE & 0 & NA & Requires
-each 1990 county FIPS to appear once and map to one CZ. \\
-aa\_all\_county\_fips\_valid & pass & TRUE & 0 & NA & Requires all
-county FIPS to be five numeric digits before filtering. \\
-aa\_vote\_identity\_error\_within\_tolerance & pass & TRUE & 0 & NA &
-Max absolute vote identity error: 0 \\
-crosswalk\_positive\_final\_weight\_sums\_equal\_one & pass & TRUE & 0 &
-NA & Tolerance: 1e-06 \\
-crosswalk\_all\_source\_weight\_sums\_equal\_one\_or\_reported &
-reported & FALSE & 0 & 162 & Global non-ADH or unsupported source-county
-rows are reported rather than treated as validation failures. Estimation
-is gated by positive final weights, retained vote share, and panel
-balance. Tolerance: 1e-06 \\
-crosswalk\_undefined\_selected\_weights\_handled & pass & TRUE & 1204 &
-NA & Policy: fallback\_m2 \\
-aa\_no\_duplicate\_county\_years\_after\_exact\_distinct & pass & TRUE &
-0 & NA & Exact duplicate rows removed: 0 \\
-aa\_two\_party\_votes\_match\_party\_votes & pass & TRUE & 0 & NA &
-Requires republican + democratic votes to equal two-party votes. \\
-aa\_votes\_nonnegative & pass & TRUE & 0 & NA & Requires nonnegative
-Republican, Democratic, two-party, and total votes. \\
-bridged\_vote\_retention\_above\_threshold & pass & TRUE & 0 & NA &
-Minimum retained share in main years: 0.996122 \\
-main\_panel\_balanced & pass & TRUE & 0 & NA & Observed complete rows:
-9386; expected rows: 9386; missing share: 0 \\
-event\_study\_residualized\_design\_full\_rank & pass & TRUE & 0 & NA &
-Requires no residualized RHS rank deficiency in 1952-start or 1972-start
-specifications. \\
-event\_study\_main\_vcov\_available\_without\_repair & pass & TRUE & 0 &
-NA & Main SE type: cluster\_cz \\
-event\_study\_conley\_repair\_diagnostics\_recorded & pass & FALSE & 31
-& NA & Conley VCOVs requiring repair across all samples/specs/cutoffs:
-31 \\
+adh one row per czone & pass & TRUE & 0 \\
+cz lookup unique 1990 counties & pass & TRUE & 0 \\
+aa all county fips valid & pass & TRUE & 0 \\
+aa vote identity error within tolerance & pass & TRUE & 0 \\
+crosswalk positive final weight sums equal one & pass & TRUE & 0 \\
+crosswalk all source weight sums equal one or reported & reported &
+FALSE & 0 \\
+crosswalk undefined selected weights handled & pass & TRUE & 1204 \\
+aa no duplicate county years after exact distinct & pass & TRUE & 0 \\
+aa two party votes match party votes & pass & TRUE & 0 \\
+aa votes nonnegative & pass & TRUE & 0 \\
+bridged vote retention above threshold & pass & TRUE & 0 \\
+main panel balanced & pass & TRUE & 0 \\
+event study residualized design full rank & pass & TRUE & 0 \\
+event study main vcov available without repair & pass & TRUE & 0 \\
+event study conley repair diagnostics recorded & pass & FALSE & 31 \\
 
 \end{longtable}
 
@@ -1061,12 +1023,12 @@ SD
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-l\_shind\_manuf\_cbp & 0.574 & 0.614 & 20.695 & 12.848 \\
-l\_sh\_popedu\_c & -0.243 & -0.287 & 48.021 & 8.574 \\
-l\_sh\_popfborn & -0.145 & -0.131 & 10.146 & 4.969 \\
-l\_sh\_empl\_f & 0.028 & 0.006 & 63.624 & 6.634 \\
-l\_sh\_routine33 & 0.301 & 0.355 & 32.228 & 3.362 \\
-l\_task\_outsource & 0.261 & 0.312 & 0.112 & 0.407 \\
+l shind manuf cbp & 0.574 & 0.614 & 20.695 & 12.848 \\
+l sh popedu c & -0.243 & -0.287 & 48.021 & 8.574 \\
+l sh popfborn & -0.145 & -0.131 & 10.146 & 4.969 \\
+l sh empl f & 0.028 & 0.006 & 63.624 & 6.634 \\
+l sh routine33 & 0.301 & 0.355 & 32.228 & 3.362 \\
+l task outsource & 0.261 & 0.312 & 0.112 & 0.407 \\
 statefip & -0.085 & -0.087 & 27.790 & 14.987 \\
 
 \end{longtable}
@@ -1106,30 +1068,30 @@ p-value
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-pretrend\_slope\_rep\_margin & minimal & exposure\_1990\_2007 & 0.0001 &
+pretrend slope rep margin & Minimal & exposure 1990 2007 & 0.0001 &
 0.0002 & 0.601 \\
-pretrend\_slope\_rep\_margin & core\_controls & exposure\_1990\_2007 &
--0.0001 & 0.0002 & 0.700 \\
-pretrend\_slope\_rep\_margin & full\_controls & exposure\_1990\_2007 &
--0.0001 & 0.0002 & 0.548 \\
-pretrend\_slope\_rep\_margin & minimal & instrument\_1990\_2007 & 0.0000
-& 0.0002 & 0.976 \\
-pretrend\_slope\_rep\_margin & core\_controls & instrument\_1990\_2007 &
+pretrend slope rep margin & Core controls & exposure 1990 2007 & -0.0001
+& 0.0002 & 0.700 \\
+pretrend slope rep margin & Full controls & exposure 1990 2007 & -0.0001
+& 0.0002 & 0.548 \\
+pretrend slope rep margin & Minimal & instrument 1990 2007 & 0.0000 &
+0.0002 & 0.976 \\
+pretrend slope rep margin & Core controls & instrument 1990 2007 &
 -0.0001 & 0.0002 & 0.556 \\
-pretrend\_slope\_rep\_margin & full\_controls & instrument\_1990\_2007 &
+pretrend slope rep margin & Full controls & instrument 1990 2007 &
 -0.0002 & 0.0002 & 0.498 \\
-pretrend\_change\_first\_to\_last & minimal & exposure\_1990\_2007 &
-0.0075 & 0.0062 & 0.236 \\
-pretrend\_change\_first\_to\_last & core\_controls &
-exposure\_1990\_2007 & -0.0012 & 0.0056 & 0.833 \\
-pretrend\_change\_first\_to\_last & full\_controls &
-exposure\_1990\_2007 & -0.0018 & 0.0061 & 0.769 \\
-pretrend\_change\_first\_to\_last & minimal & instrument\_1990\_2007 &
-0.0064 & 0.0083 & 0.445 \\
-pretrend\_change\_first\_to\_last & core\_controls &
-instrument\_1990\_2007 & -0.0001 & 0.0081 & 0.990 \\
-pretrend\_change\_first\_to\_last & full\_controls &
-instrument\_1990\_2007 & -0.0004 & 0.0087 & 0.959 \\
+pretrend change first to last & Minimal & exposure 1990 2007 & 0.0075 &
+0.0062 & 0.236 \\
+pretrend change first to last & Core controls & exposure 1990 2007 &
+-0.0012 & 0.0056 & 0.833 \\
+pretrend change first to last & Full controls & exposure 1990 2007 &
+-0.0018 & 0.0061 & 0.769 \\
+pretrend change first to last & Minimal & instrument 1990 2007 & 0.0064
+& 0.0083 & 0.445 \\
+pretrend change first to last & Core controls & instrument 1990 2007 &
+-0.0001 & 0.0081 & 0.990 \\
+pretrend change first to last & Full controls & instrument 1990 2007 &
+-0.0004 & 0.0087 & 0.959 \\
 
 \end{longtable}
 
@@ -1142,50 +1104,47 @@ instrument\_1990\_2007 & -0.0004 & 0.0087 & 0.959 \\
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1351}}
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1216}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1081}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1892}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1622}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1892}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1892}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1622}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1892}}@{}}
 
 \caption{\label{tbl-industry-shifts}Industry-shift summary from ADH
-trade data diagnostics.}
+trade-data diagnostics.}
 
 \tabularnewline
 
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-status
+Status
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-period
+Period
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-importer
+Importer
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-sic87dd
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-start\_imports
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-end\_imports
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-import\_growth
+SIC87DD
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Start imports
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+End imports
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Import growth
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-ok & 1991-1999 & OTH & 3679 & 143699.73 & 2505878.0 & 2362178.3 \\
-ok & 1991-1999 & OTH & 3577 & 40964.04 & 1565398.4 & 1524434.3 \\
-ok & 1991-1999 & OTH & 3944 & 1285590.75 & 2732429.2 & 1446838.5 \\
-ok & 1991-1999 & OTH & 3651 & 936563.69 & 2377214.8 & 1440651.1 \\
-ok & 1991-1999 & OTH & 3861 & 58608.05 & 1004058.8 & 945450.8 \\
-ok & 1991-1999 & OTH & 2369 & 1191708.38 & 2126562.8 & 934854.4 \\
-ok & 1991-1999 & OTH & 2337 & 1214870.88 & 2095917.0 & 881046.1 \\
-ok & 1991-1999 & OTH & 2091 & 235925.19 & 1114860.0 & 878934.8 \\
-ok & 1991-1999 & OTH & 3161 & 623382.12 & 1466893.6 & 843511.5 \\
-ok & 1991-1999 & OTH & 3089 & 256498.66 & 1082972.6 & 826474.0 \\
-ok & 1991-1999 & OTH & 2325 & 634508.31 & 1300735.5 & 666227.2 \\
-ok & 1991-1999 & OTH & 2392 & 605945.94 & 1227629.4 & 621683.4 \\
-ok & 1991-1999 & OTH & 3021 & 374964.75 & 990012.8 & 615048.1 \\
-ok & 1991-1999 & OTH & 2331 & 934854.62 & 1546733.8 & 611879.1 \\
-ok & 1991-1999 & OTH & 3357 & 65468.17 & 666530.7 & 601062.5 \\
+ok & 1991-1999 & OTH & 3679 & 143699.7 & 2505878.0 & 2362178.3 \\
+ok & 1991-1999 & OTH & 3577 & 40964.0 & 1565398.4 & 1524434.3 \\
+ok & 1991-1999 & OTH & 3944 & 1285590.8 & 2732429.2 & 1446838.5 \\
+ok & 1991-1999 & OTH & 3651 & 936563.7 & 2377214.8 & 1440651.1 \\
+ok & 1991-1999 & OTH & 3861 & 58608.0 & 1004058.8 & 945450.8 \\
+ok & 1991-1999 & OTH & 2369 & 1191708.4 & 2126562.8 & 934854.4 \\
+ok & 1991-1999 & OTH & 2337 & 1214870.9 & 2095917.0 & 881046.1 \\
+ok & 1991-1999 & OTH & 2091 & 235925.2 & 1114860.0 & 878934.8 \\
+ok & 1991-1999 & OTH & 3161 & 623382.1 & 1466893.6 & 843511.5 \\
+ok & 1991-1999 & OTH & 3089 & 256498.7 & 1082972.6 & 826474.0 \\
+ok & 1991-1999 & OTH & 2325 & 634508.3 & 1300735.5 & 666227.2 \\
+ok & 1991-1999 & OTH & 2392 & 605945.9 & 1227629.4 & 621683.4 \\
 
 \end{longtable}
 
@@ -1263,263 +1222,57 @@ Full controls & 2020 & -0.0048 & 0.0043 & -0.0092 & 0.252 \\
 \section{Appendix E: Standard-Error
 Diagnostics}\label{appendix-e-standard-error-diagnostics}
 
+The main specification uses CZ-clustered standard errors. The
+diagnostics below summarize the broader set of variance-covariance
+estimators computed by the pipeline. Full row-level diagnostics are
+available in
+\texttt{output/diagnostics/event\_study\_vcov\_diagnostics.csv} and
+\texttt{output/diagnostics/event\_study\_se\_warning\_diagnostics.csv}.
+
 {
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0982}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.2455}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0893}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0714}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0714}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0625}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0670}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.1027}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0982}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1553}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1553}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1068}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1456}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2427}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1942}}@{}}
 
 \caption{\label{tbl-vcov-diagnostics}Variance-covariance diagnostics by
-specification and SE type.}
+SE type.}
 
 \tabularnewline
 
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-sample
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-spec
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-se\_type
+SE type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 status
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-vcov\_repair\_required
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-repair\_required
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-vcov\_repaired
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-min\_eigenvalue
+Model rows
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-n\_negative\_eigenvalues
+Repairs needed
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-max\_abs\_repair\_change
+Max negative eigenvalues
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Smallest eigenvalue
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-main\_1972\_start & minimal\_full\_panel & heteroskedastic & ok & FALSE
-& FALSE & FALSE & 0.0000022 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & cluster\_cz & ok & FALSE &
-FALSE & FALSE & 0.0000001 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & cluster\_state & ok & FALSE &
-FALSE & FALSE & 0.0000001 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & cluster\_cz\_year &
-repair\_required & TRUE & TRUE & FALSE & -0.0000403 & 10 & NA \\
-main\_1972\_start & minimal\_full\_panel & newey\_west\_lag1 & ok &
-FALSE & FALSE & FALSE & 0.0000012 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & driscoll\_kraay\_lag1 & ok &
-FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_250km & ok & FALSE &
-FALSE & FALSE & 0.0000001 & 0 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_500km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000057 & 2 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_750km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000041 & 4 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_1000km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000073 & 4 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-heteroskedastic & ok & FALSE & FALSE & FALSE & 0.0000011 & 0 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic & cluster\_cz
-& ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-cluster\_state & ok & FALSE & FALSE & FALSE & 0.0000000 & 1 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0004383
-& 35 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000006 & 0 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 17 &
-NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_250km & repair\_required & TRUE & TRUE & FALSE & -0.0000107 & 7
-& NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_500km & repair\_required & TRUE & TRUE & FALSE & -0.0000835 & 18
-& NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_750km & repair\_required & TRUE & TRUE & FALSE & -0.0001852 & 21
-& NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0003335 &
-22 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & heteroskedastic
-& ok & FALSE & FALSE & FALSE & 0.0000010 & 0 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & cluster\_cz & ok
-& FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & cluster\_state &
-ok & FALSE & FALSE & FALSE & 0.0000000 & 18 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0006599
-& 63 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000006 & 0 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 35 &
-NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_250km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000974 & 24 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_500km &
-repair\_required & TRUE & TRUE & FALSE & -0.0007051 & 36 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_750km &
-repair\_required & TRUE & TRUE & FALSE & -0.0011557 & 40 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_1000km &
-repair\_required & TRUE & TRUE & FALSE & -0.0019790 & 40 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-heteroskedastic & ok & FALSE & FALSE & FALSE & 0.0000001 & 0 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_state & ok & FALSE & FALSE & FALSE & 0.0000000 & 20 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0019361
-& 63 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 35 &
-NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_250km & repair\_required & TRUE & TRUE & FALSE & -0.0000139 & 24
-& NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_500km & repair\_required & TRUE & TRUE & FALSE & -0.0007107 & 36
-& NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_750km & repair\_required & TRUE & TRUE & FALSE & -0.0003939 & 40
-& NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0028599 &
-40 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & heteroskedastic & ok &
-FALSE & FALSE & FALSE & 0.0000020 & 0 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_cz & ok &
-FALSE & FALSE & FALSE & 0.0000001 & 0 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_state & ok &
-FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_cz\_year &
-repair\_required & TRUE & TRUE & FALSE & -0.0000385 & 14 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & newey\_west\_lag1 & ok
-& FALSE & FALSE & FALSE & 0.0000014 & 0 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & driscoll\_kraay\_lag1 &
-ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_250km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000001 & 1 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_500km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000112 & 4 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_750km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000233 & 7 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_1000km &
-repair\_required & TRUE & TRUE & FALSE & -0.0000152 & 7 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-heteroskedastic & ok & FALSE & FALSE & FALSE & 0.0000014 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_state & ok & FALSE & FALSE & FALSE & 0.0000000 & 10 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0004952
-& 53 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000007 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 25 &
-NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_250km & repair\_required & TRUE & TRUE & FALSE & -0.0000240 & 16
-& NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_500km & repair\_required & TRUE & TRUE & FALSE & -0.0002296 & 28
-& NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_750km & repair\_required & TRUE & TRUE & FALSE & -0.0004917 & 31
-& NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0010091 &
-33 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-heteroskedastic & ok & FALSE & FALSE & FALSE & 0.0000011 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_cz & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_state & ok & FALSE & FALSE & FALSE & 0.0000000 & 36 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0011482
-& 94 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000006 & 0 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 50 &
-NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_250km & repair\_required & TRUE & TRUE & FALSE & -0.0002214 & 39
-& NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_500km & repair\_required & TRUE & TRUE & FALSE & -0.0012160 & 54
-& NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_750km & repair\_required & TRUE & TRUE & FALSE & -0.0025146 & 56
-& NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0040057 &
-57 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-heteroskedastic & ok & FALSE & FALSE & FALSE & 0.0000001 & 0 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_state & ok & FALSE & FALSE & FALSE & 0.0000000 & 37 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz\_year & repair\_required & TRUE & TRUE & FALSE & -0.0040369
-& 94 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-newey\_west\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 0 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & ok & FALSE & FALSE & FALSE & 0.0000000 & 51 &
-NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_250km & repair\_required & TRUE & TRUE & FALSE & -0.0000431 & 39
-& NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_500km & repair\_required & TRUE & TRUE & FALSE & -0.0011073 & 54
-& NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_750km & repair\_required & TRUE & TRUE & FALSE & -0.0009977 & 56
-& NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0055161 &
-57 & NA \\
+CZ x year & repair\_required & 8 & 8 & 94 & -0.004037 \\
+CZ-clustered & ok & 8 & 0 & 0 & 0.000000 \\
+Conley 1000 km & repair\_required & 8 & 8 & 57 & -0.005516 \\
+Conley 250 km & ok & 1 & 0 & 0 & 0.000000 \\
+Conley 250 km & repair\_required & 7 & 7 & 39 & -0.000221 \\
+Conley 500 km & repair\_required & 8 & 8 & 54 & -0.001216 \\
+Conley 750 km & repair\_required & 8 & 8 & 56 & -0.002515 \\
+Driscoll-Kraay & ok & 8 & 0 & 51 & -0.000000 \\
+HC & ok & 8 & 0 & 0 & 0.000000 \\
+Newey-West & ok & 8 & 0 & 0 & 0.000000 \\
+State-clustered & ok & 8 & 0 & 37 & -0.000000 \\
 
 \end{longtable}
 
@@ -1528,417 +1281,42 @@ conley\_1000km & repair\_required & TRUE & TRUE & FALSE & -0.0055161 &
 {
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0514}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.1285}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0467}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0491}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0327}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0397}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0327}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0444}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0210}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0234}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0491}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0374}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0374}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0327}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.0350}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 32\tabcolsep) * \real{0.2944}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1356}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2966}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0932}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1525}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1525}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1695}}@{}}
 
-\caption{\label{tbl-se-warning-diagnostics}SE warning diagnostics.}
+\caption{\label{tbl-se-warning-diagnostics}SE diagnostic issue summary.}
 
 \tabularnewline
 
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-sample
+SE type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-spec
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-se\_type
+Issue
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-n\_event\_coefficients
+Model rows
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-min\_std\_error
+Max near-zero SEs
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-median\_std\_error
+Max nonfinite SEs
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-max\_std\_error
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-near\_zero\_se\_count
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-nonfinite\_se\_count
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-vcov\_dim
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-vcov\_rank
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-vcov\_rank\_deficiency
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-vcov\_status
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-repair\_required
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-vcov\_repaired
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-min\_eigenvalue
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-diagnostic\_note
+Max rank deficiency
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_cz & 17 & 0.0011450 & 0.0028558 & 0.0055053 & 0 & 0 & 119 & 119
-& 0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_cz\_year & 17 & 0.0003398 & 0.0012840 & 0.0020663 & 0 & 8 & 119
-& 119 & 0 & repair\_required & TRUE & FALSE & -0.0011482 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-cluster\_state & 17 & 0.0012618 & 0.0031569 & 0.0071144 & 0 & 0 & 119 &
-47 & 72 & ok & FALSE & FALSE & 0.0000000 & VCOV is rank deficient; use
-as diagnostic only unless justified. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_1000km & 17 & 0.0010730 & 0.0039122 & 0.0071460 & 0 & 1 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0040057 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_250km & 17 & 0.0013422 & 0.0035539 & 0.0080085 & 0 & 0 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0002214 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_500km & 17 & 0.0012428 & 0.0037343 & 0.0092022 & 0 & 0 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0012160 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-conley\_750km & 17 & 0.0011858 & 0.0040711 & 0.0058539 & 0 & 1 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0025146 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-driscoll\_kraay\_lag1 & 17 & 0.0000000 & 0.0000000 & 0.0000000 & 17 & 0
-& 119 & 51 & 68 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-heteroskedastic & 17 & 0.0021333 & 0.0029210 & 0.0053774 & 0 & 0 & 119 &
-119 & 0 & ok & FALSE & FALSE & 0.0000011 & NA \\
-diagnostic\_1952\_start & interacted\_controls\_full\_panel &
-newey\_west\_lag1 & 17 & 0.0017730 & 0.0030056 & 0.0055331 & 0 & 0 & 119
-& 119 & 0 & ok & FALSE & FALSE & 0.0000006 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz & 17 & 0.0011450 & 0.0028558 & 0.0055053 & 0 & 0 & 119 & 119
-& 0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz\_year & 17 & 0.0003398 & 0.0012840 & 0.0020663 & 0 & 8 & 119
-& 119 & 0 & repair\_required & TRUE & FALSE & -0.0040369 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_state & 17 & 0.0012618 & 0.0031569 & 0.0071144 & 0 & 0 & 119 &
-50 & 69 & ok & FALSE & FALSE & 0.0000000 & VCOV is rank deficient; use
-as diagnostic only unless justified. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_1000km & 17 & 0.0010730 & 0.0039122 & 0.0071460 & 0 & 1 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0055161 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_250km & 17 & 0.0013422 & 0.0035539 & 0.0080085 & 0 & 0 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0000431 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_500km & 17 & 0.0012428 & 0.0037343 & 0.0092022 & 0 & 0 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0011073 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_750km & 17 & 0.0011858 & 0.0040711 & 0.0058539 & 0 & 1 & 119 &
-119 & 0 & repair\_required & TRUE & FALSE & -0.0009977 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & 17 & 0.0000000 & 0.0000000 & 0.0000000 & 17 & 0
-& 119 & 63 & 56 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-heteroskedastic & 17 & 0.0021333 & 0.0029210 & 0.0053774 & 0 & 0 & 119 &
-119 & 0 & ok & FALSE & FALSE & 0.0000001 & NA \\
-diagnostic\_1952\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-newey\_west\_lag1 & 17 & 0.0017730 & 0.0030056 & 0.0055331 & 0 & 0 & 119
-& 119 & 0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz & 17 & 0.0011361 & 0.0026991 & 0.0054382 & 0 & 0 & 68 & 68 &
-0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz\_year & 17 & 0.0007968 & 0.0021135 & 0.0025131 & 0 & 10 & 68
-& 68 & 0 & repair\_required & TRUE & FALSE & -0.0004952 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-cluster\_state & 17 & 0.0012829 & 0.0031404 & 0.0065168 & 0 & 0 & 68 &
-47 & 21 & ok & FALSE & FALSE & 0.0000000 & VCOV is rank deficient; use
-as diagnostic only unless justified. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_1000km & 17 & 0.0009920 & 0.0033095 & 0.0069653 & 0 & 0 & 68 &
-68 & 0 & repair\_required & TRUE & FALSE & -0.0010091 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_250km & 17 & 0.0012790 & 0.0035720 & 0.0078193 & 0 & 0 & 68 & 68
-& 0 & repair\_required & TRUE & FALSE & -0.0000240 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_500km & 17 & 0.0005874 & 0.0036427 & 0.0082181 & 0 & 0 & 68 & 68
-& 0 & repair\_required & TRUE & FALSE & -0.0002296 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-conley\_750km & 17 & 0.0011282 & 0.0038821 & 0.0058691 & 0 & 1 & 68 & 68
-& 0 & repair\_required & TRUE & FALSE & -0.0004917 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & 17 & 0.0000000 & 0.0000000 & 0.0000000 & 17 & 0
-& 68 & 28 & 40 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-heteroskedastic & 17 & 0.0023645 & 0.0029059 & 0.0051776 & 0 & 0 & 68 &
-68 & 0 & ok & FALSE & FALSE & 0.0000014 & NA \\
-diagnostic\_1952\_start & interacted\_core\_controls\_diagnostic &
-newey\_west\_lag1 & 17 & 0.0019190 & 0.0029901 & 0.0053275 & 0 & 0 & 68
-& 68 & 0 & ok & FALSE & FALSE & 0.0000007 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_cz & 17 &
-0.0012447 & 0.0038491 & 0.0068718 & 0 & 0 & 17 & 17 & 0 & ok & FALSE &
-FALSE & 0.0000001 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_cz\_year & 17
-& 0.0003390 & 0.0009342 & 0.0022609 & 0 & 7 & 17 & 17 & 0 &
-repair\_required & TRUE & FALSE & -0.0000385 & Two-way clustering
-includes very few year clusters; use as diagnostic only. \\
-diagnostic\_1952\_start & minimal\_full\_panel & cluster\_state & 17 &
-0.0016513 & 0.0049190 & 0.0087699 & 0 & 0 & 17 & 17 & 0 & ok & FALSE &
-FALSE & 0.0000000 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_1000km & 17 &
-0.0013982 & 0.0058193 & 0.0125125 & 0 & 0 & 17 & 17 & 0 &
-repair\_required & TRUE & FALSE & -0.0000152 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_250km & 17 &
-0.0018948 & 0.0051039 & 0.0087177 & 0 & 0 & 17 & 17 & 0 &
-repair\_required & TRUE & FALSE & -0.0000001 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_500km & 17 &
-0.0019134 & 0.0053149 & 0.0107249 & 0 & 0 & 17 & 17 & 0 &
-repair\_required & TRUE & FALSE & -0.0000112 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & minimal\_full\_panel & conley\_750km & 17 &
-0.0021888 & 0.0054710 & 0.0114147 & 0 & 0 & 17 & 17 & 0 &
-repair\_required & TRUE & FALSE & -0.0000233 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-diagnostic\_1952\_start & minimal\_full\_panel & driscoll\_kraay\_lag1 &
-17 & 0.0000000 & 0.0000000 & 0.0000000 & 17 & 0 & 17 & 17 & 0 & ok &
-FALSE & FALSE & 0.0000000 & Suspicious near-zero Driscoll-Kraay SEs; do
-not report without further diagnosis. \\
-diagnostic\_1952\_start & minimal\_full\_panel & heteroskedastic & 17 &
-0.0020400 & 0.0039947 & 0.0066970 & 0 & 0 & 17 & 17 & 0 & ok & FALSE &
-FALSE & 0.0000020 & NA \\
-diagnostic\_1952\_start & minimal\_full\_panel & newey\_west\_lag1 & 17
-& 0.0017522 & 0.0041104 & 0.0068909 & 0 & 0 & 17 & 17 & 0 & ok & FALSE &
-FALSE & 0.0000014 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel & cluster\_cz & 12
-& 0.0011449 & 0.0027069 & 0.0032709 & 0 & 0 & 84 & 84 & 0 & ok & FALSE &
-FALSE & 0.0000000 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-cluster\_cz\_year & 12 & 0.0010835 & 0.0016456 & 0.0020254 & 0 & 5 & 84
-& 84 & 0 & repair\_required & TRUE & FALSE & -0.0006599 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-main\_1972\_start & interacted\_controls\_full\_panel & cluster\_state &
-12 & 0.0012617 & 0.0030857 & 0.0038112 & 0 & 0 & 84 & 47 & 37 & ok &
-FALSE & FALSE & 0.0000000 & VCOV is rank deficient; use as diagnostic
-only unless justified. \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_1000km &
-12 & 0.0010854 & 0.0039572 & 0.0047094 & 0 & 0 & 84 & 84 & 0 &
-repair\_required & TRUE & FALSE & -0.0019790 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_250km &
-12 & 0.0013577 & 0.0033711 & 0.0041022 & 0 & 0 & 84 & 84 & 0 &
-repair\_required & TRUE & FALSE & -0.0000974 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_500km &
-12 & 0.0012571 & 0.0035916 & 0.0039649 & 0 & 0 & 84 & 84 & 0 &
-repair\_required & TRUE & FALSE & -0.0007051 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_controls\_full\_panel & conley\_750km &
-12 & 0.0011994 & 0.0038920 & 0.0048773 & 0 & 0 & 84 & 84 & 0 &
-repair\_required & TRUE & FALSE & -0.0011557 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-driscoll\_kraay\_lag1 & 12 & 0.0000000 & 0.0000000 & 0.0000000 & 12 & 0
-& 84 & 26 & 58 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-main\_1972\_start & interacted\_controls\_full\_panel & heteroskedastic
-& 12 & 0.0021176 & 0.0024445 & 0.0033737 & 0 & 0 & 84 & 84 & 0 & ok &
-FALSE & FALSE & 0.0000010 & NA \\
-main\_1972\_start & interacted\_controls\_full\_panel &
-newey\_west\_lag1 & 12 & 0.0017881 & 0.0025442 & 0.0035112 & 0 & 0 & 84
-& 84 & 0 & ok & FALSE & FALSE & 0.0000006 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz & 12 & 0.0011449 & 0.0027069 & 0.0032709 & 0 & 0 & 84 & 84 &
-0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_cz\_year & 12 & 0.0010835 & 0.0016456 & 0.0020254 & 0 & 5 & 84
-& 84 & 0 & repair\_required & TRUE & FALSE & -0.0019361 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-cluster\_state & 12 & 0.0012617 & 0.0030857 & 0.0038112 & 0 & 0 & 84 &
-52 & 32 & ok & FALSE & FALSE & 0.0000000 & VCOV is rank deficient; use
-as diagnostic only unless justified. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_1000km & 12 & 0.0010854 & 0.0039572 & 0.0047094 & 0 & 0 & 84 &
-84 & 0 & repair\_required & TRUE & FALSE & -0.0028599 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_250km & 12 & 0.0013577 & 0.0033711 & 0.0041022 & 0 & 0 & 84 & 84
-& 0 & repair\_required & TRUE & FALSE & -0.0000139 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_500km & 12 & 0.0012571 & 0.0035916 & 0.0039649 & 0 & 0 & 84 & 84
-& 0 & repair\_required & TRUE & FALSE & -0.0007107 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-conley\_750km & 12 & 0.0011994 & 0.0038920 & 0.0048773 & 0 & 0 & 84 & 84
-& 0 & repair\_required & TRUE & FALSE & -0.0003939 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & 12 & 0.0000000 & 0.0000000 & 0.0000000 & 12 & 0
-& 84 & 15 & 69 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-heteroskedastic & 12 & 0.0021176 & 0.0024445 & 0.0033737 & 0 & 0 & 84 &
-84 & 0 & ok & FALSE & FALSE & 0.0000001 & NA \\
-main\_1972\_start &
-interacted\_controls\_full\_panel\_raw\_controls\_diagnostic &
-newey\_west\_lag1 & 12 & 0.0017881 & 0.0025442 & 0.0035112 & 0 & 0 & 84
-& 84 & 0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic & cluster\_cz
-& 12 & 0.0011360 & 0.0026025 & 0.0029282 & 0 & 0 & 48 & 48 & 0 & ok &
-FALSE & FALSE & 0.0000000 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-cluster\_cz\_year & 12 & 0.0011465 & 0.0014102 & 0.0017766 & 0 & 5 & 48
-& 48 & 0 & repair\_required & TRUE & FALSE & -0.0004383 & Two-way
-clustering includes very few year clusters; use as diagnostic only. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-cluster\_state & 12 & 0.0012828 & 0.0030446 & 0.0037394 & 0 & 0 & 48 &
-48 & 0 & ok & FALSE & FALSE & 0.0000000 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_1000km & 12 & 0.0010034 & 0.0034261 & 0.0055664 & 0 & 0 & 48 &
-48 & 0 & repair\_required & TRUE & FALSE & -0.0003335 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_250km & 12 & 0.0012937 & 0.0033912 & 0.0040624 & 0 & 0 & 48 & 48
-& 0 & repair\_required & TRUE & FALSE & -0.0000107 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_500km & 12 & 0.0005941 & 0.0036777 & 0.0043840 & 0 & 0 & 48 & 48
-& 0 & repair\_required & TRUE & FALSE & -0.0000835 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-conley\_750km & 12 & 0.0011412 & 0.0037447 & 0.0057087 & 0 & 0 & 48 & 48
-& 0 & repair\_required & TRUE & FALSE & -0.0001852 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-driscoll\_kraay\_lag1 & 12 & 0.0000000 & 0.0000000 & 0.0000000 & 12 & 0
-& 48 & 13 & 35 & ok & FALSE & FALSE & 0.0000000 & Suspicious near-zero
-Driscoll-Kraay SEs and rank-deficient VCOV; do not report without
-further diagnosis. \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-heteroskedastic & 12 & 0.0021051 & 0.0023785 & 0.0032685 & 0 & 0 & 48 &
-48 & 0 & ok & FALSE & FALSE & 0.0000011 & NA \\
-main\_1972\_start & interacted\_core\_controls\_diagnostic &
-newey\_west\_lag1 & 12 & 0.0017767 & 0.0024755 & 0.0034018 & 0 & 0 & 48
-& 48 & 0 & ok & FALSE & FALSE & 0.0000006 & NA \\
-main\_1972\_start & minimal\_full\_panel & cluster\_cz & 12 & 0.0012447
-& 0.0036330 & 0.0068716 & 0 & 0 & 12 & 12 & 0 & ok & FALSE & FALSE &
-0.0000001 & NA \\
-main\_1972\_start & minimal\_full\_panel & cluster\_cz\_year & 12 &
-0.0017579 & 0.0030911 & 0.0042529 & 0 & 6 & 12 & 12 & 0 &
-repair\_required & TRUE & FALSE & -0.0000403 & Two-way clustering
-includes very few year clusters; use as diagnostic only. \\
-main\_1972\_start & minimal\_full\_panel & cluster\_state & 12 &
-0.0016512 & 0.0044534 & 0.0087696 & 0 & 0 & 12 & 12 & 0 & ok & FALSE &
-FALSE & 0.0000001 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_1000km & 12 &
-0.0016324 & 0.0062737 & 0.0126565 & 0 & 0 & 12 & 12 & 0 &
-repair\_required & TRUE & FALSE & -0.0000073 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & minimal\_full\_panel & conley\_250km & 12 &
-0.0019166 & 0.0046857 & 0.0088180 & 0 & 0 & 12 & 12 & 0 & ok & FALSE &
-FALSE & 0.0000001 & NA \\
-main\_1972\_start & minimal\_full\_panel & conley\_500km & 12 &
-0.0019354 & 0.0055296 & 0.0108483 & 0 & 0 & 12 & 12 & 0 &
-repair\_required & TRUE & FALSE & -0.0000057 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & minimal\_full\_panel & conley\_750km & 12 &
-0.0022140 & 0.0060720 & 0.0115460 & 0 & 0 & 12 & 12 & 0 &
-repair\_required & TRUE & FALSE & -0.0000041 & Conley VCOV is
-non-positive-definite before repair or requires numerical repair;
-diagnostic only unless separately justified. \\
-main\_1972\_start & minimal\_full\_panel & driscoll\_kraay\_lag1 & 12 &
-0.0000000 & 0.0000000 & 0.0000000 & 12 & 0 & 12 & 12 & 0 & ok & FALSE &
-FALSE & 0.0000000 & Suspicious near-zero Driscoll-Kraay SEs; do not
-report without further diagnosis. \\
-main\_1972\_start & minimal\_full\_panel & heteroskedastic & 12 &
-0.0025538 & 0.0032235 & 0.0057428 & 0 & 0 & 12 & 12 & 0 & ok & FALSE &
-FALSE & 0.0000022 & NA \\
-main\_1972\_start & minimal\_full\_panel & newey\_west\_lag1 & 12 &
-0.0021072 & 0.0033036 & 0.0059769 & 0 & 0 & 12 & 12 & 0 & ok & FALSE &
-FALSE & 0.0000012 & NA \\
+CZ x year & Two-way cluster: few year clusters & 8 & 0 & 10 & 0 \\
+Conley 1000 km & Conley VCOV non-PD or repaired & 8 & 0 & 1 & 0 \\
+Conley 250 km & Conley VCOV non-PD or repaired & 7 & 0 & 0 & 0 \\
+Conley 500 km & Conley VCOV non-PD or repaired & 8 & 0 & 0 & 0 \\
+Conley 750 km & Conley VCOV non-PD or repaired & 8 & 0 & 1 & 0 \\
+Driscoll-Kraay & Near-zero or nonfinite SEs & 8 & 17 & 0 & 69 \\
+State-clustered & Rank-deficient VCOV & 5 & 0 & 0 & 72 \\
 
 \end{longtable}
 
@@ -1989,89 +1367,48 @@ outcomes.}
 
 {
 
-\begin{longtable}[]{@{}lrrrl@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1829}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3598}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1768}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1159}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1646}}@{}}
 
-\caption{\label{tbl-nanda-availability}NaNDA outcome availability by
-year.}
+\caption{\label{tbl-nanda-availability}NaNDA outcome availability
+summary.}
 
 \tabularnewline
 
 \toprule\noalign{}
-Outcome & Year & Nonmissing CZs & Zero CZs & Available \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Outcome
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid years
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Unavailable years
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Min nonmissing CZs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Years with all-zero values
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-partisan\_index\_dem & 2004 & 722 & 722 & FALSE \\
-partisan\_index\_dem & 2006 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2008 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2010 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2012 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2014 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2016 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2018 & 722 & 253 & TRUE \\
-partisan\_index\_dem & 2020 & 722 & 0 & TRUE \\
-partisan\_index\_dem & 2022 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2004 & 722 & 722 & FALSE \\
-partisan\_index\_rep & 2006 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2008 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2010 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2012 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2014 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2016 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2018 & 722 & 253 & TRUE \\
-partisan\_index\_rep & 2020 & 722 & 0 & TRUE \\
-partisan\_index\_rep & 2022 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2004 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2006 & 0 & 0 & FALSE \\
-pres\_dem\_ratio & 2008 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2010 & 0 & 0 & FALSE \\
-pres\_dem\_ratio & 2012 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2014 & 0 & 0 & FALSE \\
-pres\_dem\_ratio & 2016 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2018 & 0 & 0 & FALSE \\
-pres\_dem\_ratio & 2020 & 722 & 0 & TRUE \\
-pres\_dem\_ratio & 2022 & 0 & 0 & FALSE \\
-pres\_rep\_ratio & 2004 & 722 & 0 & TRUE \\
-pres\_rep\_ratio & 2006 & 0 & 0 & FALSE \\
-pres\_rep\_ratio & 2008 & 722 & 0 & TRUE \\
-pres\_rep\_ratio & 2010 & 0 & 0 & FALSE \\
-pres\_rep\_ratio & 2012 & 722 & 0 & TRUE \\
-pres\_rep\_ratio & 2014 & 0 & 0 & FALSE \\
-pres\_rep\_ratio & 2016 & 722 & 0 & TRUE \\
-pres\_rep\_ratio & 2018 & 0 & 0 & FALSE \\
-pres\_rep\_ratio & 2020 & 722 & 0 & TRUE \\
-pres\_rep\_ratio & 2022 & 0 & 0 & FALSE \\
-reg\_voter\_turnout\_pct & 2004 & 717 & 0 & TRUE \\
-reg\_voter\_turnout\_pct & 2006 & 661 & 40 & TRUE \\
-reg\_voter\_turnout\_pct & 2008 & 670 & 2 & TRUE \\
-reg\_voter\_turnout\_pct & 2010 & 703 & 0 & TRUE \\
-reg\_voter\_turnout\_pct & 2012 & 700 & 1 & TRUE \\
-reg\_voter\_turnout\_pct & 2014 & 702 & 16 & TRUE \\
-reg\_voter\_turnout\_pct & 2016 & 699 & 61 & TRUE \\
-reg\_voter\_turnout\_pct & 2018 & 701 & 1 & TRUE \\
-reg\_voter\_turnout\_pct & 2020 & 702 & 0 & TRUE \\
-reg\_voter\_turnout\_pct & 2022 & 704 & 0 & TRUE \\
-reg\_voters\_pct & 2004 & 721 & 0 & TRUE \\
-reg\_voters\_pct & 2006 & 722 & 50 & TRUE \\
-reg\_voters\_pct & 2008 & 721 & 43 & TRUE \\
-reg\_voters\_pct & 2010 & 721 & 15 & TRUE \\
-reg\_voters\_pct & 2012 & 720 & 16 & TRUE \\
-reg\_voters\_pct & 2014 & 721 & 16 & TRUE \\
-reg\_voters\_pct & 2016 & 720 & 17 & TRUE \\
-reg\_voters\_pct & 2018 & 721 & 16 & TRUE \\
-reg\_voters\_pct & 2020 & 720 & 15 & TRUE \\
-reg\_voters\_pct & 2022 & 721 & 15 & TRUE \\
-voter\_turnout\_pct & 2004 & 722 & 0 & TRUE \\
-voter\_turnout\_pct & 2006 & 722 & 62 & TRUE \\
-voter\_turnout\_pct & 2008 & 722 & 14 & TRUE \\
-voter\_turnout\_pct & 2010 & 722 & 0 & TRUE \\
-voter\_turnout\_pct & 2012 & 722 & 2 & TRUE \\
-voter\_turnout\_pct & 2014 & 722 & 17 & TRUE \\
-voter\_turnout\_pct & 2016 & 722 & 63 & TRUE \\
-voter\_turnout\_pct & 2018 & 721 & 1 & TRUE \\
-voter\_turnout\_pct & 2020 & 721 & 0 & TRUE \\
-voter\_turnout\_pct & 2022 & 721 & 0 & TRUE \\
+Ballots / CVAP & 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020,
+2022 & None & 721 & None \\
+Ballots / registered voters & 2004, 2006, 2008, 2010, 2012, 2014, 2016,
+2018, 2020, 2022 & None & 661 & None \\
+Democratic partisanship index & 2006, 2008, 2010, 2012, 2014, 2016,
+2018, 2020, 2022 & 2004 & 722 & 2004 \\
+Presidential Democratic ratio & 2004, 2008, 2012, 2016, 2020 & 2006,
+2010, 2014, 2018, 2022 & 722 & None \\
+Presidential Republican ratio & 2004, 2008, 2012, 2016, 2020 & 2006,
+2010, 2014, 2018, 2022 & 722 & None \\
+Registered / CVAP & 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018,
+2020, 2022 & None & 720 & None \\
+Republican partisanship index & 2006, 2008, 2010, 2012, 2014, 2016,
+2018, 2020, 2022 & 2004 & 722 & 2004 \\
 
 \end{longtable}
 
@@ -2096,22 +1433,20 @@ mechanism regressions.}
 {
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.4713}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1609}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1034}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1264}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0920}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0460}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.5616}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1233}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1507}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1096}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0548}}@{}}
 
-\caption{\label{tbl-adhm-mech}ADHM 2020 mechanism regressions.}
+\caption{\label{tbl-adhm-mech}ADHM 2020 mechanism regressions,
+full-control specification.}
 
 \tabularnewline
 
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Outcome
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Spec
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Estimate
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -2125,54 +1460,16 @@ N
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Republican House win share, 2002-2016 & Minimal & 0.445 & 0.627 & 0.482
-& 722 \\
-Republican House win share, 2002-2016 & Core controls & 1.128 & 0.646 &
-0.087 & 722 \\
-Republican House win share, 2002-2016 & Full controls & 0.911 & 0.632 &
-0.156 & 722 \\
-Conservative Republican CF-score share & Minimal & 0.256 & 0.901 & 0.778
-& 722 \\
-Conservative Republican CF-score share & Core controls & 1.122 & 1.013 &
-0.274 & 722 \\
-Conservative Republican CF-score share & Full controls & 1.080 & 0.999 &
-0.285 & 722 \\
-Moderate Republican CF-score share & Minimal & 0.103 & 0.703 & 0.884 &
+Republican House win share, 2002-2016 & 0.911 & 0.632 & 0.156 & 722 \\
+Conservative Republican CF-score share & 1.080 & 0.999 & 0.285 & 722 \\
+Moderate Republican CF-score share & -0.216 & 0.925 & 0.816 & 722 \\
+Moderate Democratic CF-score share & -1.326 & 0.995 & 0.189 & 722 \\
+Liberal Democratic CF-score share & 0.538 & 0.714 & 0.455 & 722 \\
+Tea Party / Freedom Caucus outcome & 0.520 & 0.778 & 0.508 & 722 \\
+Republican presidential share, 2000-2016 & 0.296 & 0.148 & 0.052 &
 722 \\
-Moderate Republican CF-score share & Core controls & -0.063 & 0.944 &
-0.947 & 722 \\
-Moderate Republican CF-score share & Full controls & -0.216 & 0.925 &
-0.816 & 722 \\
-Moderate Democratic CF-score share & Minimal & -0.809 & 0.953 & 0.400 &
+Republican presidential share, 2000-2008 & 0.265 & 0.145 & 0.075 &
 722 \\
-Moderate Democratic CF-score share & Core controls & -1.541 & 1.149 &
-0.186 & 722 \\
-Moderate Democratic CF-score share & Full controls & -1.326 & 0.995 &
-0.189 & 722 \\
-Liberal Democratic CF-score share & Minimal & 0.458 & 0.772 & 0.556 &
-722 \\
-Liberal Democratic CF-score share & Core controls & 0.505 & 0.854 &
-0.557 & 722 \\
-Liberal Democratic CF-score share & Full controls & 0.538 & 0.714 &
-0.455 & 722 \\
-Tea Party / Freedom Caucus outcome & Minimal & 0.453 & 0.809 & 0.578 &
-722 \\
-Tea Party / Freedom Caucus outcome & Core controls & 0.681 & 0.759 &
-0.374 & 722 \\
-Tea Party / Freedom Caucus outcome & Full controls & 0.520 & 0.778 &
-0.508 & 722 \\
-Republican presidential share, 2000-2016 & Minimal & 0.514 & 0.307 &
-0.101 & 722 \\
-Republican presidential share, 2000-2016 & Core controls & 0.210 & 0.160
-& 0.196 & 722 \\
-Republican presidential share, 2000-2016 & Full controls & 0.296 & 0.148
-& 0.052 & 722 \\
-Republican presidential share, 2000-2008 & Minimal & 0.176 & 0.192 &
-0.362 & 722 \\
-Republican presidential share, 2000-2008 & Core controls & 0.204 & 0.142
-& 0.159 & 722 \\
-Republican presidential share, 2000-2008 & Full controls & 0.265 & 0.145
-& 0.075 & 722 \\
 
 \end{longtable}
 

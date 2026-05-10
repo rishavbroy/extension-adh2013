@@ -23,9 +23,6 @@ format:
         \usepackage{array}
         \usepackage{float}
         \usepackage{xcolor}
-        \usepackage{caption}
-        \usepackage{fvextra}
-        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
 bibliography: references.bib
 link-citations: true
 execute:
@@ -43,6 +40,56 @@ fmt_num <- function(x, digits = 3) ifelse(is.na(x), "", formatC(x, digits = digi
 output_path <- function(...) file.path("..", "output", ...)
 report_kable <- function(x, caption = NULL, longtable = FALSE, digits = 3, align = NULL) {
   knitr::kable(x, booktabs = TRUE, longtable = longtable, caption = caption, digits = digits, align = align)
+}
+
+label_spec <- function(x) {
+  dplyr::recode(x,
+    minimal_full_panel = "Minimal",
+    interacted_core_controls_diagnostic = "Core controls",
+    interacted_controls_full_panel = "Full controls",
+    interacted_controls_full_panel_raw_controls_diagnostic = "Raw full controls",
+    minimal = "Minimal",
+    core_controls = "Core controls",
+    full_controls = "Full controls",
+    .default = x
+  )
+}
+
+label_sample <- function(x) {
+  dplyr::recode(x,
+    main_1972_start = "Main, 1972 start",
+    diagnostic_1952_start = "Diagnostic, 1952 start",
+    .default = x
+  )
+}
+
+label_se <- function(x) {
+  dplyr::recode(x,
+    heteroskedastic = "HC",
+    cluster_cz = "CZ-clustered",
+    cluster_state = "State-clustered",
+    cluster_cz_year = "CZ x year",
+    newey_west_lag1 = "Newey-West",
+    driscoll_kraay_lag1 = "Driscoll-Kraay",
+    conley_250km = "Conley 250 km",
+    conley_500km = "Conley 500 km",
+    conley_750km = "Conley 750 km",
+    conley_1000km = "Conley 1000 km",
+    .default = x
+  )
+}
+
+label_nanda_outcome <- function(x) {
+  dplyr::recode(x,
+    reg_voters_pct = "Registered / CVAP",
+    voter_turnout_pct = "Ballots / CVAP",
+    reg_voter_turnout_pct = "Ballots / registered voters",
+    pres_rep_ratio = "Presidential Republican ratio",
+    pres_dem_ratio = "Presidential Democratic ratio",
+    partisan_index_rep = "Republican partisanship index",
+    partisan_index_dem = "Democratic partisanship index",
+    .default = x
+  )
 }
 ```
 

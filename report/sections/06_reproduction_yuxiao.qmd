@@ -1,9 +1,16 @@
 ## Reproduction of Published Results
 
-We verify that the official replication package functions correctly. Our target is Table 3 of ADH (2013), the 2SLS regression of CZ-level change in manufacturing employment share on $\Delta IPW_{uit}$, instrumented by the eight-country measure. We focus on column (6) with full controls.
+We verify that the official replication package functions correctly. Our target is Table 3 of @autorDornHanson2013, the 2SLS regression of CZ-level change in manufacturing employment share on $\Delta IPW_{uit}$, instrumented by the eight-country measure. We focus on column (6) with full controls.
 
-Running the official Stata code on the published workfile, we obtain coefficients matching the published values exactly to three decimal places across all six columns. In column (6), the coefficient on $\Delta IPW$ is −0.596 (SE 0.099); the first-stage coefficient is 0.631 ($t=6.90$); $N=1{,}444$ with $R^2=0.343$. Table @fig-yuxiao-replication reports the full comparison.
+Running the official Stata code on the published workfile, we obtain coefficients matching the published values exactly to three decimal places across all six columns. In column (6), the coefficient on $\Delta IPW$ is -0.596 (SE 0.099); the first-stage coefficient is 0.631 ($t=6.90$); $N=1{,}444$ with $R^2=0.343$. Table 2 reports the full comparison.
 
-![Replication of ADH (2013) Table 3 — effect of Chinese import exposure on CZ manufacturing employment share.](assets/yuxiao_table2.png){#fig-yuxiao-replication width=100%}
+```{=latex}
+\begin{table}[H]
+\centering
+\caption{Replication of ADH (2013) Table 3: effect of Chinese import exposure on CZ manufacturing employment share.}
+\label{tbl-yuxiao-replication}
+\includegraphics[width=0.98\linewidth]{assets/yuxiao_table2.png}
+\end{table}
+```
 
-Economically, −0.596 implies that a $1,000 per-worker increase in decadal Chinese exposure lowers a CZ's manufacturing share by 0.6 percentage points. ADH attribute 44% of the 1990–2007 manufacturing decline to this channel. Because we use the original data and code, this is a computational reproduction—the exact match confirms our codebase functions correctly. The next section applies the same strategy to CZ-level presidential political outcomes.
+Economically, -0.596 implies that a $1,000 per-worker increase in decadal Chinese exposure lowers a CZ's manufacturing share by 0.6 percentage points. ADH attribute 44% of the 1990--2007 manufacturing decline to this channel. Because we use the original data and code, this is a computational reproduction: the exact match confirms our codebase functions correctly. The next section applies the same strategy to CZ-level presidential political outcomes.

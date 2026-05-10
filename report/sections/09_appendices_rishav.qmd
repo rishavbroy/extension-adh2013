@@ -1,12 +1,22 @@
 # Appendix A: County-to-CZ Harmonization and Measurement
 
-This appendix documents the county-to-CZ bridge used to construct political outcomes. County election returns are bridged to 1990 counties using FTZ crosswalk weights and then aggregated to 1990 CZs. The preferred design uses M5 where valid and M2 fallback where M5 is undefined or zero.
+This appendix documents the county-to-CZ bridge used to construct political outcomes. County election returns are bridged to 1990 counties using FTZ crosswalk weights and then aggregated to 1990 CZs. The preferred design uses M5 where valid and M2 fallback where M5 is undefined or zero. The full row-level diagnostics are saved in `output/diagnostics/`; the tables below report compact summaries intended for print.
 
 ```{r}
 #| label: tbl-validation-checks
-#| tbl-cap: "Pipeline validation checks."
+#| tbl-cap: "Pipeline validation checks, compact summary."
 val <- read_csv(output_path("diagnostics", "pipeline_validation_checks.csv"), show_col_types = FALSE) |>
-  select(check, status, fatal, n_failed, n_reported, details)
+  mutate(
+    Count = ifelse(!is.na(n_failed), n_failed, n_reported),
+    Count = ifelse(is.na(Count), 0, Count),
+    check = gsub("_", " ", check)
+  ) |>
+  transmute(
+    Check = check,
+    Status = status,
+    Fatal = fatal,
+    Count = Count
+  )
 knitr::kable(val, booktabs = TRUE, longtable = TRUE)
 ```
 
@@ -36,7 +46,6 @@ knitr::kable(ret, booktabs = TRUE)
 ```{r}
 #| label: tbl-main-event-table
 #| tbl-cap: "Main event-study coefficient table, selected years."
-#| echo: false
 main_csv <- output_path("tables", "tab_event_study_rep_margin_main_specs_m5.csv")
 if (file.exists(main_csv)) {
   main_tbl <- read_csv(main_csv, show_col_types = FALSE) |>
@@ -75,7 +84,7 @@ if (file.exists(main_csv)) {
 bal <- read_csv(output_path("diagnostics", "bartik_balance_correlations.csv"), show_col_types = FALSE) |>
   filter(!grepl("^z_", variable)) |>
   transmute(
-    Variable = variable,
+    Variable = gsub("_", " ", variable),
     `Corr. with exposure` = fmt_num(correlation_with_exposure, 3),
     `Corr. with instrument` = fmt_num(correlation_with_instrument, 3),
     `Weighted mean` = fmt_num(weighted_mean, 3),
@@ -89,9 +98,9 @@ knitr::kable(bal, booktabs = TRUE)
 #| tbl-cap: "Pre-1988 Republican-margin placebo diagnostics."
 pre <- read_csv(output_path("diagnostics", "bartik_pretrend_placebos.csv"), show_col_types = FALSE) |>
   transmute(
-    Outcome = outcome,
-    Spec = spec,
-    Regressor = regressor,
+    Outcome = gsub("_", " ", outcome),
+    Spec = label_spec(spec),
+    Regressor = gsub("_", " ", regressor),
     Estimate = fmt_num(estimate, 4),
     `Std. error` = fmt_num(std.error, 4),
     `p-value` = fmt_num(p.value, 3)
@@ -101,11 +110,21 @@ knitr::kable(pre, booktabs = TRUE, longtable = TRUE)
 
 ```{r}
 #| label: tbl-industry-shifts
-#| tbl-cap: "Industry-shift summary from ADH trade data diagnostics."
+#| tbl-cap: "Industry-shift summary from ADH trade-data diagnostics."
 shift_path <- output_path("diagnostics", "bartik_industry_shift_summary.csv")
 if (file.exists(shift_path)) {
-  shifts <- read_csv(shift_path, show_col_types = FALSE)
-  knitr::kable(head(shifts, 15), booktabs = TRUE, longtable = TRUE)
+  shifts <- read_csv(shift_path, show_col_types = FALSE) |>
+    head(12) |>
+    transmute(
+      Status = status,
+      Period = period,
+      Importer = importer,
+      `SIC87DD` = sic87dd,
+      `Start imports` = fmt_num(start_imports, 1),
+      `End imports` = fmt_num(end_imports, 1),
+      `Import growth` = fmt_num(import_growth, 1)
+    )
+  knitr::kable(shifts, booktabs = TRUE)
 } else {
   cat("Industry-shift summary not found.")
 }
@@ -119,7 +138,7 @@ if (file.exists(shift_path)) {
 #| label: tbl-subperiod-horizons
 #| tbl-cap: "Selected horizons: early versus late ADH exposure."
 sub <- read_csv(output_path("diagnostics", "subperiod_exposure_selected_horizons.csv"), show_col_types = FALSE) |>
-  mutate(spec = recode(spec, minimal = "Minimal", core_controls = "Core controls", full_controls = "Full controls")) |>
+  mutate(spec = label_spec(spec)) |>
   transmute(
     Spec = spec,
     Year = year,
@@ -133,29 +152,54 @@ knitr::kable(sub, booktabs = TRUE, longtable = TRUE)
 
 # Appendix E: Standard-Error Diagnostics
 
+The main specification uses CZ-clustered standard errors. The diagnostics below summarize the broader set of variance-covariance estimators computed by the pipeline. Full row-level diagnostics are available in `output/diagnostics/event_study_vcov_diagnostics.csv` and `output/diagnostics/event_study_se_warning_diagnostics.csv`.
+
 ```{r}
 #| label: tbl-vcov-diagnostics
-#| tbl-cap: "Variance-covariance diagnostics by specification and SE type."
-vc <- read_csv(output_path("diagnostics", "event_study_vcov_diagnostics.csv"), show_col_types = FALSE)
-# Be robust to small diagnostic-schema changes across pipeline runs.
-if (!"vcov_repair_required" %in% names(vc) && "repair_required" %in% names(vc)) {
-  vc <- vc |> mutate(vcov_repair_required = repair_required)
-}
-if (!"vcov_repair_required" %in% names(vc)) vc <- vc |> mutate(vcov_repair_required = NA)
-if (!"vcov_repaired" %in% names(vc)) vc <- vc |> mutate(vcov_repaired = NA)
-if (!"max_abs_repair_change" %in% names(vc)) vc <- vc |> mutate(max_abs_repair_change = NA_real_)
-vc <- vc |>
-  select(any_of(c(
-    "sample", "spec", "se_type", "status", "vcov_repair_required", "repair_required",
-    "vcov_repaired", "min_eigenvalue", "n_negative_eigenvalues", "max_abs_repair_change"
-  )))
+#| tbl-cap: "Variance-covariance diagnostics by SE type."
+vc <- read_csv(output_path("diagnostics", "event_study_vcov_diagnostics.csv"), show_col_types = FALSE) |>
+  mutate(
+    `SE type` = label_se(se_type),
+    `Needs repair` = as.integer(repair_required),
+    `Negative eigenvalues` = ifelse(is.na(n_negative_eigenvalues), 0, n_negative_eigenvalues)
+  ) |>
+  group_by(`SE type`, status) |>
+  summarise(
+    `Model rows` = n(),
+    `Repairs needed` = sum(`Needs repair`, na.rm = TRUE),
+    `Max negative eigenvalues` = max(`Negative eigenvalues`, na.rm = TRUE),
+    `Smallest eigenvalue` = fmt_num(min(min_eigenvalue, na.rm = TRUE), 6),
+    .groups = "drop"
+  ) |>
+  arrange(`SE type`, status)
 knitr::kable(vc, booktabs = TRUE, longtable = TRUE)
 ```
 
 ```{r}
 #| label: tbl-se-warning-diagnostics
-#| tbl-cap: "SE warning diagnostics."
-sewarn <- read_csv(output_path("diagnostics", "event_study_se_warning_diagnostics.csv"), show_col_types = FALSE)
+#| tbl-cap: "SE diagnostic issue summary."
+sewarn <- read_csv(output_path("diagnostics", "event_study_se_warning_diagnostics.csv"), show_col_types = FALSE) |>
+  mutate(
+    `SE type` = label_se(se_type),
+    Issue = case_when(
+      grepl("Conley", diagnostic_note, ignore.case = TRUE) ~ "Conley VCOV non-PD or repaired",
+      grepl("Two-way", diagnostic_note, ignore.case = TRUE) ~ "Two-way cluster: few year clusters",
+      grepl("rank deficient", diagnostic_note, ignore.case = TRUE) ~ "Rank-deficient VCOV",
+      near_zero_se_count > 0 | nonfinite_se_count > 0 ~ "Near-zero or nonfinite SEs",
+      repair_required ~ "Repair required",
+      TRUE ~ NA_character_
+    )
+  ) |>
+  filter(!is.na(Issue)) |>
+  group_by(`SE type`, Issue) |>
+  summarise(
+    `Model rows` = n(),
+    `Max near-zero SEs` = max(near_zero_se_count, na.rm = TRUE),
+    `Max nonfinite SEs` = max(nonfinite_se_count, na.rm = TRUE),
+    `Max rank deficiency` = max(vcov_rank_deficiency, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(`SE type`, Issue)
 knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE)
 ```
 
@@ -171,14 +215,20 @@ knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE)
 
 ```{r}
 #| label: tbl-nanda-availability
-#| tbl-cap: "NaNDA outcome availability by year."
+#| tbl-cap: "NaNDA outcome availability summary."
 nav <- read_csv(output_path("diagnostics", "nanda_outcome_year_availability.csv"), show_col_types = FALSE) |>
-  transmute(
-    Outcome = outcome,
-    Year = year,
-    `Nonmissing CZs` = n_nonmissing,
-    `Zero CZs` = n_zero,
-    Available = available_for_event_study
+  mutate(Outcome = label_nanda_outcome(outcome)) |>
+  group_by(Outcome) |>
+  summarise(
+    `Valid years` = paste(year[available_for_event_study], collapse = ", "),
+    `Unavailable years` = paste(year[!available_for_event_study], collapse = ", "),
+    `Min nonmissing CZs` = min(n_nonmissing[available_for_event_study], na.rm = TRUE),
+    `Years with all-zero values` = paste(year[all_nonmissing_values_zero], collapse = ", "),
+    .groups = "drop"
+  ) |>
+  mutate(
+    `Unavailable years` = ifelse(`Unavailable years` == "", "None", `Unavailable years`),
+    `Years with all-zero values` = ifelse(`Years with all-zero values` == "", "None", `Years with all-zero values`)
   )
 knitr::kable(nav, booktabs = TRUE, longtable = TRUE)
 ```
@@ -189,11 +239,11 @@ knitr::kable(nav, booktabs = TRUE, longtable = TRUE)
 
 ```{r}
 #| label: tbl-adhm-mech
-#| tbl-cap: "ADHM 2020 mechanism regressions."
+#| tbl-cap: "ADHM 2020 mechanism regressions, full-control specification."
 adhm <- read_csv(output_path("diagnostics", "adhm2020_mechanism_regressions.csv"), show_col_types = FALSE) |>
+  filter(spec_label == "Full controls") |>
   transmute(
     Outcome = outcome_label,
-    Spec = spec_label,
     Estimate = fmt_num(estimate, 3),
     `Std. error` = fmt_num(std.error, 3),
     `p-value` = fmt_num(p.value, 3),
