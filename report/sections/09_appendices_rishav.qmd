@@ -1,0 +1,213 @@
+# Appendix A: County-to-CZ Harmonization and Measurement
+
+This appendix documents the county-to-CZ bridge used to construct political outcomes. County election returns are bridged to 1990 counties using FTZ crosswalk weights and then aggregated to 1990 CZs. The preferred design uses M5 where valid and M2 fallback where M5 is undefined or zero.
+
+```{r}
+#| label: tbl-validation-checks
+#| tbl-cap: "Pipeline validation checks."
+val <- read_csv(output_path("diagnostics", "pipeline_validation_checks.csv"), show_col_types = FALSE) |>
+  select(check, status, fatal, n_failed, n_reported, details)
+knitr::kable(val, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+```
+
+```{r}
+#| label: tbl-retained-votes
+#| tbl-cap: "Retained vote shares by year and source scope."
+ret <- read_csv(output_path("diagnostics", "county_bridge_retention_by_scope_m5.csv"), show_col_types = FALSE) |>
+  filter(year >= 1972, source_scope == "adh_mainland_eligible") |>
+  transmute(
+    Year = year,
+    `Source counties` = source_counties,
+    `Fallback counties` = fallback_source_counties,
+    `Unmatched counties` = unmatched_source_counties,
+    `Retained vote share` = fmt_num(retained_vote_share, 4)
+  )
+knitr::kable(ret, booktabs = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8)
+```
+
+![1990 counties receiving positive vote mass from source counties with unavailable weights.](../output/figures/fig_crosswalk_unavailable_weights_1990_counties_small.png){#fig-crosswalk-county-map width=100%}
+
+![1990 CZs receiving positive vote mass from source counties with unavailable weights.](../output/figures/fig_crosswalk_unavailable_weights_1990_czs_small.png){#fig-crosswalk-cz-map width=100%}
+
+![Crosswalk-specification comparison. If the full sensitivity pipeline has not been run, this figure will show only the preferred M5+fallback design.](../output/figures/fig_crosswalk_specification_comparison.pdf){#fig-crosswalk-comparison width=100%}
+
+# Appendix B: Main Event Study and Alternative Political Outcomes
+
+```{r}
+#| label: tbl-main-event-table
+#| results: asis
+#| echo: false
+main_tex <- output_path("tables", "tab_event_study_rep_margin_main_specs_m5.tex")
+if (file.exists(main_tex)) {
+  cat("\\input{../output/tables/tab_event_study_rep_margin_main_specs_m5.tex}")
+} else {
+  cat("Main event-study table not found.")
+}
+```
+
+![Main event-study estimates.](../output/figures/fig_event_study_rep_margin_main_specs_m5.pdf){#fig-main-event-appendix width=100%}
+
+![Full alternative-outcome event-study grid.](../output/figures/fig_alternative_political_outcomes.pdf){#fig-alt-outcomes-full width=100%}
+
+![Vote-choice outcome family.](../output/figures/fig_alternative_political_outcomes_vote_choice.pdf){#fig-alt-vote-choice width=100%}
+
+![Vote-volume outcome family.](../output/figures/fig_alternative_political_outcomes_vote_volume.pdf){#fig-alt-vote-volume width=100%}
+
+![Outcome decomposition.](../output/figures/fig_alternative_political_outcome_decomposition.pdf){#fig-alt-decomp-appendix width=100%}
+
+# Appendix C: Bartik Identification Diagnostics
+
+![First-stage relationship between ADH exposure and the ADH instrument.](../output/figures/fig_bartik_first_stage.pdf){#fig-bartik-firststage width=85%}
+
+```{r}
+#| label: tbl-balance-correlations
+#| tbl-cap: "Baseline balance: correlations with exposure and instrument."
+bal <- read_csv(output_path("diagnostics", "bartik_balance_correlations.csv"), show_col_types = FALSE) |>
+  filter(!grepl("^z_", variable)) |>
+  transmute(
+    Variable = variable,
+    `Corr. with exposure` = fmt_num(correlation_with_exposure, 3),
+    `Corr. with instrument` = fmt_num(correlation_with_instrument, 3),
+    `Weighted mean` = fmt_num(weighted_mean, 3),
+    SD = fmt_num(sd, 3)
+  )
+knitr::kable(bal, booktabs = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8)
+```
+
+```{r}
+#| label: tbl-pretrend-placebos
+#| tbl-cap: "Pre-1988 Republican-margin placebo diagnostics."
+pre <- read_csv(output_path("diagnostics", "bartik_pretrend_placebos.csv"), show_col_types = FALSE) |>
+  transmute(
+    Outcome = outcome,
+    Spec = spec,
+    Regressor = regressor,
+    Estimate = fmt_num(estimate, 4),
+    `Std. error` = fmt_num(std.error, 4),
+    `p-value` = fmt_num(p.value, 3)
+  )
+knitr::kable(pre, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+```
+
+```{r}
+#| label: tbl-industry-shifts
+#| tbl-cap: "Industry-shift summary from ADH trade data diagnostics."
+shift_path <- output_path("diagnostics", "bartik_industry_shift_summary.csv")
+if (file.exists(shift_path)) {
+  shifts <- read_csv(shift_path, show_col_types = FALSE)
+  knitr::kable(head(shifts, 15), booktabs = TRUE, longtable = TRUE) |>
+    kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+} else {
+  cat("Industry-shift summary not found.")
+}
+```
+
+# Appendix D: Subperiod Exposure and Dynamic Interpretation
+
+![Subperiod exposure event-study estimates.](../output/figures/fig_subperiod_exposure_event_study.pdf){#fig-subperiod-appendix width=100%}
+
+```{r}
+#| label: tbl-subperiod-horizons
+#| tbl-cap: "Selected horizons: early versus late ADH exposure."
+sub <- read_csv(output_path("diagnostics", "subperiod_exposure_selected_horizons.csv"), show_col_types = FALSE) |>
+  mutate(spec = recode(spec, minimal = "Minimal", core_controls = "Core controls", full_controls = "Full controls")) |>
+  transmute(
+    Spec = spec,
+    Year = year,
+    `1990--2000 exposure` = fmt_num(early_exposure_coefficient, 4),
+    `2000--2007 exposure` = fmt_num(late_exposure_coefficient, 4),
+    `Early minus late` = fmt_num(early_minus_late, 4),
+    `Approx. p-value` = fmt_num(approx_p_difference, 3)
+  )
+knitr::kable(sub, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+```
+
+# Appendix E: Standard-Error Diagnostics
+
+```{r}
+#| label: tbl-vcov-diagnostics
+#| tbl-cap: "Variance-covariance diagnostics by specification and SE type."
+vc <- read_csv(output_path("diagnostics", "event_study_vcov_diagnostics.csv"), show_col_types = FALSE) |>
+  select(sample, spec, se_type, vcov_repair_required, vcov_repaired, min_eigenvalue, n_negative_eigenvalues, max_abs_repair_change)
+knitr::kable(vc, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 5)
+```
+
+```{r}
+#| label: tbl-se-warning-diagnostics
+#| tbl-cap: "SE warning diagnostics."
+sewarn <- read_csv(output_path("diagnostics", "event_study_se_warning_diagnostics.csv"), show_col_types = FALSE)
+knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 5)
+```
+
+# Appendix F: Exploratory Mechanism Evidence
+
+## NaNDA turnout, vote ratios, and partisanship
+
+![NaNDA turnout and registration outcomes.](../output/figures/fig_nanda_turnout_registration.pdf){#fig-nanda-turnout width=100%}
+
+![NaNDA presidential vote ratios.](../output/figures/fig_nanda_presidential_vote_ratios.pdf){#fig-nanda-vote-ratios width=100%}
+
+![NaNDA partisanship indices.](../output/figures/fig_nanda_partisanship_indices.pdf){#fig-nanda-partisanship width=100%}
+
+```{r}
+#| label: tbl-nanda-availability
+#| tbl-cap: "NaNDA outcome availability by year."
+nav <- read_csv(output_path("diagnostics", "nanda_outcome_year_availability.csv"), show_col_types = FALSE) |>
+  transmute(
+    Outcome = outcome,
+    Year = year,
+    `Nonmissing CZs` = n_nonmissing,
+    `Zero CZs` = n_zero,
+    Available = available_for_event_study
+  )
+knitr::kable(nav, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+```
+
+## ADHM 2020 public political-supply diagnostics
+
+![ADHM 2020 public political-supply mechanism regressions.](../output/figures/fig_adhm2020_mechanism_regressions.pdf){#fig-adhm-mechanisms width=100%}
+
+```{r}
+#| label: tbl-adhm-mech
+#| tbl-cap: "ADHM 2020 mechanism regressions."
+adhm <- read_csv(output_path("diagnostics", "adhm2020_mechanism_regressions.csv"), show_col_types = FALSE) |>
+  transmute(
+    Outcome = outcome_label,
+    Spec = spec_label,
+    Estimate = fmt_num(estimate, 3),
+    `Std. error` = fmt_num(std.error, 3),
+    `p-value` = fmt_num(p.value, 3),
+    N = n_obs
+  )
+knitr::kable(adhm, booktabs = TRUE, longtable = TRUE) |>
+  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+```
+
+# Appendix G: Replication Notes
+
+The complete analysis can be regenerated from the project root with:
+
+```r
+source(here::here("src", "run_pipeline.R"))
+```
+
+For the final appendix-style crosswalk-sensitivity run:
+
+```r
+Sys.setenv(RUN_CROSSWALK_SENSITIVITY = "true")
+source(here::here("src", "run_pipeline.R"))
+```
+
+The replication-code PDF can be generated from the `report` folder with:
+
+```r
+source("make_replication_code_pdf.R")
+```

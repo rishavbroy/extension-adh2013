@@ -1,0 +1,36 @@
+## Extension: Dynamic Political Effects of the China Shock
+
+We extend the ADH local-labor-market design to presidential political outcomes. The outcome is the Republican presidential vote margin in CZ $c$ and election year $t$. The preferred specification includes CZ fixed effects, election-year fixed effects, the ADH 1990–2007 import-exposure measure interacted with election-year indicators, and time-varying effects of baseline controls. The omitted year is 1988, so coefficients describe how the relationship between China-shock exposure and Republican margin changes relative to the pre-shock election immediately before the main exposure period.
+
+A central measurement challenge is that electoral data are observed for counties whose boundaries change over time, while ADH exposure is measured for 1990 commuting zones. We therefore bridge county election returns to 1990 counties using the FTZ county crosswalks, aggregate counties to 1990 CZs using the Tolbert-Sizer/USDA crosswalk, and merge those outcomes to ADH exposure. Our preferred bridge uses FTZ M5 weights where available and M2 fallback weights where M5 is undefined or zero. We validate retained vote shares, document fallback counties, and compare the results to M6+fallback, pure M2, and M4+fallback. These checks are important because the estimates should not be driven by arbitrary geographic harmonization choices.
+
+The empirical exercise should be interpreted as a reduced-form exposure design, not as definitive evidence of individual belief updating. ADH exposure is a shift-share measure: CZs differ in initial industry composition, and industries differ in later import growth. Identification requires either that initial industry shares are conditionally unrelated to counterfactual political trends, or that the industry-level import shifts are as-good-as-random with respect to local political trends [@goldsmithPinkhamSorkinSwift2020; @borusyakHullJaravel2025]. These assumptions are not innocuous. In our diagnostics, the ADH instrument strongly predicts exposure, but exposure is also highly correlated with baseline manufacturing intensity and routine-task concentration. Table @tbl-bartik-firststage summarizes the first-stage strength in our political-outcome sample.
+
+```{r}
+#| label: tbl-bartik-firststage
+#| tbl-cap: "First-stage diagnostics for ADH exposure."
+fs <- read_csv(output_path("diagnostics", "bartik_first_stage_diagnostics.csv"), show_col_types = FALSE) |>
+  transmute(
+    Specification = recode(spec, minimal = "Minimal", core_controls = "Core controls", full_controls = "Full controls"),
+    Estimate = fmt_num(estimate, 3),
+    `Std. error` = fmt_num(std.error, 3),
+    `First-stage F` = fmt_num(first_stage_F_t2, 1),
+    `N` = n_obs
+  )
+knitr::kable(fs, booktabs = TRUE, align = "lrrrr") |>
+  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 9)
+```
+
+Figure @fig-main-event-study presents the main event-study estimates. The preferred inference is CZ-clustered. Conley, Driscoll-Kraay, Newey-West, state-clustered, and two-way clustered alternatives are computed as diagnostics, but several spatial and two-way variance-covariance matrices are non-positive-definite or require numerical repair in this short election-year panel. We therefore state the conclusions cautiously and base the main figure on CZ-clustered confidence intervals.
+
+![Event-study coefficients for ADH exposure and Republican presidential margin.](../output/figures/fig_event_study_rep_margin_main_specs_m5.pdf){#fig-main-event-study width=100%}
+
+The estimates suggest little clear evidence of rising Republican margins before the shock. The post-shock pattern is more consistent with a later political response: the positive association grows in the medium and long run, especially around the 2016 and 2020 horizons. This timing is important because it suggests that the political effects of local trade exposure may not operate immediately through local material losses alone. They may also depend on later national political rhetoric, elite positioning, media narratives, or changing turnout and party coalitions.
+
+To understand what is behind the margin effect, we decompose the outcome into Republican votes per 1990 population, Democratic votes per 1990 population, and two-party vote volume. Figure @fig-alt-decomp shows that the margin pattern should not be interpreted mechanically as a simple increase in Republican votes. The broader decomposition helps distinguish vote-choice changes from changes in participation and party-specific mobilization.
+
+![Political-outcome decomposition across election years.](../output/figures/fig_alternative_political_outcome_decomposition.pdf){#fig-alt-decomp width=100%}
+
+Finally, we examine whether the single 1990–2007 exposure measure masks important timing differences. The original ADH exposure measure aggregates the China shock over a long period, so an event-study coefficient for 2016 does not mean that a new trade shock occurs in 2016. It means that CZs with greater cumulative exposure by 2007 evolved differently by 2016. To make this interpretation more transparent, we split exposure into 1990–2000 and 2000–2007 components and include both components jointly. Figure @fig-subperiod-exposure shows that the estimated relationship varies depending on which subperiod of import growth is emphasized. Pre-1988 coefficients in this exercise are placebo relationships with future exposure, while post-2008 coefficients describe how early- and late-shock exposure predict later political differences.
+
+![Subperiod ADH exposure event study, with 1990–2000 and 2000–2007 exposure terms entered jointly.](../output/figures/fig_subperiod_exposure_event_study.pdf){#fig-subperiod-exposure width=100%}

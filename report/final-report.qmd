@@ -1,0 +1,85 @@
+---
+title: "Trade Shocks and Political Change in Local Labor Markets"
+author:
+  - "Yana"
+  - "Rachel"
+  - "Yuxiao"
+  - "Rishav Roy"
+format:
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    number-sections: true
+    colorlinks: true
+    fig-pos: "H"
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{longtable}
+        \usepackage{array}
+        \usepackage{float}
+        \usepackage{threeparttable}
+        \usepackage{threeparttablex}
+        \usepackage{makecell}
+        \usepackage{xcolor}
+        \usepackage{caption}
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+bibliography: references.bib
+link-citations: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(readr)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+fmt_num <- function(x, digits = 3) ifelse(is.na(x), "", formatC(x, digits = digits, format = "f"))
+output_path <- function(...) file.path("..", "output", ...)
+```
+
+# Summary
+
+{{< include sections/00_summary_yana.qmd >}}
+
+# Introduction
+
+{{< include sections/01_intro_rachel.qmd >}}
+
+{{< include sections/02_causal_challenges_yana.qmd >}}
+
+# Data
+
+{{< include sections/03_data_yana.qmd >}}
+
+{{< include sections/04_summary_stats_yuxiao.qmd >}}
+
+# Analysis and Findings
+
+{{< include sections/05_identification_yuxiao.qmd >}}
+
+{{< include sections/06_reproduction_yuxiao.qmd >}}
+
+{{< include sections/07_extension_rishav.qmd >}}
+
+# Conclusion
+
+{{< include sections/08_conclusion_rishav.qmd >}}
+
+# References
+
+::: {#refs}
+:::
+
+\newpage
+\appendix
+
+{{< include sections/09_appendices_rishav.qmd >}}

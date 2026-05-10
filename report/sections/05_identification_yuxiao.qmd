@@ -1,0 +1,25 @@
+## Identification Strategy and its Plausibility
+
+OLS estimation of the labor-market effect of Chinese import exposure faces an endogeneity problem. Observed U.S. imports reflect both Chinese supply-side and U.S. demand shocks, biasing OLS toward zero. ADH (2013) report an OLS estimate of −0.171 versus an IV estimate of −0.596 [@autorDornHanson2013].
+
+They address this with a Bartik-style instrument, replacing $\Delta IPW_{uit}$ with $\Delta IPW_{oit}$, built from same-period Chinese exports to eight other high-income countries (Australia, Denmark, Finland, Germany, Japan, New Zealand, Spain, and Switzerland). The identifying assumption is that within-industry import growth shared by these countries reflects China's supply-side improvements, not correlated demand:
+
+$$
+\Delta IPW_{uit}=\sum_j \left(\frac{L_{ijt}}{L_{ujt}}\right)\cdot \left(\frac{\Delta M_{ucjt}}{L_{it}}\right),
+$$
+
+$$
+\Delta IPW_{oit}=\sum_j \left(\frac{L_{ij,t-1}}{L_{uj,t-1}}\right)\cdot \left(\frac{\Delta M_{ocjt}}{L_{i,t-1}}\right).
+$$
+
+The second-stage equation is estimated as stacked first differences:
+
+$$
+\Delta L_{itm}=\gamma_t+\beta_1\Delta IPW_{uit}+X_{it}'\beta_2+e_{it},
+$$
+
+where $X_{it}$ contains start-of-period manufacturing share, demographic controls, the routine and offshorability indices of Autor and Dorn (2013), and Census division dummies [@autorDorn2013].
+
+Three pieces of evidence support the strategy. First, the first stage is strong: the instrument predicts the endogenous regressor with coefficient 0.631 ($t=6.90$), well above the weak-IV threshold. Second, a falsification test shows that 1970s–1980s manufacturing changes do not predict future Chinese exposure, ruling out a pre-existing decline. Third, dropping suspect industries leaves the coefficient near −0.596.
+
+The main residual concern is correlated demand shocks across high-income economies. A gravity-based check yields similar estimates; Chinese manufacturing TFP grew about 8% per year over 1998–2007, against 3.9% in the U.S., supporting the supply-driven interpretation.

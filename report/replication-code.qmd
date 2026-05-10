@@ -1,0 +1,97 @@
+---
+title: "Replication Code Appendix"
+subtitle: "ADH China Shock Political Event Study Extension"
+author: "Rishav Roy"
+format:
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=0.65in
+    fontsize: 9pt
+    toc: true
+    number-sections: true
+    colorlinks: true
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \usepackage{xcolor}
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+This appendix prints the replication source files used to construct the final results. Files are included directly from `../src/` at render time.
+
+\newpage
+
+# `00_config.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/00_config.R}
+```
+
+\newpage
+
+# `01_helpers.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/01_helpers.R}
+```
+
+\newpage
+
+# `02_build_analysis_data.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/02_build_analysis_data.R}
+```
+
+\newpage
+
+# `03_estimate_event_study.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/03_estimate_event_study.R}
+```
+
+\newpage
+
+# `04_export_outputs.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/04_export_outputs.R}
+```
+
+\newpage
+
+# `05_export_diagnostic_maps.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/05_export_diagnostic_maps.R}
+```
+
+\newpage
+
+# `06_sixth_extensions.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/06_sixth_extensions.R}
+```
+
+\newpage
+
+# `run_pipeline.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/run_pipeline.R}
+```
+
+\newpage
+
+# `county_bridge_exceptions.csv`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/county_bridge_exceptions.csv}
+```

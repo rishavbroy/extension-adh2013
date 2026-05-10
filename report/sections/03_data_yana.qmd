@@ -1,0 +1,7 @@
+Our analysis combines four primary datasets to construct commuting-zone-level political and trade exposure measures. We use the ADH (2013) replication package for baseline commuting-zone trade exposure measures and pre-determined labor market controls, including industry composition and demographic structure [@autorDornHanson2013].
+
+To align modern political data with historical labor markets, we use Ferrara, Testa, and Zhou (2024), *Crosswalks for U.S. Counties and Congressional Districts, 1790–2020*, which maps contemporary counties to historical boundaries and provides county centroid coordinates [@ferraraTestaZhou2024]. Our preferred crosswalk uses M5 weights where available and M2 weights as fallback for source counties where M5 weights are undefined or zero.
+
+We aggregate counties into 1990 commuting zones using the U.S. Department of Agriculture Economic Research Service Commuting Zones and Labor Market Areas dataset, consistent with the Tolbert and Sizer (1996) classification [@tolbertSizer1996; @usdaERSCommutingZones].
+
+Political outcomes are drawn from Amlani and Algara (2021), *Partisanship & Nationalization in American Elections, 1872–2020*, which provides county-level presidential election returns used to construct Republican vote margins [@amlaniAlgara2021].
