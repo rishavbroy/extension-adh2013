@@ -132,8 +132,19 @@ knitr::kable(sub, booktabs = TRUE, longtable = TRUE) |>
 ```{r}
 #| label: tbl-vcov-diagnostics
 #| tbl-cap: "Variance-covariance diagnostics by specification and SE type."
-vc <- read_csv(output_path("diagnostics", "event_study_vcov_diagnostics.csv"), show_col_types = FALSE) |>
-  select(sample, spec, se_type, vcov_repair_required, vcov_repaired, min_eigenvalue, n_negative_eigenvalues, max_abs_repair_change)
+vc <- read_csv(output_path("diagnostics", "event_study_vcov_diagnostics.csv"), show_col_types = FALSE)
+# Be robust to small diagnostic-schema changes across pipeline runs.
+if (!"vcov_repair_required" %in% names(vc) && "repair_required" %in% names(vc)) {
+  vc <- vc |> mutate(vcov_repair_required = repair_required)
+}
+if (!"vcov_repair_required" %in% names(vc)) vc <- vc |> mutate(vcov_repair_required = NA)
+if (!"vcov_repaired" %in% names(vc)) vc <- vc |> mutate(vcov_repaired = NA)
+if (!"max_abs_repair_change" %in% names(vc)) vc <- vc |> mutate(max_abs_repair_change = NA_real_)
+vc <- vc |>
+  select(any_of(c(
+    "sample", "spec", "se_type", "status", "vcov_repair_required", "repair_required",
+    "vcov_repaired", "min_eigenvalue", "n_negative_eigenvalues", "max_abs_repair_change"
+  )))
 knitr::kable(vc, booktabs = TRUE, longtable = TRUE) |>
   kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 5)
 ```

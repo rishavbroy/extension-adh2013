@@ -107,22 +107,11 @@
  
 
 
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{adjustbox}
 \usepackage{fvextra}
 \usepackage{xcolor}
-\DefineVerbatimEnvironment{CodeFile}{Verbatim}{%
-  breaklines=true,
-  breakanywhere=true,
-  breaksymbolleft={},
-  breaksymbolright={},
-  fontsize=\scriptsize,
-  numbers=left,
-  numbersep=5pt,
-  frame=single,
-  framerule=0.2pt,
-  framesep=2mm,
-  tabsize=2,
-  commandchars=\\\{\}
-}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -198,9 +187,8 @@
 }
 
 This appendix prints the replication source files used to construct the
-final results.
-
-The files are included directly from \texttt{src/} at render time.
+final results. Files are included directly from \texttt{../src/} at
+render time.
 
 \newpage
 
@@ -255,24 +243,6 @@ The files are included directly from \texttt{src/} at render time.
 \section{\texorpdfstring{\texttt{county\_bridge\_exceptions.csv}}{county\_bridge\_exceptions.csv}}\label{county_bridge_exceptions.csv}
 
 \VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/county_bridge_exceptions.csv}
-
-\newpage
-
-\section{\texorpdfstring{\texttt{dependencies.json}}{dependencies.json}}\label{dependencies.json}
-
-\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/dependencies.json}
-
-\newpage
-
-\section{\texorpdfstring{\texttt{make\_replication\_code\_pdf.R}}{make\_replication\_code\_pdf.R}}\label{make_replication_code_pdf.r}
-
-\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/make_replication_code_pdf.R}
-
-\newpage
-
-\section{\texorpdfstring{\texttt{README.md}}{README.md}}\label{readme.md}
-
-\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/README.md}
 
 
 

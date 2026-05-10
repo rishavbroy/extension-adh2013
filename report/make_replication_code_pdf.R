@@ -9,6 +9,25 @@ library(fs)
 library(glue)
 
 project_root <- rprojroot::find_root(rprojroot::has_dir("src"))
+
+ensure_fvextra_available <- function() {
+  # Keep fvextra, but give the user a clearer setup path than a raw LaTeX failure.
+  if (!nzchar(Sys.which("kpsewhich"))) return(invisible(FALSE))
+  has_fvextra <- suppressWarnings(system2("kpsewhich", "fvextra.sty", stdout = TRUE, stderr = FALSE))
+  if (length(has_fvextra) && nzchar(has_fvextra[1])) return(invisible(TRUE))
+
+  message("LaTeX package fvextra.sty was not found.")
+  if (requireNamespace("tinytex", quietly = TRUE)) {
+    message("Attempting tinytex::tlmgr_install('fvextra')...")
+    try(tinytex::tlmgr_install("fvextra"), silent = TRUE)
+    has_fvextra <- suppressWarnings(system2("kpsewhich", "fvextra.sty", stdout = TRUE, stderr = FALSE))
+    if (length(has_fvextra) && nzchar(has_fvextra[1])) return(invisible(TRUE))
+  }
+  message("Install fvextra manually, for example: quarto install tinytex; Rscript -e \"tinytex::tlmgr_install('fvextra')\"")
+  invisible(FALSE)
+}
+
+ensure_fvextra_available()
 src_dir <- file.path(project_root, "src")
 out_dir <- file.path(project_root, "report")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
@@ -31,6 +50,7 @@ header <- c(
   "format:",
   "  pdf:",
   "    documentclass: article",
+  "    pdf-engine: xelatex",
   "    geometry:",
   "      - margin=0.65in",
   "    fontsize: 9pt",
@@ -40,6 +60,9 @@ header <- c(
   "    keep-tex: true",
   "    include-in-header:",
   "      text: |",
+  "        \\usepackage{booktabs}",
+  "        \\usepackage{float}",
+  "        \\usepackage{adjustbox}",
   "        \\usepackage{fvextra}",
   "        \\usepackage{xcolor}",
   "execute:",

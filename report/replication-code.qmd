@@ -5,6 +5,7 @@ author: "Rishav Roy"
 format:
   pdf:
     documentclass: article
+    pdf-engine: xelatex
     geometry:
       - margin=0.65in
     fontsize: 9pt
@@ -14,6 +15,9 @@ format:
     keep-tex: true
     include-in-header:
       text: |
+        \usepackage{booktabs}
+        \usepackage{float}
+        \usepackage{adjustbox}
         \usepackage{fvextra}
         \usepackage{xcolor}
 execute:

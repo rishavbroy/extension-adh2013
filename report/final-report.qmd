@@ -8,6 +8,7 @@ author:
 format:
   pdf:
     documentclass: article
+    pdf-engine: xelatex
     geometry:
       - margin=1in
     fontsize: 11pt
@@ -21,6 +22,7 @@ format:
         \usepackage{longtable}
         \usepackage{array}
         \usepackage{float}
+        \usepackage{adjustbox}
         \usepackage{threeparttable}
         \usepackage{threeparttablex}
         \usepackage{makecell}
