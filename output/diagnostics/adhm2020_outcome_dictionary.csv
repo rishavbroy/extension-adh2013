@@ -1,0 +1,9 @@
+outcome,outcome_label,interpretation,report_family
+d2_rwin_2002_2016,"Republican House win share, 2002-2016",Change in Republican House win indicator/share,House control
+d2_cfavg_repcon_2002_2016,Conservative Republican CF-score share,Change in conservative Republican CF-score share,House ideology
+d2_cfavg_repmod_2002_2016,Moderate Republican CF-score share,Change in moderate Republican CF-score share,House ideology
+d2_cfavg_demmod_2002_2016,Moderate Democratic CF-score share,Change in moderate Democratic CF-score share,House ideology
+d2_cfavg_demlib_2002_2016,Liberal Democratic CF-score share,Change in liberal Democratic CF-score share,House ideology
+d2_teaparty_2002_2010,Tea Party / Freedom Caucus outcome,Change in Tea Party outcome,Tea Party
+d_shnr_pres_2000_2016,"Republican presidential share, 2000-2016","Change in Republican presidential vote share, 2000-2016",Presidential
+d_shnr_pres_2000_2008,"Republican presidential share, 2000-2008","Change in Republican presidential vote share, 2000-2008",Presidential

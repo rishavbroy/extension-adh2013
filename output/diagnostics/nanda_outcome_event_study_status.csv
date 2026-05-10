@@ -1,0 +1,22 @@
+module,outcome,outcome_label,spec,spec_label,reference_year,valid_years,status,n_coefficients
+nanda_turnout_partisanship,reg_voters_pct,Registered voters / CVAP,minimal,Minimal,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,reg_voters_pct,Registered voters / CVAP,core_controls,Core controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,reg_voters_pct,Registered voters / CVAP,full_controls,Full controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,voter_turnout_pct,Ballots cast / CVAP,minimal,Minimal,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,voter_turnout_pct,Ballots cast / CVAP,core_controls,Core controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,voter_turnout_pct,Ballots cast / CVAP,full_controls,Full controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,reg_voter_turnout_pct,Ballots cast / registered voters,minimal,Minimal,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,reg_voter_turnout_pct,Ballots cast / registered voters,core_controls,Core controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,reg_voter_turnout_pct,Ballots cast / registered voters,full_controls,Full controls,2004,2004;2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,9
+nanda_turnout_partisanship,pres_rep_ratio,Presidential Republican ratio,minimal,Minimal,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,pres_rep_ratio,Presidential Republican ratio,core_controls,Core controls,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,pres_rep_ratio,Presidential Republican ratio,full_controls,Full controls,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,pres_dem_ratio,Presidential Democratic ratio,minimal,Minimal,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,pres_dem_ratio,Presidential Democratic ratio,core_controls,Core controls,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,pres_dem_ratio,Presidential Democratic ratio,full_controls,Full controls,2004,2004;2008;2012;2016;2020,ok,4
+nanda_turnout_partisanship,partisan_index_dem,Democratic partisanship index,minimal,Minimal,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8
+nanda_turnout_partisanship,partisan_index_dem,Democratic partisanship index,core_controls,Core controls,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8
+nanda_turnout_partisanship,partisan_index_dem,Democratic partisanship index,full_controls,Full controls,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8
+nanda_turnout_partisanship,partisan_index_rep,Republican partisanship index,minimal,Minimal,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8
+nanda_turnout_partisanship,partisan_index_rep,Republican partisanship index,core_controls,Core controls,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8
+nanda_turnout_partisanship,partisan_index_rep,Republican partisanship index,full_controls,Full controls,2006,2006;2008;2010;2012;2014;2016;2018;2020;2022,ok,8

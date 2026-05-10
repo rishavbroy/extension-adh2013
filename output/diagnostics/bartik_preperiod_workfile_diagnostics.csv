@@ -1,0 +1,3 @@
+outcome,regressor,estimate,std.error,statistic,p.value,n_obs,median_source_rows_per_cz,note
+d_sh_empl_mfg,exposure_1990_2007,0.020304090799111843,0.028522051929929074,0.7118734251306138,0.4800619373717827,722,4,ADH preperiod-workfile diagnostic: source rows aggregated to one CZ row before regression; future exposure/instrument predicting preperiod/local-labor-market changes.
+d_sh_empl_mfg,instrument_1990_2007,-0.11332386536502881,0.050027772189477376,-2.265219105416508,0.028149531382030895,722,4,ADH preperiod-workfile diagnostic: source rows aggregated to one CZ row before regression; future exposure/instrument predicting preperiod/local-labor-market changes.

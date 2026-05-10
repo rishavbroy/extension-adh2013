@@ -1,0 +1,6 @@
+candidate_variable,available_in_current_ADH_extension_data,note
+l_sh_pop_white,FALSE,"If a majority-white or race-composition variable is available, add exposure × baseline-race heterogeneity to compare with ADHM 2020 heterogeneity results."
+l_sh_popwht,FALSE,"If a majority-white or race-composition variable is available, add exposure × baseline-race heterogeneity to compare with ADHM 2020 heterogeneity results."
+sh_pop_white,FALSE,"If a majority-white or race-composition variable is available, add exposure × baseline-race heterogeneity to compare with ADHM 2020 heterogeneity results."
+l_sh_pop_black,FALSE,"If a majority-white or race-composition variable is available, add exposure × baseline-race heterogeneity to compare with ADHM 2020 heterogeneity results."
+l_sh_pop_hispanic,FALSE,"If a majority-white or race-composition variable is available, add exposure × baseline-race heterogeneity to compare with ADHM 2020 heterogeneity results."
