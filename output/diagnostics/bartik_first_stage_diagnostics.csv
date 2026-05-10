@@ -1,0 +1,4 @@
+spec,endogenous_variable,instrument,estimate,std.error,statistic,p.value,first_stage_F_t2,n_obs,r2,controls
+minimal,"ADH exposure, 1990-2007",ADH other-high-income-country import growth instrument,0.9772552401745078,0.08462511249903704,11.548052478933226,2.5189100657639015e-15,133.3575160561958,722,0.6270418748884656,none
+core_controls,"ADH exposure, 1990-2007",ADH other-high-income-country import growth instrument,0.8116742821988467,0.10095561736961578,8.039912026164611,2.220886527651481e-10,64.64018538846634,722,0.6699030112872988,z_l_shind_manuf_cbp; z_l_sh_popedu_c; z_l_sh_popfborn
+full_controls,"ADH exposure, 1990-2007",ADH other-high-income-country import growth instrument,0.7937495675236124,0.10079683321032175,7.874747075311204,3.919965197165584e-10,62.01164150012236,722,0.6751375785992044,z_l_shind_manuf_cbp; z_l_sh_popedu_c; z_l_sh_popfborn; z_l_sh_empl_f; z_l_sh_routine33; z_l_task_outsource

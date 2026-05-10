@@ -1,0 +1,4 @@
+diagnostic,status,details
+rotemberg_weights_exact,not_computable_from_public_ADH_files_in_this_project,"Exact GPSS Rotemberg weights require CZ-by-industry baseline shares matched to industry-level shocks. The attached ADH workfiles include CZ-level exposure and instrument, and sic87dd_trade_data includes trade by industry, but the CZ-by-industry share matrix is not present as a reusable public file in this project."
+industry_by_cz_shares_available,not_found_in_ADH_workfiles,"The project can still report first-stage, balance, and pretrend diagnostics using CZ-level exposure and instrument. Exact Rotemberg weights should be added only if the CZ-by-industry employment-share matrix is reconstructed from ADH raw CBP inputs or obtained from Dorn/ADH auxiliary files."
+industry_shift_data_available,available_in_sic87dd_trade_data,"sic87dd_trade_data.dta can support industry-shift summaries, but not Rotemberg weights without local shares."

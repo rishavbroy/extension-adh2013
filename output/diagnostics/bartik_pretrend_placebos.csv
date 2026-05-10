@@ -1,0 +1,5 @@
+outcome,regressor,estimate,std.error,statistic,p.value,n_obs,note
+pretrend_slope_rep_margin,exposure_1990_2007,-6.101720807898338e-5,1.5763842067079034e-4,-0.38707066348000774,0.7004510696056383,722,CZ-level pre-1988 presidential Republican-margin pretrend diagnostic; not a causal test.
+pretrend_slope_rep_margin,instrument_1990_2007,-1.3161488618706308e-4,2.2171840011118012e-4,-0.5936128265451363,0.5556173595409313,722,CZ-level pre-1988 presidential Republican-margin pretrend diagnostic; not a causal test.
+pretrend_change_first_to_last,exposure_1990_2007,-0.0011952382291072381,0.005637574413022155,-0.21201285190069932,0.8330137656138542,722,CZ-level pre-1988 presidential Republican-margin pretrend diagnostic; not a causal test.
+pretrend_change_first_to_last,instrument_1990_2007,-1.0062858930068763e-4,0.008115213492171801,-0.012399992852653505,0.9901589774420851,722,CZ-level pre-1988 presidential Republican-margin pretrend diagnostic; not a causal test.

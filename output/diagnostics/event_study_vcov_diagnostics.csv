@@ -1,81 +1,81 @@
 sample,spec,se_type,status,error_message,min_eigenvalue,max_eigenvalue,n_negative_eigenvalues,eigenvalue_ratio_abs_min_to_max,repair_required,vcov_repaired
-main_1972_start,minimal_full_panel,heteroskedastic,ok,NA,2.2329311618583816e-6,6.809165264381949e-5,0,0.032793023449417764,FALSE,FALSE
-main_1972_start,minimal_full_panel,cluster_cz,ok,NA,8.852024905057847e-8,1.565217461788917e-4,0,5.655460101333587e-4,FALSE,FALSE
-main_1972_start,minimal_full_panel,cluster_state,ok,NA,6.303709336857014e-8,2.732664622320187e-4,0,2.3067994825888322e-4,FALSE,FALSE
-main_1972_start,minimal_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.0303844540216904e-5,1.3680492271421282e-4,10,0.2946081452376691,TRUE,FALSE
-main_1972_start,minimal_full_panel,newey_west_lag1,ok,NA,1.2361352836087847e-6,8.180563543213117e-5,0,0.015110637269413132,FALSE,FALSE
-main_1972_start,minimal_full_panel,driscoll_kraay_lag1,ok,NA,3.9657699265411965e-36,1.321021214860532e-30,0,3.002048628689045e-6,FALSE,FALSE
-main_1972_start,minimal_full_panel,conley_250km,ok,NA,8.355755626332011e-8,2.9057729095498643e-4,0,2.875570764277794e-4,FALSE,FALSE
-main_1972_start,minimal_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-5.72335508018277e-6,4.676377169886359e-4,2,0.012238865412820954,TRUE,FALSE
-main_1972_start,minimal_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.1251075264639615e-6,5.329964096642751e-4,4,0.007739465879446153,TRUE,FALSE
-main_1972_start,minimal_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.274030415417637e-6,6.206098206847604e-4,4,0.011720778777544499,TRUE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,heteroskedastic,ok,NA,1.0680091937365188e-6,0.0013246329055796886,0,8.06268053011362e-4,FALSE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,cluster_cz,ok,NA,3.35396664208919e-8,0.001628617835844978,0,2.0593945174062563e-5,FALSE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,cluster_state,ok,NA,2.5664023054936447e-20,0.004009205255342882,0,6.401274422339737e-18,FALSE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.388585531965824e-4,9.483457494482324e-4,35,0.46276218715792167,TRUE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,newey_west_lag1,ok,NA,6.502183788238789e-7,0.0013830041998242446,0,4.7014924387540555e-4,FALSE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-3.0243507164643938e-43,1.5252144556878786e-27,17,1.9829019487626074e-16,FALSE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.0622752407917747e-5,0.004612608306678152,7,0.0023029816757989367,TRUE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-8.241394691606518e-5,0.006568966354528699,17,0.012545953574453664,TRUE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.8486536400753284e-4,0.007140387403616343,21,0.02589010281345594,TRUE,FALSE
-main_1972_start,interacted_core_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.3361899752289685e-4,0.0056512965516215645,22,0.05903406315267057,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel,heteroskedastic,ok,NA,1.0399680870141613e-6,0.0019603033012897094,0,5.305138680988562e-4,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel,cluster_cz,ok,NA,1.9056625032217255e-8,0.0024292171998213856,0,7.844759634345765e-6,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel,cluster_state,ok,NA,-5.868345505753117e-19,0.004290609152250118,18,1.3677184981241158e-16,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-6.600561737295544e-4,0.0016240625743121958,63,0.40642287074997324,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel,newey_west_lag1,ok,NA,5.811090828424457e-7,0.0021116753993381107,0,2.751886407468639e-4,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel,driscoll_kraay_lag1,ok,NA,-1.1343548335350438e-41,2.305012155645687e-26,35,4.921253151557827e-16,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-9.728338802727356e-5,0.00662210628690621,23,0.014690701691036057,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.066109098831559e-4,0.012941735843476156,36,0.05459939210854422,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011539872995544012,0.015902081128041368,40,0.07256831921951941,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0019817344900681716,0.016228838940153152,41,0.12211190815166657,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,ok,NA,6.601652168284772e-8,0.006170834046539127,0,1.0698152176021111e-5,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,ok,NA,8.512508145284158e-10,0.006936220346850708,0,1.227254573760642e-7,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,ok,NA,-6.824933913288428e-19,0.010790315849085467,18,6.325054807238915e-17,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0019378538775580067,0.0036246657389946437,63,0.534629678182546,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,ok,NA,4.0316176727149415e-8,0.006788115924866091,0,5.939229260871047e-6,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-1.46657145433426e-41,6.515073758419626e-26,37,2.2510435164896877e-16,FALSE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.3870244823149757e-5,0.008694643769189946,23,0.0015952631518153626,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.163548900175757e-4,0.009914523736574855,36,0.07225308134317433,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.9151754473686794e-4,0.012807898240843735,40,0.03056844592099728,TRUE,FALSE
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0028622394782081015,0.012923190857801938,41,0.22148086410718926,TRUE,FALSE
-diagnostic_1952_start,minimal_full_panel,heteroskedastic,ok,NA,1.9867860242137804e-6,6.065251238152471e-5,0,0.032756862761368036,FALSE,FALSE
-diagnostic_1952_start,minimal_full_panel,cluster_cz,ok,NA,7.95533701326392e-8,2.1474295980834334e-4,0,3.7045857151098247e-4,FALSE,FALSE
-diagnostic_1952_start,minimal_full_panel,cluster_state,ok,NA,4.519909175214916e-8,3.3809980453005446e-4,0,1.3368564887215518e-4,FALSE,FALSE
-diagnostic_1952_start,minimal_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.8505610545442774e-5,1.9873994795913043e-4,14,0.1937487200779644,TRUE,FALSE
-diagnostic_1952_start,minimal_full_panel,newey_west_lag1,ok,NA,1.4073265294996294e-6,8.255134121621039e-5,0,0.01704789418034648,FALSE,FALSE
-diagnostic_1952_start,minimal_full_panel,driscoll_kraay_lag1,ok,NA,7.441785990425055e-38,1.8748793036516536e-31,0,3.969208031648161e-7,FALSE,FALSE
-diagnostic_1952_start,minimal_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.660675970321383e-8,3.8111640531364335e-4,1,2.0100619819860436e-4,TRUE,FALSE
-diagnostic_1952_start,minimal_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.1195083205710905e-5,6.304841329940337e-4,4,0.017756328224388232,TRUE,FALSE
-diagnostic_1952_start,minimal_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.3300267779590003e-5,7.002490642454638e-4,7,0.03327425764530886,TRUE,FALSE
-diagnostic_1952_start,minimal_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.5133524852425597e-5,7.607022799389269e-4,7,0.019894149460996217,TRUE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,heteroskedastic,ok,NA,1.4410702094039366e-6,0.0019205215870006717,0,7.503535597610716e-4,FALSE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz,ok,NA,2.7198034552631394e-8,0.0020637011267642755,0,1.3179250716054905e-5,FALSE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_state,ok,NA,-8.981913329300103e-19,0.004814818616998376,11,1.8654728337200686e-16,FALSE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.953150277847776e-4,0.0011800163177106031,53,0.4197526935438978,TRUE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,newey_west_lag1,ok,NA,7.017137587576871e-7,0.0020243983112500285,0,3.4662830672111745e-4,FALSE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-1.9310269624663334e-42,3.952811021437155e-27,25,4.885199297395843e-16,FALSE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.3805883085616486e-5,0.0050958166152941745,16,0.004671652236104302,TRUE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.2798139414717474e-4,0.008755177586623945,28,0.026039608208002767,TRUE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.923598797309613e-4,0.00868684386642343,31,0.05667879926264601,TRUE,FALSE
-diagnostic_1952_start,interacted_core_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0010099312837039604,0.007199693258111902,33,0.1402742099555519,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,heteroskedastic,ok,NA,1.1281132436287944e-6,0.0030863530123058694,0,3.655165948712914e-4,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,cluster_cz,ok,NA,1.3708364217297882e-8,0.004903271368823658,0,2.7957588283731173e-6,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,cluster_state,ok,NA,-2.4484738684755933e-18,0.01318790323199304,36,1.856605879951975e-16,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011483270003924324,0.0037701845004378337,94,0.30458111539609706,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,newey_west_lag1,ok,NA,6.259514929778897e-7,0.0033874518796601187,0,1.8478535347952893e-4,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,driscoll_kraay_lag1,ok,NA,-5.60038880498493e-41,6.241512890615185e-26,52,8.972806598550398e-16,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.2133230963522946e-4,0.010355434285408624,39,0.021373542000754024,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0012176920498867443,0.021924586709703403,54,0.05554002298925056,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.002513468938134548,0.028567042453436026,55,0.08798491976309677,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.004008143144782312,0.02816820328205493,57,0.14229317733359914,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,ok,NA,1.019966175248781e-7,0.010799559442293993,0,9.444516516611945e-6,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,ok,NA,5.894493454209914e-10,0.017034578592490954,0,3.46031069815151e-8,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,ok,NA,-2.6503228147273228e-18,0.04133426492091788,39,6.411926811322302e-17,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.004036468495919468,0.012313252815908587,94,0.32781496134834454,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,ok,NA,4.222023858786747e-8,0.011929406189661748,0,3.53917352771979e-6,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-1.0999561869331227e-41,4.314274156158881e-26,51,2.5495741511069023e-16,FALSE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.3157424887848246e-5,0.035047208277750555,39,0.0012314083491564833,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011149008971223671,0.03441755207347473,54,0.032393381572933255,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-9.9627914368711e-4,0.03631242890666141,55,0.02743631240553962,TRUE,FALSE
-diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.005520581176595822,0.025513281354453445,57,0.21638068031700605,TRUE,FALSE
+main_1972_start,minimal_full_panel,heteroskedastic,ok,NA,2.2323888029852207e-6,6.80697477552144e-5,0,0.03279560857215328,FALSE,FALSE
+main_1972_start,minimal_full_panel,cluster_cz,ok,NA,8.844430936487922e-8,1.5644739419305124e-4,0,5.653293864117781e-4,FALSE,FALSE
+main_1972_start,minimal_full_panel,cluster_state,ok,NA,6.244037640557328e-8,2.73218049621074e-4,0,2.2853679137294119e-4,FALSE,FALSE
+main_1972_start,minimal_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.028184525402244e-5,1.367403099385562e-4,10,0.29458647031093427,TRUE,FALSE
+main_1972_start,minimal_full_panel,newey_west_lag1,ok,NA,1.2362021098494714e-6,8.17767575413636e-5,0,0.015116790479546546,FALSE,FALSE
+main_1972_start,minimal_full_panel,driscoll_kraay_lag1,ok,NA,8.856624225959867e-36,3.680940088147056e-31,0,2.4060767124352173e-5,FALSE,FALSE
+main_1972_start,minimal_full_panel,conley_250km,ok,NA,8.366316676711944e-8,2.9067202553516297e-4,0,2.878266892491125e-4,FALSE,FALSE
+main_1972_start,minimal_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-5.694662959980063e-6,4.6778798542956667e-4,2,0.01217359816274608,TRUE,FALSE
+main_1972_start,minimal_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.142522177504536e-6,5.329694271927753e-4,4,0.007772532468370242,TRUE,FALSE
+main_1972_start,minimal_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.2837246191281754e-6,6.20942260170604e-4,4,0.011730115803564362,TRUE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,heteroskedastic,ok,NA,1.0686762714856044e-6,0.0013235869612598745,0,8.07409186373648e-4,FALSE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,cluster_cz,ok,NA,3.395849541703905e-8,0.0016267812153377124,0,2.0874654253976876e-5,FALSE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,cluster_state,ok,NA,-5.0898725496800544e-20,0.004007046206126753,1,1.2702305608299864e-17,FALSE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.382843171976456e-4,9.466880912830991e-4,35,0.4629659137294253,TRUE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,newey_west_lag1,ok,NA,6.499326262048837e-7,0.001381888339142507,0,4.7032210041527783e-4,FALSE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-5.276352032342707e-43,1.2590436980147566e-27,17,4.1907616396971674e-16,FALSE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.074277810435513e-5,0.004607227720800643,7,0.0023317228397141724,TRUE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-8.345036351213428e-5,0.006558046005067342,18,0.012724882296899555,TRUE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.8519056157761677e-4,0.007120697984903914,21,0.026007360791066567,TRUE,FALSE
+main_1972_start,interacted_core_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.335390685622669e-4,0.005639850783611804,22,0.059139697371331144,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel,heteroskedastic,ok,NA,1.0389234609547653e-6,0.0019599887398488803,0,5.300660354991981e-4,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel,cluster_cz,ok,NA,1.915531025559778e-8,0.0024289437299672935,0,7.886271723493453e-6,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel,cluster_state,ok,NA,-1.2030549867745926e-18,0.004287865370923681,18,2.805720055794181e-16,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-6.598628037536284e-4,0.0016233715410951602,63,0.40647675966308444,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel,newey_west_lag1,ok,NA,5.80945878328895e-7,0.0021111980920173823,0,2.751735521766054e-4,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel,driscoll_kraay_lag1,ok,NA,-1.059213343910468e-41,2.4598661234412297e-26,35,4.3059796377401283e-16,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-9.743652846054442e-5,0.006614477813917104,24,0.014730796776660794,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.050966127652228e-4,0.01291914150933782,36,0.054577667738648604,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011557408620308407,0.01588378696042534,40,0.07276229937548168,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0019790150996475747,0.01620313652190411,40,0.12213777850802253,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,ok,NA,6.603593861113399e-8,0.006168018541263911,0,1.0706183544902627e-5,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,ok,NA,8.544315524909207e-10,0.006931799052243771,0,1.23262596917657e-7,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,ok,NA,-7.47762084215082e-19,0.010787742571778978,20,6.931589989654069e-17,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.00193612633509169,0.00362157519347258,63,0.5346089012817701,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,ok,NA,4.0331159483906826e-8,0.006785284404543339,0,5.9439158448394e-6,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-3.0498653640933716e-41,9.431419997204552e-26,35,3.2337287121105235e-16,FALSE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.3887698056900928e-5,0.008693974740644901,24,0.0015973934214433623,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.107092209458598e-4,0.009916014310706496,36,0.07167287164748185,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.9385967744780064e-4,0.012818991901592212,40,0.03072469976355008,TRUE,FALSE
+main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0028598960797052183,0.012924394520733355,40,0.2212789214316666,TRUE,FALSE
+diagnostic_1952_start,minimal_full_panel,heteroskedastic,ok,NA,1.9868295705531486e-6,6.064551165334629e-5,0,0.03276136215834069,FALSE,FALSE
+diagnostic_1952_start,minimal_full_panel,cluster_cz,ok,NA,7.944402910257718e-8,2.146712888246937e-4,0,3.700729125796291e-4,FALSE,FALSE
+diagnostic_1952_start,minimal_full_panel,cluster_state,ok,NA,4.4807616513250406e-8,3.3806312995378395e-4,0,1.3254215719820135e-4,FALSE,FALSE
+diagnostic_1952_start,minimal_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-3.8479328535321644e-5,1.986766105933779e-4,14,0.1936782010745869,TRUE,FALSE
+diagnostic_1952_start,minimal_full_panel,newey_west_lag1,ok,NA,1.4073680597444839e-6,8.252942082582301e-5,0,0.017052925437520166,FALSE,FALSE
+diagnostic_1952_start,minimal_full_panel,driscoll_kraay_lag1,ok,NA,1.969399070475807e-37,5.973435435090257e-32,0,3.296928696854744e-6,FALSE,FALSE
+diagnostic_1952_start,minimal_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-7.56084688111178e-8,3.8117287965917974e-4,1,1.9835741954863636e-4,TRUE,FALSE
+diagnostic_1952_start,minimal_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.1171719036446307e-5,6.306176968785063e-4,4,0.01771551780380599,TRUE,FALSE
+diagnostic_1952_start,minimal_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.329509318324347e-5,7.002209884622739e-4,7,0.033268201849248835,TRUE,FALSE
+diagnostic_1952_start,minimal_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-1.5160572081624823e-5,7.610629422168133e-4,7,0.019920260520720302,TRUE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,heteroskedastic,ok,NA,1.441323253205237e-6,0.0019200550260913005,0,7.506676806754707e-4,FALSE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz,ok,NA,2.7472314894080397e-8,0.002063267270722675,0,1.3314956953908358e-5,FALSE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_state,ok,NA,-7.391498055440784e-19,0.0048141015329265235,10,1.5353847451878408e-16,FALSE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.951581649238113e-4,0.001179197517956999,53,0.4199111322602596,TRUE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,newey_west_lag1,ok,NA,7.01107523226816e-7,0.0020238020751570133,0,3.4643087475459857e-4,FALSE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-1.1376513810553523e-43,3.761836253490554e-28,25,3.0241916564011575e-16,FALSE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.4012045619484498e-5,0.005094320752380307,16,0.004713493081146282,TRUE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.2961217585464763e-4,0.008752308500876774,28,0.02623447012084251,TRUE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.917239635232138e-4,0.008671337505383315,31,0.056706818667586534,TRUE,FALSE
+diagnostic_1952_start,interacted_core_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.001009089746493219,0.0071890181349834135,33,0.14036544734568918,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,heteroskedastic,ok,NA,1.1283571351509162e-6,0.0030857891176179464,0,3.656624260902001e-4,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,cluster_cz,ok,NA,1.381830766760789e-8,0.004903306794227848,0,2.81816093658972e-6,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,cluster_state,ok,NA,-2.162309408239941e-18,0.013186656303135227,36,1.6397708096220235e-16,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011481914613675338,0.0037698521746041937,94,0.30457201189542277,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,newey_west_lag1,ok,NA,6.256932683022965e-7,0.0033867194165580015,0,1.847490716955237e-4,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,driscoll_kraay_lag1,ok,NA,-3.071667455284593e-41,9.412505513261879e-26,50,3.263389807269409e-16,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-2.2142597707620334e-4,0.010353253029500346,39,0.02138709219655665,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0012160096095711846,0.021909052101623243,54,0.055502611611439386,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0025146370910997997,0.028549233395758107,56,0.08808072203695069,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.004005692388486417,0.028142450767819023,57,0.14233630260328778,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,heteroskedastic,ok,NA,1.0191946332973338e-7,0.010798821878386277,0,9.438016894576626e-6,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,ok,NA,6.000289828869363e-10,0.017036119277253264,0,3.522098977600485e-8,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_state,ok,NA,-3.721438604269814e-18,0.04133122567848928,37,9.003939619933958e-17,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz_year,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.004036877671090155,0.012314024740166109,94,0.3278276401315481,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,newey_west_lag1,ok,NA,4.223291788514967e-8,0.011928378405923621,0,3.540541425494755e-6,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,driscoll_kraay_lag1,ok,NA,-1.0605723293603846e-41,3.1036458251296554e-26,51,3.417182208012021e-16,FALSE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_250km,repair_required,Unrepaired VCOV is not positive semidefinite.,-4.307455905545576e-5,0.03504868257682964,39,0.0012289922441744488,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_500km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0011072692667898007,0.03441264956912807,54,0.03217622823739626,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_750km,repair_required,Unrepaired VCOV is not positive semidefinite.,-9.976642597629088e-4,0.03632714509500546,56,0.027463326863527062,TRUE,FALSE
+diagnostic_1952_start,interacted_controls_full_panel_raw_controls_diagnostic,conley_1000km,repair_required,Unrepaired VCOV is not positive semidefinite.,-0.0055160518415711245,0.025518177907993024,57,0.21616166567454406,TRUE,FALSE
