@@ -10,7 +10,7 @@ library(glue)
 
 project_root <- rprojroot::find_root(rprojroot::has_dir("src"))
 
-ensure_fvextra_available <- function() {
+ensure_code_pdf_tex_available <- function() {
   # Keep fvextra, but give the user a clearer setup path than a raw LaTeX failure.
   if (!nzchar(Sys.which("kpsewhich"))) return(invisible(FALSE))
   has_fvextra <- suppressWarnings(system2("kpsewhich", "fvextra.sty", stdout = TRUE, stderr = FALSE))
@@ -27,7 +27,7 @@ ensure_fvextra_available <- function() {
   invisible(FALSE)
 }
 
-ensure_fvextra_available()
+ensure_code_pdf_tex_available()
 src_dir <- file.path(project_root, "src")
 out_dir <- file.path(project_root, "report")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
@@ -60,9 +60,6 @@ header <- c(
   "    keep-tex: true",
   "    include-in-header:",
   "      text: |",
-  "        \\usepackage{booktabs}",
-  "        \\usepackage{float}",
-  "        \\usepackage{adjustbox}",
   "        \\usepackage{fvextra}",
   "        \\usepackage{xcolor}",
   "execute:",

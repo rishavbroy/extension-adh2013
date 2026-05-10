@@ -15,9 +15,6 @@ format:
     keep-tex: true
     include-in-header:
       text: |
-        \usepackage{booktabs}
-        \usepackage{float}
-        \usepackage{adjustbox}
         \usepackage{fvextra}
         \usepackage{xcolor}
 execute:

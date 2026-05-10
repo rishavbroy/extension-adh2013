@@ -1,9 +1,9 @@
 ---
 title: "Trade Shocks and Political Change in Local Labor Markets"
 author:
-  - "Yana"
-  - "Rachel"
-  - "Yuxiao"
+  - "Yana Samanta"
+  - "Rachel Williams"
+  - "Yuxiao Li"
   - "Rishav Roy"
 format:
   pdf:
@@ -22,10 +22,6 @@ format:
         \usepackage{longtable}
         \usepackage{array}
         \usepackage{float}
-        \usepackage{adjustbox}
-        \usepackage{threeparttable}
-        \usepackage{threeparttablex}
-        \usepackage{makecell}
         \usepackage{xcolor}
         \usepackage{caption}
         \usepackage{fvextra}
@@ -43,9 +39,11 @@ execute:
 library(readr)
 library(dplyr)
 library(knitr)
-library(kableExtra)
 fmt_num <- function(x, digits = 3) ifelse(is.na(x), "", formatC(x, digits = digits, format = "f"))
 output_path <- function(...) file.path("..", "output", ...)
+report_kable <- function(x, caption = NULL, longtable = FALSE, digits = 3, align = NULL) {
+  knitr::kable(x, booktabs = TRUE, longtable = longtable, caption = caption, digits = digits, align = align)
+}
 ```
 
 # Summary

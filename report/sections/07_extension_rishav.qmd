@@ -17,8 +17,7 @@ fs <- read_csv(output_path("diagnostics", "bartik_first_stage_diagnostics.csv"),
     `First-stage F` = fmt_num(first_stage_F_t2, 1),
     `N` = n_obs
   )
-knitr::kable(fs, booktabs = TRUE, align = "lrrrr") |>
-  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 9)
+knitr::kable(fs, booktabs = TRUE, align = "lrrrr")
 ```
 
 Figure @fig-main-event-study presents the main event-study estimates. The preferred inference is CZ-clustered. Conley, Driscoll-Kraay, Newey-West, state-clustered, and two-way clustered alternatives are computed as diagnostics, but several spatial and two-way variance-covariance matrices are non-positive-definite or require numerical repair in this short election-year panel. We therefore state the conclusions cautiously and base the main figure on CZ-clustered confidence intervals.

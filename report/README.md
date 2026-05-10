@@ -55,3 +55,17 @@ tlmgr install fvextra
 
 Seeing Quarto list a Julia engine in the render metadata does not mean the report is using Julia.
 The report chunks are R/knitr chunks; no Python virtual environment is required for these PDFs.
+
+## Minimal TeX package setup
+
+The report now avoids `kableExtra`-inserted LaTeX dependencies such as `adjustbox` and `multirow`. The code appendix intentionally still uses `fvextra` for line-wrapped verbatim code. If rendering fails because a TeX package is missing, run:
+
+```r
+source("report/install_tex_packages.R")
+```
+
+or manually:
+
+```r
+tinytex::tlmgr_install(c("fvextra", "xcolor", "booktabs", "caption", "float"))
+```

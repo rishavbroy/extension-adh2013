@@ -7,8 +7,7 @@ This appendix documents the county-to-CZ bridge used to construct political outc
 #| tbl-cap: "Pipeline validation checks."
 val <- read_csv(output_path("diagnostics", "pipeline_validation_checks.csv"), show_col_types = FALSE) |>
   select(check, status, fatal, n_failed, n_reported, details)
-knitr::kable(val, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+knitr::kable(val, booktabs = TRUE, longtable = TRUE)
 ```
 
 ```{r}
@@ -23,8 +22,7 @@ ret <- read_csv(output_path("diagnostics", "county_bridge_retention_by_scope_m5.
     `Unmatched counties` = unmatched_source_counties,
     `Retained vote share` = fmt_num(retained_vote_share, 4)
   )
-knitr::kable(ret, booktabs = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8)
+knitr::kable(ret, booktabs = TRUE)
 ```
 
 ![1990 counties receiving positive vote mass from source counties with unavailable weights.](../output/figures/fig_crosswalk_unavailable_weights_1990_counties_small.png){#fig-crosswalk-county-map width=100%}
@@ -37,13 +35,23 @@ knitr::kable(ret, booktabs = TRUE) |>
 
 ```{r}
 #| label: tbl-main-event-table
-#| results: asis
+#| tbl-cap: "Main event-study coefficient table, selected years."
 #| echo: false
-main_tex <- output_path("tables", "tab_event_study_rep_margin_main_specs_m5.tex")
-if (file.exists(main_tex)) {
-  cat("\\input{../output/tables/tab_event_study_rep_margin_main_specs_m5.tex}")
+main_csv <- output_path("tables", "tab_event_study_rep_margin_main_specs_m5.csv")
+if (file.exists(main_csv)) {
+  main_tbl <- read_csv(main_csv, show_col_types = FALSE) |>
+    filter(year %in% c(1972, 1988, 1992, 2000, 2008, 2016, 2020)) |>
+    transmute(
+      Spec = spec_label,
+      Year = year,
+      Estimate = fmt_num(estimate, 4),
+      `Std. error` = fmt_num(std.error, 4),
+      `95% CI` = paste0("[", fmt_num(conf.low, 4), ", ", fmt_num(conf.high, 4), "]"),
+      `p-value` = fmt_num(p.value, 3)
+    )
+  knitr::kable(main_tbl, booktabs = TRUE, longtable = TRUE)
 } else {
-  cat("Main event-study table not found.")
+  cat("Main event-study table CSV not found.")
 }
 ```
 
@@ -73,8 +81,7 @@ bal <- read_csv(output_path("diagnostics", "bartik_balance_correlations.csv"), s
     `Weighted mean` = fmt_num(weighted_mean, 3),
     SD = fmt_num(sd, 3)
   )
-knitr::kable(bal, booktabs = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8)
+knitr::kable(bal, booktabs = TRUE)
 ```
 
 ```{r}
@@ -89,8 +96,7 @@ pre <- read_csv(output_path("diagnostics", "bartik_pretrend_placebos.csv"), show
     `Std. error` = fmt_num(std.error, 4),
     `p-value` = fmt_num(p.value, 3)
   )
-knitr::kable(pre, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+knitr::kable(pre, booktabs = TRUE, longtable = TRUE)
 ```
 
 ```{r}
@@ -99,8 +105,7 @@ knitr::kable(pre, booktabs = TRUE, longtable = TRUE) |>
 shift_path <- output_path("diagnostics", "bartik_industry_shift_summary.csv")
 if (file.exists(shift_path)) {
   shifts <- read_csv(shift_path, show_col_types = FALSE)
-  knitr::kable(head(shifts, 15), booktabs = TRUE, longtable = TRUE) |>
-    kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+  knitr::kable(head(shifts, 15), booktabs = TRUE, longtable = TRUE)
 } else {
   cat("Industry-shift summary not found.")
 }
@@ -123,8 +128,7 @@ sub <- read_csv(output_path("diagnostics", "subperiod_exposure_selected_horizons
     `Early minus late` = fmt_num(early_minus_late, 4),
     `Approx. p-value` = fmt_num(approx_p_difference, 3)
   )
-knitr::kable(sub, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 7)
+knitr::kable(sub, booktabs = TRUE, longtable = TRUE)
 ```
 
 # Appendix E: Standard-Error Diagnostics
@@ -145,16 +149,14 @@ vc <- vc |>
     "sample", "spec", "se_type", "status", "vcov_repair_required", "repair_required",
     "vcov_repaired", "min_eigenvalue", "n_negative_eigenvalues", "max_abs_repair_change"
   )))
-knitr::kable(vc, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 5)
+knitr::kable(vc, booktabs = TRUE, longtable = TRUE)
 ```
 
 ```{r}
 #| label: tbl-se-warning-diagnostics
 #| tbl-cap: "SE warning diagnostics."
 sewarn <- read_csv(output_path("diagnostics", "event_study_se_warning_diagnostics.csv"), show_col_types = FALSE)
-knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 5)
+knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE)
 ```
 
 # Appendix F: Exploratory Mechanism Evidence
@@ -178,8 +180,7 @@ nav <- read_csv(output_path("diagnostics", "nanda_outcome_year_availability.csv"
     `Zero CZs` = n_zero,
     Available = available_for_event_study
   )
-knitr::kable(nav, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+knitr::kable(nav, booktabs = TRUE, longtable = TRUE)
 ```
 
 ## ADHM 2020 public political-supply diagnostics
@@ -198,8 +199,7 @@ adhm <- read_csv(output_path("diagnostics", "adhm2020_mechanism_regressions.csv"
     `p-value` = fmt_num(p.value, 3),
     N = n_obs
   )
-knitr::kable(adhm, booktabs = TRUE, longtable = TRUE) |>
-  kableExtra::kable_styling(latex_options = c("repeat_header"), font_size = 6)
+knitr::kable(adhm, booktabs = TRUE, longtable = TRUE)
 ```
 
 # Appendix G: Replication Notes
