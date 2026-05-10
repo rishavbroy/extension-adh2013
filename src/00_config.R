@@ -57,7 +57,7 @@ CONFIG <- list(
   standardize_interacted_controls = TRUE,
   export_bandwidth_diagnostic = TRUE,
   export_crosswalk_maps = TRUE,
-  run_crosswalk_sensitivity = TRUE,
+  run_crosswalk_sensitivity = FALSE,
   save_single_rds = FALSE,
   rds_chunk_size_mib = 45,
   county1990_shapefile_path = Sys.getenv("COUNTY1990_SHAPEFILE", unset = file.path(REPLICATION_DIR, "spatial-data", "counties-1990")),

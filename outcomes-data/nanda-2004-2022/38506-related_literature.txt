@@ -1,0 +1,55 @@
+Bibliography
+National Neighborhood Data Archive (NaNDA): Voter Registration, Turnout, and Partisanship by County, United States, 2004-2022
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 38506. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. 
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu
+
+
+1. Amin, Raid; Singha Roy, Sudakshina; Aristilde, James; Averina, Vera; Clark, Jelani; Ferdman, Brian; Ferro, Gabriella; Joseph, Sarlina; Post, Arielle; Sharma, Abhishek; Xu, Jun; Graham, Johnathon, "A Spatiotemporal Analysis of Evictions and Homelessness in the USA." 2026. DOI: 10.1080/2330443X.2026.2637439.
+
+2. Becker-Toro, S.; Ouyang, Y., "Rising numbers, rising risks: Population growth and natural disasters." 2026, 28(2). 
+Abstract: https://scholar.valpo.edu/mssj/vol28/iss2/11
+
+3. Shomali, R.; Freeman, N.; Bott, G.; Dayarian, I.; Parton, J., "Hidden in Plain Sight: Detecting Illicit Massage Businesses from Mobility Data." arXiv. 2026. DOI: 10.48550/arXiv.2602.16561.
+Abstract: https://arxiv.org/abs/2602.16561
+
+4. Streyczek, Julian, "Essays on Information, Politics, and Digital Media." Bocconi University. 2026. 
+
+5. D'Amico, Elisa, "Resilient by design: Isolating impactful climate adaptation measures in New England." 2025, 4(80). DOI: 10.1038/s44168-025-00275-w.
+
+6. Kim, Jangwon; Kim, Bitna, "Enhancing victim support: An analysis of disparities and determinants in law enforcement-based victim assistance." 2025. DOI: 10.1108/PIJPSM-02-2025-0023.
+
+7. Kim, Yoo Ri, "Understanding the entrepreneurial ecosystem in hospitality and tourism: A spatial econometric analysis." 2025, 59. DOI: 10.1016/j.tmp.2025.101425.
+
+8. Lyon, Melissa Arnold; Finger, Leslie; Noh, Hyesang, "Teacher Strikes and the Demobilization of Republican Voters." Brown University, Annenberg Institute. 2025. DOI: 10.26300/4n4r-w756.
+Abstract: https://edworkingpapers.com/ai24-1074
+
+9. Sperry, Toryn, "Traversing the Rural/Urban Divide: How Community Context Impacts Racialized Policing and Social Movement Response." University of Maryland, College Park. 2025. 
+
+10. Xiang, Nuannuan, "Community health centers and voting, 2006–2022." 2025. DOI: 10.1215/03616878-12318009.
+
+11. Amin, Raid; Angstadt, Alexis; Dragomirov, Vladimir; Drury, Maria; Farinas, Kyra; Mezzano, Michael; Muller, Amy; Waterhouse, Paul, "Clusters of jail incarcerations in U.S. counties: 2010-2018." 2024, 11(1). DOI: 10.1080/2330443X.2024.2342777.
+
+12. Noppert, Grace A.; Clarke, Philippa; Hoover, Andrew; Kubale, John; Melendez, Robert; Duchowny, Kate; Hegde, Sonia T., "State variation in neighborhood COVID-19 burden across the United States." 2024, 36. DOI: 10.1038/s43856-024-00459-1.
+
+13. Grace A Noppert; Philippa Clarke; Andrew Hoover; John Kubale; Robert Melendez; Kate Duchowny; Sonia T Hegde, "State variation in neighborhood COVID-19 burden: Findings from the COVID neighborhood project." medRxiv. 2023. DOI: 10.1101/2023.05.19.23290222.
+Abstract: https://www.medrxiv.org/content/10.1101/2023.05.19.23290222v1
+Full text PDF: https://www.medrxiv.org/content/10.1101/2023.05.19.23290222v1.full.pdf
+
+14. Grade, Madeline M.; Reardon, Alexander W. T.; Ha, Yoonhee P.; Steinhart, Adi; Martin, Alister F., "The healthy democracy kit: Design, implementation, uptake, and impact of a novel voter registration toolkit for healthcare settings." 2023, 23. DOI: 10.1186/s12889-023-15800-x.
+
+15. Monarrez, Tomas E., "School attendance boundaries and the segregation of public schools in the United States." 2023, 15(3), 210-37. DOI: 10.1257/app.20200498.
+
+16. Parker, Gary; Hutti, Ellen, "Race, poverty and unemployment as quantitative predictors of voter turnout in St. Louis amidst COVID-19 and a racial justice movement." 2023, 43(5-6), 405-417. DOI: 10.1108/IJSSP-02-2022-0061.
+
+17. Willse, Cadence, "The geography of giving: Nonprofit philanthropy, public parks and land conservation in the United States." 2023, 5(5). DOI: 10.1111/csp2.12890.
+
+18. Auerbach, Alan J.; Gorodnichenko, Yuriy; Murphy, Daniel, "Demand Stimulus as Social Policy." National Bureau of Economic Research. 2022. DOI: 10.3386/w30498.
+Abstract: https://www.nber.org/papers/w30498
+
