@@ -282,6 +282,10 @@ finalize_config <- function(config) {
   config$alternative_outcomes_status_csv <- file.path(config$diagnostic_dir, "alternative_political_outcome_status.csv")
   config$alternative_outcomes_decomposition_plot_png <- file.path(config$figure_dir, "fig_alternative_political_outcome_decomposition.png")
   config$alternative_outcomes_decomposition_plot_pdf <- file.path(config$figure_dir, "fig_alternative_political_outcome_decomposition.pdf")
+  config$alternative_outcomes_vote_choice_plot_png <- file.path(config$figure_dir, "fig_alternative_political_outcomes_vote_choice.png")
+  config$alternative_outcomes_vote_choice_plot_pdf <- file.path(config$figure_dir, "fig_alternative_political_outcomes_vote_choice.pdf")
+  config$alternative_outcomes_vote_volume_plot_png <- file.path(config$figure_dir, "fig_alternative_political_outcomes_vote_volume.png")
+  config$alternative_outcomes_vote_volume_plot_pdf <- file.path(config$figure_dir, "fig_alternative_political_outcomes_vote_volume.pdf")
 
   config$nanda_cz_panel_csv <- file.path(config$intermediate_dir, "nanda_2004_2022_cz_panel.csv")
   config$nanda_outcomes_coefficients_csv <- file.path(config$diagnostic_dir, "nanda_outcome_event_studies.csv")
@@ -292,6 +296,13 @@ finalize_config <- function(config) {
   config$nanda_county_validation_csv <- file.path(config$diagnostic_dir, "nanda_county_year_validation.csv")
   config$nanda_cz_validation_csv <- file.path(config$diagnostic_dir, "nanda_cz_year_validation.csv")
   config$nanda_outlier_rates_csv <- file.path(config$diagnostic_dir, "nanda_outlier_rates.csv")
+  config$nanda_outcome_availability_csv <- file.path(config$diagnostic_dir, "nanda_outcome_year_availability.csv")
+  config$nanda_turnout_plot_png <- file.path(config$figure_dir, "fig_nanda_turnout_registration.png")
+  config$nanda_turnout_plot_pdf <- file.path(config$figure_dir, "fig_nanda_turnout_registration.pdf")
+  config$nanda_vote_plot_png <- file.path(config$figure_dir, "fig_nanda_presidential_vote_ratios.png")
+  config$nanda_vote_plot_pdf <- file.path(config$figure_dir, "fig_nanda_presidential_vote_ratios.pdf")
+  config$nanda_partisanship_plot_png <- file.path(config$figure_dir, "fig_nanda_partisanship_indices.png")
+  config$nanda_partisanship_plot_pdf <- file.path(config$figure_dir, "fig_nanda_partisanship_indices.pdf")
 
   config$adhm2020_summary_csv <- file.path(config$diagnostic_dir, "adhm2020_public_data_summary.csv")
   config$adhm2020_regressions_csv <- file.path(config$diagnostic_dir, "adhm2020_mechanism_regressions.csv")
@@ -309,6 +320,7 @@ finalize_config <- function(config) {
   config$subperiod_event_study_plot_pdf <- file.path(config$figure_dir, "fig_subperiod_exposure_event_study.pdf")
   config$subperiod_first_stage_csv <- file.path(config$diagnostic_dir, "subperiod_exposure_first_stage.csv")
   config$subperiod_equality_tests_csv <- file.path(config$diagnostic_dir, "subperiod_exposure_equality_tests.csv")
+  config$subperiod_selected_horizons_csv <- file.path(config$diagnostic_dir, "subperiod_exposure_selected_horizons.csv")
 
   config
 }

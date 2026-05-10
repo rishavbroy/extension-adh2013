@@ -1,5 +1,0 @@
-diagnostic,status,details
-rotemberg_weights_exact,not_yet_computed,"Exact GPSS Rotemberg weights require a CZ-by-industry baseline share matrix matched to industry-level shifts. This patch adds industry-shift summaries and documents the reconstruction path, but does not yet run the full ADH CBP-to-CZ industry-share reconstruction."
-industry_by_cz_shares_status,requires_reconstructing_CZ_by_industry_shares,"Relevant public ADH files include other/cbp1980_to_cz.do, cbp1990_to_cz.do, cbp2000_to_cz.do, cbp*_imputations.do, cw_n97_s87.dta, and sic87dd_trade_data.dta."
-industry_shift_summary_status,written,Industry-level China import-growth summaries are exported from sic87dd_trade_data.dta where columns are available.
-next_step,feasible_with_ADH_raw_CBP_scripts_but_not_a_one-file_join,"To compute exact GPSS weights: reconstruct 1990 CZ x SIC87DD employment shares, create shift vectors from Chinese import growth in the instrument country group, residualize by controls, and compute Rotemberg weights."

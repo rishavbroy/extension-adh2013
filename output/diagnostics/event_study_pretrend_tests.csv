@@ -1,5 +1,0 @@
-sample,spec,se_type,pre_years,statistic,p.value,df1,df2,status,error_message
-main_1972_start,minimal_full_panel,cluster_cz,"1972,1976,1980,1984",1.3245849930832785,0.2591641047898334,4,721,ok,NA
-main_1972_start,interacted_core_controls_diagnostic,cluster_cz,"1972,1976,1980,1984",1.8782714788418837,0.11239199563701924,4,721,ok,NA
-main_1972_start,interacted_controls_full_panel,cluster_cz,"1972,1976,1980,1984",0.8529644414480058,0.49192270294339757,4,721,ok,NA
-main_1972_start,interacted_controls_full_panel_raw_controls_diagnostic,cluster_cz,"1972,1976,1980,1984",0.8529644414482603,0.49192270294323936,4,721,ok,NA

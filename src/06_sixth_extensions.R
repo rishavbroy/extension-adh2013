@@ -38,6 +38,59 @@ weighted_mean_safe <- function(x, w = NULL) {
   stats::weighted.mean(x[ok], w[ok], na.rm = TRUE)
 }
 
+extension_spec_label <- function(x) {
+  dplyr::recode(as.character(x),
+    minimal = "Minimal",
+    core_controls = "Core controls",
+    full_controls = "Full controls",
+    .default = as.character(x)
+  )
+}
+
+extension_outcome_label <- function(x) {
+  dplyr::recode(as.character(x),
+    rep_margin = "Republican margin",
+    rep_2party_share = "Republican two-party share",
+    dem_2party_share = "Democratic two-party share",
+    two_party_votes_per_1990_pop = "Two-party votes / 1990 population",
+    total_votes_per_1990_pop = "Total votes / 1990 population",
+    rep_votes_per_1990_pop = "Republican votes / 1990 population",
+    dem_votes_per_1990_pop = "Democratic votes / 1990 population",
+    rep_margin_swing = "Republican-margin swing",
+    rep_2party_share_swing = "Republican-share swing",
+    reg_voters_pct = "Registered voters / CVAP",
+    voter_turnout_pct = "Ballots cast / CVAP",
+    reg_voter_turnout_pct = "Ballots cast / registered voters",
+    pres_rep_ratio = "Presidential Republican ratio",
+    pres_dem_ratio = "Presidential Democratic ratio",
+    partisan_index_dem = "Democratic partisanship index",
+    partisan_index_rep = "Republican partisanship index",
+    .default = as.character(x)
+  )
+}
+
+adhm_outcome_label <- function(x) {
+  dplyr::recode(as.character(x),
+    d2_rwin_2002_2016 = "Republican House win share, 2002-2016",
+    d2_cfavg_repcon_2002_2016 = "Conservative Republican CF-score share",
+    d2_cfavg_repmod_2002_2016 = "Moderate Republican CF-score share",
+    d2_cfavg_demmod_2002_2016 = "Moderate Democratic CF-score share",
+    d2_cfavg_demlib_2002_2016 = "Liberal Democratic CF-score share",
+    d2_teaparty_2002_2010 = "Tea Party / Freedom Caucus outcome",
+    d_shnr_pres_2000_2016 = "Republican presidential share, 2000-2016",
+    d_shnr_pres_2000_2008 = "Republican presidential share, 2000-2008",
+    .default = as.character(x)
+  )
+}
+
+plot_pointrange_event <- function(df, title, subtitle, y_lab = "Coefficient on ADH exposure × year") {
+  ggplot2::ggplot(df, ggplot2::aes(x = year, y = estimate, ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error)) +
+    ggplot2::geom_hline(yintercept = 0, linewidth = 0.25) +
+    ggplot2::geom_pointrange(linewidth = 0.25) +
+    ggplot2::labs(title = title, subtitle = subtitle, x = NULL, y = y_lab) +
+    ggplot2::theme_minimal(base_size = 10)
+}
+
 first_existing_col <- function(df, candidates) {
   nm <- names(df)
   hit <- candidates[candidates %in% nm]
@@ -232,8 +285,8 @@ run_bartik_identification_diagnostics <- function(config = CONFIG) {
     )
   })
   readr::write_csv(fs_tbl, config$bartik_first_stage_csv)
-  p_fs <- ggplot2::ggplot(adh, ggplot2::aes(x = instrument_1990_2007, y = exposure_1990_2007, size = adh_weight)) +
-    ggplot2::geom_point(alpha = 0.35) +
+  p_fs <- ggplot2::ggplot(adh, ggplot2::aes(x = instrument_1990_2007, y = exposure_1990_2007)) +
+    ggplot2::geom_point(ggplot2::aes(size = adh_weight), alpha = 0.35) +
     ggplot2::geom_smooth(method = "lm", se = TRUE, linewidth = 0.5) +
     ggplot2::guides(size = "none") +
     ggplot2::labs(title = "ADH exposure first stage", subtitle = "CZ-level China exposure and ADH other-country instrument", x = "Instrument", y = "Exposure") +
@@ -295,24 +348,38 @@ run_bartik_identification_diagnostics <- function(config = CONFIG) {
   preperiod_path <- file.path(config$replication_dir, "adh2013", "dta", "workfile_china_preperiod.dta")
   preperiod_tbl <- tibble::tibble()
   if (file.exists(preperiod_path)) {
-    pre <- haven::read_dta(preperiod_path) %>% dplyr::mutate(czone = as.integer(czone), dplyr::across(dplyr::everything(), ~ .x))
-    names(pre) <- make.names(names(pre), unique = TRUE)
-    names(pre) <- gsub("\\.", "_", names(pre))
-    pre <- pre %>% dplyr::mutate(czone = as.integer(czone)) %>% dplyr::left_join(adh, by = "czone")
-    candidate_outcomes <- names(pre)[grepl("^d_", names(pre))]
+    pre_raw <- haven::read_dta(preperiod_path)
+    names(pre_raw) <- make.names(names(pre_raw), unique = TRUE)
+    names(pre_raw) <- gsub("\\.", "_", names(pre_raw))
+    pre_raw <- pre_raw %>% dplyr::mutate(czone = as.integer(czone))
+    candidate_outcomes <- names(pre_raw)[grepl("^d_", names(pre_raw))]
     candidate_outcomes <- setdiff(candidate_outcomes, c("d_tradeusch_pw", "d_tradeotch_pw_lag", "d_tradeusch_pw_future", "d_tradeotch_pw_lag_future"))
+    # The preperiod workfile can contain multiple rows per CZ. Aggregate to one
+    # row per CZ before running diagnostics so the output is comparable to the
+    # main CZ-level exposure regressions.
+    pre <- pre_raw %>%
+      dplyr::group_by(czone) %>%
+      dplyr::summarise(
+        dplyr::across(dplyr::all_of(candidate_outcomes), ~ mean(safe_num(.x), na.rm = TRUE)),
+        preperiod_rows_per_cz = dplyr::n(),
+        .groups = "drop"
+      ) %>%
+      dplyr::mutate(dplyr::across(dplyr::all_of(candidate_outcomes), ~ dplyr::if_else(is.nan(.x), NA_real_, .x))) %>%
+      dplyr::left_join(adh, by = "czone")
     for (outcome in candidate_outcomes) {
       for (rhs_var in c("exposure_1990_2007", "instrument_1990_2007")) {
         dat <- pre %>% dplyr::filter(!is.na(.data[[outcome]]), !is.na(.data[[rhs_var]]))
         if (nrow(dat) >= 50) {
-          fml <- stats::as.formula(paste(outcome, "~", rhs_var, "+", paste(controls_core, collapse = " + ")))
+          rhs <- c(rhs_var, controls_core)
+          fml <- stats::as.formula(paste(outcome, "~", paste(rhs, collapse = " + ")))
           mod <- tryCatch(fit_weighted_feols(fml, dat, weight_var = "adh_weight", cluster_var = "statefip"), error = function(e) NULL)
           if (!is.null(mod)) {
             ct <- coeftable_to_tibble(mod) %>% dplyr::filter(term == rhs_var)
             preperiod_tbl <- dplyr::bind_rows(preperiod_tbl, tibble::tibble(
               outcome = outcome, regressor = rhs_var, estimate = scalar_or_na(ct$estimate), std.error = scalar_or_na(ct$std.error),
               statistic = scalar_or_na(ct$statistic), p.value = scalar_or_na(ct$p.value), n_obs = stats::nobs(mod),
-              note = "ADH preperiod-workfile diagnostic: future exposure/instrument predicting preperiod/local-labor-market changes."
+              median_source_rows_per_cz = stats::median(dat$preperiod_rows_per_cz, na.rm = TRUE),
+              note = "ADH preperiod-workfile diagnostic: source rows aggregated to one CZ row before regression; future exposure/instrument predicting preperiod/local-labor-market changes."
             ))
           }
         }
@@ -398,7 +465,7 @@ run_alternative_political_outcome_event_studies <- function(config = CONFIG) {
       status_tbl <- dplyr::bind_rows(status_tbl, tibble::tibble(module = "alternative_political_outcomes", outcome = outcome, spec = spec_name, status = fit$status, n_coefficients = nrow(fit$coefficients)))
     }
   }
-  coef_tbl <- coef_tbl %>% dplyr::left_join(outcome_labels, by = "outcome")
+  coef_tbl <- coef_tbl %>% dplyr::left_join(outcome_labels, by = "outcome") %>% dplyr::mutate(spec_label = extension_spec_label(spec))
   readr::write_csv(coef_tbl, config$alternative_outcomes_coefficients_csv)
   readr::write_csv(status_tbl, config$alternative_outcomes_status_csv)
   summary_tbl <- panel %>%
@@ -409,10 +476,22 @@ run_alternative_political_outcome_event_studies <- function(config = CONFIG) {
     plot_df <- coef_tbl %>% dplyr::filter(spec %in% c("minimal", "core_controls", "full_controls"), outcome %in% outcomes[1:7])
     p <- ggplot2::ggplot(plot_df, ggplot2::aes(x = year, y = estimate, ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error)) +
       ggplot2::geom_hline(yintercept = 0, linewidth = 0.25) + ggplot2::geom_pointrange(linewidth = 0.25) +
-      ggplot2::facet_grid(label ~ spec, scales = "free_y") +
+      ggplot2::facet_grid(label ~ spec_label, scales = "free_y") +
       ggplot2::labs(title = "Alternative political outcome event studies", subtitle = "CZ-clustered 95% intervals; 1988 reference where available", x = NULL, y = "Coefficient on ADH exposure × election year") +
       ggplot2::theme_minimal(base_size = 10)
     write_plot_safely(p, config$alternative_outcomes_plot_png, config$alternative_outcomes_plot_pdf, width = 12, height = 10)
+    vote_choice <- coef_tbl %>% dplyr::filter(spec == "full_controls", outcome %in% c("rep_margin", "rep_2party_share", "dem_2party_share"))
+    if (nrow(vote_choice) > 0) {
+      p_choice <- plot_pointrange_event(vote_choice, "Vote-choice outcome diagnostics", "Full-control specification; CZ-clustered 95% intervals") +
+        ggplot2::facet_wrap(~label, scales = "free_y", ncol = 1)
+      write_plot_safely(p_choice, config$alternative_outcomes_vote_choice_plot_png, config$alternative_outcomes_vote_choice_plot_pdf, width = 8.5, height = 7)
+    }
+    vote_volume <- coef_tbl %>% dplyr::filter(spec == "full_controls", outcome %in% c("two_party_votes_per_1990_pop", "total_votes_per_1990_pop", "rep_votes_per_1990_pop", "dem_votes_per_1990_pop"))
+    if (nrow(vote_volume) > 0) {
+      p_volume <- plot_pointrange_event(vote_volume, "Vote-volume outcome diagnostics", "Full-control specification; CZ-clustered 95% intervals") +
+        ggplot2::facet_wrap(~label, scales = "free_y", ncol = 2)
+      write_plot_safely(p_volume, config$alternative_outcomes_vote_volume_plot_png, config$alternative_outcomes_vote_volume_plot_pdf, width = 9.5, height = 7)
+    }
     decomp <- coef_tbl %>% dplyr::filter(spec == "full_controls", outcome %in% c("rep_margin", "rep_votes_per_1990_pop", "dem_votes_per_1990_pop", "two_party_votes_per_1990_pop"))
     p2 <- ggplot2::ggplot(decomp, ggplot2::aes(x = year, y = estimate, ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error)) +
       ggplot2::geom_hline(yintercept = 0, linewidth = 0.25) + ggplot2::geom_pointrange(linewidth = 0.25) +
@@ -517,12 +596,43 @@ run_nanda_outcome_event_studies <- function(config = CONFIG) {
   }
   rate_cols <- c("reg_voters_pct", "voter_turnout_pct", "reg_voter_turnout_pct", "pres_rep_ratio", "pres_dem_ratio", "partisan_index_dem", "partisan_index_rep")
   rate_cols <- rate_cols[rate_cols %in% names(cz_panel)]
-  cz_val <- cz_panel %>%
+  cz_initial <- cz_panel %>%
     dplyr::mutate(dplyr::across(dplyr::all_of(rate_cols), ~ dplyr::if_else(.x < 0 | .x > 1.5 | !is.finite(.x), NA_real_, .x)))
   outlier_rows <- cz_panel %>%
     dplyr::filter(dplyr::if_any(dplyr::all_of(rate_cols), ~ !is.na(.x) & (!is.finite(.x) | .x < 0 | .x > 1.5))) %>%
     dplyr::select(czone, year, dplyr::all_of(rate_cols))
   readr::write_csv(outlier_rows, config$nanda_outlier_rates_csv)
+
+  availability_long <- cz_initial %>%
+    dplyr::select(czone, year, dplyr::all_of(rate_cols)) %>%
+    tidyr::pivot_longer(dplyr::all_of(rate_cols), names_to = "outcome", values_to = "value") %>%
+    dplyr::group_by(outcome, year) %>%
+    dplyr::summarise(
+      n_cz = dplyr::n(),
+      n_nonmissing = sum(!is.na(value)),
+      n_zero = sum(!is.na(value) & abs(value) < 1e-12),
+      n_nonzero = sum(!is.na(value) & abs(value) >= 1e-12),
+      all_nonmissing_values_zero = n_nonmissing > 0 && n_nonzero == 0,
+      min = if (n_nonmissing > 0) min(value, na.rm = TRUE) else NA_real_,
+      max = if (n_nonmissing > 0) max(value, na.rm = TRUE) else NA_real_,
+      mean = if (n_nonmissing > 0) mean(value, na.rm = TRUE) else NA_real_,
+      .groups = "drop"
+    ) %>%
+    dplyr::mutate(available_for_event_study = n_nonmissing >= 50 & !all_nonmissing_values_zero)
+  readr::write_csv(availability_long, config$nanda_outcome_availability_csv)
+
+  unavailable_years <- availability_long %>%
+    dplyr::filter(!available_for_event_study) %>%
+    dplyr::select(outcome, year)
+  cz_val <- cz_initial
+  if (nrow(unavailable_years) > 0) {
+    for (i in seq_len(nrow(unavailable_years))) {
+      outcome_i <- unavailable_years$outcome[[i]]
+      year_i <- unavailable_years$year[[i]]
+      cz_val[[outcome_i]][cz_val$year == year_i] <- NA_real_
+    }
+  }
+
   cz_summary <- cz_val %>%
     dplyr::summarise(n_cz = dplyr::n_distinct(czone), min_year = min(year, na.rm = TRUE), max_year = max(year, na.rm = TRUE), dplyr::across(dplyr::all_of(rate_cols), list(n_nonmissing = ~sum(!is.na(.x)), min = ~min(.x, na.rm = TRUE), max = ~max(.x, na.rm = TRUE)), .names = "{.col}_{.fn}"))
   readr::write_csv(cz_summary, config$nanda_cz_validation_csv)
@@ -533,25 +643,46 @@ run_nanda_outcome_event_studies <- function(config = CONFIG) {
   specs <- list(minimal = list(controls = character(0), standardize = FALSE), core_controls = list(controls = config$core_interacted_controls, standardize = TRUE), full_controls = list(controls = config$interacted_controls, standardize = TRUE))
   coef_tbl <- tibble::tibble(); status_tbl <- tibble::tibble()
   for (outcome in outcomes) {
-    valid_years <- sort(unique(nanda_panel$year[!is.na(nanda_panel[[outcome]])]))
-    ref <- if (2004 %in% valid_years) 2004L else if (length(valid_years) > 0) min(valid_years) else NA_integer_
+    outcome_i <- outcome
+    valid_years <- availability_long %>% dplyr::filter(.data$outcome == outcome_i, available_for_event_study) %>% dplyr::pull(year) %>% sort()
+    ref <- if (outcome_i %in% c("partisan_index_dem", "partisan_index_rep")) {
+      if (2006L %in% valid_years) 2006L else if (length(valid_years) > 0) min(valid_years) else NA_integer_
+    } else if (outcome_i %in% c("pres_rep_ratio", "pres_dem_ratio")) {
+      if (2004L %in% valid_years) 2004L else if (length(valid_years) > 0) min(valid_years) else NA_integer_
+    } else {
+      if (2004L %in% valid_years) 2004L else if (length(valid_years) > 0) min(valid_years) else NA_integer_
+    }
     for (spec_name in names(specs)) {
       spec <- specs[[spec_name]]
-      fit <- fit_single_outcome_event_study(nanda_panel, outcome, spec$controls, spec_name, config, ref_year = ref, standardize_controls = spec$standardize, sample_label = "nanda_2004_2022")
+      fit <- if (length(valid_years) >= 2 && !is.na(ref)) {
+        panel_subset <- nanda_panel %>% dplyr::filter(year %in% valid_years)
+        fit_single_outcome_event_study(panel_subset, outcome_i, spec$controls, spec_name, config, ref_year = ref, standardize_controls = spec$standardize, sample_label = "nanda_2004_2022")
+      } else {
+        list(status = "insufficient_valid_years", coefficients = tibble::tibble())
+      }
       coef_tbl <- dplyr::bind_rows(coef_tbl, fit$coefficients)
-      status_tbl <- dplyr::bind_rows(status_tbl, tibble::tibble(module = "nanda_turnout_partisanship", outcome = outcome, spec = spec_name, reference_year = ref, status = fit$status, n_coefficients = nrow(fit$coefficients)))
+      status_tbl <- dplyr::bind_rows(status_tbl, tibble::tibble(module = "nanda_turnout_partisanship", outcome = outcome_i, outcome_label = extension_outcome_label(outcome_i), spec = spec_name, spec_label = extension_spec_label(spec_name), reference_year = ref, valid_years = paste(valid_years, collapse = ";"), status = fit$status, n_coefficients = nrow(fit$coefficients)))
     }
   }
+  coef_tbl <- coef_tbl %>% dplyr::mutate(outcome_label = extension_outcome_label(.data$outcome), spec_label = extension_spec_label(.data$spec))
   readr::write_csv(coef_tbl, config$nanda_outcomes_coefficients_csv)
   readr::write_csv(status_tbl, config$nanda_outcomes_status_csv)
-  readr::write_csv(cz_summary, config$nanda_outcomes_summary_csv)
+  readr::write_csv(availability_long, config$nanda_outcomes_summary_csv)
   if (nrow(coef_tbl) > 0) {
-    p <- ggplot2::ggplot(coef_tbl, ggplot2::aes(x = year, y = estimate, ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error)) +
-      ggplot2::geom_hline(yintercept = 0, linewidth = 0.25) + ggplot2::geom_pointrange(linewidth = 0.25) +
-      ggplot2::facet_grid(outcome ~ spec, scales = "free_y") +
-      ggplot2::labs(title = "NaNDA turnout and partisanship outcomes", subtitle = "County outcomes bridged to 1990 CZs; rates outside [0, 1.5] set missing; CZ-clustered intervals", x = NULL, y = "Coefficient on ADH exposure × year") +
-      ggplot2::theme_minimal(base_size = 10)
+    p <- plot_pointrange_event(coef_tbl, "NaNDA turnout and partisanship outcomes", "Outcome-specific valid years and reference years; rates outside [0, 1.5] and all-zero structural years set missing; CZ-clustered intervals") +
+      ggplot2::facet_grid(outcome_label ~ spec_label, scales = "free_y")
     write_plot_safely(p, config$nanda_outcomes_plot_png, config$nanda_outcomes_plot_pdf, width = 12, height = 10)
+    plot_family <- function(family_outcomes, title, png_path, pdf_path, height = 6) {
+      df <- coef_tbl %>% dplyr::filter(outcome %in% family_outcomes, spec == "full_controls")
+      if (nrow(df) > 0) {
+        pp <- plot_pointrange_event(df, title, "Full-control specification; outcome-specific reference years; CZ-clustered intervals") +
+          ggplot2::facet_wrap(~outcome_label, scales = "free_y", ncol = 1)
+        write_plot_safely(pp, png_path, pdf_path, width = 8.5, height = height)
+      }
+    }
+    plot_family(c("reg_voters_pct", "voter_turnout_pct", "reg_voter_turnout_pct"), "NaNDA turnout and registration diagnostics", config$nanda_turnout_plot_png, config$nanda_turnout_plot_pdf, height = 7)
+    plot_family(c("pres_rep_ratio", "pres_dem_ratio"), "NaNDA presidential vote-ratio diagnostics", config$nanda_vote_plot_png, config$nanda_vote_plot_pdf, height = 5.5)
+    plot_family(c("partisan_index_dem", "partisan_index_rep"), "NaNDA partisanship-index diagnostics", config$nanda_partisanship_plot_png, config$nanda_partisanship_plot_pdf, height = 5.5)
   }
   invisible(coef_tbl)
 }
@@ -575,7 +706,9 @@ run_adhm2020_mechanism_diagnostics <- function(config = CONFIG) {
   regressions <- tibble::tibble(); status <- tibble::tibble()
   outcome_dict <- tibble::tibble(
     outcome = c("d2_rwin_2002_2016", "d2_cfavg_repcon_2002_2016", "d2_cfavg_repmod_2002_2016", "d2_cfavg_demmod_2002_2016", "d2_cfavg_demlib_2002_2016", "d2_teaparty_2002_2010", "d_shnr_pres_2000_2016", "d_shnr_pres_2000_2008"),
-    interpretation = c("Change in Republican House win indicator/share", "Change in conservative Republican CF-score share", "Change in moderate Republican CF-score share", "Change in moderate Democratic CF-score share", "Change in liberal Democratic CF-score share", "Change in Tea Party outcome", "Change in Republican presidential vote share, 2000-2016", "Change in Republican presidential vote share, 2000-2008")
+    outcome_label = adhm_outcome_label(outcome),
+    interpretation = c("Change in Republican House win indicator/share", "Change in conservative Republican CF-score share", "Change in moderate Republican CF-score share", "Change in moderate Democratic CF-score share", "Change in liberal Democratic CF-score share", "Change in Tea Party outcome", "Change in Republican presidential vote share, 2000-2016", "Change in Republican presidential vote share, 2000-2008"),
+    report_family = c("House control", "House ideology", "House ideology", "House ideology", "House ideology", "Tea Party", "Presidential", "Presidential")
   )
   readr::write_csv(outcome_dict, config$adhm2020_outcome_dictionary_csv)
   fit_cross_section <- function(df, outcomes, source, weight_var = NULL) {
@@ -595,7 +728,7 @@ run_adhm2020_mechanism_diagnostics <- function(config = CONFIG) {
         }
         ct <- coeftable_to_tibble(mod) %>% dplyr::filter(term == "exposure_1990_2007")
         status <<- dplyr::bind_rows(status, tibble::tibble(source = source, outcome = outcome, spec = spec_name, status = "ok", n_obs = stats::nobs(mod), note = NA_character_))
-        tibble::tibble(source = source, outcome = outcome, spec = spec_name, estimate = scalar_or_na(ct$estimate), std.error = scalar_or_na(ct$std.error), statistic = scalar_or_na(ct$statistic), p.value = scalar_or_na(ct$p.value), n_obs = stats::nobs(mod), controls = if (length(ctrls) == 0) "none" else paste(ctrls, collapse = "; "))
+        tibble::tibble(source = source, outcome = outcome, outcome_label = adhm_outcome_label(outcome), spec = spec_name, spec_label = extension_spec_label(spec_name), estimate = scalar_or_na(ct$estimate), std.error = scalar_or_na(ct$std.error), statistic = scalar_or_na(ct$statistic), p.value = scalar_or_na(ct$p.value), n_obs = stats::nobs(mod), controls = if (length(ctrls) == 0) "none" else paste(ctrls, collapse = "; "))
       })
     })
   }
@@ -621,10 +754,12 @@ run_adhm2020_mechanism_diagnostics <- function(config = CONFIG) {
   summary <- tibble::tibble(source = c("house_2002_2016", "president_2000_2016"), file_present = c(file.exists(house_path), file.exists(pres_path)), purpose = c("Political-supply and House ideology outcomes from ADHM public replication data", "Presidential-vote benchmark outcomes from ADHM public replication data"))
   readr::write_csv(summary, config$adhm2020_summary_csv)
   if (nrow(regressions) > 0) {
-    p <- ggplot2::ggplot(regressions, ggplot2::aes(x = estimate, y = outcome, xmin = estimate - 1.96 * std.error, xmax = estimate + 1.96 * std.error)) +
+    plot_dat <- regressions %>%
+      dplyr::mutate(outcome_label = factor(outcome_label, levels = rev(unique(outcome_label))))
+    p <- ggplot2::ggplot(plot_dat, ggplot2::aes(x = estimate, y = outcome_label, xmin = estimate - 1.96 * std.error, xmax = estimate + 1.96 * std.error)) +
       ggplot2::geom_vline(xintercept = 0, linewidth = 0.25) + ggplot2::geom_pointrange(linewidth = 0.25) +
-      ggplot2::facet_grid(source ~ spec, scales = "free_y", space = "free_y") +
-      ggplot2::labs(title = "ADHM 2020 political-supply diagnostics", subtitle = "Cross-sectional CZ regressions on ADH exposure; CZ-level public ADHM outcomes", x = "Coefficient on ADH exposure", y = NULL) +
+      ggplot2::facet_grid(source ~ spec_label, scales = "free_y", space = "free_y") +
+      ggplot2::labs(title = "ADHM 2020 political-supply diagnostics", subtitle = "Cross-sectional CZ regressions on ADH exposure; public ADHM outcomes aggregated to CZs", x = "Coefficient on ADH exposure", y = NULL) +
       ggplot2::theme_minimal(base_size = 10)
     write_plot_safely(p, config$adhm2020_plot_png, config$adhm2020_plot_pdf, width = 12, height = 7)
   }
@@ -706,6 +841,20 @@ run_subperiod_exposure_event_studies <- function(config = CONFIG) {
     }
   }
   readr::write_csv(equality, config$subperiod_equality_tests_csv)
+  selected_horizons <- tibble::tibble()
+  if (nrow(equality) > 0) {
+    selected_horizons <- equality %>%
+      dplyr::filter(year %in% c(1996L, 2000L, 2008L, 2016L, 2020L)) %>%
+      dplyr::transmute(
+        spec, year,
+        early_exposure_coefficient = `estimate_1990-2000`,
+        late_exposure_coefficient = `estimate_2000-2007`,
+        early_minus_late = difference_early_minus_late,
+        approx_se_difference, approx_t_difference, approx_p_difference,
+        interpretation_note = "Approximate early-vs-late comparison; covariance ignored. Use for descriptive horizon interpretation."
+      )
+  }
+  readr::write_csv(selected_horizons, config$subperiod_selected_horizons_csv)
   if (nrow(coef_tbl) > 0) {
     p <- ggplot2::ggplot(coef_tbl, ggplot2::aes(x = year, y = estimate, ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error, color = exposure_period)) +
       ggplot2::geom_hline(yintercept = 0, linewidth = 0.25) + ggplot2::geom_pointrange(position = ggplot2::position_dodge(width = 0.6), linewidth = 0.25) +

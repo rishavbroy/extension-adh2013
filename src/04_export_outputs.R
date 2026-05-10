@@ -96,6 +96,14 @@ export_event_study_outputs <- function(config = CONFIG) {
     )
   }
 
+  se_label <- dplyr::case_when(
+    config$main_se_type == "cluster_cz" ~ "CZ-clustered",
+    config$main_se_type == "heteroskedastic" ~ "heteroskedastic",
+    config$main_se_type == "cluster_state" ~ "state-clustered",
+    config$main_se_type == "newey_west" ~ "Newey-West",
+    TRUE ~ config$main_se_type
+  )
+
   notes_text <- paste0(
     if (uses_repaired_main_vcov || has_validation_failures) {
       "PROVISIONAL: at least one fatal/non-handled validation check failed or a main numerical repair/warning was recorded; treat these as diagnostic output until reviewed. "
@@ -113,7 +121,7 @@ export_event_study_outputs <- function(config = CONFIG) {
     "defined as Republican minus Democratic votes divided by two-party votes. County presidential returns are from Amlani and Algara (2021), ",
     "bridged to 1990 counties with the Ferrara, Testa, and Zhou (2024) ",
     crosswalk_note, ", then aggregated to 1990 commuting zones. ",
-    "Standard errors use ", config$main_se_type, ". Significance stars: *** p<0.01, ** p<0.05, * p<0.10."
+    "Standard errors use ", se_label, ". Significance stars: *** p<0.01, ** p<0.05, * p<0.10."
   )
 
   latex_tbl <- knitr::kable(
@@ -208,7 +216,7 @@ export_event_study_outputs <- function(config = CONFIG) {
     ) +
     ggplot2::labs(
       title = "China exposure and Republican presidential vote margin, 1972-2020",
-      subtitle = paste0("Event-study coefficients with 95% ", config$main_se_type, " CIs; ", config$reference_year, " normalized to zero."),
+      subtitle = paste0("Event-study coefficients with 95% ", se_label, " CIs; ", config$reference_year, " normalized to zero."),
       x = "Presidential election year",
       y = paste0("Coefficient on ADH China exposure (per ", config$exposure_units, ")")
     ) +
