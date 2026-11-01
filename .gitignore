@@ -3,6 +3,7 @@ __MACOSX/
 .Rhistory
 .RData
 .Ruserdata
+.vscode/
 *.log
 *.aux
 *.out
