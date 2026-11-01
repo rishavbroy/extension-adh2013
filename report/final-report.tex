@@ -474,14 +474,14 @@ extends the CZ framework to presidential voting using an event study of
 observed import exposure rather than ADH's original
 instrumental-variables specification.
 
-\subsection{Extension: Dynamic Political Effects of the China
-Shock}\label{extension-dynamic-political-effects-of-the-china-shock}
+\subsection{Extension: Trade Exposure and Presidential
+Voting}\label{extension-trade-exposure-and-presidential-voting}
 
-We extend the ADH local-labor-market design to presidential political
-outcomes. The outcome is the Republican two-party presidential vote
-margin, \((R_{ct}-D_{ct})/(R_{ct}+D_{ct})\), where \(R_{ct}\) and
-\(D_{ct}\) denote Republican and Democratic votes. We estimate weighted
-CZ-level event studies:
+We examine the relationship between ADH's measure of Chinese import
+exposure and presidential voting. The outcome is the Republican
+two-party presidential vote margin, \((R_{ct}-D_{ct})/(R_{ct}+D_{ct})\),
+where \(R_{ct}\) and \(D_{ct}\) denote Republican and Democratic votes.
+We estimate weighted CZ-level event studies:
 
 \[
 Y_{ct} = \alpha_c + \lambda_t + \sum_{k \ne 1988} \beta_k E_c \mathbf{1}\{t=k\} + X_c^{\prime}\Gamma_t + \varepsilon_{ct}.
@@ -489,31 +489,31 @@ Y_{ct} = \alpha_c + \lambda_t + \sum_{k \ne 1988} \beta_k E_c \mathbf{1}\{t=k\} 
 
 Here \(E_c\) is cumulative ADH import exposure over 1990--2007 in
 thousands of dollars per worker; \(\alpha_c\) and \(\lambda_t\) are CZ
-and election-year fixed effects, and \(X_c^{\prime}\Gamma_t\) allows
-baseline characteristics to have year-specific associations with the
-outcome. Each \(\beta_k\) measures the difference in the
-exposure--margin association in election year \(k\) relative to the
-omitted 1988 election; it is not a new trade shock in year \(k\).
-Estimation uses ADH analysis weights and CZ-clustered standard errors.
-We compare a minimal specification without interacted controls, core
-controls (initial manufacturing share, college-educated share, and
-foreign-born share), and full controls adding female employment share,
-routine-task intensity, and offshorability. Interacted controls are
-standardized for estimation.
+and election-year fixed effects, and \(X_c^{\prime}\Gamma_t\) represents
+baseline characteristics interacted with election-year indicators. Each
+\(\beta_k\) measures the difference in the exposure--margin association
+in election year \(k\) relative to the omitted 1988 election; it is not
+a new trade shock in year \(k\). Estimation uses ADH analysis weights
+and CZ-clustered standard errors. We compare a minimal specification
+without interacted controls, core controls (initial manufacturing share,
+college-educated share, and foreign-born share), and full controls
+adding female employment share, routine-task intensity, and
+offshorability. Interacted controls are standardized for estimation.
 
-A central measurement challenge is that electoral data are observed for
-counties whose boundaries change over time, while ADH exposure is
-measured for 1990 commuting zones. We therefore bridge county election
-returns to 1990 counties using the FTZ county crosswalks, aggregate
-counties to 1990 CZs using the Tolbert-Sizer/USDA crosswalk, and merge
-those outcomes to ADH exposure. Our preferred bridge uses FTZ M5 weights
-where available and M2 fallback weights where M5 is undefined or zero.
-We validate retained vote shares, document fallback counties, and
-compare the results to M6+fallback, pure M2, and M4+fallback. These
-checks probe geographic harmonization choices while holding the 1990 CZ
-definitions fixed; they do not test sensitivity to alternative
-local-labor-market boundaries
-(\citeproc{ref-footeKutzbachVilhuber2021}{Foote et al. 2021}).
+County boundaries changed during the election series, whereas ADH
+measures exposure for 1990 commuting zones. We convert county election
+returns to 1990 county boundaries using the crosswalks of Ferrara et al.
+(\citeproc{ref-ferraraTestaZhou2024}{2024}), then assign counties to
+commuting zones using the definitions of Tolbert and Sizer
+(\citeproc{ref-tolbertSizer1996}{1996}) distributed by the USDA Economic
+Research Service (\citeproc{ref-usdaERSCommutingZones}{U.S. Department
+of Agriculture Economic Research Service 2026}). We use M5 weights where
+available and M2 weights where M5 is undefined or zero. We check the
+share of votes retained and compare estimates using M6, M2, and M4
+weights. All four specifications retain the 1990 commuting-zone
+boundaries; alternative definitions of local labor markets remain a
+separate question (\citeproc{ref-footeKutzbachVilhuber2021}{Foote et al.
+2021}).
 
 The political event study relates observed ADH exposure to voting
 outcomes conditional on fixed effects and baseline controls; unlike
@@ -529,10 +529,10 @@ Neither is established by the observed-exposure political event study,
 which also requires assumptions about counterfactual political trends.
 In our diagnostics, the ADH instrument strongly predicts exposure, but
 exposure also correlates with baseline manufacturing intensity and
-routine-task concentration. First-stage strength does not establish
-instrument exogeneity or validate a causal interpretation of this
-political event study. Table~\ref{tbl-bartik-firststage} reports
-first-stage estimates in the political-outcome sample.
+routine-task concentration. A strong first stage alone cannot justify
+causal inference for these political outcomes.
+Table~\ref{tbl-bartik-firststage} reports first-stage estimates in the
+political-outcome sample.
 
 {
 
@@ -558,13 +558,9 @@ Full controls & 0.794 & 0.101 & 62.0 & 722 \\
 }
 
 Figure~\ref{fig-main-event-study} presents the main event-study
-estimates. The preferred inference is CZ-clustered. Conley,
-Driscoll-Kraay, Newey-West, state-clustered, and two-way clustered
-alternatives are computed as diagnostics, but several spatial and
-two-way variance-covariance matrices are non-positive-definite or
-require numerical repair in this short election-year panel. We therefore
-state the conclusions cautiously and base the main figure on
-CZ-clustered confidence intervals.
+estimates with confidence intervals based on standard errors clustered
+by commuting zone. Some alternative standard-error estimates are
+numerically unreliable; their results appear in Appendix E.
 
 \begin{figure}[H]
 
@@ -589,25 +585,21 @@ additional \$1,000 of cumulative exposure per worker, relative to the
 1988 association; the 2016 and 2020 full-control estimates are not
 statistically distinguishable from zero (CZ-clustered \(p = 0.668\) and
 \(p = 0.537\)). Even the minimally controlled 2016 and 2020 estimates
-are imprecise. Thus, the apparent delayed positive association is not
-robust to baseline controls; the evidence does not establish a causal
-political shift. Attenuation may reflect pre-existing differences in
-local political trajectories, but it does not distinguish confounding
-from heterogeneous responses. This matters because Autor et al.
-(\citeproc{ref-autorDornHansonMajlesi2020}{2020}) document differing
-political responses to trade exposure across initially distinct
-communities and political outcomes; our average CZ-level margin
-estimates do not test those heterogeneous responses.
+are imprecise. The positive association in the minimal specification
+largely disappears after adjustment for baseline characteristics.
+Exposed commuting zones may have differed in their initial economic and
+demographic characteristics, and political responses may also vary
+across communities, as Autor et al.
+(\citeproc{ref-autorDornHansonMajlesi2020}{2020}) find. Our estimates do
+not establish which explanation accounts for the differences across
+specifications.
 
-To examine related electoral outcomes descriptively, we consider
-Republican votes per 1990 population, Democratic votes per 1990
-population, and two-party vote volume alongside the margin.
-Figure~\ref{fig-alt-decomp} shows that the margin pattern should not be
-interpreted mechanically as a simple increase in Republican votes. These
-outcomes describe different electoral margins and vote volumes, but
-cannot separately identify voter switching, participation, or migration
-mechanisms; ratios with fixed 1990 population are not contemporaneous
-turnout rates.
+We also examine Republican and Democratic votes per 1990 population and
+total two-party votes. Figure~\ref{fig-alt-decomp} compares these
+outcomes with the Republican margin. They measure voting totals and
+electoral composition but do not separately reveal changes in individual
+preferences, turnout, or migration. Ratios using 1990 population are not
+turnout rates for later elections.
 
 \begin{figure}[H]
 
@@ -622,19 +614,12 @@ election years.}
 
 \end{figure}%
 
-Finally, we examine whether the single 1990--2007 exposure measure masks
-important timing differences. The original ADH exposure measure
-aggregates the China shock over a long period, so an event-study
-coefficient for 2016 does not mean that a new trade shock occurs in
-2016. It means that CZs with greater cumulative exposure by 2007 evolved
-differently by 2016. To make this interpretation more transparent, we
-split exposure into 1990--2000 and 2000--2007 components and include
-both components jointly. Figure~\ref{fig-subperiod-exposure} shows that
-the estimated relationship varies depending on which subperiod of import
-growth is emphasized. Pre-1988 coefficients in this exercise are placebo
-relationships with future exposure, while post-2008 coefficients
-describe how early- and late-shock exposure predict later political
-differences.
+We additionally estimate separate associations for import exposure
+during 1990--2000 and 2000--2007, entering both measures in the same
+regression. Figure~\ref{fig-subperiod-exposure} compares their estimated
+coefficients across election years. Coefficients before 1988 serve as
+placebo comparisons with future exposure; those after 2008 describe
+associations with import growth during the two earlier periods.
 
 \begin{figure}[H]
 
@@ -651,31 +636,24 @@ study, with 1990--2000 and 2000--2007 exposure terms entered jointly.}
 
 \section{Conclusion}\label{conclusion}
 
-The political event-study results are sensitive to baseline controls.
-More trade-exposed CZs show a more positive Republican
-presidential-margin association in minimally controlled specifications
-for 2016 and 2020, relative to 1988, but this pattern largely disappears
-with core controls and turns slightly negative and statistically
-indistinguishable from zero with full controls. We therefore do not find
-a robust positive relationship across specifications, let alone
-establish a causal effect of import exposure on Republican voting.
+In the minimally controlled models, the estimated relationship between
+Chinese import exposure and Republican presidential margins becomes more
+positive in 2016 and 2020 relative to 1988. The estimates approach zero
+with core controls and become slightly negative with full controls. We
+therefore find no robust positive association across specifications.
 
-This sensitivity highlights the role of pre-existing local industry and
-demographic characteristics in interpreting political trajectories. Our
-CZ-level exposure design differs from the instrumental-variables
-analysis of labor-market outcomes in ADH, and the strength of an
-exposure first stage does not resolve the political design's
-identification assumptions. Nor can aggregate CZ outcomes distinguish
-changes in residents' voting preferences from changes in electoral
-participation or population composition through migration. These
-channels can produce different aggregate vote margins without implying
-the same individual-level response.
+The differences across specifications suggest that initial industrial
+and demographic characteristics are important when interpreting the
+relationship. Because our political analysis uses observed exposure
+rather than the instrumental-variables approach of ADH's labor-market
+study, we cannot interpret these associations as causal effects.
+Aggregate election results also cannot establish whether residents
+changed their preferences, whether electoral participation shifted, or
+whether migration changed the composition of the electorate.
 
-Trade shocks remain a relevant setting for studying local political
-change, but the present evidence is conditional on specification and
-cannot isolate a mechanism. Future work linking individual voting
-behavior to participation, migration, and political-supply measures
-could distinguish these channels.
+Future research using individual voting data, migration records, and
+measures of political mobilization could help distinguish these
+explanations.
 
 \section{References}\label{references}
 
@@ -747,13 +725,13 @@ U.S. Department of Agriculture Economic Research Service. 2026.
 \section{Appendix A: County-to-CZ Harmonization and
 Measurement}\label{appendix-a-county-to-cz-harmonization-and-measurement}
 
-This appendix documents the county-to-CZ bridge used to construct
-political outcomes. County election returns are bridged to 1990 counties
-using FTZ crosswalk weights and then aggregated to 1990 CZs. The
-preferred design uses M5 where valid and M2 fallback where M5 is
-undefined or zero. The full row-level diagnostics are saved in
-\texttt{output/diagnostics/}; the tables below report compact summaries
-intended for print.
+We convert historical county election returns to 1990 county boundaries
+using the crosswalks of Ferrara et al.
+(\citeproc{ref-ferraraTestaZhou2024}{2024}), then aggregate votes to the
+1990 commuting zones defined by Tolbert and Sizer
+(\citeproc{ref-tolbertSizer1996}{1996}). We use M5 weights where
+available and M2 weights otherwise. The following tables summarize the
+geographic conversion and the proportion of votes retained.
 
 {
 
@@ -763,8 +741,8 @@ intended for print.
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0789}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0789}}@{}}
 
-\caption{\label{tbl-validation-checks}Pipeline validation checks,
-compact summary.}
+\caption{\label{tbl-validation-checks}Validation checks for the
+analysis.}
 
 \tabularnewline
 
@@ -885,9 +863,8 @@ mass from source counties with unavailable weights.}
 
 }
 
-\caption{\label{fig-crosswalk-comparison}Crosswalk-specification
-comparison. If the full sensitivity pipeline has not been run, this
-figure will show only the preferred M5+fallback design.}
+\caption{\label{fig-crosswalk-comparison}Event-study estimates using
+alternative county crosswalk weights.}
 
 \end{figure}%
 
@@ -1199,9 +1176,9 @@ ok & 1991-1999 & OTH & 2392 & 605945.9 & 1227629.4 & 621683.4 \\
 \section{Appendix D: Subperiod Exposure and Dynamic
 Interpretation}\label{appendix-d-subperiod-exposure-and-dynamic-interpretation}
 
-The early-minus-late differences below are descriptive: the saved
-approximate tests omit covariance between the jointly estimated
-coefficients, so we do not report their p-values.
+We report differences between the early- and late-exposure coefficients
+descriptively. Formal inference would require accounting for their
+covariance.
 
 \begin{figure}[H]
 
@@ -1269,12 +1246,9 @@ Full controls & 2020 & -0.0048 & 0.0043 & -0.0092 \\
 \section{Appendix E: Standard-Error
 Diagnostics}\label{appendix-e-standard-error-diagnostics}
 
-The main specification uses CZ-clustered standard errors. The
-diagnostics below summarize the broader set of variance-covariance
-estimators computed by the pipeline. Full row-level diagnostics are
-available in
-\texttt{output/diagnostics/event\_study\_vcov\_diagnostics.csv} and
-\texttt{output/diagnostics/event\_study\_se\_warning\_diagnostics.csv}.
+We cluster the main standard errors by commuting zone. The following
+tables summarize alternative variance estimators and potential numerical
+problems.
 
 {
 
@@ -1369,8 +1343,8 @@ State-clustered & Rank-deficient VCOV & 5 & 0 & 0 & 72 \\
 
 }
 
-\section{Appendix F: Exploratory Mechanism
-Evidence}\label{appendix-f-exploratory-mechanism-evidence}
+\section{Appendix F: Additional Political
+Outcomes}\label{appendix-f-additional-political-outcomes}
 
 \subsection{NaNDA turnout, vote ratios, and
 partisanship}\label{nanda-turnout-vote-ratios-and-partisanship}
@@ -1461,8 +1435,8 @@ Republican partisanship index & 2006, 2008, 2010, 2012, 2014, 2016,
 
 }
 
-\subsection{ADHM 2020 public political-supply
-diagnostics}\label{adhm-2020-public-political-supply-diagnostics}
+\subsection{Political Representation and Related
+Outcomes}\label{political-representation-and-related-outcomes}
 
 \begin{figure}[H]
 
@@ -1472,8 +1446,8 @@ diagnostics}\label{adhm-2020-public-political-supply-diagnostics}
 
 }
 
-\caption{\label{fig-adhm-mechanisms}ADHM 2020 public political-supply
-mechanism regressions.}
+\caption{\label{fig-adhm-mechanisms}Political representation and related
+outcomes from ADHM (2020).}
 
 \end{figure}%
 
@@ -1486,8 +1460,8 @@ mechanism regressions.}
   >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1096}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0548}}@{}}
 
-\caption{\label{tbl-adhm-mech}ADHM 2020 mechanism regressions,
-full-control specification.}
+\caption{\label{tbl-adhm-mech}ADHM (2020) results, full-control
+specification.}
 
 \tabularnewline
 
@@ -1533,7 +1507,7 @@ The complete analysis can be regenerated from the project root with:
 \end{Highlighting}
 \end{Shaded}
 
-For the final appendix-style crosswalk-sensitivity run:
+To reproduce estimates under all four county crosswalk specifications:
 
 \begin{Shaded}
 \begin{Highlighting}[]
