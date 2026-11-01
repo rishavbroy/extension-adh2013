@@ -510,20 +510,24 @@ those outcomes to ADH exposure. Our preferred bridge uses FTZ M5 weights
 where available and M2 fallback weights where M5 is undefined or zero.
 We validate retained vote shares, document fallback counties, and
 compare the results to M6+fallback, pure M2, and M4+fallback. These
-checks are important because the estimates should not be driven by
-arbitrary geographic harmonization choices.
+checks probe geographic harmonization choices while holding the 1990 CZ
+definitions fixed; they do not test sensitivity to alternative
+local-labor-market boundaries
+(\citeproc{ref-footeKutzbachVilhuber2021}{Foote et al. 2021}).
 
 The political event study relates observed ADH exposure to voting
 outcomes conditional on fixed effects and baseline controls; unlike
 ADH's original labor-market instrumental-variables analysis, it does not
 instrument exposure in the main regression. ADH exposure has a
 shift-share structure, combining initial CZ industry composition with
-subsequent industry-level import growth. A causal interpretation would
-require assumptions about counterfactual political trends and the
-sources of variation in exposure
+subsequent industry-level import growth. Shift-share identification can
+rely on exogenous initial industry shares or on exogenous industry-level
+shocks, but these are distinct assumptions
 (\citeproc{ref-goldsmithPinkhamSorkinSwift2020}{Goldsmith-Pinkham et al.
-2020}; \citeproc{ref-borusyakHullJaravel2025}{Borusyak et al. 2025}). In
-our diagnostics, the ADH instrument strongly predicts exposure, but
+2020}; \citeproc{ref-borusyakHullJaravel2025}{Borusyak et al. 2025}).
+Neither is established by the observed-exposure political event study,
+which also requires assumptions about counterfactual political trends.
+In our diagnostics, the ADH instrument strongly predicts exposure, but
 exposure also correlates with baseline manufacturing intensity and
 routine-task concentration. First-stage strength does not establish
 instrument exogeneity or validate a causal interpretation of this
@@ -587,7 +591,13 @@ statistically distinguishable from zero (CZ-clustered \(p = 0.668\) and
 \(p = 0.537\)). Even the minimally controlled 2016 and 2020 estimates
 are imprecise. Thus, the apparent delayed positive association is not
 robust to baseline controls; the evidence does not establish a causal
-political shift.
+political shift. Attenuation may reflect pre-existing differences in
+local political trajectories, but it does not distinguish confounding
+from heterogeneous responses. This matters because Autor et al.
+(\citeproc{ref-autorDornHansonMajlesi2020}{2020}) document differing
+political responses to trade exposure across initially distinct
+communities and political outcomes; our average CZ-level margin
+estimates do not test those heterogeneous responses.
 
 To examine related electoral outcomes descriptively, we consider
 Republican votes per 1990 population, Democratic votes per 1990
@@ -655,15 +665,17 @@ demographic characteristics in interpreting political trajectories. Our
 CZ-level exposure design differs from the instrumental-variables
 analysis of labor-market outcomes in ADH, and the strength of an
 exposure first stage does not resolve the political design's
-identification assumptions. Moreover, commuting-zone outcomes cannot
-reveal how individual voters changed their preferences or whether
-changes arose through turnout, migration, or party composition.
+identification assumptions. Nor can aggregate CZ outcomes distinguish
+changes in residents' voting preferences from changes in electoral
+participation or population composition through migration. These
+channels can produce different aggregate vote margins without implying
+the same individual-level response.
 
 Trade shocks remain a relevant setting for studying local political
 change, but the present evidence is conditional on specification and
-cannot isolate a mechanism. Future research combining individual-level
-political behavior with migration, registration, turnout, and
-political-supply measures could help distinguish those channels.
+cannot isolate a mechanism. Future work linking individual voting
+behavior to participation, migration, and political-supply measures
+could distinguish these channels.
 
 \section{References}\label{references}
 
@@ -688,6 +700,12 @@ Syndrome: Local Labor Market Effects of Import Competition in the United
 States.''} \emph{American Economic Review} 103 (6): 2121--68.
 \url{https://doi.org/10.1257/aer.103.6.2121}.
 
+\bibitem[\citeproctext]{ref-autorDornHansonMajlesi2020}
+Autor, David H., David Dorn, Gordon H. Hanson, and Kaveh Majlesi. 2020.
+{``Importing Political Polarization? The Electoral Consequences of
+Rising Trade Exposure.''} \emph{American Economic Review} 110 (10):
+3139--83. \url{https://doi.org/10.1257/aer.20170011}.
+
 \bibitem[\citeproctext]{ref-borusyakHullJaravel2025}
 Borusyak, Kirill, Peter Hull, and Xavier Jaravel. 2025. {``Design-Based
 Identification with Formula Instruments: A Review.''} \emph{Journal of
@@ -700,6 +718,12 @@ for u.s. Counties and Congressional Districts, 1790--2020.''}
 \emph{Historical Methods: A Journal of Quantitative and
 Interdisciplinary History}, ahead of print.
 \url{https://doi.org/10.1080/01615440.2024.2369230}.
+
+\bibitem[\citeproctext]{ref-footeKutzbachVilhuber2021}
+Foote, Andrew, Mark Kutzbach, and Lars Vilhuber. 2021.
+{``Recalculating...: How Uncertainty in Local Labour Market Definitions
+Affects Empirical Findings.''} \emph{Applied Economics} 53 (14):
+1598--612. \url{https://doi.org/10.1080/00036846.2020.1841083}.
 
 \bibitem[\citeproctext]{ref-goldsmithPinkhamSorkinSwift2020}
 Goldsmith-Pinkham, Paul, Isaac Sorkin, and Henry Swift. 2020. {``Bartik
