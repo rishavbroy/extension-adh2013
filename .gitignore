@@ -12,4 +12,15 @@ __MACOSX/
 *.toc
 *.lof
 *.lot
+*.zip
+*.txt
 output/intermediate/*.rds
+
+# Data
+adh2013/
+adhm2020/
+cz-data/
+ftz2024/
+lutz2025/
+outcomes-data/
+spatial-data/
