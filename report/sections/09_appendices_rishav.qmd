@@ -1,10 +1,10 @@
 # Appendix A: County-to-CZ Harmonization and Measurement
 
-This appendix documents the county-to-CZ bridge used to construct political outcomes. County election returns are bridged to 1990 counties using FTZ crosswalk weights and then aggregated to 1990 CZs. The preferred design uses M5 where valid and M2 fallback where M5 is undefined or zero. The full row-level diagnostics are saved in `output/diagnostics/`; the tables below report compact summaries intended for print.
+We convert historical county election returns to 1990 county boundaries using the crosswalks of @ferraraTestaZhou2024, then aggregate votes to the 1990 commuting zones defined by @tolbertSizer1996. We use M5 weights where available and M2 weights otherwise. The following tables summarize the geographic conversion and the proportion of votes retained.
 
 ```{r}
 #| label: tbl-validation-checks
-#| tbl-cap: "Pipeline validation checks, compact summary."
+#| tbl-cap: "Validation checks for the analysis."
 val <- read_csv(output_path("diagnostics", "pipeline_validation_checks.csv"), show_col_types = FALSE) |>
   mutate(
     Count = ifelse(!is.na(n_failed), n_failed, n_reported),
@@ -39,7 +39,7 @@ knitr::kable(ret, booktabs = TRUE)
 
 ![1990 CZs receiving positive vote mass from source counties with unavailable weights.](../output/figures/fig_crosswalk_unavailable_weights_1990_czs_small.png){#fig-crosswalk-cz-map width=100%}
 
-![Crosswalk-specification comparison. If the full sensitivity pipeline has not been run, this figure will show only the preferred M5+fallback design.](../output/figures/fig_crosswalk_specification_comparison.pdf){#fig-crosswalk-comparison width=100%}
+![Event-study estimates using alternative county crosswalk weights.](../output/figures/fig_crosswalk_specification_comparison.pdf){#fig-crosswalk-comparison width=100%}
 
 # Appendix B: Main Event Study and Alternative Political Outcomes
 
@@ -132,7 +132,7 @@ if (file.exists(shift_path)) {
 
 # Appendix D: Subperiod Exposure and Dynamic Interpretation
 
-The early-minus-late differences below are descriptive: the saved approximate tests omit covariance between the jointly estimated coefficients, so we do not report their p-values.
+We report differences between the early- and late-exposure coefficients descriptively. Formal inference would require accounting for their covariance.
 
 ![Subperiod exposure event-study estimates.](../output/figures/fig_subperiod_exposure_event_study.pdf){#fig-subperiod-appendix width=100%}
 
@@ -153,7 +153,7 @@ knitr::kable(sub, booktabs = TRUE, longtable = TRUE)
 
 # Appendix E: Standard-Error Diagnostics
 
-The main specification uses CZ-clustered standard errors. The diagnostics below summarize the broader set of variance-covariance estimators computed by the pipeline. Full row-level diagnostics are available in `output/diagnostics/event_study_vcov_diagnostics.csv` and `output/diagnostics/event_study_se_warning_diagnostics.csv`.
+We cluster the main standard errors by commuting zone. The following tables summarize alternative variance estimators and potential numerical problems.
 
 ```{r}
 #| label: tbl-vcov-diagnostics
@@ -204,7 +204,7 @@ sewarn <- read_csv(output_path("diagnostics", "event_study_se_warning_diagnostic
 knitr::kable(sewarn, booktabs = TRUE, longtable = TRUE)
 ```
 
-# Appendix F: Exploratory Mechanism Evidence
+# Appendix F: Additional Political Outcomes
 
 ## NaNDA turnout, vote ratios, and partisanship
 
@@ -234,13 +234,13 @@ nav <- read_csv(output_path("diagnostics", "nanda_outcome_year_availability.csv"
 knitr::kable(nav, booktabs = TRUE, longtable = TRUE)
 ```
 
-## ADHM 2020 public political-supply diagnostics
+## Political Representation and Related Outcomes
 
-![ADHM 2020 public political-supply mechanism regressions.](../output/figures/fig_adhm2020_mechanism_regressions.pdf){#fig-adhm-mechanisms width=100%}
+![Political representation and related outcomes from ADHM (2020).](../output/figures/fig_adhm2020_mechanism_regressions.pdf){#fig-adhm-mechanisms width=100%}
 
 ```{r}
 #| label: tbl-adhm-mech
-#| tbl-cap: "ADHM 2020 mechanism regressions, full-control specification."
+#| tbl-cap: "ADHM (2020) results, full-control specification."
 adhm <- read_csv(output_path("diagnostics", "adhm2020_mechanism_regressions.csv"), show_col_types = FALSE) |>
   filter(spec_label == "Full controls") |>
   transmute(
@@ -261,7 +261,7 @@ The complete analysis can be regenerated from the project root with:
 source(here::here("src", "run_pipeline.R"))
 ```
 
-For the final appendix-style crosswalk-sensitivity run:
+To reproduce estimates under all four county crosswalk specifications:
 
 ```r
 Sys.setenv(RUN_CROSSWALK_SENSITIVITY = "true")
