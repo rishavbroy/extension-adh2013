@@ -8,3 +8,4 @@ We follow the sample design of Autor, Dorn, and Hanson (2013). The unit of analy
 \includegraphics[width=0.95\linewidth]{assets/yuxiao_table1.png}
 \end{table}
 ```
+report/sections/04_summary_stats_yuxiao.qmd
