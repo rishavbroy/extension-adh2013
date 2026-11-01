@@ -96,3 +96,28 @@ This appendix prints the replication source files used to construct the final re
 ```{=latex}
 \VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/county_bridge_exceptions.csv}
 ```
+
+\newpage
+
+# `dependencies.json`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/dependencies.json}
+```
+
+\newpage
+
+# `make_replication_code_pdf.R`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/make_replication_code_pdf.R}
+```
+
+\newpage
+
+# `README.md`
+
+```{=latex}
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/README.md}
+```
+

@@ -153,6 +153,10 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   pdftitle={Replication Code Appendix},
   pdfauthor={Rishav Roy},
@@ -240,6 +244,24 @@ render time.
 \section{\texorpdfstring{\texttt{county\_bridge\_exceptions.csv}}{county\_bridge\_exceptions.csv}}\label{county_bridge_exceptions.csv}
 
 \VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/county_bridge_exceptions.csv}
+
+\newpage
+
+\section{\texorpdfstring{\texttt{dependencies.json}}{dependencies.json}}\label{dependencies.json}
+
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/dependencies.json}
+
+\newpage
+
+\section{\texorpdfstring{\texttt{make\_replication\_code\_pdf.R}}{make\_replication\_code\_pdf.R}}\label{make_replication_code_pdf.r}
+
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/make_replication_code_pdf.R}
+
+\newpage
+
+\section{\texorpdfstring{\texttt{README.md}}{README.md}}\label{readme.md}
+
+\VerbatimInput[breaklines=true,breakanywhere=true,fontsize=\scriptsize,numbers=left,frame=single,tabsize=2]{../src/README.md}
 
 
 

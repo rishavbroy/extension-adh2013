@@ -229,6 +229,10 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   pdftitle={Trade Shocks and Political Change in Local Labor Markets},
   pdfauthor={Yana Samanta; Rachel Williams; Yuxiao Li; Rishav Roy},
@@ -743,7 +747,7 @@ aa vote identity error within tolerance & pass & TRUE & 0 \\
 crosswalk positive final weight sums equal one & pass & TRUE & 0 \\
 crosswalk all source weight sums equal one or reported & reported &
 FALSE & 0 \\
-crosswalk undefined selected weights handled & pass & TRUE & 1204 \\
+crosswalk undefined selected weights handled & pass & TRUE & 211 \\
 aa no duplicate county years after exact distinct & pass & TRUE & 0 \\
 aa two party votes match party votes & pass & TRUE & 0 \\
 aa votes nonnegative & pass & TRUE & 0 \\
@@ -1262,17 +1266,17 @@ Smallest eigenvalue
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-CZ x year & repair\_required & 8 & 8 & 94 & -0.004037 \\
+CZ x year & repair\_required & 8 & 8 & 94 & -0.004036 \\
 CZ-clustered & ok & 8 & 0 & 0 & 0.000000 \\
-Conley 1000 km & repair\_required & 8 & 8 & 57 & -0.005516 \\
+Conley 1000 km & repair\_required & 8 & 8 & 57 & -0.005521 \\
 Conley 250 km & ok & 1 & 0 & 0 & 0.000000 \\
 Conley 250 km & repair\_required & 7 & 7 & 39 & -0.000221 \\
-Conley 500 km & repair\_required & 8 & 8 & 54 & -0.001216 \\
-Conley 750 km & repair\_required & 8 & 8 & 56 & -0.002515 \\
+Conley 500 km & repair\_required & 8 & 8 & 54 & -0.001218 \\
+Conley 750 km & repair\_required & 8 & 8 & 55 & -0.002513 \\
 Driscoll-Kraay & ok & 8 & 0 & 51 & -0.000000 \\
 HC & ok & 8 & 0 & 0 & 0.000000 \\
 Newey-West & ok & 8 & 0 & 0 & 0.000000 \\
-State-clustered & ok & 8 & 0 & 37 & -0.000000 \\
+State-clustered & ok & 8 & 0 & 35 & -0.000000 \\
 
 \end{longtable}
 
@@ -1315,7 +1319,7 @@ Conley 1000 km & Conley VCOV non-PD or repaired & 8 & 0 & 1 & 0 \\
 Conley 250 km & Conley VCOV non-PD or repaired & 7 & 0 & 0 & 0 \\
 Conley 500 km & Conley VCOV non-PD or repaired & 8 & 0 & 0 & 0 \\
 Conley 750 km & Conley VCOV non-PD or repaired & 8 & 0 & 1 & 0 \\
-Driscoll-Kraay & Near-zero or nonfinite SEs & 8 & 17 & 0 & 69 \\
+Driscoll-Kraay & Near-zero or nonfinite SEs & 8 & 17 & 0 & 80 \\
 State-clustered & Rank-deficient VCOV & 5 & 0 & 0 & 72 \\
 
 \end{longtable}
