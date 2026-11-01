@@ -1,0 +1,16 @@
+check,status,fatal,n_failed,details,n_reported
+adh_one_row_per_czone,pass,TRUE,0,Requires one ADH baseline/exposure row per commuting zone.,NA
+cz_lookup_unique_1990_counties,pass,TRUE,0,Requires each 1990 county FIPS to appear once and map to one CZ.,NA
+aa_all_county_fips_valid,pass,TRUE,0,Requires all county FIPS to be five numeric digits before filtering.,NA
+aa_vote_identity_error_within_tolerance,pass,TRUE,0,Max absolute vote identity error: 0,NA
+crosswalk_positive_final_weight_sums_equal_one,pass,TRUE,0,Tolerance: 1e-06,NA
+crosswalk_all_source_weight_sums_equal_one_or_reported,reported,FALSE,0,"Global non-ADH or unsupported source-county rows are reported rather than treated as validation failures. Estimation is gated by positive final weights, retained vote share, and panel balance. Tolerance: 1e-06",162
+crosswalk_undefined_selected_weights_handled,pass,TRUE,1204,Policy: fallback_m2,NA
+aa_no_duplicate_county_years_after_exact_distinct,pass,TRUE,0,Exact duplicate rows removed: 0,NA
+aa_two_party_votes_match_party_votes,pass,TRUE,0,Requires republican + democratic votes to equal two-party votes.,NA
+aa_votes_nonnegative,pass,TRUE,0,"Requires nonnegative Republican, Democratic, two-party, and total votes.",NA
+bridged_vote_retention_above_threshold,pass,TRUE,0,Minimum retained share in main years: 0.996122,NA
+main_panel_balanced,pass,TRUE,0,Observed complete rows: 9386; expected rows: 9386; missing share: 0,NA
+event_study_residualized_design_full_rank,pass,TRUE,0,Requires no residualized RHS rank deficiency in 1952-start or 1972-start specifications.,NA
+event_study_main_vcov_available_without_repair,pass,TRUE,0,Main SE type: cluster_cz,NA
+event_study_conley_repair_diagnostics_recorded,pass,FALSE,31,Conley VCOVs requiring repair across all samples/specs/cutoffs: 31,NA
