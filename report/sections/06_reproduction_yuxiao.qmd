@@ -13,4 +13,4 @@ Running the official Stata code on the published workfile, we obtain coefficient
 \end{table}
 ```
 
-Economically, -0.596 implies that a $1,000 per-worker increase in decadal Chinese exposure lowers a CZ's manufacturing share by 0.6 percentage points. ADH attribute 44% of the 1990--2007 manufacturing decline to this channel. Because we use the original data and code, this is a computational reproduction: the exact match confirms our codebase functions correctly. The next section applies the same strategy to CZ-level presidential political outcomes.
+Economically, -0.596 implies that a $1,000 per-worker increase in decadal Chinese exposure lowers a CZ's manufacturing share by 0.6 percentage points. ADH attribute 44% of the 1990--2007 manufacturing decline to this channel. Because we use the original data and code, this is a computational reproduction of ADH’s published estimates, not a validation of the separate political-outcome analysis. The next section extends the CZ framework to presidential voting using an event study of observed import exposure rather than ADH’s original instrumental-variables specification.
