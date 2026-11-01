@@ -1,6 +1,6 @@
 {
   "stage": "crosswalk_sensitivity_complete",
-  "generated_at": "2026-11-01 13:44:28 CST",
+  "generated_at": "2026-11-01 14:33:27 CST",
   "config": {
     "first_election_year": 1972,
     "diagnostic_first_election_year": 1952,
@@ -44,7 +44,7 @@
     },
     "sensitivity_status": {
       "path": "output/diagnostics/crosswalk_sensitivity_run_status.csv",
-      "md5": "1bfbf636d4c25450fb734a64d521dacb"
+      "md5": "c81d364ce30c12d4859849dc3afa55f5"
     }
   },
   "checks": {
@@ -78,12 +78,12 @@
     },
     "output_manifest_csv": {
       "path": "output/diagnostics/output_manifest.csv",
-      "md5": "15f7c0accd1bb47133aa7dbcad4558c7"
+      "md5": "a61f13455b65ba3ad7d93506e84d2157"
     },
     "output_manifest_json": {
       "path": "output/diagnostics/output_manifest.json",
-      "md5": "4c4fe97ec54d0badf4ddf90e17d5ac7a"
+      "md5": "0ec2ced3e7159288d5ae701dd5fca32f"
     },
-    "output_manifest_n_files": 291
+    "output_manifest_n_files": 288
   }
 }

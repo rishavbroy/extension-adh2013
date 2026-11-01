@@ -475,14 +475,28 @@ CZ-level presidential political outcomes.
 Shock}\label{extension-dynamic-political-effects-of-the-china-shock}
 
 We extend the ADH local-labor-market design to presidential political
-outcomes. The outcome is the Republican presidential vote margin in CZ
-\(c\) and election year \(t\). The preferred specification includes CZ
-fixed effects, election-year fixed effects, the ADH 1990--2007
-import-exposure measure interacted with election-year indicators, and
-time-varying effects of baseline controls. The omitted year is 1988, so
-coefficients describe how the relationship between China-shock exposure
-and Republican margin changes relative to the pre-shock election
-immediately before the main exposure period.
+outcomes. The outcome is the Republican two-party presidential vote
+margin, \((R_{ct}-D_{ct})/(R_{ct}+D_{ct})\), where \(R_{ct}\) and
+\(D_{ct}\) denote Republican and Democratic votes. We estimate weighted
+CZ-level event studies:
+
+\[
+Y_{ct} = \alpha_c + \lambda_t + \sum_{k \ne 1988} \beta_k E_c \mathbf{1}\{t=k\} + X_c^{\prime}\Gamma_t + \varepsilon_{ct}.
+\]
+
+Here \(E_c\) is cumulative ADH import exposure over 1990--2007 in
+thousands of dollars per worker; \(\alpha_c\) and \(\lambda_t\) are CZ
+and election-year fixed effects, and \(X_c^{\prime}\Gamma_t\) allows
+baseline characteristics to have year-specific associations with the
+outcome. Each \(\beta_k\) measures the difference in the
+exposure--margin association in election year \(k\) relative to the
+omitted 1988 election; it is not a new trade shock in year \(k\).
+Estimation uses ADH analysis weights and CZ-clustered standard errors.
+We compare a minimal specification without interacted controls, core
+controls (initial manufacturing share, college-educated share, and
+foreign-born share), and full controls adding female employment share,
+routine-task intensity, and offshorability. Interacted controls are
+standardized for estimation.
 
 A central measurement challenge is that electoral data are observed for
 counties whose boundaries change over time, while ADH exposure is
@@ -496,21 +510,22 @@ compare the results to M6+fallback, pure M2, and M4+fallback. These
 checks are important because the estimates should not be driven by
 arbitrary geographic harmonization choices.
 
-The empirical exercise should be interpreted as a reduced-form exposure
-design, not as definitive evidence of individual belief updating. ADH
-exposure is a shift-share measure: CZs differ in initial industry
-composition, and industries differ in later import growth.
-Identification requires either that initial industry shares are
-conditionally unrelated to counterfactual political trends, or that the
-industry-level import shifts are as-good-as-random with respect to local
-political trends
+The political event study relates observed ADH exposure to voting
+outcomes conditional on fixed effects and baseline controls; unlike
+ADH's original labor-market instrumental-variables analysis, it does not
+instrument exposure in the main regression. ADH exposure has a
+shift-share structure, combining initial CZ industry composition with
+subsequent industry-level import growth. A causal interpretation would
+require assumptions about counterfactual political trends and the
+sources of variation in exposure
 (\citeproc{ref-goldsmithPinkhamSorkinSwift2020}{Goldsmith-Pinkham et al.
-2020}; \citeproc{ref-borusyakHullJaravel2025}{Borusyak et al. 2025}).
-These assumptions are not innocuous. In our diagnostics, the ADH
-instrument strongly predicts exposure, but exposure is also highly
-correlated with baseline manufacturing intensity and routine-task
-concentration. Table~\ref{tbl-bartik-firststage} summarizes the
-first-stage strength in our political-outcome sample.
+2020}; \citeproc{ref-borusyakHullJaravel2025}{Borusyak et al. 2025}). In
+our diagnostics, the ADH instrument strongly predicts exposure, but
+exposure also correlates with baseline manufacturing intensity and
+routine-task concentration. First-stage strength does not establish
+instrument exogeneity or validate a causal interpretation of this
+political event study. Table~\ref{tbl-bartik-firststage} reports
+first-stage estimates in the political-outcome sample.
 
 {
 
@@ -557,22 +572,29 @@ exposure and Republican presidential margin.}
 
 \end{figure}%
 
-The estimates suggest little clear evidence of rising Republican margins
-before the shock. The post-shock pattern is more consistent with a later
-political response: the positive association grows in the medium and
-long run, especially around the 2016 and 2020 horizons. This timing is
-important because it suggests that the political effects of local trade
-exposure may not operate immediately through local material losses
-alone. They may also depend on later national political rhetoric, elite
-positioning, media narratives, or changing turnout and party coalitions.
+The estimates do not reject a joint null of zero pre-1988 exposure
+coefficients, although this does not establish parallel trends. In 2016
+and 2020, the minimally controlled coefficients are positive (0.00837
+and 0.00874), but fall to 0.00083 and 0.00024 with core controls and
+become slightly negative (−0.00121 and −0.00176) with full controls.
+These coefficients are changes in the Republican two-party margin per
+additional \$1,000 of cumulative exposure per worker, relative to the
+1988 association; the 2016 and 2020 full-control estimates are not
+statistically distinguishable from zero (CZ-clustered \(p = 0.668\) and
+\(p = 0.537\)). Even the minimally controlled 2016 and 2020 estimates
+are imprecise. Thus, the apparent delayed positive association is not
+robust to baseline controls; the evidence does not establish a causal
+political shift.
 
-To understand what is behind the margin effect, we decompose the outcome
-into Republican votes per 1990 population, Democratic votes per 1990
-population, and two-party vote volume. Figure~\ref{fig-alt-decomp} shows
-that the margin pattern should not be interpreted mechanically as a
-simple increase in Republican votes. The broader decomposition helps
-distinguish vote-choice changes from changes in participation and
-party-specific mobilization.
+To examine related electoral outcomes descriptively, we consider
+Republican votes per 1990 population, Democratic votes per 1990
+population, and two-party vote volume alongside the margin.
+Figure~\ref{fig-alt-decomp} shows that the margin pattern should not be
+interpreted mechanically as a simple increase in Republican votes. These
+outcomes describe different electoral margins and vote volumes, but
+cannot separately identify voter switching, participation, or migration
+mechanisms; ratios with fixed 1990 population are not contemporaneous
+turnout rates.
 
 \begin{figure}[H]
 
@@ -616,36 +638,29 @@ study, with 1990--2000 and 2000--2007 exposure terms entered jointly.}
 
 \section{Conclusion}\label{conclusion}
 
-Our results suggest that the China shock may have had political
-consequences beyond its direct effects on manufacturing employment. CZs
-more exposed to Chinese import competition eventually show more
-Republican-leaning presidential outcomes, with the clearest differences
-appearing after the original labor-market shock rather than immediately.
-This timing makes the interpretation complex. The estimates may reflect
-voters responding to material local losses, but they may also reflect
-later elite rhetoric, media framing, turnout changes, candidate supply,
-or changes in local population composition.
+The political event-study results are sensitive to baseline controls.
+More trade-exposed CZs show a more positive Republican
+presidential-margin association in minimally controlled specifications
+for 2016 and 2020, relative to 1988, but this pattern largely disappears
+with core controls and turns slightly negative and statistically
+indistinguishable from zero with full controls. We therefore do not find
+a robust positive relationship across specifications, let alone
+establish a causal effect of import exposure on Republican voting.
 
-The main lesson is that trade policy cannot be evaluated only through
-employment and wage effects. Large local labor-market shocks may also
-affect political representation, polarization, and support for future
-policy regimes. At the same time, our conclusions should be cautious.
-The design builds on a Bartik-style exposure measure, so interpretation
-depends on assumptions about initial industry composition and
-industry-level shocks. The unit of analysis is a commuting zone, not an
-individual voter, so we cannot directly observe individual belief
-updating. Our evidence is most informative about how local political
-outcomes evolve in places more exposed to import competition, not about
-a single definitive psychological mechanism.
+This sensitivity highlights the role of pre-existing local industry and
+demographic characteristics in interpreting political trajectories. Our
+CZ-level exposure design differs from the instrumental-variables
+analysis of labor-market outcomes in ADH, and the strength of an
+exposure first stage does not resolve the political design's
+identification assumptions. Moreover, commuting-zone outcomes cannot
+reveal how individual voters changed their preferences or whether
+changes arose through turnout, migration, or party composition.
 
-Future work should therefore focus on mechanism. Turnout and
-registration data, partisan-index data, migration data, and measures of
-elite political supply could help distinguish material-experience
-channels from mobilization, composition, and rhetoric/media channels.
-Even with these limitations, the evidence suggests that the political
-effects of globalization are dynamic, geographically concentrated, and
-potentially mediated by institutions and narratives long after the
-initial economic shock.
+Trade shocks remain a relevant setting for studying local political
+change, but the present evidence is conditional on specification and
+cannot isolate a mechanism. Future research combining individual-level
+political behavior with migration, registration, turnout, and
+political-supply measures could help distinguish those channels.
 
 \section{References}\label{references}
 
