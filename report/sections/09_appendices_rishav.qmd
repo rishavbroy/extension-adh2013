@@ -132,6 +132,8 @@ if (file.exists(shift_path)) {
 
 # Appendix D: Subperiod Exposure and Dynamic Interpretation
 
+The early-minus-late differences below are descriptive: the saved approximate tests omit covariance between the jointly estimated coefficients, so we do not report their p-values.
+
 ![Subperiod exposure event-study estimates.](../output/figures/fig_subperiod_exposure_event_study.pdf){#fig-subperiod-appendix width=100%}
 
 ```{r}
@@ -144,8 +146,7 @@ sub <- read_csv(output_path("diagnostics", "subperiod_exposure_selected_horizons
     Year = year,
     `1990--2000 exposure` = fmt_num(early_exposure_coefficient, 4),
     `2000--2007 exposure` = fmt_num(late_exposure_coefficient, 4),
-    `Early minus late` = fmt_num(early_minus_late, 4),
-    `Approx. p-value` = fmt_num(approx_p_difference, 3)
+    `Early minus late` = fmt_num(early_minus_late, 4)
   )
 knitr::kable(sub, booktabs = TRUE, longtable = TRUE)
 ```
